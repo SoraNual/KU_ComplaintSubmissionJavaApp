@@ -46,11 +46,11 @@ public class HomeController {
     }
 
     public void handleCreatorButton(ActionEvent actionEvent) {
-        /*try {
-            //FXRouter.goTo("creator");
+        try {
+            FXRouter.goTo("creatorTeam");
         } catch (IOException e) {
             System.err.println("ไปที่หน้า creator ไม่ได้");
             System.err.println("ให้ตรวจสอบการกำหนด route");
-        }*/
+        }
     }
 }
