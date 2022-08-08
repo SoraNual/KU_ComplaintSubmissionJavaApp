@@ -18,13 +18,14 @@ public class HomeController {
         cat.setImage(new Image(url));
     }
 
+    @FXML
     public void handleLoginButton(ActionEvent actionEvent) {
-        /*try {
-            //FXRouter.goTo("login");
+        try {
+            FXRouter.goTo("login");
         } catch (IOException e) {
             System.err.println("ไปที่หน้า Login ไม่ได้");
             System.err.println("ให้ตรวจสอบการกำหนด route");
-        }*/
+        }
     }
 
     public void handleRegisterButton(ActionEvent actionEvent) {
