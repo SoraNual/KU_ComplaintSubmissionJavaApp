@@ -18,6 +18,7 @@ public class ProjectApplication extends Application {
         String packageStr = "ku/cs/";
         FXRouter.when("home", packageStr+"home.fxml");
         FXRouter.when("login", packageStr+"login-page.fxml");
+        FXRouter.when("creatorTeam",packageStr+"creator_team.fxml");
     }
 
 
