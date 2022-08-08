@@ -18,7 +18,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="508.0" layoutY="479.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="276.0" style="-fx-background-color: FFFFFF; -fx-background-radius: 8; -fx-border-color: #011627; -fx-border-radius: 8;" text="Register">
+      <Button layoutX="508.0" layoutY="479.0" mnemonicParsing="false" onAction="#handleRegisterButton" prefHeight="52.0" prefWidth="276.0" style="-fx-background-color: FFFFFF; -fx-background-radius: 8; -fx-border-color: #011627; -fx-border-radius: 8;" text="Register">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

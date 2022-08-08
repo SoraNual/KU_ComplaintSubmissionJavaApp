@@ -29,12 +29,12 @@ public class HomeController {
     }
 
     public void handleRegisterButton(ActionEvent actionEvent) {
-        /*try {
-            //FXRouter.goTo("register");
+        try {
+            FXRouter.goTo("register");
         } catch (IOException e) {
             System.err.println("ไปที่หน้า register ไม่ได้");
             System.err.println("ให้ตรวจสอบการกำหนด route");
-        }*/
+        }
     }
 
     public void handleInstructionButton(ActionEvent actionEvent) {
