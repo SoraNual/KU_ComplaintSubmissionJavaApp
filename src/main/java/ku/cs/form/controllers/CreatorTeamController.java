@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 
-public class creatorTeamController {
+public class CreatorTeamController {
     @FXML
     private ImageView donutImage;
     @FXML
@@ -17,7 +17,7 @@ public class creatorTeamController {
     @FXML
     private ImageView bezImage;
 
-    public creatorTeamController() {
+    public CreatorTeamController() {
     }
 
     @FXML
