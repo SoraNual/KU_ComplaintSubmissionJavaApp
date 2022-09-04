@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.AdminPageController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#011627" height="400.0" stroke="BLACK" strokeType="INSIDE" width="178.0" />
+      <Label layoutX="37.0" layoutY="33.0" text="Admin" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="39.0" layoutY="76.0" text="Username" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

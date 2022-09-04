@@ -12,11 +12,12 @@ public class ProjectApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXRouter.bind(this, stage, "Project", 1280, 720);
         configRoute();
-        FXRouter.goTo("home");
+        FXRouter.goTo("admin");
     }
     private static void configRoute() {
         String packageStr = "ku/cs/";
         FXRouter.when("home", packageStr+"home.fxml");
+        FXRouter.when("admin", packageStr+"admin-page.fxml");
         FXRouter.when("login", packageStr+"login-page.fxml");
         FXRouter.when("creatorTeam",packageStr+"creator_team.fxml");
         FXRouter.when("register", packageStr+"register.fxml");
