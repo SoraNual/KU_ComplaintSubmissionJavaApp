@@ -2,13 +2,22 @@ package ku.cs.form.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
-import java.io.IOException;
+import ku.cs.form.models.Nisit;
+import ku.cs.form.services.Registration;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import java.io.*;
 
 public class RegisterController {
 
+    @FXML private TextField nameTextField;
+    @FXML private TextField usernameTextField;
+    @FXML private PasswordField passwordField;
+    @FXML private PasswordField confirmPasswordField;
     @FXML
     private ImageView regis_pic;
     @FXML public void initialize() {
@@ -24,5 +33,43 @@ public class RegisterController {
             System.err.println("ให้ตรวจสอบการกำหนด route");
         }
     }
+
+    @FXML
+    public void handleRegisterButton(ActionEvent actionEvent) {
+
+        String name = nameTextField.getText();
+        String username = usernameTextField.getText();
+        String password = passwordField.getText();
+        String confirmPassword = confirmPasswordField.getText();
+
+        Registration reg = new Registration("data","users.csv");
+        String error = reg.registrationCheck(name,username,password,confirmPassword);
+
+        if(error.isBlank()){
+            Nisit newNisit = new Nisit(name, username, password);
+            reg.addNisit(newNisit);
+            showPopUp("Registration successful!","Hello Welcome!",null);
+            try {
+                com.github.saacsos.FXRouter.goTo("login");
+            } catch (IOException e) {
+                System.err.println("ให้ตรวจสอบการกำหนด route");
+            }
+        } else{
+            showPopUp(error,"ERROR",null);
+        }
+    }
+
+    public static void showPopUp(String infoMessage, String titleBar, String headerMessage)
+    {
+        Alert alert;
+        if(titleBar != null && titleBar.equals("ERROR")) alert = new Alert(AlertType.ERROR);
+        else alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle(titleBar);
+        alert.setHeaderText(headerMessage);
+        alert.setContentText(infoMessage);
+        alert.showAndWait();
+    }
+
+
 }
 
