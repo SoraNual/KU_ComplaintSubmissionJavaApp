@@ -1,6 +1,10 @@
 package ku.cs.form.models;
 
-public class Admin {
-    private String username;
-    private String password;
+public class Admin extends User{
+
+    public Admin(String name, String username, String password) {
+        super(name, username, password);
+    }
+
+
 }
