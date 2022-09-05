@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,7 +20,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="319.0" layoutY="277.0" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13px; -fx-background-radius: 13px;" />
+      <TextField fx:id="nameTextField" layoutX="319.0" layoutY="277.0" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13px; -fx-background-radius: 13px;" />
       <Label layoutX="316.0" layoutY="312.0" prefHeight="35.0" prefWidth="108.0" text="Username" textFill="#011627">
          <font>
             <Font size="20.0" />
@@ -35,10 +36,8 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="319.0" layoutY="345.0" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13px; -fx-background-radius: 13px;" />
-      <TextField layoutX="319.0" layoutY="410.0" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13px; -fx-background-radius: 13px;" />
-      <TextField layoutX="319.0" layoutY="480.0" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13px; -fx-background-radius: 13px;" />
-      <Button layoutX="318.0" layoutY="526.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="149.0" style="-fx-background-color: #011627; -fx-background-radius: 7px;" text="Register" textFill="#fdfffc">
+      <TextField fx:id="usernameTextField" layoutX="319.0" layoutY="345.0" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13px; -fx-background-radius: 13px;" />
+      <Button layoutX="318.0" layoutY="526.0" mnemonicParsing="false" onAction="#handleRegisterButton" prefHeight="26.0" prefWidth="149.0" style="-fx-background-color: #011627; -fx-background-radius: 7px;" text="Register" textFill="#fdfffc">
          <font>
             <Font size="16.0" />
          </font>
@@ -49,5 +48,7 @@
          </font>
       </Button>
       <ImageView fx:id="regis_pic" fitHeight="372.0" fitWidth="286.0" layoutX="660.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" />
+      <PasswordField fx:id="passwordField" layoutX="318.0" layoutY="412.0" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13px; -fx-background-radius: 13px;" />
+      <PasswordField fx:id="confirmPasswordField" layoutX="318.0" layoutY="482.0" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13px; -fx-background-radius: 13px;" />
    </children>
 </AnchorPane>
