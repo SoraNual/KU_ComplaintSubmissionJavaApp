@@ -1,32 +1,38 @@
 package ku.cs.form.controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import ku.cs.form.models.Admin;
 import ku.cs.form.models.User;
 import ku.cs.form.models.UserList;
 import ku.cs.form.services.LoginTimeFileDataSource;
 
+import java.io.File;
+
 public class LoginTimePageController {
 
 
     @FXML private Label usernameLabel;
+    @FXML private Label nameLabel;
+    @FXML private Label loginTimeLabel;
+    @FXML private ImageView profileImage;
 
     @FXML private ListView<User> usersLoginListView;
     private LoginTimeFileDataSource dataSource;
     private UserList usersList;
-    private Admin admin;
 
     @FXML
     public void initialize() {
-        admin = new Admin("admin", "adminInwZa007", "123456");
-        usernameLabel.setText(admin.getUsername());
-
         dataSource = new LoginTimeFileDataSource("data","loginTime.csv");
         usersList = dataSource.readData();
-        usersList.sortByLoginTime();
         showUsersLoginListView();
+        clearSelectedUser();
+        handleSelectedListView();
     }
 
     private void showUsersLoginListView() {
@@ -34,4 +40,27 @@ public class LoginTimePageController {
         usersLoginListView.refresh();
     }
 
+    private void handleSelectedListView() {
+
+        usersLoginListView.getSelectionModel().selectedItemProperty().addListener(
+                new ChangeListener<User>() {
+                    @Override
+                    public void changed(ObservableValue<? extends User>
+                                                observable,
+                                        User oldValue, User newValue) {
+                        showSelectedMemberCard(newValue);
+                    }
+                });
+    }
+    private void showSelectedMemberCard(User user) {
+        nameLabel.setText(user.getName());
+        usernameLabel.setText(user.getUsername());
+        loginTimeLabel.setText(user.toStringLoginTime());
+        profileImage.setImage(new Image("file:"+user.getProfileImageFilePath()));
+    }
+    private void clearSelectedUser() {
+        nameLabel.setText("");
+        usernameLabel.setText("");
+        profileImage.setImage(null);
+    }
 }
