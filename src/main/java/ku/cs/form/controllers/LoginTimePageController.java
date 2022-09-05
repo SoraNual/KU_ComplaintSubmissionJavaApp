@@ -8,6 +8,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import ku.cs.form.models.Admin;
+import ku.cs.form.models.Staff;
 import ku.cs.form.models.User;
 import ku.cs.form.models.UserList;
 import ku.cs.form.services.LoginTimeFileDataSource;
@@ -20,6 +21,8 @@ public class LoginTimePageController {
     @FXML private Label usernameLabel;
     @FXML private Label nameLabel;
     @FXML private Label loginTimeLabel;
+    @FXML private Label agencyLabel;
+
     @FXML private ImageView profileImage;
 
     @FXML private ListView<User> usersLoginListView;
@@ -57,10 +60,15 @@ public class LoginTimePageController {
         usernameLabel.setText(user.getUsername());
         loginTimeLabel.setText(user.toStringLoginTime());
         profileImage.setImage(new Image("file:"+user.getProfileImageFilePath()));
+        if(user.getClass() == Staff.class)
+            agencyLabel.setText("หน่วยงาน : " + ((Staff) user).getAgency());
+        else
+            agencyLabel.setText("");
     }
     private void clearSelectedUser() {
         nameLabel.setText("");
         usernameLabel.setText("");
+        loginTimeLabel.setText("");
         profileImage.setImage(null);
     }
 }

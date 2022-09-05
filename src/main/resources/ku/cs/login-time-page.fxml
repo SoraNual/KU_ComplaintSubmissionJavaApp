@@ -1,31 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles/login-time-page-styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.LoginTimePageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-radius: 5px;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.LoginTimePageController">
    <children>
+      <ImageView fitHeight="641.0" fitWidth="641.0" layoutX="436.0" layoutY="58.0" opacity="0.05">
+         <image>
+            <Image url="@images/administrator.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="187.0" layoutX="69.0" layoutY="99.0" stroke="WHITE" strokeType="INSIDE" width="1127.0">
+         <effect>
+            <DropShadow blurType="GAUSSIAN" height="78.9" radius="33.8325" spread="0.08" width="58.43">
+               <color>
+                  <Color opacity="0.04939209669828415" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Rectangle>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#011627" height="722.0" stroke="BLACK" strokeType="INSIDE" width="298.0" />
       <Label layoutX="95.0" layoutY="50.0" text="Admin" textFill="WHITE">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
       </Label>
-      <ListView fx:id="usersLoginListView" layoutX="367.0" layoutY="187.0" prefHeight="388.0" prefWidth="414.0" />
+      <ListView fx:id="usersLoginListView" layoutX="390.0" layoutY="370.0" prefHeight="264.0" prefWidth="803.0">
+         <effect>
+            <DropShadow height="13.98" radius="7.66" spread="0.21" width="18.66">
+               <color>
+                  <Color opacity="0.06458966434001923" />
+               </color>
+            </DropShadow>
+         </effect></ListView>
       
-      <Label layoutX="371.0" layoutY="107.0" text="เวลาเข้าใช้งานล่าสุด">
+      <Label layoutX="393.0" layoutY="320.0" text="เวลาเข้าใช้งานล่าสุด">
          <font>
-            <Font name="Cordia New" size="53.0" />
+            <Font name="FreesiaUPC Bold" size="48.0" />
          </font>
       </Label>
-      <GridPane alignment="TOP_CENTER" layoutX="836.0" layoutY="473.0" prefHeight="91.0" prefWidth="379.0">
+      <GridPane alignment="TOP_CENTER" layoutX="659.0" layoutY="131.0" prefHeight="91.0" prefWidth="379.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.4000244140625" minWidth="10.0" prefWidth="158.00006103515625" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="221.99993896484378" minWidth="10.0" prefWidth="221.99993896484378" />
@@ -38,36 +63,54 @@
          <children>
             <Label text="username" textAlignment="CENTER">
                <font>
-                  <Font name="Cordia New" size="24.0" />
+                  <Font name="FreesiaUPC" size="24.0" />
                </font>
             </Label>
             <Label fx:id="usernameLabel" prefHeight="32.0" prefWidth="354.0" text="usernameLabel" GridPane.columnIndex="1">
                <font>
-                  <Font name="Cordia New" size="24.0" />
+                  <Font name="FreesiaUPC" size="24.0" />
                </font>
             </Label>
             <Label text="name" GridPane.rowIndex="1">
                <font>
-                  <Font name="Cordia New" size="24.0" />
+                  <Font name="FreesiaUPC" size="24.0" />
                </font>
             </Label>
             <Label fx:id="nameLabel" prefHeight="32.0" prefWidth="274.0" text="nameLabel" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
-                  <Font name="Cordia New" size="24.0" />
+                  <Font name="FreesiaUPC" size="24.0" />
                </font>
             </Label>
             <Label text="วันเวลาที่ใช้งานล่าสุด" GridPane.rowIndex="2">
                <font>
-                  <Font name="Cordia New" size="24.0" />
+                  <Font name="FreesiaUPC" size="24.0" />
                </font>
             </Label>
             <Label fx:id="loginTimeLabel" prefHeight="32.0" prefWidth="251.0" text="loginTimeLabel" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
-                  <Font name="Cordia New" size="24.0" />
+                  <Font name="FreesiaUPC" size="24.0" />
                </font>
             </Label>
          </children>
       </GridPane>
-      <ImageView fx:id="profileImage" fitHeight="256.0" fitWidth="270.0" layoutX="882.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="profileImage" fitHeight="130.0" fitWidth="155.0" layoutX="462.0" layoutY="111.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></ImageView>
+      <Label fx:id="agencyLabel" layoutX="660.0" layoutY="218.0" prefHeight="32.0" prefWidth="251.0">
+         <font>
+            <Font name="FreesiaUPC" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="390.0" layoutY="62.0" text="ข้อมูลผู้ใช้ระบบ">
+         <font>
+            <Font name="FreesiaUPC Bold" size="48.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="180.0" fitWidth="180.0" layoutX="981.0" layoutY="122.0" opacity="0.04">
+         <image>
+            <Image url="@images/group.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

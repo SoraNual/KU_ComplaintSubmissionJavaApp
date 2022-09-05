@@ -63,6 +63,6 @@ public class User {
     }
 
     public String toStringLoginTime() {
-        return  loginTime.format(format);
+        return loginTime.format(format);
     }
 }

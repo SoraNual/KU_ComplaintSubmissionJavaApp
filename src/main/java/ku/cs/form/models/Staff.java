@@ -8,10 +8,6 @@ public class Staff extends User {
         this.agency = agency;
     }
 
-    public Staff(String name, String username, String password){
-        this(name,username,password,"NoAgency");
-    }
-
     public String getAgency() {
         return agency;
     }
