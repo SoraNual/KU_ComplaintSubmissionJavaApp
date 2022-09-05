@@ -31,6 +31,10 @@ public class User {
         return name;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public LocalDateTime getLoginTime() {
          return loginTime;
     }
