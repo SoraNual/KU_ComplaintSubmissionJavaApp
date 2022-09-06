@@ -2,15 +2,16 @@ package ku.cs.form.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
 import java.io.IOException;
 
 public class StaffPageController {
-    @FXML String agencyLabel;
+    @FXML private Label agencyLabel;
 //    @FXML private ListView<> reportListView;
 
     @FXML
-    void handleChangePasswordButton(ActionEvent actionEvent) {
+    public void handleChangePasswordButton(ActionEvent actionEvent) {
         try {
             com.github.saacsos.FXRouter.goTo("changePassword");
         } catch (IOException e) {
@@ -19,7 +20,7 @@ public class StaffPageController {
     }
 
     @FXML
-    void getReportsListView() {
+    public void getReportsListView() {
         // TODO
     }
 
