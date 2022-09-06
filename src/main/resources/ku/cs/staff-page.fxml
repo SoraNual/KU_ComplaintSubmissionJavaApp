@@ -17,7 +17,7 @@
             <Font name="System Bold" size="48.0" />
          </font>
       </Label>
-      <Label layoutX="340.0" layoutY="90.0" prefHeight="36.0" prefWidth="338.0" text="เรื่องร้อนเรียนที่รับผิดชอบ">
+      <Label layoutX="340.0" layoutY="90.0" prefHeight="36.0" prefWidth="338.0" text="เรื่องร้องเรียนที่รับผิดชอบ">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
@@ -38,7 +38,7 @@
             <Font size="24.0" />
          </font>
       </Button>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="51.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="staffImage" fitHeight="150.0" fitWidth="200.0" layoutX="51.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="nameLabel" layoutX="75.0" layoutY="281.0" prefHeight="39.0" prefWidth="155.0" text="nameLabel" textFill="WHITE">
          <font>
             <Font name="System Bold" size="32.0" />
