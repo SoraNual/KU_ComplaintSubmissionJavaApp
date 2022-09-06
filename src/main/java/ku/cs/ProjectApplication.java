@@ -10,7 +10,7 @@ import java.io.IOException;
 public class ProjectApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXRouter.bind(this, stage, "KU จะแจ้ง", 1280, 720);
+        FXRouter.bind(this, stage, "Project", 1280, 720);
         configRoute();
         FXRouter.goTo("staffPage");
     }
@@ -21,6 +21,7 @@ public class ProjectApplication extends Application {
         FXRouter.when("creatorTeam",packageStr+"creator_team.fxml");
         FXRouter.when("register", packageStr+"register.fxml");
         FXRouter.when("staffPage", packageStr+"staff-page.fxml");
+        FXRouter.when("reportsDetail", packageStr+"report-detail.fxml");
 
     }
 
