@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ku.cs.form.controllers.StaffPageController"
-            prefHeight="720.0" prefWidth="1280.0">
 
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.StaffPageController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#011627" height="730.0" layoutX="-5.0" layoutY="-6.0" stroke="BLACK" strokeType="INSIDE" width="298.0" />
+      <Label layoutX="100.0" layoutY="77.0" prefHeight="57.0" prefWidth="102.0" text="Staff" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="48.0" />
+         </font>
+      </Label>
+      <Label layoutX="340.0" layoutY="90.0" prefHeight="36.0" prefWidth="338.0" text="เรื่องร้อนเรียนที่รับผิดชอบ">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <ListView fx:id="reportListView" layoutX="340.0" layoutY="150.0" prefHeight="300.0" prefWidth="800.0" style="-fx-background-color: f3f3f3; -fx-background-radius: 13;" />
+      <Label layoutX="800.0" layoutY="90.0" prefHeight="39.0" prefWidth="146.0" text="หน่วยงาน: ">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <Label fx:id="agencyLabel" layoutX="950.0" layoutY="90.0" prefHeight="39.0" prefWidth="183.0" text="agencyLabel">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <ScrollBar layoutX="1122.0" layoutY="150.0" orientation="VERTICAL" prefHeight="300.0" prefWidth="28.0" style="-fx-background-color: d9d9d9; -fx-border-radius: 13;" />
+   </children>
 </AnchorPane>

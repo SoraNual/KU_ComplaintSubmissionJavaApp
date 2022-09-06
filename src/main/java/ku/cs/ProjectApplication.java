@@ -10,9 +10,9 @@ import java.io.IOException;
 public class ProjectApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXRouter.bind(this, stage, "Project", 1280, 720);
+        FXRouter.bind(this, stage, "KU จะแจ้ง", 1280, 720);
         configRoute();
-        FXRouter.goTo("home");
+        FXRouter.goTo("staffPage");
     }
     private static void configRoute() {
         String packageStr = "ku/cs/";
@@ -20,6 +20,7 @@ public class ProjectApplication extends Application {
         FXRouter.when("login", packageStr+"login-page.fxml");
         FXRouter.when("creatorTeam",packageStr+"creator_team.fxml");
         FXRouter.when("register", packageStr+"register.fxml");
+        FXRouter.when("staffPage", packageStr+"staff-page.fxml");
 
     }
 
