@@ -1,10 +1,10 @@
 package ku.cs.form.services;
 
-import ku.cs.form.models.UserList;
+import java.io.FileNotFoundException;
 
 public interface DataSource<T> {
 
-    T readData();
+    T readData() throws FileNotFoundException;
     void writeData(T t);
 
 }

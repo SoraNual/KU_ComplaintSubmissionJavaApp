@@ -51,11 +51,11 @@ public class LoginTimePageController {
                     public void changed(ObservableValue<? extends User>
                                                 observable,
                                         User oldValue, User newValue) {
-                        showSelectedMemberCard(newValue);
+                        showSelectedUser(newValue);
                     }
                 });
     }
-    private void showSelectedMemberCard(User user) {
+    private void showSelectedUser(User user) {
         nameLabel.setText(user.getName());
         usernameLabel.setText(user.getUsername());
         loginTimeLabel.setText(user.toStringLoginTime());

@@ -7,12 +7,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import ku.cs.form.models.Nisit;
-import ku.cs.form.services.Registration;
+import ku.cs.form.services.NisitRegistration;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import java.io.*;
 
-public class RegisterController {
+public class NisitRegisterController {
 
     @FXML private TextField nameTextField;
     @FXML private TextField usernameTextField;
@@ -42,7 +42,7 @@ public class RegisterController {
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
-        Registration reg = new Registration("data","users.csv");
+        NisitRegistration reg = new NisitRegistration("data","users.csv");
         String error = reg.registrationCheck(name,username,password,confirmPassword);
 
         if(error.isBlank()){

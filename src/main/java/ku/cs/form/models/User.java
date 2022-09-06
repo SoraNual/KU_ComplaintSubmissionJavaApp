@@ -13,13 +13,16 @@ public class User {
     private LocalDateTime loginTime;
     private String profileImageFilePath;
     private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"); //for change date format
-
+    private String userStatus;
+    private int loginAttempt;
 
     public User(String name, String username, String password) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.loginTime = LocalDateTime.now(); //default time = recently time
+        this.userStatus = "active";
+        this.loginAttempt = 0;
         setProfileImage();
     }
 
@@ -58,6 +61,14 @@ public class User {
 
     public String getProfileImageFilePath() {
         return profileImageFilePath;
+    }
+
+    public String getUserStatus() {
+        return userStatus;
+    }
+
+    public int getLoginAttempt() {
+        return loginAttempt;
     }
 
     @Override

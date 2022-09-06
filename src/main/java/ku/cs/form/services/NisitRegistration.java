@@ -1,18 +1,17 @@
 package ku.cs.form.services;
 
 import ku.cs.form.models.Nisit;
-import ku.cs.form.models.User;
 import ku.cs.form.models.UserList;
 
 import java.io.*;
 
-public class Registration{
+public class NisitRegistration implements Registeration{
 
     private String directoryName;
 
     private String fileName;
 
-    public Registration(String directoryName, String fileName) {
+    public NisitRegistration(String directoryName, String fileName) {
         this.directoryName = directoryName;
         this.fileName = fileName;
         checkFileIsExisted();
@@ -34,7 +33,7 @@ public class Registration{
             }
         }
     }
-
+    @Override
     public String registrationCheck(String name, String username, String password, String confirmPassword) {
         String error = "";
         if(name.isBlank())   error += "ใส่ชื่อมาด้วย!\n";
@@ -42,13 +41,13 @@ public class Registration{
         if(password.isBlank())   error += "ใส่รหัสผ่านมาด้วย!\n";
         if(confirmPassword.isBlank())   error += "โปรดยืนยันรหัสผ่าน!\n";
 
-        if(!password.isBlank() && !confirmPassword.isBlank() && !confirmationPasswordCheck(password, confirmPassword))
+        if(!password.isBlank() && !confirmPassword.isBlank() && confirmationPasswordCheck(password, confirmPassword))
             error += "รหัสผ่านไม่ตรงกัน!\n";
-        if(!usernameValidationCheck(username))     error += "username ของคุณซ้ำ!\n";
+        if(usernameValidationCheck(username))     error += "username ของคุณซ้ำ!\n";
 
         return error;
     }
-
+    @Override
     public boolean usernameValidationCheck(String newUserName) {
         UserList userList = new UserList();
 
@@ -65,7 +64,7 @@ public class Registration{
             String line = "";
             while((line = buffer.readLine()) != null){ //วนลูปแยกคอมมาทีละบรรทัดจนกว่าจะไม่เจอบรรทัด
                 String[] data = line.split(",");
-                if(data[3].equals(newUserName)) return false;
+                if(data[3].equals(newUserName)) return true;
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -80,12 +79,12 @@ public class Registration{
             }
         }
 
-        return true;
-    }
-
-    public boolean confirmationPasswordCheck(String password, String confirmationPassword){
-        if(password.equals(confirmationPassword)) return true;
         return false;
+    }
+    @Override
+    public boolean confirmationPasswordCheck(String password, String confirmationPassword){
+        if(password.equals(confirmationPassword)) return false;
+        return true;
     }
 
     public void addNisit(Nisit nisit) {
