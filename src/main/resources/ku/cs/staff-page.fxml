@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.StaffPageController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#011627" height="730.0" layoutX="-5.0" layoutY="-6.0" stroke="BLACK" strokeType="INSIDE" width="298.0" />
+      <Label layoutX="95.0" layoutY="50.0" prefHeight="57.0" prefWidth="102.0" text="Staff" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="48.0" />
+         </font>
+      </Label>
+      <Label layoutX="340.0" layoutY="90.0" prefHeight="36.0" prefWidth="338.0" text="เรื่องร้อนเรียนที่รับผิดชอบ">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <ListView fx:id="reportsListView" layoutX="340.0" layoutY="150.0" prefHeight="300.0" prefWidth="900.0" style="-fx-background-color: f3f3f3; -fx-background-radius: 13;" />
+      <Label layoutX="800.0" layoutY="90.0" prefHeight="39.0" prefWidth="146.0" text="หน่วยงาน: ">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <Label fx:id="agencyLabel" layoutX="950.0" layoutY="90.0" prefHeight="39.0" prefWidth="183.0" text="agencyLabel">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <Button layoutX="40.0" layoutY="630.0" mnemonicParsing="false" onAction="#handleChangePasswordButton" prefHeight="45.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="Change Password" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="51.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="nameLabel" layoutX="75.0" layoutY="281.0" prefHeight="39.0" prefWidth="155.0" text="nameLabel" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
