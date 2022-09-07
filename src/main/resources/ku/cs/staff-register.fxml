@@ -28,7 +28,7 @@
       </Label>
       <Label layoutX="406.0" layoutY="204.0" prefHeight="35.0" prefWidth="108.0" text="ชื่อของผู้ใช้" textFill="#011627">
          <font>
-            <Font size="20.0" />
+            <Font name="FreesiaUPC" size="24.0" />
          </font>
       </Label>
       <TextField fx:id="nameTextField" layoutX="409.0" layoutY="237.0" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13px; -fx-background-radius: 13px;" />
@@ -59,7 +59,7 @@
       <ChoiceBox fx:id="agencyChoiceBox" layoutX="408.0" layoutY="520.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-background-radius: 13px; -fx-border-radius: 13px; -fx-border-color: #011627;" stylesheets="@styles/staff-register-styles.css" />
       <Label layoutX="406.0" layoutY="487.0" prefHeight="35.0" prefWidth="166.0" text="หน่วยงานที่รับผิดชอบ" textFill="#011627">
          <font>
-            <Font size="20.0" />
+            <Font name="FreesiaUPC" size="24.0" />
          </font>
       </Label>
       <Pane layoutX="633.0" layoutY="190.0" prefHeight="200.0" prefWidth="200.0" />
