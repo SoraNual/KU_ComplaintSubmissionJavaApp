@@ -37,7 +37,7 @@ public class StaffRegisterController {
     @FXML
     public void handleBackButton(ActionEvent actionEvent) {
         try {
-            com.github.saacsos.FXRouter.goTo("home");
+            com.github.saacsos.FXRouter.goTo("admin");
         } catch (IOException e) {
             System.err.println("ให้ตรวจสอบการกำหนด route");
         }

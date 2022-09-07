@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -8,55 +9,72 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.StaffRegisterController">
    <children>
-      <ImageView fitHeight="651.0" fitWidth="651.0" layoutX="582.0" layoutY="27.0" opacity="0.05">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#011627" height="751.0" layoutX="-16.0" layoutY="-28.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="314.0" />
+      <ImageView fitHeight="651.0" fitWidth="651.0" layoutX="622.0" layoutY="27.0" opacity="0.05">
          <image>
             <Image url="@images/administrator.png" />
          </image>
       </ImageView>
-      <Label layoutX="226.0" layoutY="116.0" prefHeight="88.0" prefWidth="327.0" text="Staff Registration" textFill="#011627">
+      <Label layoutX="406.0" layoutY="116.0" prefHeight="88.0" prefWidth="327.0" text="Staff Registration" textFill="#011627">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="226.0" layoutY="204.0" prefHeight="35.0" prefWidth="108.0" text="ชื่อของผู้ใช้" textFill="#011627">
+      <Label layoutX="406.0" layoutY="204.0" prefHeight="35.0" prefWidth="108.0" text="ชื่อของผู้ใช้" textFill="#011627">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="nameTextField" layoutX="229.0" layoutY="237.0" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13px; -fx-background-radius: 13px;" />
-      <Label layoutX="226.0" layoutY="272.0" prefHeight="35.0" prefWidth="108.0" text="Username" textFill="#011627">
+      <TextField fx:id="nameTextField" layoutX="409.0" layoutY="237.0" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13px; -fx-background-radius: 13px;" />
+      <Label layoutX="406.0" layoutY="272.0" prefHeight="35.0" prefWidth="108.0" text="Username" textFill="#011627">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="226.0" layoutY="347.0" prefHeight="35.0" prefWidth="108.0" text="Password" textFill="#011627">
+      <Label layoutX="406.0" layoutY="347.0" prefHeight="35.0" prefWidth="108.0" text="Password" textFill="#011627">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="226.0" layoutY="417.0" prefHeight="35.0" prefWidth="166.0" text="Confirm Password" textFill="#011627">
+      <Label layoutX="406.0" layoutY="417.0" prefHeight="35.0" prefWidth="166.0" text="Confirm Password" textFill="#011627">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameTextField" layoutX="229.0" layoutY="305.0" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13px; -fx-background-radius: 13px;" />
-      <Button layoutX="228.0" layoutY="576.0" mnemonicParsing="false" onAction="#handleRegisterButton" prefHeight="37.0" prefWidth="313.0" style="-fx-background-color: #011627; -fx-background-radius: 7px;" text="Register" textFill="#fdfffc">
+      <TextField fx:id="usernameTextField" layoutX="409.0" layoutY="305.0" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13px; -fx-background-radius: 13px;" />
+      <Button layoutX="408.0" layoutY="576.0" mnemonicParsing="false" onAction="#handleRegisterButton" prefHeight="37.0" prefWidth="313.0" style="-fx-background-color: #011627; -fx-background-radius: 7px;" text="Register" textFill="#fdfffc">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <ImageView fx:id="regis_pic" fitHeight="372.0" fitWidth="286.0" layoutX="660.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" />
-      <PasswordField fx:id="passwordField" layoutX="228.0" layoutY="382.0" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13px; -fx-background-radius: 13px;" />
-      <PasswordField fx:id="confirmPasswordField" layoutX="228.0" layoutY="452.0" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13px; -fx-background-radius: 13px;" />
-      <ChoiceBox fx:id="agencyChoiceBox" layoutX="228.0" layoutY="520.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-background-radius: 13px; -fx-border-radius: 13px; -fx-border-color: #011627;" stylesheets="@styles/staff-register-styles.css" />
-      <Label layoutX="226.0" layoutY="487.0" prefHeight="35.0" prefWidth="166.0" text="หน่วยงานที่รับผิดชอบ" textFill="#011627">
+      <ImageView fx:id="regis_pic" fitHeight="372.0" fitWidth="286.0" layoutX="830.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true" />
+      <PasswordField fx:id="passwordField" layoutX="408.0" layoutY="382.0" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13px; -fx-background-radius: 13px;" />
+      <PasswordField fx:id="confirmPasswordField" layoutX="408.0" layoutY="452.0" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13px; -fx-background-radius: 13px;" />
+      <ChoiceBox fx:id="agencyChoiceBox" layoutX="408.0" layoutY="520.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-background-radius: 13px; -fx-border-radius: 13px; -fx-border-color: #011627;" stylesheets="@styles/staff-register-styles.css" />
+      <Label layoutX="406.0" layoutY="487.0" prefHeight="35.0" prefWidth="166.0" text="หน่วยงานที่รับผิดชอบ" textFill="#011627">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
+      <Pane layoutX="633.0" layoutY="190.0" prefHeight="200.0" prefWidth="200.0" />
+      <Label layoutX="90.0" layoutY="62.0" text="Admin" textFill="WHITE">
+         <font>
+            <Font name="FreesiaUPC Bold" size="64.0" />
+         </font>
+      </Label>
+      <Button layoutX="113.0" layoutY="650.0" mnemonicParsing="false" onAction="#handleBackButton" style="-fx-background-color: #011627;" text="Back" textFill="WHITE">
+         <font>
+            <Font name="FreesiaUPC" size="24.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

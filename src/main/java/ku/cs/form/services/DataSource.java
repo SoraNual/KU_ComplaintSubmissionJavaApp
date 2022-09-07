@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 
 public interface DataSource<T> {
 
-    T readData() throws FileNotFoundException;
+    T readData();
     void writeData(T t);
 
 }
