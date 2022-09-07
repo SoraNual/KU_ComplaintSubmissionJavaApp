@@ -23,7 +23,7 @@ public class ProjectApplication extends Application {
         FXRouter.when("creatorTeam",packageStr+"creator_team.fxml");
         FXRouter.when("register", packageStr+"register.fxml");
         FXRouter.when("staffPage", packageStr+"staff-page.fxml");
-        FXRouter.when("reportsDetail", packageStr+"report-detail.fxml");
+        FXRouter.when("reportDetail", packageStr+"report-detail.fxml");
 
     }
 

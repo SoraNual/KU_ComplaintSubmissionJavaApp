@@ -25,4 +25,15 @@ public class Report {
     public String getStatus() { return status; }
     public int getVotePoint() { return votePoint; }
     public void addVotePoint() { votePoint++; }
+
+    @Override
+    public String toString() {
+        return "Report{" +
+                "topic='" + topic + '\'' +
+                ", category='" + category + '\'' +
+                ", detail='" + detail + '\'' +
+                ", status='" + status + '\'' +
+                ", votePoint=" + votePoint +
+                '}';
+    }
 }
