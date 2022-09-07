@@ -28,12 +28,9 @@ public class Report {
 
     @Override
     public String toString() {
-        return "Report{" +
-                "topic='" + topic + '\'' +
-                ", category='" + category + '\'' +
-                ", detail='" + detail + '\'' +
-                ", status='" + status + '\'' +
-                ", votePoint=" + votePoint +
-                '}';
+        return "หัวข้อ: " + getTopic() + "\n" +
+                "รายละเอียด: " + getDetail() + "\n" +
+                "สถานะ: " + getStatus() + "\n" +
+                "คะแนนโหวต: " + getVotePoint();
     }
 }

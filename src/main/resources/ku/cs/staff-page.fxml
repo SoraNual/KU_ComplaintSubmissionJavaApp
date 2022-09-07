@@ -22,12 +22,12 @@
          </font>
       </Label>
       <ListView fx:id="reportsListView" layoutX="340.0" layoutY="150.0" prefHeight="300.0" prefWidth="900.0" style="-fx-background-color: f3f3f3; -fx-background-radius: 13;" />
-      <Label layoutX="800.0" layoutY="90.0" prefHeight="39.0" prefWidth="146.0" text="หน่วยงาน: ">
+      <Label layoutX="900.0" layoutY="90.0" prefHeight="39.0" prefWidth="146.0" text="หน่วยงาน: ">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
       </Label>
-      <Label fx:id="agencyLabel" layoutX="950.0" layoutY="90.0" prefHeight="39.0" prefWidth="183.0" text="agencyLabel">
+      <Label fx:id="agencyLabel" layoutX="1060.0" layoutY="90.0" prefHeight="39.0" prefWidth="183.0" text="agencyLabel">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>

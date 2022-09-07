@@ -49,7 +49,7 @@
             <Font name="System Bold" size="19.0" />
          </font>
       </Button>
-      <Button layoutX="850.0" layoutY="587.0" mnemonicParsing="false" onAction="#handleFinishButton" prefHeight="57.0" prefWidth="223.0" style="-fx-background-color: green; -fx-background-radius: 13; -fx-border-radius: 13;" text="เสร็จสิ้นแล้ว" textFill="WHITE">
+      <Button layoutX="852.0" layoutY="587.0" mnemonicParsing="false" onAction="#handleFinishButton" prefHeight="57.0" prefWidth="223.0" style="-fx-background-color: green; -fx-background-radius: 13; -fx-border-radius: 13;" text="เสร็จสิ้นแล้ว" textFill="WHITE">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
@@ -74,7 +74,7 @@
             <Font size="18.0" />
          </font>
       </TextArea>
-      <TextArea fx:id="solutionTextArea" layoutX="609.0" layoutY="192.0" prefHeight="375.0" prefWidth="466.0" style="-fx-background-color: white; -fx-border-color: black;">
+      <TextArea fx:id="solutionTextArea" layoutX="609.0" layoutY="192.0" prefHeight="374.0" prefWidth="466.0" style="-fx-background-color: white; -fx-border-color: black;">
          <font>
             <Font size="18.0" />
          </font>

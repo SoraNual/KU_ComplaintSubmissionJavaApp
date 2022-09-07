@@ -21,7 +21,7 @@ public class StaffPageController {
 
     @FXML
     public void initialize() {
-        String url = getClass().getResource("/ku/cs/images/catMeow.png").toExternalForm();
+        String url = getClass().getResource("/ku/cs/images/zen.jpg").toExternalForm();
         staffImage.setImage(new Image(url));
 
         dataSource = new ReportFileDataSource("data", "reports.csv");
@@ -38,7 +38,7 @@ public class StaffPageController {
     @FXML
     public void handleChangePasswordButton(ActionEvent actionEvent) {
         try {
-            com.github.saacsos.FXRouter.goTo("changePassword");
+            com.github.saacsos.FXRouter.goTo("staffChangePassword");
         } catch (IOException e) {
             System.out.println("ไม่สามารถไปหน้า Change Password ได้");
         }
