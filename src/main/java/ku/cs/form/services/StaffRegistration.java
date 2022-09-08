@@ -66,7 +66,7 @@ public class StaffRegistration implements Registeration{
             String line = "";
             while((line = buffer.readLine()) != null){ //วนลูปแยกคอมมาทีละบรรทัดจนกว่าจะไม่เจอบรรทัด
                 String[] data = line.split(",");
-                if(data[3].equals(newUserName)) return true;
+                if(data[0].equals(newUserName)) return true;
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
