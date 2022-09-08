@@ -5,7 +5,7 @@ import ku.cs.form.models.UserList;
 
 import java.io.*;
 
-public class NisitRegistration implements Registeration{
+public class NisitRegistration implements Registration {
 
     private String directoryName;
 

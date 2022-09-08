@@ -1,6 +1,6 @@
 package ku.cs.form.services;
 
-public interface Registeration {
+public interface Registration {
 
     String registrationCheck(String name, String username, String password, String confirmPassword);
     boolean usernameValidationCheck(String newUserName);

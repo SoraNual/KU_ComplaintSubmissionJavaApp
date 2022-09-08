@@ -31,7 +31,7 @@ public class UserData {
         }
     }
 
-    public User usernamepasswordCheck(String username, String password) {
+    public User usernamePasswordCheck(String username, String password) {
         UserList userList = new UserList();
 
         String filePath = directoryName + File.separator + fileName;

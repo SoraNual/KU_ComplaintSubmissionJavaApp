@@ -4,8 +4,6 @@ import com.github.saacsos.FXRouter;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -40,8 +38,8 @@ public class LoginPageController {
 
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
-        UserData unclarifyUser = new UserData("data","users.csv");
-        user = unclarifyUser.usernamepasswordCheck(username,password);
+        UserData unclarifiedUser = new UserData("data","users.csv");
+        user = unclarifiedUser.usernamePasswordCheck(username,password);
         try {
             if (user instanceof Admin) {
                 FXRouter.goTo("admin",user);

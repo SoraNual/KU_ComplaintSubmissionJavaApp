@@ -1,13 +1,11 @@
 package ku.cs.form.services;
 
-import ku.cs.form.models.Admin;
-import ku.cs.form.models.Nisit;
 import ku.cs.form.models.Staff;
 import ku.cs.form.models.UserList;
 
 import java.io.*;
 
-public class StaffRegistration implements Registeration{
+public class StaffRegistration implements Registration {
 
     private String directoryName;
 
