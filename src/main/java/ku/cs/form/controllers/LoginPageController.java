@@ -44,7 +44,7 @@ public class LoginPageController {
         user = unclarifyUser.usernamepasswordCheck(username,password);
         try {
             if (user instanceof Admin) {
-                FXRouter.goTo("adminPage",user);
+                FXRouter.goTo("admin",user);
             } else if (user instanceof Staff) {
                 FXRouter.goTo("staffPage",user);
             } else if (user instanceof Nisit) {
