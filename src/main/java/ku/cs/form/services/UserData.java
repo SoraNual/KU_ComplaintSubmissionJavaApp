@@ -31,7 +31,7 @@ public class UserData {
         }
     }
 
-    public User usernamepasswordCheck(String username,String password) {
+    public User usernamepasswordCheck(String username, String password) {
         UserList userList = new UserList();
 
         String filePath = directoryName + File.separator + fileName;
@@ -48,13 +48,13 @@ public class UserData {
             while((line = buffer.readLine()) != null){ //วนลูปแยกคอมมาทีละบรรทัดจนกว่าจะไม่เจอบรรทัด
                 String[] data = line.split(",");
                 if(data[0].equals(username)&&data[1].equals(password)){
-                    if(data[2]=="admin"){
+                    if(data[2].trim().equals("admin")){
                         Admin admin = new Admin(data[3],data[0],data[1]);
                         return admin;
-                    } else if (data[2]=="staff") {
+                    } else if (data[2].trim().equals("staff")) {
                         Staff staff = new Staff(data[3],data[0],data[1],data[6]);
                         return staff;
-                    } else if (data[2]=="nisit") {
+                    } else if (data[2].trim().equals("nisit")) {
                         Nisit nisit = new Nisit(data[3],data[0],data[1]);
                         return nisit;
                     }
