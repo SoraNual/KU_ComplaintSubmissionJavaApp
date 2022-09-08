@@ -2,6 +2,7 @@ package ku.cs.form.controllers;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -13,10 +14,9 @@ import ku.cs.form.models.User;
 import ku.cs.form.models.UserList;
 import ku.cs.form.services.LoginTimeFileDataSource;
 
-import java.io.File;
+import java.io.IOException;
 
 public class LoginTimePageController {
-
 
     @FXML private Label usernameLabel;
     @FXML private Label nameLabel;
@@ -71,4 +71,14 @@ public class LoginTimePageController {
         loginTimeLabel.setText("");
         profileImage.setImage(null);
     }
+    @FXML
+    public void handleBackButton(ActionEvent actionEvent) {
+        try {
+            com.github.saacsos.FXRouter.goTo("admin");
+        } catch (IOException e) {
+            System.err.println("ให้ตรวจสอบการกำหนด route");
+        }
+    }
+
+
 }

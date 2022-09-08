@@ -1,8 +1,6 @@
 package ku.cs;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import com.github.saacsos.FXRouter;
 import java.io.IOException;
@@ -18,6 +16,7 @@ public class ProjectApplication extends Application {
         String packageStr = "ku/cs/";
         FXRouter.when("home", packageStr+"home.fxml");
         FXRouter.when("staffRegister", packageStr+"staff-register.fxml");
+        FXRouter.when("admin", packageStr+"admin.fxml");
         FXRouter.when("loginTime", packageStr+"login-time-page.fxml");
         FXRouter.when("login", packageStr+"login-page.fxml");
         FXRouter.when("creatorTeam",packageStr+"creator_team.fxml");
