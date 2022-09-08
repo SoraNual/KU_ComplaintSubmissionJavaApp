@@ -97,9 +97,9 @@ public class NisitRegistration implements Registeration{
             writer = new FileWriter(file,true);
             buffer = new BufferedWriter(writer);
 
-            String line = nisit.getName() + ","
+            String line = nisit.getUsername() + ","
                         + nisit.getPassword() + ",nisit,"
-                        + nisit.getUsername() + ","
+                        + nisit.getName() + ","
                         + nisit.getUserStatus() + ","
                         + nisit.getLoginAttempt();
             buffer.append(line);

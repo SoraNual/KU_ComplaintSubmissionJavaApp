@@ -99,9 +99,9 @@ public class StaffRegistration implements Registeration{
             writer = new FileWriter(file,true);
             buffer = new BufferedWriter(writer);
 
-            String line = staff.getName() + ","
+            String line = staff.getUsername() + ","
                     + staff.getPassword() + ",staff,"
-                    + staff.getUsername() + ","
+                    + staff.getName() + ","
                     + staff.getUserStatus() + ","
                     + staff.getLoginAttempt() + ","
                     + staff.getAgency();
