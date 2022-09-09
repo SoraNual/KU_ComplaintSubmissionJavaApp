@@ -64,7 +64,7 @@ public class StaffRegistration implements Registration {
             String line = "";
             while((line = buffer.readLine()) != null){ //วนลูปแยกคอมมาทีละบรรทัดจนกว่าจะไม่เจอบรรทัด
                 String[] data = line.split(",");
-                if(data[0].equals(newUserName)) return true;
+                if(data[0].equals(newUserName)) return false;
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -79,7 +79,7 @@ public class StaffRegistration implements Registration {
             }
         }
 
-        return false;
+        return true;
     }
 
     @Override
