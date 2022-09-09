@@ -42,7 +42,7 @@ public class StaffRegistration implements Registration {
 
         if(!password.isBlank() && !confirmPassword.isBlank() && confirmationPasswordCheck(password, confirmPassword))
             error += "รหัสผ่านไม่ตรงกัน!\n";
-        if(usernameValidationCheck(username))     error += "username ของคุณซ้ำ!\n";
+        if(!usernameValidationCheck(username))     error += "username ของคุณซ้ำ!\n";
 
         return error;
     }
