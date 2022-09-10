@@ -38,8 +38,8 @@ public class User {
         return password;
     }
 
-    public LocalDateTime getLoginTime() {
-         return loginTime;
+    public String getLoginTime() {
+         return loginTime.format(format);
     }
 
     public void setLoginTime(String s) {

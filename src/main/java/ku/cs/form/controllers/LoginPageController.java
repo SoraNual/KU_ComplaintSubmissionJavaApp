@@ -7,10 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import ku.cs.form.models.Admin;
-import ku.cs.form.models.Nisit;
-import ku.cs.form.models.Staff;
-import ku.cs.form.models.User;
+import ku.cs.form.models.*;
+import ku.cs.form.services.LoginTimeFileDataSource;
 import ku.cs.form.services.UserData;
 
 import java.io.*;
@@ -48,6 +46,11 @@ public class LoginPageController {
             } else if (user instanceof Nisit) {
                 FXRouter.goTo("nisitPage",user);
             }
+            LoginTimeFileDataSource loginTimeFileDataSource = new LoginTimeFileDataSource("data","loginTime.csv");
+            UserList users = new UserList();
+            users.addUser(user);
+            loginTimeFileDataSource.writeData(users);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

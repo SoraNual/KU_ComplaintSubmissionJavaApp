@@ -3,6 +3,7 @@ package ku.cs.form.services;
 import ku.cs.form.models.*;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class LoginTimeFileDataSource implements DataSource<UserList> {
 
@@ -29,10 +30,10 @@ public class LoginTimeFileDataSource implements DataSource<UserList> {
             while ((line = buffer.readLine()) != null) {
 
                 String[] data = line.split(",");
-
                 String class_name = data[2].trim(); // check Class
 
                 if(class_name.equals("staff")){
+
                     Staff staff = new Staff(data[0].trim(), data[1].trim(), null,data[3].trim()); // add agency
                     staff.setLoginTime(data[4].trim());
                     userList.addUser(staff);
@@ -49,7 +50,6 @@ public class LoginTimeFileDataSource implements DataSource<UserList> {
                     nisit.setLoginTime(data[3].trim());
                     userList.addUser(nisit);
                 }
-
             }
 
 
@@ -70,7 +70,40 @@ public class LoginTimeFileDataSource implements DataSource<UserList> {
 
     @Override
     public void writeData(UserList users) {
+        String filePath = directoryName + File.separator + fileName;
+        File file = new File(filePath);
+
+        FileWriter writer = null;
+        BufferedWriter buffer = null;
+
+        try {
+            writer = new FileWriter(file,true);
+            buffer = new BufferedWriter(writer);
+
+            for (User user : users.getAllUsers()){
+                String line = "";
+                if(user instanceof Admin)
+                    line = user.getName() + "," + user.getUsername() + ",admin," + user.getLoginTime();
+                if(user instanceof Staff)
+                    line = user.getName() + "," + user.getUsername() + ",staff," + ((Staff) user).getAgency() + "," + user.getLoginTime();
+                if(user instanceof Nisit)
+                    line = user.getName() + "," + user.getUsername() + ",nisit," + user.getLoginTime();
+                buffer.append(line);
+                buffer.newLine();
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                buffer.close();
+                writer.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
     }
+
 }
 
