@@ -3,6 +3,11 @@ package ku.cs.form.services;
 import ku.cs.form.models.*;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserData {
     private String directoryName;
@@ -55,7 +60,7 @@ public class UserData {
                         Staff staff = new Staff(data[3],data[0],data[1],data[6]);
                         return staff;
                     } else if (data[2].trim().equals("nisit")) {
-                        Nisit nisit = new Nisit(data[3],data[0],data[1]);
+                        Nisit nisit = new Nisit(data[3],data[0],data[1],data[7]);
                         return nisit;
                     }
                 };
@@ -73,5 +78,25 @@ public class UserData {
             }
         }
         return null;
+    }
+
+    public void changeData(User user) {
+        String filePath = directoryName + File.separator + fileName;
+        checkFileIsExisted();
+
+        try {
+
+            List<String> file = new ArrayList<>(Files.readAllLines(Path.of(filePath), StandardCharsets.UTF_8));
+            for (int i = 0; i < file.size(); i++) {
+                if ((file.get(i).split(","))[0].equals(user.getUsername())) {
+                    file.set(i, user.toString());
+                    break;
+                }
+            }
+            Files.write(Path.of(filePath), file);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

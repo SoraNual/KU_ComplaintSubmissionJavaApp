@@ -26,6 +26,7 @@ public class ProjectApplication extends Application {
         FXRouter.when("reportDetail", packageStr+"report-detail.fxml");
         FXRouter.when("report", packageStr+"report.fxml");
         FXRouter.when("nisitPage", packageStr+"nisit-page.fxml");
+        FXRouter.when("editProfile",packageStr+"edit-profile.fxml");
     }
 
     public static void main(String[] args) {

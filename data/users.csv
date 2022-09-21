@@ -1,7 +1,8 @@
-admin,admin123,admin,KluayTodd,active,0
-a,b,nisit,Rachata Kaewviset,active,0
-jojo,jo,staff,Sorawit,active,0,สำนักการกีฬา
-asdf,1234,staff,wasd,active,0,สำนักเก็ตไก่
-123qwe,123,staff,ioo,active,0,สำนักงานนายกรัฐมนตรี
-abc,123,nisit,Sorawit Nualmanee,active,0
-Joemama,1234,staff,Moon,active,0,สำนักการกีฬา
+[0]username, [1]password, [2]ประเภทผู้ใช้(Admin/Nisit/Staff), [3]name,  [4]user_status, [5]login_attempt, [6]หน่วยงาน ,[7]color setting
+admin,admin123,admin,KluayTodd,active,0,,0xffb3b3ff
+a,asd,nisit,Rachata Kaewviset,active,0,null,0xffb3b3ff
+jojo,jo,staff,Sorawit,active,0,สำนักการกีฬา,0xffb3b3ff
+asdf,1234,staff,wasd,active,0,สำนักเก็ตไก่,0xffb3b3ff
+123qwe,123,staff,ioo,active,0,สำนักงานนายกรัฐมนตรี,0xffb3b3ff
+abc,123,nisit,Sorawit Nualmanee,active,0,,0xffb3b3ff
+Joemama,1234,staff,Moon,active,0,สำนักการกีฬา,0xffb3b3ff

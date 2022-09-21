@@ -1,7 +1,9 @@
 package ku.cs.form.models;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
+import java.awt.*;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,7 +17,8 @@ public class User {
     private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"); //for change date format
     private String userStatus;
     private int loginAttempt;
-
+    private String Agency;
+    private Color color;
     public User(String name, String username, String password) {
         this.name = name;
         this.username = username;
@@ -74,10 +77,35 @@ public class User {
     @Override
     public String toString() {
         //loginTime.format(format) => change LocalDateTime to string
-        return name + " : " + username + " : " + loginTime.format(format);
+        return username + "," + password + "," + this.getClass() + "," + getName() + "," + userStatus + "," + loginAttempt + "," + Agency;
     }
 
     public String toStringLoginTime() {
         return loginTime.format(format);
     }
+
+    public DateTimeFormatter getFormat() {
+        return format;
+    }
+
+    public String getAgency() {
+        return Agency;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
 }

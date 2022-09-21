@@ -1,9 +1,26 @@
 package ku.cs.form.models;
 
-public class Nisit extends User{
+import javafx.scene.paint.Color;
 
-    public Nisit(String name, String username, String password) {
+public class Nisit extends User{
+    Color color;
+
+    public Nisit(String name, String username, String password,String colorWeb) {
         super(name, username, password);
+        color = Color.web(colorWeb);
     }
 
+    @Override
+    public String toString() {
+        return getUsername()+","+getPassword()+",nisit,"+getName()+","+getUserStatus()+","+getLoginAttempt()+","+getAgency()+","+color;
+    }
+
+    @Override
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
 }

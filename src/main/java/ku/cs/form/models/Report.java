@@ -24,7 +24,11 @@ public class Report {
     public String getDetail() { return detail; }
     public String getStatus() { return status; }
     public int getVotePoint() { return votePoint; }
-    public void addVotePoint() { votePoint++; }
+    public void addVotePoint(int point) { votePoint+=point; }
+
+    public void setVotePoint(int votePoint) {
+        this.votePoint = votePoint;
+    }
 
     @Override
     public String toString() {

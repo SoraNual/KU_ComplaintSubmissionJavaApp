@@ -4,6 +4,7 @@ import com.github.saacsos.FXRouter;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,6 +20,7 @@ public class LoginPageController {
     @FXML private ImageView img;
     @FXML private TextField usernameTextField;
     @FXML private TextField passwordTextField;
+    @FXML private Label incorrectWarningText;
     private User user;
     @FXML public void initialize() {
         String url = getClass().getResource("/ku/cs/images/catMeow.png").toExternalForm();
@@ -38,8 +40,8 @@ public class LoginPageController {
 
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
-        UserData unclarifiedUser = new UserData("data","users.csv");
-        user = unclarifiedUser.usernamePasswordCheck(username,password);
+        UserData unclarifyUser = new UserData("data","users.csv");
+        user = unclarifyUser.usernamePasswordCheck(username,password);
         try {
             if (user instanceof Admin) {
                 FXRouter.goTo("admin",user);
@@ -47,6 +49,8 @@ public class LoginPageController {
                 FXRouter.goTo("staffPage",user);
             } else if (user instanceof Nisit) {
                 FXRouter.goTo("nisitPage",user);
+            } else{
+                incorrectWarningText.setText("Incorrect username or password");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
