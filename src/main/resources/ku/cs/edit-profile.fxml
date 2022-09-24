@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -9,29 +10,29 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.EditProfileController">
+<AnchorPane fx:id="pane" prefHeight="720.0" prefWidth="1280.0" stylesheets="styles/main.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.EditProfileController">
    <children>
-      <Label layoutX="464.0" layoutY="250.0" prefHeight="35.0" prefWidth="277.0" text="Password">
+      <Label fx:id="passwordLabel" layoutX="225.0" layoutY="50.0" prefHeight="35.0" prefWidth="277.0" text="Password">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <PasswordField fx:id="newPasswordTextField" layoutX="464.0" layoutY="300.0" prefHeight="34.0" prefWidth="353.0" promptText="New password" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 13; -fx-background-radius: 13;">
+      <PasswordField fx:id="newPasswordTextField" layoutX="225.0" layoutY="100.0" prefHeight="34.0" prefWidth="353.0" promptText="New password" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 13; -fx-background-radius: 13;">
          <font>
             <Font size="10.0" />
          </font>
       </PasswordField>
-      <PasswordField fx:id="confirmNewPasswordTextField" layoutX="464.0" layoutY="400.0" prefHeight="34.0" prefWidth="353.0" promptText="New password" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 13;">
+      <PasswordField fx:id="confirmNewPasswordTextField" layoutX="225.0" layoutY="200.0" prefHeight="34.0" prefWidth="353.0" promptText="Confirm new password" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 13; -fx-background-radius: 13;">
          <font>
             <Font size="10.0" />
          </font>
       </PasswordField>
-      <Label layoutX="464.0" layoutY="350.0" prefHeight="35.0" prefWidth="277.0" text="Confirm password">
+      <Label fx:id="confirmPasswordLabel" layoutX="225.0" layoutY="150.0" prefHeight="35.0" prefWidth="277.0" text="Confirm password">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="464.0" layoutY="450.0" prefHeight="35.0" prefWidth="277.0" text="Change theme color">
+      <Label fx:id="changeRectangleColorLabel" layoutX="225.0" layoutY="250.0" prefHeight="35.0" prefWidth="277.0" text="Change theme color">
          <font>
             <Font size="24.0" />
          </font>
@@ -48,16 +49,49 @@
       </Button>
       <Rectangle fx:id="rightRec" arcHeight="5.0" arcWidth="5.0" fill="#011627" height="720.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
       <Rectangle fx:id="leftRec" arcHeight="5.0" arcWidth="5.0" fill="#011627" height="720.0" layoutX="1080.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-      <Label layoutX="475.0" layoutY="535.0" text="ถ้าไม่เปลี่ยนไม่ต้องใส่อะไรเข้าไปเข้าใจไหม User อย่าทำตัวยุ่งยาก ขี้เกียจแก้" />
+      <Label fx:id="warningLabel" layoutX="475.0" layoutY="535.0" text="ถ้าไม่เปลี่ยนไม่ต้องใส่อะไรเข้าไปเข้าใจไหม User อย่าทำตัวยุ่งยาก ขี้เกียจแก้" />
       <Label fx:id="incorrectWarningText" layoutX="481.0" layoutY="552.0" prefHeight="29.0" prefWidth="317.0" textFill="RED">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <ColorPicker fx:id="colorPickerButton" layoutX="463.0" layoutY="500.0" onAction="#handleColorPickerButton" prefHeight="35.0" prefWidth="353.0" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 13; -fx-border-radius: 13;">
+      <ColorPicker fx:id="rectangleColorPicker" layoutX="225.0" layoutY="300.0" onAction="#handleRectangleColorPickerButton" prefHeight="35.0" prefWidth="353.0" promptText="เฮไอ้หนูเข้ามานี่สิ" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 13; -fx-border-radius: 13;">
          <value>
             <Color red="0.003921568859368563" green="0.08627451211214066" blue="0.15294118225574493" />
          </value>
       </ColorPicker>
+      <ColorPicker fx:id="backgroundColorPicker" layoutX="225.0" layoutY="400.0" onAction="#handleBackgroundColorPickerButton" prefHeight="35.0" prefWidth="353.0" promptText="ฉันจะพาไปดูองดี" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 13; -fx-border-radius: 13;" />
+      <Label fx:id="changeBackgroundColorLabel" layoutX="225.0" layoutY="350.0" prefHeight="35.0" prefWidth="277.0" text="Change background color">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="changeTextColorLabel" layoutX="660.0" layoutY="50.0" prefHeight="35.0" prefWidth="277.0" text="Change text color">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ColorPicker fx:id="textColorPicker" layoutX="660.0" layoutY="100.0" onAction="#handleTextColorPickerButton" prefHeight="35.0" prefWidth="353.0" promptText="ที่โขดหิน ณ ตรงนั้นฉันจะพาเธอไปสู่ฝัน" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 13; -fx-border-radius: 13;">
+         <value>
+            <Color red="0.003921568859368563" green="0.08627451211214066" blue="0.15294118225574493" />
+         </value>
+      </ColorPicker>
+      <ChoiceBox layoutX="660.0" layoutY="200.0" prefHeight="35.0" prefWidth="353.0" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 13; -fx-border-radius: 13;" />
+      <Label fx:id="changeFontLabel" layoutX="660.0" layoutY="150.0" prefHeight="35.0" prefWidth="277.0" text="Change font">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ColorPicker fx:id="buttonColorPicker" layoutX="660.0" layoutY="300.0" onAction="#handleRectangleColorPickerButton" prefHeight="35.0" prefWidth="353.0" promptText="เฮไอ้หนูเข้ามานี่สิ" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 13; -fx-border-radius: 13;">
+         <value>
+            <Color red="0.003921568859368563" green="0.08627451211214066" blue="0.15294118225574493" />
+         </value>
+      </ColorPicker>
+      <Label fx:id="changeButtonColorLabel" layoutX="660.0" layoutY="250.0" prefHeight="35.0" prefWidth="277.0" text="Change button color">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="376.0" layoutY="55.0" mnemonicParsing="false" styleClass="button2" text="Button" />
    </children>
 </AnchorPane>

@@ -60,7 +60,7 @@ public class UserData {
                         Staff staff = new Staff(data[3],data[0],data[1],data[6]);
                         return staff;
                     } else if (data[2].trim().equals("nisit")) {
-                        Nisit nisit = new Nisit(data[3],data[0],data[1],data[7]);
+                        Nisit nisit = new Nisit(data[3],data[0],data[1],data[7],data[8],data[9]);
                         return nisit;
                     }
                 };

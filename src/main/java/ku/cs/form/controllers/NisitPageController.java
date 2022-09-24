@@ -2,6 +2,7 @@ package ku.cs.form.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
@@ -32,6 +33,7 @@ public class NisitPageController {
 
     @FXML public void initialize() {
         user = (User) com.github.saacsos.FXRouter.getData();
+
         nameLabel.setText(user.getName());
         File imageFile = new File(user.getProfileImageFilePath());
         Image userImage = new Image(imageFile.toURI().toString());
@@ -39,7 +41,7 @@ public class NisitPageController {
         dataSource = new ReportFileDataSource("data", "reports.csv");
         reportList = dataSource.readData();
         reportsListView.getItems().addAll(reportList.getAllReports());
-        rightRec.setFill(user.getColor());
+        rightRec.setFill(user.getRectangleColor());
     }
 
     public void handleUploadImageButton(ActionEvent actionEvent){

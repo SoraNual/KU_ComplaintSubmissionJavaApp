@@ -2,10 +2,14 @@ package ku.cs.form.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import ku.cs.form.models.User;
@@ -17,23 +21,53 @@ public class EditProfileController {
     @FXML private TextField confirmNewPasswordTextField;
     @FXML private Label incorrectWarningText;
     private User user;
-    @FXML private Color color;
-    @FXML private ColorPicker colorPickerButton;
+    @FXML private Color rectangleColor;
+    @FXML private Color textColor;
+    @FXML private Color backgroundColor;
+    @FXML private ColorPicker rectangleColorPicker;
+    @FXML private ColorPicker textColorPicker;
+    @FXML private ColorPicker backgroundColorPicker;
 
     @FXML private Rectangle rightRec;
     @FXML private Rectangle leftRec;
     @FXML private Button confirmButton;
+    @FXML private Pane pane;
+    @FXML private Label passwordLabel;
+    @FXML private Label confirmPasswordLabel;
+    @FXML private Label changeRectangleColorLabel;
+    @FXML private Label changeTextColorLabel;
+    @FXML private Label changeFontLabel;
+    @FXML private Label changeButtonColorLabel;
+    @FXML private Label changeBackgroundColorLabel;
+    @FXML private Label warningLabel;
     @FXML public void initialize() {
         user = (User) com.github.saacsos.FXRouter.getData();
-        rightRec.setFill(user.getColor());
-        leftRec.setFill(user.getColor());
+
+        rectangleColor = user.getRectangleColor();
+        textColor = user.getTextColor();
+        backgroundColor = user.getBackgroundColor();
+
+
+        rightRec.setFill(rectangleColor);
+        leftRec.setFill(rectangleColor);
+
+        //pane.setBackground(new Background(new BackgroundFill(backgroundColor,null,null)));
+
+        warningLabel.setTextFill(textColor);
+        passwordLabel.setTextFill(textColor);
+        confirmPasswordLabel.setTextFill(textColor);
+        changeBackgroundColorLabel.setTextFill(textColor);
+        changeButtonColorLabel.setTextFill(textColor);
+        changeRectangleColorLabel.setTextFill(textColor);
+        changeFontLabel.setTextFill(textColor);
+        changeTextColorLabel.setTextFill(textColor);
     }
 
 
 
     public void handleBackButton(ActionEvent actionEvent) {
         try{
-            com.github.saacsos.FXRouter.goTo("nisitPage");
+            com.github.saacsos.FXRouter.goTo("nisitPage",user);
         } catch (Exception e){
             System.out.println("Path มีปัญหาละพ่อหนุ่ม");
         }
@@ -46,7 +80,9 @@ public class EditProfileController {
         if (newPassword.equals(newConfirmPassword)) {
             if (!newPassword.trim().equals("")){
                 user.setPassword(newPassword);}
-                user.setColor(color);
+                user.setRectangleColor(rectangleColor);
+                user.setBackgroundColor(backgroundColor);
+                user.setTextColor(textColor);
                 file.changeData(user);
                 try {
                     com.github.saacsos.FXRouter.goTo("nisitPage", user);
@@ -59,11 +95,29 @@ public class EditProfileController {
         }
     }
 
-    public void handleColorPickerButton(ActionEvent actionEvent){
-        color = colorPickerButton.getValue();
-        rightRec.setFill(color);
-        leftRec.setFill(color);
-
+    public void handleRectangleColorPickerButton(ActionEvent actionEvent){
+        rectangleColor = rectangleColorPicker.getValue();
+        rightRec.setFill(rectangleColor);
+        leftRec.setFill(rectangleColor);
     }
+
+    public void handleBackgroundColorPickerButton(ActionEvent actionEvent){
+        backgroundColor = backgroundColorPicker.getValue();
+        pane.setBackground(new Background(new BackgroundFill(backgroundColor,null,null)));
+    }
+    public void handleTextColorPickerButton(ActionEvent actionEvent){
+        textColor = textColorPicker.getValue();
+
+        warningLabel.setTextFill(textColor);
+        passwordLabel.setTextFill(textColor);
+        confirmPasswordLabel.setTextFill(textColor);
+        changeBackgroundColorLabel.setTextFill(textColor);
+        changeButtonColorLabel.setTextFill(textColor);
+        changeRectangleColorLabel.setTextFill(textColor);
+        changeFontLabel.setTextFill(textColor);
+        changeTextColorLabel.setTextFill(textColor);
+        confirmButton.setTextFill(textColor);
+    }
+
 }
 

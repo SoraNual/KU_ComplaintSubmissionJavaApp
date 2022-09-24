@@ -1,6 +1,6 @@
 [0]username, [1]password, [2]ประเภทผู้ใช้(Admin/Nisit/Staff), [3]name,  [4]user_status, [5]login_attempt, [6]หน่วยงาน ,[7]color setting
 admin,admin123,admin,KluayTodd,active,0,,0xffb3b3ff
-a,asd,nisit,Rachata Kaewviset,active,0,null,0xffb3b3ff
+a,asd,nisit,Rachata Kaewviset,active,0,null,0x808080ff,0x0000ffff,0xe6e6e6ff
 jojo,jo,staff,Sorawit,active,0,สำนักการกีฬา,0xffb3b3ff
 asdf,1234,staff,wasd,active,0,สำนักเก็ตไก่,0xffb3b3ff
 123qwe,123,staff,ioo,active,0,สำนักงานนายกรัฐมนตรี,0xffb3b3ff

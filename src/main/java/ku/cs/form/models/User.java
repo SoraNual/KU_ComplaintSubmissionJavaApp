@@ -1,9 +1,7 @@
 package ku.cs.form.models;
 
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-import java.awt.*;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,7 +16,10 @@ public class User {
     private String userStatus;
     private int loginAttempt;
     private String Agency;
-    private Color color;
+    private Color rectangleColor;
+    private Color textColor;
+    private Color backgroundColor;
+
     public User(String name, String username, String password) {
         this.name = name;
         this.username = username;
@@ -100,12 +101,44 @@ public class User {
         this.userStatus = userStatus;
     }
 
-    public Color getColor() {
-        return color;
+
+
+    public void setLoginTime(LocalDateTime loginTime) {
+        this.loginTime = loginTime;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public void setProfileImageFilePath(String profileImageFilePath) {
+        this.profileImageFilePath = profileImageFilePath;
     }
 
+    public void setLoginAttempt(int loginAttempt) {
+        this.loginAttempt = loginAttempt;
+    }
+
+    public void setAgency(String agency) {
+        Agency = agency;
+    }
+
+    public Color getTextColor() {
+        return textColor;
+    }
+
+    public void setTextColor(Color textColor) {
+        this.textColor = textColor;
+    }
+
+    public Color getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public void setBackgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+    public Color getRectangleColor() {
+        return rectangleColor;
+    }
+
+    public void setRectangleColor(Color rectangleColor) {
+        this.rectangleColor = rectangleColor;
+    }
 }

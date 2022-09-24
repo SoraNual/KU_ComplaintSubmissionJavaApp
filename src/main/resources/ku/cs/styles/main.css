@@ -1,3 +1,18 @@
-AnchorPane{
-    -fx-background-color: green;
+.button {
+    -fx-background-color: #02b572;
+}
+
+.button:hover {
+    -fx-background-color: #1CCF8C;
+}
+
+.button:pressed {
+    -fx-background-color: #02b572;
+    -fx-font-size: 30;
+    -fx-font-weight: bold;
+}
+button2:pressed{
+    -fx-background-color: #000000;
+    -fx-font-size: 60;
+    -fx-font-weight: bold;
 }
