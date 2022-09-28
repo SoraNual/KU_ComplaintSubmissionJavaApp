@@ -6,15 +6,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import ku.cs.form.models.Admin;
 import ku.cs.form.models.Staff;
 import ku.cs.form.models.User;
 import ku.cs.form.models.UserList;
 import ku.cs.form.services.LoginTimeFileDataSource;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class LoginTimePageController {
 
@@ -25,7 +26,7 @@ public class LoginTimePageController {
 
     @FXML private ImageView profileImage;
 
-    @FXML private ListView<User> usersLoginListView;
+    @FXML private ListView<String> usersLoginListView;
     private LoginTimeFileDataSource dataSource;
     private UserList usersList;
 
@@ -39,23 +40,52 @@ public class LoginTimePageController {
     }
 
     private void showUsersLoginListView() {
-        usersLoginListView.getItems().addAll(usersList.getAllUsers());
+        usersLoginListView.getItems().clear();
+        for(User user : usersList.getAllUsers()){
+            String user_data = user.getLoginTime()
+                    + "\nUsername: " + user.getUsername()
+                    + "\nName: " + user.getName();
+            if(user instanceof Staff)
+                user_data += "\nAgency: " + ((Staff) user).getAgency();
+            usersLoginListView.getItems().add(user_data);
+        }
         usersLoginListView.refresh();
+
+
     }
 
     private void handleSelectedListView() {
 
         usersLoginListView.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<User>() {
+                new ChangeListener<String>() {
                     @Override
-                    public void changed(ObservableValue<? extends User>
+                    public void changed(ObservableValue<? extends String>
                                                 observable,
-                                        User oldValue, User newValue) {
+                                        String oldValue, String newValue) {
                         showSelectedUser(newValue);
                     }
                 });
     }
-    private void showSelectedUser(User user) {
+
+    private User changeStringToUser(String user_data) {
+        String[] user_data_array = user_data.split("\n");
+        String login_time = user_data_array[0];
+        String username = user_data_array[1].split(" ")[1];
+        String name = user_data_array[2].split(" ")[1];
+        String agency = null;
+        if(user_data_array.length == 4){
+            agency = user_data_array[3].split(" ")[1];
+            Staff staff = new Staff(name,username,null,agency);
+            staff.setLoginTime(login_time);
+            return staff;
+        }
+        User user = new User(name,username,null);
+        user.setLoginTime(login_time);
+        return user;
+    }
+
+    private void showSelectedUser(String user_data) {
+        User user = changeStringToUser(user_data);
         nameLabel.setText(user.getName());
         usernameLabel.setText(user.getUsername());
         loginTimeLabel.setText(user.toStringLoginTime());
@@ -79,6 +109,7 @@ public class LoginTimePageController {
             System.err.println("ให้ตรวจสอบการกำหนด route");
         }
     }
+
 
 
 }
