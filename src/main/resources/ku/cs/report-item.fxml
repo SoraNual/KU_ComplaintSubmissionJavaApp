@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="943.0" styleClass="report-item" stylesheets="@styles/new-staff-style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="topicLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="100.0" prefWidth="167.0" text="topicLabel" wrapText="true">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+         <HBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </HBox.margin>
+      </Label>
+      <Label fx:id="detailLabel" prefHeight="29.0" prefWidth="663.0" text="detailLabel">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="97.0">
+         <children>
+            <Circle fx:id="status" fill="#d9d9d9" radius="15.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+         </children>
+      </HBox>
+   </children>
+</HBox>
