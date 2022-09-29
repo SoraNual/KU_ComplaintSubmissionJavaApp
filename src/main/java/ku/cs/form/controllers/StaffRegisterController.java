@@ -37,7 +37,7 @@ public class StaffRegisterController {
     @FXML
     public void handleBackButton(ActionEvent actionEvent) {
         try {
-            com.github.saacsos.FXRouter.goTo("home");
+            com.github.saacsos.FXRouter.goTo("admin");
         } catch (IOException e) {
             System.err.println("ให้ตรวจสอบการกำหนด route");
         }
@@ -60,7 +60,7 @@ public class StaffRegisterController {
             reg.addStaff(newStaff);
             showPopUp("Registration successful!","Hello Welcome!",null);
             try {
-                com.github.saacsos.FXRouter.goTo("login");
+                com.github.saacsos.FXRouter.goTo("admin");
             } catch (IOException e) {
                 System.err.println("ให้ตรวจสอบการกำหนด route");
             }

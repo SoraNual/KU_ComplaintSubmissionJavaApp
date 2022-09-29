@@ -1,13 +1,11 @@
 package ku.cs.form.services;
 
-import ku.cs.form.models.Admin;
-import ku.cs.form.models.Nisit;
 import ku.cs.form.models.Staff;
 import ku.cs.form.models.UserList;
 
 import java.io.*;
 
-public class StaffRegistration implements Registeration{
+public class StaffRegistration implements Registration {
 
     private String directoryName;
 
@@ -44,7 +42,7 @@ public class StaffRegistration implements Registeration{
 
         if(!password.isBlank() && !confirmPassword.isBlank() && confirmationPasswordCheck(password, confirmPassword))
             error += "รหัสผ่านไม่ตรงกัน!\n";
-        if(usernameValidationCheck(username))     error += "username ของคุณซ้ำ!\n";
+        if(!usernameValidationCheck(username))     error += "username ของคุณซ้ำ!\n";
 
         return error;
     }
@@ -66,7 +64,7 @@ public class StaffRegistration implements Registeration{
             String line = "";
             while((line = buffer.readLine()) != null){ //วนลูปแยกคอมมาทีละบรรทัดจนกว่าจะไม่เจอบรรทัด
                 String[] data = line.split(",");
-                if(data[3].equals(newUserName)) return true;
+                if(data[0].equals(newUserName)) return false;
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -81,7 +79,7 @@ public class StaffRegistration implements Registeration{
             }
         }
 
-        return false;
+        return true;
     }
 
     @Override
@@ -99,9 +97,9 @@ public class StaffRegistration implements Registeration{
             writer = new FileWriter(file,true);
             buffer = new BufferedWriter(writer);
 
-            String line = staff.getName() + ","
+            String line = staff.getUsername() + ","
                     + staff.getPassword() + ",staff,"
-                    + staff.getUsername() + ","
+                    + staff.getName() + ","
                     + staff.getUserStatus() + ","
                     + staff.getLoginAttempt() + ","
                     + staff.getAgency();

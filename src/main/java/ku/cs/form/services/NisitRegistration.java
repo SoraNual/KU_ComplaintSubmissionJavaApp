@@ -5,7 +5,7 @@ import ku.cs.form.models.UserList;
 
 import java.io.*;
 
-public class NisitRegistration implements Registeration{
+public class NisitRegistration implements Registration {
 
     private String directoryName;
 
@@ -43,7 +43,7 @@ public class NisitRegistration implements Registeration{
 
         if(!password.isBlank() && !confirmPassword.isBlank() && confirmationPasswordCheck(password, confirmPassword))
             error += "รหัสผ่านไม่ตรงกัน!\n";
-        if(usernameValidationCheck(username))     error += "username ของคุณซ้ำ!\n";
+        if(!usernameValidationCheck(username))     error += "username ของคุณซ้ำ!\n";
 
         return error;
     }
@@ -64,7 +64,7 @@ public class NisitRegistration implements Registeration{
             String line = "";
             while((line = buffer.readLine()) != null){ //วนลูปแยกคอมมาทีละบรรทัดจนกว่าจะไม่เจอบรรทัด
                 String[] data = line.split(",");
-                if(data[3].equals(newUserName)) return true;
+                if(data[0].equals(newUserName)) return false;
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -79,7 +79,7 @@ public class NisitRegistration implements Registeration{
             }
         }
 
-        return false;
+        return true;
     }
     @Override
     public boolean confirmationPasswordCheck(String password, String confirmationPassword){
@@ -97,9 +97,9 @@ public class NisitRegistration implements Registeration{
             writer = new FileWriter(file,true);
             buffer = new BufferedWriter(writer);
 
-            String line = nisit.getName() + ","
+            String line = nisit.getUsername() + ","
                         + nisit.getPassword() + ",nisit,"
-                        + nisit.getUsername() + ","
+                        + nisit.getName() + ","
                         + nisit.getUserStatus() + ","
                         + nisit.getLoginAttempt();
             buffer.append(line);

@@ -3,14 +3,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles/main.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.NewStaffPageController">
@@ -52,7 +51,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" onAction="#handleChangePasswordButton" prefHeight="102.0" prefWidth="345.0" style="-fx-background-color: transparent;" stylesheets="@styles/new-staff-style.css" text="Change Password" textFill="WHITE">
+                  <Button fx:id="changePasswordButton" mnemonicParsing="false" onAction="#handleChangePasswordButton" prefHeight="102.0" prefWidth="345.0" text="Change Password" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -112,44 +111,16 @@
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                     <children>
-                        <ScrollPane prefHeight="587.0" prefWidth="954.0" styleClass="transparent">
-                           <content>
-                              <VBox prefHeight="571.0" prefWidth="951.0" style="-fx-background-color: ffffff;">
-                                 <children>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="100.0" prefWidth="167.0" text="topicLabeltopicLabeltopicLabeltopicLabeltopicLabeltopicLabeltopicLabel" wrapText="true">
-                                             <font>
-                                                <Font name="System Bold" size="24.0" />
-                                             </font>
-                                             <HBox.margin>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label prefHeight="29.0" prefWidth="663.0" text="detailLabeldetailLabeldetailLabeldetailLabeldetailLabeldetailLabeldetailLabeldetailLabeldetailLabeldetailLabel">
-                                             <font>
-                                                <Font size="24.0" />
-                                             </font>
-                                          </Label>
-                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="97.0">
-                                             <children>
-                                                <Circle fill="#d9d9d9" radius="15.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </content>
-                        </ScrollPane>
-                     </children>
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
+                     <children>
+                        <ListView fx:id="itemHolder" prefHeight="577.0" prefWidth="1000.0">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </ListView>
+                     </children>
                   </HBox>
                </children>
             </VBox>
