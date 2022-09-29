@@ -26,7 +26,6 @@ public final class FXRouter {
     private static Double animationDuration;
     private static AbstractMap<String, RouteScene> routes = new HashMap();
     private static RouteScene currentRoute;
-    private static Scene scene;
 
     private FXRouter() {
     }
@@ -105,9 +104,7 @@ public final class FXRouter {
         Parent resource = (Parent)FXMLLoader.load((new Object() {
         }).getClass().getResource(scenePath));
         window.setTitle(route.windowTitle);
-        scene = new Scene(resource, route.sceneWidth, route.sceneHeight);
-        scene.getStylesheets().add(FXRouter.class.getResource("/ku/cs/styles/main.css").toExternalForm());
-        window.setScene(scene);
+        window.setScene(new Scene(resource, route.sceneWidth, route.sceneHeight));
         window.show();
         routeAnimation(resource);
     }
@@ -193,5 +190,3 @@ public final class FXRouter {
         }
     }
 }
-
-

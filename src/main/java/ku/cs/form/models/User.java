@@ -19,7 +19,8 @@ public class User {
     private Color rectangleColor;
     private Color textColor;
     private Color backgroundColor;
-
+    private Color buttonColor;
+    private Color borderColor;
     public User(String name, String username, String password) {
         this.name = name;
         this.username = username;
@@ -44,6 +45,14 @@ public class User {
 
     public LocalDateTime getLoginTime() {
          return loginTime;
+    }
+
+    public Color getBorderColor() {
+        return borderColor;
+    }
+
+    public void setBorderColor(Color borderColor) {
+        this.borderColor = borderColor;
     }
 
     public void setLoginTime(String s) {
@@ -140,5 +149,14 @@ public class User {
 
     public void setRectangleColor(Color rectangleColor) {
         this.rectangleColor = rectangleColor;
+    }
+
+    public Color getButtonColor() {
+        return buttonColor;
+    }
+
+
+    public void setButtonColor(Color buttonColor) {
+        this.buttonColor = buttonColor;
     }
 }

@@ -65,7 +65,7 @@ public class NisitPageController {
         try {
             com.github.saacsos.FXRouter.goTo("editProfile",user);
         } catch (IOException e) {
-            System.err.println("ให้ตรวจสอบการกำหนด route");
+            e.printStackTrace();
         }
     }
     @FXML

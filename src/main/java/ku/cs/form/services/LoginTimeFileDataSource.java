@@ -45,7 +45,7 @@ public class LoginTimeFileDataSource implements DataSource<UserList> {
                 }
 
                 else if(class_name.equals("nisit")){
-                    Nisit nisit = new Nisit(data[0].trim(), data[1].trim(), null,data[7],data[8],data[9]);
+                    Nisit nisit = new Nisit(data[0].trim(), data[1].trim(), null,data[7],data[8],data[9],data[10],data[11]);
                     nisit.setLoginTime(data[3].trim());
                     userList.addUser(nisit);
                 }
