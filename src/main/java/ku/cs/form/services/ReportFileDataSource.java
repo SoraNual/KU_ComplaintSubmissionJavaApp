@@ -56,6 +56,7 @@ public class ReportFileDataSource implements DataSource<ReportList> {
                         data[4].trim(),
                         Integer.parseInt(data[5].trim())
                 );
+                report.setSubmitTime(data[6].trim());
                 reportList.addReport(report);
             }
         } catch (FileNotFoundException e) {
@@ -92,7 +93,8 @@ public class ReportFileDataSource implements DataSource<ReportList> {
                         report.getCategory() + "," +
                         report.getDetail()+ "," +
                         report.getStatus() + "," +
-                        report.getVotePoint();
+                        report.getVotePoint() + "," +
+                        report.getSubmitTime();
                 buffer.append(line);
                 buffer.newLine();
             }

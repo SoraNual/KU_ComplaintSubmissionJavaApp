@@ -1,8 +1,13 @@
 package ku.cs.form.models;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Report {
     private String topic;
     private String complainantUsername; //ผู้ร้องเรียน
+    private LocalDateTime submitTime;
+    private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     private String category;
     private String detail;
     private String status; // 3 status : pending, in progress, finish
@@ -11,6 +16,7 @@ public class Report {
     public Report(String topic, String complainantUsername, String category, String detail, String status, int votePoint) {
         this.topic = topic;
         this.complainantUsername = complainantUsername;
+        this.submitTime = LocalDateTime.now();
         this.category = category;
         this.detail = detail;
         this.status = status;
@@ -29,6 +35,19 @@ public class Report {
 
     public String getComplainantUsername() {
         return complainantUsername;
+    }
+
+    public String getSubmitTime() {
+        return submitTime.format(format);
+    }
+
+    public void setSubmitTime(LocalDateTime submitTime) {
+        this.submitTime = submitTime;
+    }
+
+    public void setSubmitTime(String s) {
+        //change string to LocalDateTime
+        this.submitTime = LocalDateTime.parse(s,format);
     }
 
     public void addVotePoint() { votePoint++; }
