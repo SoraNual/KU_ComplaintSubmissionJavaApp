@@ -18,6 +18,11 @@ public class Nisit extends User{
         borderColor = Color.web(borderColorWeb);
     }
 
+    public Nisit(String name, String username, String password) {
+        super(name, username, password);
+        //rectangleColor = Color.web(0x000000ff);
+    }
+
     @Override
     public Color getButtonColor() {
         return buttonColor;
@@ -40,7 +45,7 @@ public class Nisit extends User{
 
     @Override
     public String toString() {
-        return getUsername()+","+getPassword()+",nisit,"+getName()+","+getUserStatus()+","+getLoginAttempt()+","+getAgency()+","+ rectangleColor +","+textColor+","+backgroundColor+","+buttonColor+","+borderColor;
+        return getUsername()+","+getPassword()+",nisit,"+getName()+","+getUserStatus()+","+getLoginAttempt()+","+ ","+ rectangleColor +","+textColor+","+backgroundColor+","+buttonColor+","+borderColor;
     }
 
     @Override

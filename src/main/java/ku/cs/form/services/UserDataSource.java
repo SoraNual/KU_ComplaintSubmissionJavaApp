@@ -143,7 +143,7 @@ public class UserDataSource implements DataSource<UserList>{
         BufferedWriter buffer = null;
 
         try {
-            writer = new FileWriter(file);
+            writer = new FileWriter(file,StandardCharsets.UTF_8);
             buffer = new BufferedWriter(writer);
 
             for (User user : userList.getAllUsers()){
@@ -153,7 +153,7 @@ public class UserDataSource implements DataSource<UserList>{
                 if(user instanceof Staff)
                     line = user.getUsername() + "," + user.getPassword() + ",staff," + user.getName() + "," + user.getUserStatus() + "," + user.getLoginAttempt() + "," + ((Staff) user).getAgency();
                 if(user instanceof Nisit)
-                    line = user.getUsername() + "," + user.getPassword() + ",nisit," + user.getName() + "," + user.getUserStatus() + "," + user.getLoginAttempt();
+                    line = user.toString();
                 buffer.append(line);
                 buffer.newLine();
             }

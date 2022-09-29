@@ -15,7 +15,6 @@ public class User {
     private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"); //for change date format
     private String userStatus;
     private int loginAttempt;
-    private String Agency;
     private Color rectangleColor;
     private Color textColor;
     private Color backgroundColor;
@@ -91,7 +90,7 @@ public class User {
     @Override
     public String toString() {
         //loginTime.format(format) => change LocalDateTime to string
-        return username + "," + password + "," + this.getClass() + "," + getName() + "," + userStatus + "," + loginAttempt + "," + Agency;
+        return username + "," + password + "," + this.getClass() + "," + getName() + "," + userStatus + "," + loginAttempt;
     }
 
     public String toStringLoginTime() {
@@ -102,9 +101,7 @@ public class User {
         return format;
     }
 
-    public String getAgency() {
-        return Agency;
-    }
+
 
     public void setPassword(String password) {
         this.password = password;
@@ -128,9 +125,7 @@ public class User {
         this.loginAttempt = loginAttempt;
     }
 
-    public void setAgency(String agency) {
-        Agency = agency;
-    }
+
 
     public Color getTextColor() {
         return textColor;

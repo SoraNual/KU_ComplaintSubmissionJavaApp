@@ -3,6 +3,7 @@ package ku.cs.form.services;
 import ku.cs.form.models.*;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 public class LoginTimeFileDataSource implements DataSource<UserList> {
@@ -24,7 +25,7 @@ public class LoginTimeFileDataSource implements DataSource<UserList> {
         BufferedReader buffer = null;
 
         try {
-            reader = new FileReader(file);
+            reader = new FileReader(file, StandardCharsets.UTF_8);
             buffer = new BufferedReader(reader);
             String line = "";
             while ((line = buffer.readLine()) != null) {
@@ -48,8 +49,8 @@ public class LoginTimeFileDataSource implements DataSource<UserList> {
                 }
 
                 else if(class_name.equals("nisit")){
-                    Nisit nisit = new Nisit(data[0].trim(), data[1].trim(), null,data[7],data[8],data[9],data[10],data[11]);
-                    nisit.setLoginTime(data[3].trim());
+                    Nisit nisit = new Nisit(data[0].trim(), data[1].trim(), null);
+                    nisit.setLoginTime(data[2].trim());
                     userList.addUser(nisit);
                 }
 
@@ -80,7 +81,7 @@ public class LoginTimeFileDataSource implements DataSource<UserList> {
         BufferedWriter buffer = null;
 
         try {
-            writer = new FileWriter(file);
+            writer = new FileWriter(file, StandardCharsets.UTF_8);
             buffer = new BufferedWriter(writer);
 
             for (User user : users.getAllUsers()){

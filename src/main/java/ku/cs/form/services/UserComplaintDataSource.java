@@ -5,6 +5,7 @@ import ku.cs.form.models.User;
 import ku.cs.form.models.UserComplaint;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -28,7 +29,7 @@ public class UserComplaintDataSource implements DataSource<HashMap<String, UserC
         BufferedReader buffer = null;
 
         try {
-            reader = new FileReader(file);
+            reader = new FileReader(file, StandardCharsets.UTF_8);
             buffer = new BufferedReader(reader);
             String line = "";
             while ((line = buffer.readLine()) != null) {
@@ -67,7 +68,7 @@ public class UserComplaintDataSource implements DataSource<HashMap<String, UserC
         BufferedWriter buffer = null;
 
         try {
-            writer = new FileWriter(file);
+            writer = new FileWriter(file, StandardCharsets.UTF_8);
             buffer = new BufferedWriter(writer);
 
             for (String key : userComplaintHashMap.keySet()){

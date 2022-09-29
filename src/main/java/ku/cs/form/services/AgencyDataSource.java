@@ -3,6 +3,7 @@ package ku.cs.form.services;
 import ku.cs.form.models.*;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class AgencyDataSource implements DataSource<AgencyList> {
@@ -25,7 +26,7 @@ public class AgencyDataSource implements DataSource<AgencyList> {
         BufferedReader buffer = null;
 
         try {
-            reader = new FileReader(file);
+            reader = new FileReader(file, StandardCharsets.UTF_8);
             buffer = new BufferedReader(reader);
             String line = "";
             while ((line = buffer.readLine()) != null) {
@@ -56,7 +57,7 @@ public class AgencyDataSource implements DataSource<AgencyList> {
         BufferedWriter buffer = null;
 
         try {
-            writer = new FileWriter(file);
+            writer = new FileWriter(file, StandardCharsets.UTF_8);
             buffer = new BufferedWriter(writer);
 
             for (String agency : agencies.getAgencies()){
