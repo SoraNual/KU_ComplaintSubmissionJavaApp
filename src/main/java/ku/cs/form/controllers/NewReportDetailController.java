@@ -28,21 +28,43 @@ public class NewReportDetailController {
 
         topicTextArea.setText(report.getTopic());
         detailTextArea.setText(report.getDetail());
-        agencyTextArea.setText("-");
-        responsibleTextArea.setText("-");
+        agencyTextArea.setText("");
+        responsibleTextArea.setText("");
     }
 
     @FXML
     public void handleInProgressButton(ActionEvent actionEvent) {
-        if (solutionTextArea.getText() == null || solutionTextArea.getText().trim().isEmpty()) showAlert("please put solution first!");
+        if (solutionTextArea.getText() == null || solutionTextArea.getText().trim().isEmpty()) {
+            showAlert("please put solution first!");
+            return;
+        }
 
         String solution = solutionTextArea.getText();
+        System.out.println(solution);
+        // TODO
+
+        try {
+            FXRouter.goTo("newStaff");
+        } catch (IOException e) {
+            System.out.println("ไม่สามารถกลับหน้า New Staff Page ได้");
+        }
     }
 
     @FXML public void handleDoneButton(ActionEvent actionEvent) {
-        if (solutionTextArea.getText() == null || solutionTextArea.getText().trim().isEmpty()) showAlert("please put solution first!");
+        if (solutionTextArea.getText() == null || solutionTextArea.getText().trim().isEmpty()) {
+            showAlert("please put solution first!");
+            return;
+        }
 
         String solution = solutionTextArea.getText();
+        System.out.println(solution);
+        // TODO
+
+        try {
+            FXRouter.goTo("newStaff");
+        } catch (IOException e) {
+            System.out.println("ไม่สามารถกลับหน้า New Staff Page ได้");
+        }
     }
 
     @FXML
