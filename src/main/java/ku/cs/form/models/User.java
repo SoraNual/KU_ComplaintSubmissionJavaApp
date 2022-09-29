@@ -43,8 +43,8 @@ public class User {
         return password;
     }
 
-    public LocalDateTime getLoginTime() {
-         return loginTime;
+    public String getLoginTime() {
+         return loginTime.format(format);
     }
 
     public Color getBorderColor() {
@@ -70,6 +70,10 @@ public class User {
                 filePath = directoryName + File.separator + fileName;
             }
             profileImageFilePath = filePath;
+    }
+
+    public void bannedLoginAttempt() {
+        loginAttempt++;
     }
 
     public String getProfileImageFilePath() {

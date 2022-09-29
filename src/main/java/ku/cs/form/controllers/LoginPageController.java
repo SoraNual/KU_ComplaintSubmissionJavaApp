@@ -8,11 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import ku.cs.form.models.Admin;
-import ku.cs.form.models.Nisit;
-import ku.cs.form.models.Staff;
-import ku.cs.form.models.User;
-import ku.cs.form.services.UserData;
+import ku.cs.form.models.*;
+import ku.cs.form.services.LoginTimeFileDataSource;
+import ku.cs.form.services.UserDataSource;
 
 import java.io.*;
 
@@ -40,8 +38,8 @@ public class LoginPageController {
 
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
-        UserData unclarifyUser = new UserData("data","users.csv");
-        user = unclarifyUser.usernamePasswordCheck(username,password);
+        UserDataSource unclarifiedUser = new UserDataSource("data","users.csv");
+        user = unclarifiedUser.usernamePasswordCheck(username,password);
         try {
             if (user instanceof Admin) {
                 FXRouter.goTo("admin",user);
@@ -52,6 +50,11 @@ public class LoginPageController {
             } else{
                 incorrectWarningText.setText("Incorrect username or password");
             }
+            LoginTimeFileDataSource loginTimeFileDataSource = new LoginTimeFileDataSource("data","loginTime.csv");
+            UserList users = loginTimeFileDataSource.readData();
+            users.addUser(user);
+            loginTimeFileDataSource.writeData(users);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

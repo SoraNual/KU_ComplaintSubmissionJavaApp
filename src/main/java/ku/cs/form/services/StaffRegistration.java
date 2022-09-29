@@ -1,6 +1,7 @@
 package ku.cs.form.services;
 
 import ku.cs.form.models.Staff;
+import ku.cs.form.models.User;
 import ku.cs.form.models.UserList;
 
 import java.io.*;
@@ -10,10 +11,14 @@ public class StaffRegistration implements Registration {
     private String directoryName;
 
     private String fileName;
+    private UserDataSource userDataSource;
+    private UserList userList;
 
     public StaffRegistration(String directoryName, String fileName) {
         this.directoryName = directoryName;
         this.fileName = fileName;
+        userDataSource = new UserDataSource(directoryName,fileName);
+        userList = userDataSource.readData();
         checkFileIsExisted();
     }
     private void checkFileIsExisted() {
@@ -39,46 +44,19 @@ public class StaffRegistration implements Registration {
         if(username.isBlank())   error += "อย่าปล่อยให้ช่อง Username ว่างสิ!\n";
         if(password.isBlank())   error += "ใส่รหัสผ่านมาด้วย!\n";
         if(confirmPassword.isBlank())   error += "โปรดยืนยันรหัสผ่าน!\n";
-
         if(!password.isBlank() && !confirmPassword.isBlank() && confirmationPasswordCheck(password, confirmPassword))
             error += "รหัสผ่านไม่ตรงกัน!\n";
-        if(!usernameValidationCheck(username))     error += "username ของคุณซ้ำ!\n";
-
+        if(!usernameValidationCheck(username)) error += "username ของคุณซ้ำ!\n";
         return error;
     }
 
     @Override
     public boolean usernameValidationCheck(String newUserName) {
-        UserList userList = new UserList();
-
-        String filePath = directoryName + File.separator + fileName;
-        File file = new File(filePath);
-
-        FileReader reader = null;
-        BufferedReader buffer = null;
-
-        try {
-            reader = new FileReader(file);
-            buffer = new BufferedReader(reader);
-
-            String line = "";
-            while((line = buffer.readLine()) != null){ //วนลูปแยกคอมมาทีละบรรทัดจนกว่าจะไม่เจอบรรทัด
-                String[] data = line.split(",");
-                if(data[0].equals(newUserName)) return false;
-            }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                buffer.close();
-                reader.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+        for(User user : userList.getAllUsers()){
+            if(newUserName.equals(user.getUsername())){
+                return false;
             }
         }
-
         return true;
     }
 
@@ -88,33 +66,7 @@ public class StaffRegistration implements Registration {
     }
 
     public void addStaff(Staff staff) {
-        String filePath = directoryName + File.separator + fileName;
-        File file = new File(filePath);
-        FileWriter writer = null;
-        BufferedWriter buffer = null;
-
-        try {
-            writer = new FileWriter(file,true);
-            buffer = new BufferedWriter(writer);
-
-            String line = staff.getUsername() + ","
-                    + staff.getPassword() + ",staff,"
-                    + staff.getName() + ","
-                    + staff.getUserStatus() + ","
-                    + staff.getLoginAttempt() + ","
-                    + staff.getAgency();
-            buffer.append(line);
-            buffer.newLine();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                buffer.close();
-                writer.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        userList.addUser(staff);
+        userDataSource.writeData(userList);
     }
 }
