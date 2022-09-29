@@ -35,7 +35,7 @@ public class NisitPageController {
     @FXML
     public void handleReportButton(ActionEvent actionEvent) {
         try {
-            com.github.saacsos.FXRouter.goTo("report");
+            com.github.saacsos.FXRouter.goTo("report",user);
         } catch (IOException e) {
             System.err.println("ให้ตรวจสอบการกำหนด route");
         }

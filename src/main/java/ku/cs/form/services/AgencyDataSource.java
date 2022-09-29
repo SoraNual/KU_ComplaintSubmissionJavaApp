@@ -1,9 +1,6 @@
 package ku.cs.form.services;
 
-import ku.cs.form.models.Admin;
-import ku.cs.form.models.Nisit;
-import ku.cs.form.models.Staff;
-import ku.cs.form.models.UserList;
+import ku.cs.form.models.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -19,9 +16,9 @@ public class AgencyDataSource implements DataSource {
     }
 
     @Override
-    public ArrayList<String> readData() {
+    public AgencyList readData() {
 
-        ArrayList<String> agencies = new ArrayList<String>();
+        AgencyList agencies = new AgencyList();
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
         FileReader reader = null;
@@ -32,7 +29,7 @@ public class AgencyDataSource implements DataSource {
             buffer = new BufferedReader(reader);
             String line = "";
             while ((line = buffer.readLine()) != null) {
-                agencies.add(line);
+                agencies.addAgency(line);
             }
 
         } catch (FileNotFoundException e) {

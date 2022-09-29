@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import ku.cs.form.models.*;
 import ku.cs.form.services.LoginTimeFileDataSource;
-import ku.cs.form.services.UserData;
+import ku.cs.form.services.UserDataSource;
 
 import java.io.*;
 
@@ -36,7 +36,7 @@ public class LoginPageController {
 
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
-        UserData unclarifiedUser = new UserData("data","users.csv");
+        UserDataSource unclarifiedUser = new UserDataSource("data","users.csv");
         user = unclarifiedUser.usernamePasswordCheck(username,password);
         try {
             if (user instanceof Admin) {

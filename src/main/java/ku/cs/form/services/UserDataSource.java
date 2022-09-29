@@ -3,6 +3,7 @@ package ku.cs.form.services;
 import ku.cs.form.models.*;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class UserDataSource implements DataSource<UserList>{
     private String directoryName;
@@ -84,7 +85,7 @@ public class UserDataSource implements DataSource<UserList>{
         BufferedReader buffer = null;
 
         try {
-            reader = new FileReader(file);
+            reader = new FileReader(file, StandardCharsets.UTF_8);
             buffer = new BufferedReader(reader);
             String line = "";
             while ((line = buffer.readLine()) != null) {
@@ -95,15 +96,11 @@ public class UserDataSource implements DataSource<UserList>{
                 if(class_name.equals("staff")){
 
                     Staff staff = new Staff(data[3].trim(), data[0].trim(), data[1].trim(),data[6].trim()); // add agency
-                    staff.setLoginAttempt(Integer.parseInt(data[5].trim()));
-                    staff.setUserStatus(data[4].trim());
                     userList.addUser(staff);
                 }
 
                 else if(class_name.equals("admin")){
                     Admin admin = new Admin(data[3].trim(), data[0].trim(), data[1].trim());
-                    admin.setLoginAttempt(Integer.parseInt(data[5].trim()));
-                    admin.setUserStatus(data[4].trim());
                     userList.addUser(admin);
                 }
 
@@ -133,6 +130,36 @@ public class UserDataSource implements DataSource<UserList>{
 
     @Override
     public void writeData(UserList userList) {
+        String filePath = directoryName + File.separator + fileName;
+        File file = new File(filePath);
+        FileWriter writer = null;
+        BufferedWriter buffer = null;
 
+        try {
+            writer = new FileWriter(file);
+            buffer = new BufferedWriter(writer);
+            String agency = "";
+            for (User user : userList.getAllUsers()) {
+                if(user instanceof Staff) agency = ((Staff) user).getAgency();
+                String line = user.getUsername() + ","
+                        + user.getPassword() + ","
+                        + user.getClass().getSimpleName().toLowerCase() + ","
+                        + user.getName() + ","
+                        + user.getUserStatus() + ","
+                        + user.getLoginAttempt() + ","
+                        + agency;
+                buffer.append(line);
+                buffer.newLine();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                buffer.close();
+                writer.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }

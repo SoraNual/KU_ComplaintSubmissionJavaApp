@@ -80,4 +80,12 @@ public class User {
     public String toStringLoginTime() {
         return loginTime.format(format);
     }
+
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus;
+    }
+
+    public void setLoginAttempt(int loginAttempt) {
+        this.loginAttempt = loginAttempt;
+    }
 }
