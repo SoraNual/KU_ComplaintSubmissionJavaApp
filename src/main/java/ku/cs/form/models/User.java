@@ -1,6 +1,6 @@
 package ku.cs.form.models;
 
-import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -15,7 +15,12 @@ public class User {
     private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"); //for change date format
     private String userStatus;
     private int loginAttempt;
-
+    private String Agency;
+    private Color rectangleColor;
+    private Color textColor;
+    private Color backgroundColor;
+    private Color buttonColor;
+    private Color borderColor;
     public User(String name, String username, String password) {
         this.name = name;
         this.username = username;
@@ -40,6 +45,14 @@ public class User {
 
     public LocalDateTime getLoginTime() {
          return loginTime;
+    }
+
+    public Color getBorderColor() {
+        return borderColor;
+    }
+
+    public void setBorderColor(Color borderColor) {
+        this.borderColor = borderColor;
     }
 
     public void setLoginTime(String s) {
@@ -74,10 +87,76 @@ public class User {
     @Override
     public String toString() {
         //loginTime.format(format) => change LocalDateTime to string
-        return name + " : " + username + " : " + loginTime.format(format);
+        return username + "," + password + "," + this.getClass() + "," + getName() + "," + userStatus + "," + loginAttempt + "," + Agency;
     }
 
     public String toStringLoginTime() {
         return loginTime.format(format);
+    }
+
+    public DateTimeFormatter getFormat() {
+        return format;
+    }
+
+    public String getAgency() {
+        return Agency;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus;
+    }
+
+
+
+    public void setLoginTime(LocalDateTime loginTime) {
+        this.loginTime = loginTime;
+    }
+
+    public void setProfileImageFilePath(String profileImageFilePath) {
+        this.profileImageFilePath = profileImageFilePath;
+    }
+
+    public void setLoginAttempt(int loginAttempt) {
+        this.loginAttempt = loginAttempt;
+    }
+
+    public void setAgency(String agency) {
+        Agency = agency;
+    }
+
+    public Color getTextColor() {
+        return textColor;
+    }
+
+    public void setTextColor(Color textColor) {
+        this.textColor = textColor;
+    }
+
+    public Color getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public void setBackgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+    public Color getRectangleColor() {
+        return rectangleColor;
+    }
+
+    public void setRectangleColor(Color rectangleColor) {
+        this.rectangleColor = rectangleColor;
+    }
+
+    public Color getButtonColor() {
+        return buttonColor;
+    }
+
+
+    public void setButtonColor(Color buttonColor) {
+        this.buttonColor = buttonColor;
     }
 }

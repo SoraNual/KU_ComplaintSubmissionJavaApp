@@ -2,40 +2,76 @@ package ku.cs.form.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import ku.cs.form.models.Report;
+import ku.cs.form.models.ReportList;
 import ku.cs.form.models.User;
-import ku.cs.form.services.LoginTimeFileDataSource;
+import ku.cs.form.services.ReportFileDataSource;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 public class NisitPageController {
 
     @FXML private Label nameLabel;
     @FXML private ImageView nisitImage;
     private User user;
-
+    @FXML private ListView<Report> reportsListView;
+    private ReportFileDataSource dataSource;
+    private ReportList reportList;
+    private Stage stage;
+    @FXML private Rectangle rightRec;
 
     @FXML public void initialize() {
         user = (User) com.github.saacsos.FXRouter.getData();
+
         nameLabel.setText(user.getName());
-        //String url = getClass().getResource(user.getProfileImageFilePath()).toExternalForm();
-        //nisitImage.setImage(new Image(url));
+        File imageFile = new File(user.getProfileImageFilePath());
+        Image userImage = new Image(imageFile.toURI().toString());
+        nisitImage.setImage(userImage);
+        dataSource = new ReportFileDataSource("data", "reports.csv");
+        reportList = dataSource.readData();
+        reportsListView.getItems().addAll(reportList.getAllReports());
+        rightRec.setFill(user.getRectangleColor());
+    }
+
+    public void handleUploadImageButton(ActionEvent actionEvent){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image","*jpg","*jpeg","*png"));
+        fileChooser.setInitialFileName(user.getUsername()+".jpg");
+        File uploadImg = fileChooser.showOpenDialog(stage);
+        File newUserImg = new File("data"+File.separator+"img",user.getUsername()+".jpg");
+        try{
+            Files.move(uploadImg.toPath(), newUserImg.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        File imageFile = new File(user.getProfileImageFilePath());
+        Image userImage = new Image(imageFile.toURI().toString());
+        nisitImage.setImage(userImage);
     }
 
     @FXML
-    public void handleBackButton(ActionEvent actionEvent) {
+    public void handleEditProfileButton(ActionEvent actionEvent) {
         try {
-            com.github.saacsos.FXRouter.goTo("home");
+            com.github.saacsos.FXRouter.goTo("editProfile",user);
         } catch (IOException e) {
-            System.err.println("ให้ตรวจสอบการกำหนด route");
+            e.printStackTrace();
         }
     }
     @FXML
     public void handleReportButton(ActionEvent actionEvent) {
         try {
-            com.github.saacsos.FXRouter.goTo("report");
+            com.github.saacsos.FXRouter.goTo("report",user);
         } catch (IOException e) {
             System.err.println("ให้ตรวจสอบการกำหนด route");
         }

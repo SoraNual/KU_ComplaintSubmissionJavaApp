@@ -190,5 +190,3 @@ public final class FXRouter {
         }
     }
 }
-
-

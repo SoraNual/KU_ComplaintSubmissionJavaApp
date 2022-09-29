@@ -5,12 +5,13 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.NisitPageController">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#011627" height="720.0" stroke="BLACK" strokeType="INSIDE" width="264.0" />
+        <Rectangle fx:id="rightRec" arcHeight="5.0" arcWidth="5.0" fill="#011627" height="720.0" stroke="BLACK" strokeType="INSIDE" width="264.0" />
         <Label layoutX="95.0" layoutY="40.0" prefHeight="45.0" prefWidth="84.0" text="Nisit" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="32.0" />
@@ -21,36 +22,35 @@
                 <Font name="System Bold" size="32.0" />
             </font>
         </Label>
-        <ListView fx:id="reportsListView" layoutX="300.0" layoutY="73.0" prefHeight="249.0" prefWidth="670.0" style="-fx-background-color: f3f3f3; -fx-background-radius: 13;" />
+      <VBox layoutX="300.0" layoutY="73.0">
+         <children>
+              <ListView fx:id="reportsListView" prefHeight="531.0" prefWidth="863.0" style="-fx-background-color: f3f3f3; -fx-background-radius: 13;" />
+         </children>
+      </VBox>
         <Label layoutX="303.0" layoutY="40.0" prefHeight="19.0" prefWidth="144.0" text="เรื่องร้องเรียนทั้งหมด">
             <font>
                 <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <Button alignment="TOP_LEFT" layoutX="63.0" layoutY="561.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="157.0" style="-fx-background-color: transparent;" text="Change Password" textFill="WHITE">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Button>
-        <ImageView fx:id="nisitImage" fitHeight="145.0" fitWidth="150.0" layoutX="57.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="nisitImage" fitHeight="145.0" fitWidth="150.0" layoutX="57.0" layoutY="85.0" pickOnBounds="true" preserveRatio="false" />
         <Label fx:id="nameLabel" layoutX="39.0" layoutY="285.0" prefHeight="30.0" prefWidth="205.0" text="nameLabel" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="20.0" />
             </font>
         </Label>
-      <Button alignment="TOP_LEFT" layoutX="63.0" layoutY="596.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="157.0" style="-fx-background-color: transparent;" text="Change theme" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Button>
-      <Button layoutX="184.0" layoutY="208.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: white; -fx-background-radius: 9999; -fx-border-radius: 9999;" text="+" textFill="#011627">
+        <Button layoutX="520.0" layoutY="631.0" mnemonicParsing="false" onAction="#handleReportButton" prefHeight="36.0" prefWidth="184.0" style="-fx-background-color: #2EC4B6; -fx-background-color: #2EC4B6; -fx-border-radius: 7; -fx-background-radius: 7;" text="เรื่องร้องเรียน" textFill="WHITE">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Button>
+        <Button layoutX="39.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleEditProfileButton" style="-fx-background-color: none; -fx-border-color: none;" text="Edit profile" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Button>
+      <Button fx:id="uploadImageButton" layoutX="192.0" layoutY="216.0" mnemonicParsing="false" onAction="#handleUploadImageButton" style="-fx-background-color: white; -fx-border-color: white; -fx-background-radius: 9999; -fx-border-radius: 9999;" text="+" textFill="#011627">
          <font>
             <Font name="System Bold" size="13.0" />
-         </font>
-      </Button>
-      <Button layoutX="518.0" layoutY="387.0" mnemonicParsing="false" onAction="#handleReportButton" prefHeight="36.0" prefWidth="184.0" style="-fx-background-color: #2EC4B6; -fx-background-color: #2EC4B6; -fx-border-radius: 7; -fx-background-radius: 7;" text="เรื่องร้องเรียน" textFill="WHITE">
-         <font>
-            <Font size="16.0" />
          </font>
       </Button>
     </children>
