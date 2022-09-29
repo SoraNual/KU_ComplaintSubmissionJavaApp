@@ -28,6 +28,6 @@ public class Report {
 
     @Override
     public String toString() {
-        return "(" + getTopic() + ")" + " " + getStatus() + " " + getVotePoint();
+        return "[" + getTopic() + "]" + " " + getStatus() + " " + getVotePoint();
     }
 }
