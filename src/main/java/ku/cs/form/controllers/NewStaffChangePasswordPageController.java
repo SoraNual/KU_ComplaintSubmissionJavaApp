@@ -58,7 +58,7 @@ public class NewStaffChangePasswordPageController {
     }
 
     public boolean usernameCheck(String username) {
-        // TODO
+        return false; //placeholder
     }
 
     public boolean confirmPasswordCheck(String password, String confirmPassword) {
