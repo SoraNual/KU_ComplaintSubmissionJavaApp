@@ -11,10 +11,4 @@ public class Staff extends User {
     public String getAgency() {
         return agency;
     }
-
-    @Override
-    public String toString() {
-        return super.toString() + " Agency : " + agency;
-    }
-
 }

@@ -15,43 +15,56 @@ import ku.cs.form.models.UserList;
 import ku.cs.form.services.LoginTimeFileDataSource;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.*;
 
 public class LoginTimePageController {
 
     @FXML private Label usernameLabel;
-    @FXML private Label nameLabel;
     @FXML private Label loginTimeLabel;
     @FXML private Label agencyLabel;
 
     @FXML private ImageView profileImage;
+    private UserList loginTimeUserList;
 
     @FXML private ListView<String> usersLoginListView;
     private LoginTimeFileDataSource dataSource;
-    private UserList usersList;
+    private UserList userList;
 
     @FXML
     public void initialize() {
         dataSource = new LoginTimeFileDataSource("data","loginTime.csv");
-        usersList = dataSource.readData();
+        userList = dataSource.readData();
+        loginTimeUserList = new UserList();
+        addLoginTimeUserList();
         showUsersLoginListView();
         clearSelectedUser();
         handleSelectedListView();
     }
+    private void addLoginTimeUserList() {
+        for(int i = userList.getAllUsers().size()-1;i > 0;--i){
+            boolean isInUserList = false;
+            User user_login = userList.getAllUsers().get(i);
+            for(User user : loginTimeUserList.getAllUsers()){
+                if (user.getUsername().equals(user_login.getUsername())) {
+                    isInUserList = true;
+                    break;
+                }
+            }
+            if(!isInUserList) loginTimeUserList.addUser(user_login);
+        }
+
+    }
 
     private void showUsersLoginListView() {
         usersLoginListView.getItems().clear();
-        for(User user : usersList.getAllUsers()){
+        for(User user : loginTimeUserList.getAllUsers()){
             String user_data = user.getLoginTime()
-                    + "\nUsername: " + user.getUsername()
-                    + "\nName: " + user.getName();
+                    + "\nUsername: " + user.getUsername();
             if(user instanceof Staff)
                 user_data += "\nAgency: " + ((Staff) user).getAgency();
             usersLoginListView.getItems().add(user_data);
         }
         usersLoginListView.refresh();
-
-
     }
 
     private void handleSelectedListView() {
@@ -71,22 +84,20 @@ public class LoginTimePageController {
         String[] user_data_array = user_data.split("\n");
         String login_time = user_data_array[0];
         String username = user_data_array[1].split(" ")[1];
-        String name = user_data_array[2].split(" ")[1];
         String agency = null;
         if(user_data_array.length == 4){
             agency = user_data_array[3].split(" ")[1];
-            Staff staff = new Staff(name,username,null,agency);
+            Staff staff = new Staff(null,username,null,agency);
             staff.setLoginTime(login_time);
             return staff;
         }
-        User user = new User(name,username,null);
+        User user = new User(null,username,null);
         user.setLoginTime(login_time);
         return user;
     }
 
     private void showSelectedUser(String user_data) {
         User user = changeStringToUser(user_data);
-        nameLabel.setText(user.getName());
         usernameLabel.setText(user.getUsername());
         loginTimeLabel.setText(user.toStringLoginTime());
         profileImage.setImage(new Image("file:"+user.getProfileImageFilePath()));
@@ -96,7 +107,6 @@ public class LoginTimePageController {
             agencyLabel.setText("");
     }
     private void clearSelectedUser() {
-        nameLabel.setText("");
         usernameLabel.setText("");
         loginTimeLabel.setText("");
         profileImage.setImage(null);

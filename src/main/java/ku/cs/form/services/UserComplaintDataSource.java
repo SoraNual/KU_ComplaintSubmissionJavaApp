@@ -1,24 +1,27 @@
 package ku.cs.form.services;
 
-import ku.cs.form.models.*;
+import javafx.fxml.FXML;
+import ku.cs.form.models.User;
+import ku.cs.form.models.UserComplaint;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class AgencyDataSource implements DataSource<AgencyList> {
+public class UserComplaintDataSource implements DataSource<HashMap<String, UserComplaint>>{
 
     private String directoryName;
     private String fileName;
 
-    public AgencyDataSource(String directoryName, String fileName) {
+    public UserComplaintDataSource(String directoryName, String fileName) {
         this.directoryName = directoryName;
         this.fileName = fileName;
     }
 
     @Override
-    public AgencyList readData() {
+    public HashMap<String, UserComplaint> readData() {
+        HashMap<String, UserComplaint> userComplaintHashMap = new HashMap<>();
 
-        AgencyList agencies = new AgencyList();
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
         FileReader reader = null;
@@ -29,7 +32,14 @@ public class AgencyDataSource implements DataSource<AgencyList> {
             buffer = new BufferedReader(reader);
             String line = "";
             while ((line = buffer.readLine()) != null) {
-                agencies.addAgency(line);
+                UserComplaint userComplaint = null;
+                String[] data = line.split(",");
+                if(data.length == 4){
+                    userComplaint = new UserComplaint(data[0].trim(),data[1].trim(),data[2].trim(),data[3].trim());
+                } else {
+                    userComplaint = new UserComplaint(data[0].trim(),data[1].trim(),data[2].trim(),null);
+                }
+                userComplaintHashMap.put(data[0].trim(),userComplaint);
             }
 
         } catch (FileNotFoundException e) {
@@ -44,11 +54,12 @@ public class AgencyDataSource implements DataSource<AgencyList> {
                 throw new RuntimeException(e);
             }
         }
-        return agencies;
+        return userComplaintHashMap;
+
     }
 
     @Override
-    public void writeData(AgencyList agencies) {
+    public void writeData(HashMap<String, UserComplaint> userComplaintHashMap) {
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
 
@@ -59,8 +70,12 @@ public class AgencyDataSource implements DataSource<AgencyList> {
             writer = new FileWriter(file);
             buffer = new BufferedWriter(writer);
 
-            for (String agency : agencies.getAgencies()){
-                buffer.write(agency);
+            for (String key : userComplaintHashMap.keySet()){
+                UserComplaint userComplaint = userComplaintHashMap.get(key);
+                String data = key + "," + userComplaint.getComplaint_category() + "," + userComplaint.getComplaint_detail();
+                if(userComplaint.getRequest_permission_detail() != null)
+                    data += userComplaint.getRequest_permission_detail();
+                buffer.write(data);
                 buffer.newLine();
             }
 
@@ -77,6 +92,7 @@ public class AgencyDataSource implements DataSource<AgencyList> {
         }
 
 
-
     }
+
+
 }

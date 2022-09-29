@@ -30,26 +30,29 @@ public class LoginTimeFileDataSource implements DataSource<UserList> {
             while ((line = buffer.readLine()) != null) {
 
                 String[] data = line.split(",");
-                String class_name = data[2].trim(); // check Class
+                System.out.println(data);
+                String class_name = data[1].trim(); // check Class
 
                 if(class_name.equals("staff")){
 
-                    Staff staff = new Staff(data[0].trim(), data[1].trim(), null,data[3].trim()); // add agency
-                    staff.setLoginTime(data[4].trim());
+                    Staff staff = new Staff(null, data[0].trim(), null,data[2].trim()); // add agency
+                    staff.setLoginTime(data[3].trim());
                     userList.addUser(staff);
+                    System.out.println(staff);
                 }
 
                 else if(class_name.equals("admin")){
-                    Admin admin = new Admin(data[0].trim(), data[1].trim(), null);
-                    admin.setLoginTime(data[3].trim());
+                    Admin admin = new Admin(null, data[0].trim(), null);
+                    admin.setLoginTime(data[2].trim());
                     userList.addUser(admin);
                 }
 
                 else if(class_name.equals("nisit")){
-                    Nisit nisit = new Nisit(data[0].trim(), data[1].trim(), null);
-                    nisit.setLoginTime(data[3].trim());
+                    Nisit nisit = new Nisit(null, data[0].trim(), null);
+                    nisit.setLoginTime(data[2].trim());
                     userList.addUser(nisit);
                 }
+
             }
 
 
@@ -77,17 +80,17 @@ public class LoginTimeFileDataSource implements DataSource<UserList> {
         BufferedWriter buffer = null;
 
         try {
-            writer = new FileWriter(file,true);
+            writer = new FileWriter(file);
             buffer = new BufferedWriter(writer);
 
             for (User user : users.getAllUsers()){
                 String line = "";
                 if(user instanceof Admin)
-                    line = user.getName() + "," + user.getUsername() + ",admin," + user.getLoginTime();
+                    line = user.getUsername() + ",admin," + user.getLoginTime();
                 if(user instanceof Staff)
-                    line = user.getName() + "," + user.getUsername() + ",staff," + ((Staff) user).getAgency() + "," + user.getLoginTime();
+                    line = user.getUsername() + ",staff," + ((Staff) user).getAgency() + "," + user.getLoginTime();
                 if(user instanceof Nisit)
-                    line = user.getName() + "," + user.getUsername() + ",nisit," + user.getLoginTime();
+                    line = user.getUsername() + ",nisit," + user.getLoginTime();
                 buffer.append(line);
                 buffer.newLine();
             }

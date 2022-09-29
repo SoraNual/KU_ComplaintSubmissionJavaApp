@@ -42,6 +42,14 @@ public class User {
          return loginTime.format(format);
     }
 
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus;
+    }
+
+    public void setLoginAttempt(int loginAttempt) {
+        this.loginAttempt = loginAttempt;
+    }
+
     public void setLoginTime(String s) {
         //change string to LocalDateTime
         this.loginTime = LocalDateTime.parse(s,format);
@@ -59,6 +67,10 @@ public class User {
             profileImageFilePath = filePath;
     }
 
+    public void bannedLoginAttempt() {
+        loginAttempt++;
+    }
+
     public String getProfileImageFilePath() {
         return profileImageFilePath;
     }
@@ -71,13 +83,21 @@ public class User {
         return loginAttempt;
     }
 
-    @Override
-    public String toString() {
-        //loginTime.format(format) => change LocalDateTime to string
-        return name + " : " + username + " : " + loginTime.format(format);
-    }
-
     public String toStringLoginTime() {
         return loginTime.format(format);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", loginTime=" + loginTime +
+                ", profileImageFilePath='" + profileImageFilePath + '\'' +
+                ", format=" + format +
+                ", userStatus='" + userStatus + '\'' +
+                ", loginAttempt=" + loginAttempt +
+                '}';
     }
 }

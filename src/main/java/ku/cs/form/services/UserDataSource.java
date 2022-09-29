@@ -133,6 +133,38 @@ public class UserDataSource implements DataSource<UserList>{
 
     @Override
     public void writeData(UserList userList) {
+        String filePath = directoryName + File.separator + fileName;
+        File file = new File(filePath);
+
+        FileWriter writer = null;
+        BufferedWriter buffer = null;
+
+        try {
+            writer = new FileWriter(file);
+            buffer = new BufferedWriter(writer);
+
+            for (User user : userList.getAllUsers()){
+                String line = "";
+                if(user instanceof Admin)
+                    line = user.getUsername() + "," + user.getPassword() + ",admin," + user.getName() + "," + user.getUserStatus() + "," + user.getLoginAttempt();
+                if(user instanceof Staff)
+                    line = user.getUsername() + "," + user.getPassword() + ",staff," + user.getName() + "," + user.getUserStatus() + "," + user.getLoginAttempt() + "," + ((Staff) user).getAgency();
+                if(user instanceof Nisit)
+                    line = user.getUsername() + "," + user.getPassword() + ",nisit," + user.getName() + "," + user.getUserStatus() + "," + user.getLoginAttempt();
+                buffer.append(line);
+                buffer.newLine();
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                buffer.close();
+                writer.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
     }
 }

@@ -3,16 +3,14 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="adminPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles/admin-styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.AdminController">
+<AnchorPane fx:id="adminAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles/admin-styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.AdminController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#011627" height="751.0" layoutX="-16.0" layoutY="-28.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="314.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#011627" height="751.0" layoutX="-16.0" layoutY="-29.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="314.0" />
       <VBox layoutY="194.0" prefHeight="271.0" prefWidth="298.0">
          <children>
             <Button mnemonicParsing="false" onAction="#handleLoginTimeMenu" prefHeight="52.0" prefWidth="298.0" text="เวลาใช้งานล่าสุด" textFill="WHITE">
@@ -24,6 +22,22 @@
                </cursor>
             </Button>
             <Button mnemonicParsing="false" onAction="#handleStaffRegisterMenu" prefHeight="52.0" prefWidth="374.0" text="ลงทะเบียนเจ้าหน้าที่" textFill="WHITE">
+               <font>
+                  <Font name="FreesiaUPC Bold" size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#handleUserComplaintBtn" prefHeight="52.0" prefWidth="374.0" text="รายงานผู้ใช้ระบบ" textFill="WHITE">
+               <font>
+                  <Font name="FreesiaUPC Bold" size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#handleManageAgencyBtn" prefHeight="52.0" prefWidth="374.0" text="จัดการหน่วยงาน" textFill="WHITE">
                <font>
                   <Font name="FreesiaUPC Bold" size="24.0" />
                </font>
@@ -43,10 +57,5 @@
             <Font name="System Bold" size="41.0" />
          </font>
       </Label>
-      <ImageView fitHeight="651.0" fitWidth="651.0" layoutX="622.0" layoutY="27.0" opacity="0.05">
-         <image>
-            <Image url="@images/administrator.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

@@ -1,8 +1,7 @@
-admin,admin123,admin,KluayTodd,active,0
-a,b,nisit,Rachata Kaewviset,active,0
-jojo,jo,staff,Sorawit,active,0,สำนักการกีฬา
-asdf,1234,staff,wasd,active,0,สำนักเก็ตไก่
+asdf,1234,staff,wasd,banned,0,สำนักเก็ตไก่
+abc,123,nisit,Sorawit Nualmanee,banned,0
+Joemama,1234,staff,Moon,banned,0,สำนักการกีฬา
 123qwe,123,staff,ioo,active,0,สำนักงานนายกรัฐมนตรี
-abc,123,nisit,Sorawit Nualmanee,active,0
-Joemama,1234,staff,Moon,active,0,สำนักการกีฬา
-b,a,nisit,a,active,0
+admin,admin123,admin,KluayTodd,active,0
+jojo,jo,staff,Sorawit,banned,0,สำนักการกีฬา
+a,b,nisit,Rachata Kaewviset,active,0

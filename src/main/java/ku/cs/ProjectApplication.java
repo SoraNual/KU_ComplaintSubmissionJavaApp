@@ -8,12 +8,15 @@ import java.io.IOException;
 public class ProjectApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        stage.setResizable(false);
         FXRouter.bind(this, stage, "Project", 1280, 720);
         configRoute();
         FXRouter.goTo("home");
     }
     private static void configRoute() {
         String packageStr = "ku/cs/";
+        FXRouter.when("manageAgency",packageStr+"manage-agency.fxml");
+        FXRouter.when("userComplaint",packageStr+"user-complaint.fxml");
         FXRouter.when("home", packageStr+"home.fxml");
         FXRouter.when("staffRegister", packageStr+"staff-register.fxml");
         FXRouter.when("admin", packageStr+"admin.fxml");
