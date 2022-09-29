@@ -9,8 +9,7 @@ public class AgencyList {
     public AgencyList() {
         this.agencies = new ArrayList<>();
     }
-
-    public void addAgency(String agency) {
+    public void addAgency(String agency){
         agencies.add(agency);
     }
 

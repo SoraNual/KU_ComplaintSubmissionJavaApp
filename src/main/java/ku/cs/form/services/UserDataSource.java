@@ -3,6 +3,7 @@ package ku.cs.form.services;
 import ku.cs.form.models.*;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class UserDataSource implements DataSource<UserList>{
     private String directoryName;
@@ -55,7 +56,8 @@ public class UserDataSource implements DataSource<UserList>{
                         Staff staff = new Staff(data[3],data[0],data[1],data[6]);
                         return staff;
                     } else if (data[2].trim().equals("nisit")) {
-                        Nisit nisit = new Nisit(data[3],data[0],data[1]);
+                        Nisit nisit = new Nisit(data[3].trim(), data[0].trim(), data[1].trim()
+                                ,data[7].trim() ,data[8].trim() ,data[9].trim() ,data[10].trim() ,data[11].trim());
                         return nisit;
                     }
                 };
@@ -84,7 +86,7 @@ public class UserDataSource implements DataSource<UserList>{
         BufferedReader buffer = null;
 
         try {
-            reader = new FileReader(file);
+            reader = new FileReader(file, StandardCharsets.UTF_8);
             buffer = new BufferedReader(reader);
             String line = "";
             while ((line = buffer.readLine()) != null) {
@@ -108,7 +110,8 @@ public class UserDataSource implements DataSource<UserList>{
                 }
 
                 else if(class_name.equals("nisit")){
-                    Nisit nisit = new Nisit(data[3].trim(), data[0].trim(), data[1].trim());
+                    Nisit nisit = new Nisit(data[3].trim(), data[0].trim(), data[1].trim()
+                            ,data[7].trim() ,data[8].trim() ,data[9].trim() ,data[10].trim() ,data[11].trim());
                     nisit.setLoginAttempt(Integer.parseInt(data[5].trim()));
                     nisit.setUserStatus(data[4].trim());
                     userList.addUser(nisit);
