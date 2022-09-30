@@ -11,6 +11,7 @@ import ku.cs.form.models.User;
 import ku.cs.form.models.UserList;
 import ku.cs.form.services.NisitRegistration;
 import ku.cs.form.services.UserData;
+import ku.cs.form.services.UserDataSource;
 
 import java.io.IOException;
 
@@ -51,8 +52,8 @@ public class NewStaffChangePasswordPageController {
         String newPass = newPassword.getText();
         String confirmPass = confirmPassword.getText();
 
-        UserData userData = new UserData("data", "users.csv");
-        user = userData.usernamePasswordCheck(name, oldPass);
+        UserDataSource userDataSource = new UserDataSource("data", "users.csv");
+        user = userDataSource.usernamePasswordCheck(name, oldPass);
 
         // TODO
     }

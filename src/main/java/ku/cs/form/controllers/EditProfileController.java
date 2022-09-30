@@ -10,8 +10,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import ku.cs.form.models.User;
+import ku.cs.form.models.UserList;
 import ku.cs.form.services.SetTheme;
 import ku.cs.form.services.UserData;
+import ku.cs.form.services.UserDataSource;
 
 public class EditProfileController {
 
@@ -50,6 +52,8 @@ public class EditProfileController {
     @FXML private Label incorrectWarningLabel;
     @FXML private Label changeBorderColorLabel;
     @FXML private ComboBox<Font> changeFontComboBox;
+    private UserDataSource userDataSource;
+    private UserList userList;
     @FXML public void initialize() {
         user = (User) com.github.saacsos.FXRouter.getData();
         SetTheme theme = new SetTheme(user);
@@ -97,6 +101,9 @@ public class EditProfileController {
         sampleListView.setStroke(user.getBorderColor());
         sampleButton.setStroke(user.getBorderColor());
         sampleRec.setStroke(user.getRectangleColor());
+
+        userDataSource = new UserDataSource("data","users.csv");
+        userList = userDataSource.readData();
     }
 
 
@@ -110,7 +117,6 @@ public class EditProfileController {
     }
 
     public void handleConfirmButton(ActionEvent actionEvent){
-        UserData file = new UserData("data","users.csv");
         String newPassword = newPasswordTextField.getText();
         String newConfirmPassword = confirmNewPasswordTextField.getText();
         if (newPassword.equals(newConfirmPassword)) {
@@ -121,11 +127,11 @@ public class EditProfileController {
                 user.setTextColor(textColor);
                 user.setBorderColor(borderColor);
                 user.setButtonColor(buttonColor);
-                file.changeData(user);
+                userDataSource.changeData(user);
                 try {
                     com.github.saacsos.FXRouter.goTo("nisitPage", user);
                 } catch (Exception e) {
-                    System.out.println("Path มึงเหี้ยไอ้ควาย");
+                    System.out.println("Path มีปัญหาละพ่อหนุ่ม");
                 }
         }
         else{
