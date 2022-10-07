@@ -21,7 +21,8 @@ public class AdminController {
 
     @FXML
     public void initialize() {
-        admin = new Admin("admin","AdminInwza007","123456");
+        admin = new Admin("admin","AdminInwza007","123456","0x669966ff","0x000000ff","0xffffffff","0x008000ff");
+        System.out.println(admin.toString());
         showAdminGreetingLabel();
     }
     public void handleLoginTimeMenu(ActionEvent actionEvent){

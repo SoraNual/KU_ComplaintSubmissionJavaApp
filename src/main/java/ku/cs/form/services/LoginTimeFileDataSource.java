@@ -31,11 +31,9 @@ public class LoginTimeFileDataSource implements DataSource<UserList> {
             while ((line = buffer.readLine()) != null) {
 
                 String[] data = line.split(",");
-                System.out.println(data);
                 String class_name = data[1].trim(); // check Class
 
                 if(class_name.equals("staff")){
-
                     Staff staff = new Staff(null, data[0].trim(), null,data[2].trim()); // add agency
                     staff.setLoginTime(data[3].trim());
                     userList.addUser(staff);

@@ -6,6 +6,7 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+
 public class User {
     private final String name;
     private String username;
@@ -15,19 +16,29 @@ public class User {
     private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"); //for change date format
     private String userStatus;
     private int loginAttempt;
-    private Color rectangleColor;
-    private Color textColor;
-    private Color backgroundColor;
-    private Color buttonColor;
-    private Color borderColor;
-    public User(String name, String username, String password) {
+    protected String rectangleColor;
+    protected String textColor;
+    protected String backgroundColor;
+    protected String buttonColor;
+
+    public User(String name, String username, String password, String rectangleColor, String textColor, String backgroundColor, String buttonColor) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.loginTime = LocalDateTime.now(); //default time = recently time
         this.userStatus = "active";
         this.loginAttempt = 0;
+        this.rectangleColor = rectangleColor;
+        this.textColor = textColor;
+        this.backgroundColor = backgroundColor;
+        this.buttonColor = buttonColor;
         setProfileImage();
+    }
+
+    public User(String name, String username, String password) {
+        this.name = name;
+        this.username = username;
+        this.password = password;
     }
 
     public String getUsername() {
@@ -43,32 +54,26 @@ public class User {
     }
 
     public String getLoginTime() {
-         return loginTime.format(format);
+        return loginTime.format(format);
     }
 
-    public Color getBorderColor() {
-        return borderColor;
-    }
-
-    public void setBorderColor(Color borderColor) {
-        this.borderColor = borderColor;
-    }
 
     public void setLoginTime(String s) {
         //change string to LocalDateTime
-        this.loginTime = LocalDateTime.parse(s,format);
+        this.loginTime = LocalDateTime.parse(s, format);
     }
-    private void setProfileImage() {
-            String fileName = username + ".jpg";
-            String directoryName = "data" + File.separator + "img";
-            String filePath = directoryName + File.separator + fileName;
-            File file = new File(filePath);
 
-            if(!file.exists()) {
-                fileName = "default.jpg";
-                filePath = directoryName + File.separator + fileName;
-            }
-            profileImageFilePath = filePath;
+    private void setProfileImage() {
+        String fileName = username + ".jpg";
+        String directoryName = "data" + File.separator + "img";
+        String filePath = directoryName + File.separator + fileName;
+        File file = new File(filePath);
+
+        if (!file.exists()) {
+            fileName = "default.jpg";
+            filePath = directoryName + File.separator + fileName;
+        }
+        profileImageFilePath = filePath;
     }
 
     public void bannedLoginAttempt() {
@@ -90,7 +95,7 @@ public class User {
     @Override
     public String toString() {
         //loginTime.format(format) => change LocalDateTime to string
-        return username + "," + password + "," + this.getClass() + "," + getName() + "," + userStatus + "," + loginAttempt;
+        return getUsername() + "," + getPassword() + "," + this.getClass().getSimpleName() + "," + getName() + "," + getUserStatus() + "," + getLoginAttempt() + "," + "," + rectangleColor + "," + textColor + "," + backgroundColor + "," + buttonColor;
     }
 
     public String toStringLoginTime() {
@@ -102,7 +107,6 @@ public class User {
     }
 
 
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -110,7 +114,6 @@ public class User {
     public void setUserStatus(String userStatus) {
         this.userStatus = userStatus;
     }
-
 
 
     public void setLoginTime(LocalDateTime loginTime) {
@@ -125,37 +128,35 @@ public class User {
         this.loginAttempt = loginAttempt;
     }
 
-
-
-    public Color getTextColor() {
-        return textColor;
-    }
-
-    public void setTextColor(Color textColor) {
-        this.textColor = textColor;
-    }
-
-    public Color getBackgroundColor() {
-        return backgroundColor;
-    }
-
-    public void setBackgroundColor(Color backgroundColor) {
-        this.backgroundColor = backgroundColor;
-    }
-    public Color getRectangleColor() {
+    public String getRectangleColor() {
         return rectangleColor;
     }
 
-    public void setRectangleColor(Color rectangleColor) {
-        this.rectangleColor = rectangleColor;
+    public String getTextColor() {
+        return textColor;
     }
 
-    public Color getButtonColor() {
+    public String getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public String getButtonColor() {
         return buttonColor;
     }
 
+    public void setRectangleColor(String rectangleColor) {
+        this.rectangleColor = rectangleColor;
+    }
 
-    public void setButtonColor(Color buttonColor) {
+    public void setTextColor(String textColor) {
+        this.textColor = textColor;
+    }
+
+    public void setBackgroundColor(String backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
+    public void setButtonColor(String buttonColor) {
         this.buttonColor = buttonColor;
     }
 }

@@ -1,9 +1,14 @@
 package ku.cs.form.services;
 
+import javafx.event.ActionEvent;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Callback;
 import ku.cs.form.models.User;
 
 
@@ -15,42 +20,135 @@ public class SetTheme {
     }
 
     public void setObject(Rectangle rectangle){
-        rectangle.setFill(user.getRectangleColor());
+        rectangle.setStyle("-fx-fill: "+user.getRectangleColor()+";"
+                            +"-fx-stroke: none;");
     }
     public void setObject(Pane pane){
-        pane.setBackground(new Background(new BackgroundFill(user.getBackgroundColor(),null,null)));
+        pane.setStyle("-fx-background-color: "+user.getBackgroundColor()+";");
     }
-    public void setObject(Button button,Boolean bool){
-        button.setBackground(new Background(new BackgroundFill(user.getButtonColor(),null,null)));
-        button.setBorder(new Border(new BorderStroke(user.getBorderColor(), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        button.setTextFill(user.getTextColor());
-
+    public void setObject(Button button){
+        button.setStyle("-fx-background-color: "+user.getButtonColor()+";"
+                        +"-fx-border-color: none;"
+                        +"-fx-background-radius : 13;"
+                        +"-fx-border-radius : 13;"
+                        +"-fx-text-fill :"+user.getTextColor());
+        button.hoverProperty().addListener((observable, oldValue, newValue) ->{
+            if(newValue){
+                button.setStyle("-fx-background-color: "+hoverColor(user.getButtonColor())+";"
+                                +"-fx-border-color: none;"
+                                +"-fx-background-radius : 13;"
+                                +"-fx-border-radius : 13;"
+                                +"-fx-text-fill :"+user.getTextColor()
+                                );
+                button.setCursor(Cursor.HAND);
+            } else{
+                button.setStyle("-fx-background-color: "+user.getButtonColor()+";"
+                        +"-fx-border-color: none;"
+                        +"-fx-background-radius : 13;"
+                        +"-fx-border-radius : 13;"
+                        +"-fx-text-fill :"+user.getTextColor());
+            }
+        });
     }
     public void setObject(ColorPicker colorPicker){
-        colorPicker.setBackground(new Background(new BackgroundFill(user.getButtonColor(),null,null)));
-        colorPicker.setBorder(new Border(new BorderStroke(user.getBorderColor(), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        colorPicker.setStyle("-fx-background-color: "+user.getButtonColor()+";"
+                +"-fx-border-color: none;"
+                +"-fx-background-radius : 13;"
+                +"-fx-border-radius : 13;"
+        );
+        colorPicker.hoverProperty().addListener((observable, oldValue, newValue) ->{
+            if(newValue){
+                colorPicker.setStyle("-fx-background-color: "+hoverColor(user.getButtonColor())+";"
+                        +"-fx-border-color: none;"
+                        +"-fx-background-radius : 13;"
+                        +"-fx-border-radius : 13;"
+                );
+                colorPicker.setCursor(Cursor.HAND);
+            } else{
+                colorPicker.setStyle("-fx-background-color: "+user.getButtonColor()+";"
+                        +"-fx-border-color: none;"
+                        +"-fx-background-radius : 13;"
+                        +"-fx-border-radius : 13;"
+                );
+            }
+        });
     }
 
     public void setObject(Label label){
-        label.setTextFill(user.getTextColor());
+        label.setStyle("-fx-text-fill :"+user.getTextColor()+";");
     }
 
 
     public void setObject(TextField textField){
-        textField.setBackground(new Background(new BackgroundFill(user.getButtonColor(),null,null)));
-        textField.setBorder(new Border(new BorderStroke(user.getBorderColor(),BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+        textField.setStyle("-fx-background-color: "+user.getButtonColor()+";"
+                            +"-fx-border-color: none;"
+                            +"-fx-background-radius : 13;"
+                            +"-fx-border-radius : 13;");
     }
     public void setObject(TextArea textArea){
-        textArea.setBackground(new Background(new BackgroundFill(user.getButtonColor(),null,null)));
-        textArea.setBorder(new Border(new BorderStroke(user.getBorderColor(),BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+        textArea.setStyle("-fx-background-color: "+user.getButtonColor()+";"
+                +"-fx-border-color: none;"
+                +"-fx-background-radius : 13;"
+                +"-fx-border-radius : 13;");
     }
     public void setObject(ListView listView){
-        listView.setBackground(new Background(new BackgroundFill(user.getRectangleColor(),null,null)));
-        listView.setBorder(new Border(new BorderStroke(user.getBorderColor(),BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+        listView.setStyle("-fx-background-color: "+user.getRectangleColor()+";"
+                +"-fx-border-color: none;"
+                +"-fx-selection-bar:"+hoverColor(user.getRectangleColor())+";"
+                +"-fx-background-radius: 13;"
+                +"-fx-border-radius: 13;"
+                +"-fx-control-inner-background: " + user.getRectangleColor() + ";"
+        );
     }
     public void setObject(ComboBox comboBox){
-        comboBox.setBorder(new Border(new BorderStroke(user.getBorderColor(),BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT)));
-        comboBox.setBackground(new Background(new BackgroundFill(user.getButtonColor(),null,null)));
+        comboBox.setStyle("-fx-background-color: "+user.getButtonColor()+";"
+                +"-fx-border-color: none;"
+                +"-fx-background-radius : 13;"
+                +"-fx-border-radius : 13;"
+                +"-fx-text-fill: "+user.getTextColor()+";"
+        );
+    }
+    public void setObject(ChoiceBox choiceBox){
+        choiceBox.setStyle("-fx-background-color: "+user.getButtonColor()+";"
+                +"-fx-border-color: none;"
+                +"-fx-background-radius: 13;"
+                +"-fx-border-radius: 13;"
+        );
+    }
+    public void setInvisibleBackgroundButton(Button button){
+        button.setStyle("-fx-background-color: none;"
+                +"-fx-border-color: none;"
+                +"-fx-background-radius : 13;"
+                +"-fx-border-radius : 13;"
+                +"-fx-text-fill :"+user.getTextColor()+";");
+        button.hoverProperty().addListener((observable, oldValue, newValue) ->{
+            if(newValue){
+                button.setStyle("-fx-background-color: none;"
+                        +"-fx-border-color: none;"
+                        +"-fx-background-radius : 13;"
+                        +"-fx-border-radius : 13;"
+                        +"-fx-underline: true;"
+                        +"-fx-text-fill :"+user.getTextColor()
+                );
+                button.setCursor(Cursor.HAND);
+            } else{
+                button.setStyle("-fx-background-color: none;"
+                        +"-fx-border-color: none;"
+                        +"-fx-background-radius : 13;"
+                        +"-fx-border-radius : 13;"
+                        +"-fx-text-fill :"+user.getTextColor());
+            }
+        });
+    }
+    public void setObject(PasswordField passwordField){
+        passwordField.setStyle("-fx-background-color: "+user.getButtonColor()+";"
+                +"-fx-border-color: none;"
+                +"-fx-background-radius : 13;"
+                +"-fx-border-radius : 13;");
+    }
+    private String hoverColor(String color){
+        color = ("#"+((Color.web(color)).brighter())).replace("0x","").toUpperCase();
+        return color;
     }
 
 }

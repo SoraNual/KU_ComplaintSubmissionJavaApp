@@ -2,15 +2,13 @@ package ku.cs.form.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import ku.cs.form.models.Report;
 import ku.cs.form.models.ReportList;
 import ku.cs.form.models.User;
 import ku.cs.form.services.ReportCategoryDataSource;
 import ku.cs.form.services.ReportFileDataSource;
+import ku.cs.form.services.SetTheme;
 import ku.cs.form.services.UserDataSource;
 import javafx.scene.image.Image;
 
@@ -23,7 +21,7 @@ public class ReportController {
     private Report report;
     @FXML private TextField topicTextField;
     @FXML private TextArea detailTextArea;
-    @FXML private ChoiceBox<String> categoryChoiceBox;
+    @FXML private ComboBox<String> categoryComboBox;
     private ReportCategoryDataSource reportCategoryDataSource;
     private ArrayList<String> reportCategory;
     private ReportList reportList;
@@ -37,7 +35,15 @@ public class ReportController {
         reportList = reportFileDataSource.readData();
 
         user = (User) com.github.saacsos.FXRouter.getData();
-        categoryChoiceBox.getItems().addAll(reportCategory);
+        categoryComboBox.getItems().addAll(reportCategory);
+        theme();
+    }
+    public void theme(){
+        SetTheme setTheme = new SetTheme(user);
+        setTheme.setObject(warningLabel);
+        setTheme.setObject(topicTextField);
+        setTheme.setObject(detailTextArea);
+        setTheme.setObject(categoryComboBox);
     }
 
     @FXML
@@ -51,7 +57,7 @@ public class ReportController {
 
     @FXML
     public void handleSubmitButton(ActionEvent actionEvent) {
-        report = new Report(topicTextField.getText(), user.getUsername(), categoryChoiceBox.getValue(), detailTextArea.getText());
+        report = new Report(topicTextField.getText(), user.getUsername(), categoryComboBox.getValue(), detailTextArea.getText());
         System.out.println(report);
         if (report.getTopic().trim().isBlank() || report.getDetail().trim().isBlank() || report.getCategory() == null) {
             warningLabel.setText("โปรดกรอกให้ครบทุกช่อง");

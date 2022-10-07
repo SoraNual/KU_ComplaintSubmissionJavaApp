@@ -42,23 +42,28 @@ public class LoginPageController {
         user = unclarifiedUser.usernamePasswordCheck(username,password);
         try {
             if (user instanceof Admin) {
+                addLoginTime();
                 FXRouter.goTo("admin",user);
             } else if (user instanceof Staff) {
+                addLoginTime();
                 FXRouter.goTo("newStaff",user);
             } else if (user instanceof Nisit) {
+                addLoginTime();
                 FXRouter.goTo("nisitPage",user);
             } else{
                 incorrectWarningText.setText("Incorrect username or password");
             }
-            LoginTimeFileDataSource loginTimeFileDataSource = new LoginTimeFileDataSource("data","loginTime.csv");
-            UserList users = loginTimeFileDataSource.readData();
-            users.addUser(user);
-            loginTimeFileDataSource.writeData(users);
+
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
     }
-
+    public void addLoginTime(){
+        LoginTimeFileDataSource loginTimeFileDataSource = new LoginTimeFileDataSource("data","loginTime.csv");
+        UserList users = loginTimeFileDataSource.readData();
+        users.addUser(user);
+        loginTimeFileDataSource.writeData(users);
+    }
 }

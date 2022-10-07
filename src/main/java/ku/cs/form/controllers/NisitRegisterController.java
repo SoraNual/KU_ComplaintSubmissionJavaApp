@@ -47,7 +47,7 @@ public class NisitRegisterController {
         String error = reg.registrationCheck(name,username,password,confirmPassword);
 
         if(error.isBlank()){
-            Nisit newNisit = new Nisit(name, username, password,"0x669966ff","0x000000ff","0xffffffff","0x008000ff","0x000080ff");
+            Nisit newNisit = new Nisit(name, username, password,"0x669966ff","0x000000ff","0xffffffff","0x008000ff");
             reg.addNisit(newNisit);
             showPopUp("Registration successful!","Hello Welcome!",null);
             try {

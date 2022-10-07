@@ -64,7 +64,7 @@ public class StaffRegisterController extends UploadPicture {
         String error = reg.registrationCheck(name,username,password,confirmPassword);
 
         if(error.isBlank()){
-            Staff newStaff = new Staff(name, username, password,agency);
+            Staff newStaff = new Staff(name, username, password,agency,"0x669966ff","0x000000ff","0xffffffff","0x008000ff");
             reg.addStaff(newStaff);
             if(profile_pic.getImage() != null)
                 addPic(username,profile_pic);

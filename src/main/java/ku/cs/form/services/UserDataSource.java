@@ -53,7 +53,6 @@ public class UserDataSource implements DataSource<UserList>{
                 user.setRectangleColor(editedUser.getRectangleColor());
                 user.setBackgroundColor(editedUser.getBackgroundColor());
                 user.setTextColor(editedUser.getTextColor());
-                user.setBorderColor(editedUser.getBorderColor());
                 user.setButtonColor(editedUser.getButtonColor());
                 writeData(userList);
             }
@@ -76,24 +75,24 @@ public class UserDataSource implements DataSource<UserList>{
                 String[] data = line.split(",");
                 String class_name = data[2].trim(); // check Class
 
-                if(class_name.equals("staff")){
+                if(class_name.toLowerCase().equals("staff")){
 
-                    Staff staff = new Staff(data[3].trim(), data[0].trim(), data[1].trim(),data[6].trim()); // add agency
+                    Staff staff = new Staff(data[3].trim(), data[0].trim(), data[1].trim(),data[6].trim(),data[7].trim() ,data[8].trim() ,data[9].trim() ,data[10].trim()); // add agency
                     staff.setLoginAttempt(Integer.parseInt(data[5].trim()));
                     staff.setUserStatus(data[4].trim());
                     userList.addUser(staff);
                 }
 
-                else if(class_name.equals("admin")){
-                    Admin admin = new Admin(data[3].trim(), data[0].trim(), data[1].trim());
+                else if(class_name.toLowerCase().equals("admin")){
+                    Admin admin = new Admin(data[3].trim(), data[0].trim(), data[1].trim(),data[7].trim() ,data[8].trim() ,data[9].trim() ,data[10].trim());
                     admin.setLoginAttempt(Integer.parseInt(data[5].trim()));
                     admin.setUserStatus(data[4].trim());
                     userList.addUser(admin);
                 }
 
-                else if(class_name.equals("nisit")){
+                else if(class_name.toLowerCase().equals("nisit")){
                     Nisit nisit = new Nisit(data[3].trim(), data[0].trim(), data[1].trim()
-                            ,data[7].trim() ,data[8].trim() ,data[9].trim() ,data[10].trim() ,data[11].trim());
+                            ,data[7].trim() ,data[8].trim() ,data[9].trim() ,data[10].trim());
                     nisit.setLoginAttempt(Integer.parseInt(data[5].trim()));
                     nisit.setUserStatus(data[4].trim());
                     userList.addUser(nisit);
@@ -131,9 +130,9 @@ public class UserDataSource implements DataSource<UserList>{
             for (User user : userList.getAllUsers()){
                 String line = "";
                 if(user instanceof Admin)
-                    line = user.getUsername() + "," + user.getPassword() + ",admin," + user.getName() + "," + user.getUserStatus() + "," + user.getLoginAttempt();
+                    line = user.toString();
                 if(user instanceof Staff)
-                    line = user.getUsername() + "," + user.getPassword() + ",staff," + user.getName() + "," + user.getUserStatus() + "," + user.getLoginAttempt() + "," + ((Staff) user).getAgency();
+                    line = user.toString();
                 if(user instanceof Nisit)
                     line = user.toString();
                 buffer.append(line);
