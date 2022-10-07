@@ -13,6 +13,7 @@ import ku.cs.form.services.LoginTimeFileDataSource;
 import ku.cs.form.services.UserDataSource;
 
 import java.io.*;
+import java.time.LocalDateTime;
 
 public class LoginPageController {
     @FXML private ImageView img;
@@ -20,8 +21,12 @@ public class LoginPageController {
     @FXML private TextField passwordTextField;
     @FXML private Label incorrectWarningText;
     private User user;
+    private UserDataSource userDataSource;
+    private UserList userList;
     @FXML public void initialize() {
         String url = getClass().getResource("/ku/cs/images/catMeow.png").toExternalForm();
+        userDataSource = new UserDataSource("data","users.csv");
+        userList = userDataSource.readData();
         img.setImage(new Image(url));
     }
 
@@ -32,6 +37,15 @@ public class LoginPageController {
         } catch (IOException e) {
             System.out.println("ไม่สามารถไปหน้า Home ได้");
         }
+    }
+
+    private void setLoginTime(User user) {
+        for(User u : userList.getAllUsers()){
+            if(u.getUsername().equals(user.getUsername())){
+                u.setLoginTime(LocalDateTime.now().format(u.getFormat()));
+            }
+        }
+        userDataSource.writeData(userList);
     }
 
     @FXML public void handleLoginButton(ActionEvent actionEvent) {
@@ -50,15 +64,13 @@ public class LoginPageController {
             } else{
                 incorrectWarningText.setText("Incorrect username or password");
             }
-            LoginTimeFileDataSource loginTimeFileDataSource = new LoginTimeFileDataSource("data","loginTime.csv");
-            UserList users = loginTimeFileDataSource.readData();
-            users.addUser(user);
-            loginTimeFileDataSource.writeData(users);
-
+            setLoginTime(user);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
     }
+
+
 
 }

@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class UserDataSource implements DataSource<UserList>{
@@ -74,28 +75,30 @@ public class UserDataSource implements DataSource<UserList>{
             while ((line = buffer.readLine()) != null) {
 
                 String[] data = line.split(",");
-                String class_name = data[2].trim(); // check Class
-
+                String class_name = data[3].trim(); // check Class
                 if(class_name.equals("staff")){
 
-                    Staff staff = new Staff(data[3].trim(), data[0].trim(), data[1].trim(),data[6].trim()); // add agency
-                    staff.setLoginAttempt(Integer.parseInt(data[5].trim()));
-                    staff.setUserStatus(data[4].trim());
+                    Staff staff = new Staff(data[4].trim(), data[1].trim(), data[2].trim(),data[7].trim()); // add agency
+                    staff.setLoginAttempt(Integer.parseInt(data[6].trim()));
+                    staff.setUserStatus(data[5].trim());
+                    staff.setLoginTime(data[0].trim());
                     userList.addUser(staff);
                 }
 
                 else if(class_name.equals("admin")){
-                    Admin admin = new Admin(data[3].trim(), data[0].trim(), data[1].trim());
-                    admin.setLoginAttempt(Integer.parseInt(data[5].trim()));
-                    admin.setUserStatus(data[4].trim());
+                    Admin admin = new Admin(data[4].trim(), data[1].trim(), data[2].trim());
+                    admin.setLoginAttempt(Integer.parseInt(data[6].trim()));
+                    admin.setUserStatus(data[5].trim());
+                    admin.setLoginTime(data[0].trim());
                     userList.addUser(admin);
                 }
 
                 else if(class_name.equals("nisit")){
-                    Nisit nisit = new Nisit(data[3].trim(), data[0].trim(), data[1].trim()
-                            ,data[7].trim() ,data[8].trim() ,data[9].trim() ,data[10].trim() ,data[11].trim());
-                    nisit.setLoginAttempt(Integer.parseInt(data[5].trim()));
-                    nisit.setUserStatus(data[4].trim());
+                    Nisit nisit = new Nisit(data[4].trim(), data[1].trim(), data[2].trim()
+                            ,data[8].trim() ,data[9].trim() ,data[10].trim() ,data[11].trim() ,data[12].trim());
+                    nisit.setLoginAttempt(Integer.parseInt(data[6].trim()));
+                    nisit.setUserStatus(data[5].trim());
+                    nisit.setLoginTime(data[0].trim());
                     userList.addUser(nisit);
                 }
             }
@@ -129,13 +132,13 @@ public class UserDataSource implements DataSource<UserList>{
             buffer = new BufferedWriter(writer);
 
             for (User user : userList.getAllUsers()){
-                String line = "";
+                String line = user.getLoginTime() + ",";
                 if(user instanceof Admin)
-                    line = user.getUsername() + "," + user.getPassword() + ",admin," + user.getName() + "," + user.getUserStatus() + "," + user.getLoginAttempt();
+                    line += user.getUsername() + "," + user.getPassword() + ",admin," + user.getName() + "," + user.getUserStatus() + "," + user.getLoginAttempt();
                 if(user instanceof Staff)
-                    line = user.getUsername() + "," + user.getPassword() + ",staff," + user.getName() + "," + user.getUserStatus() + "," + user.getLoginAttempt() + "," + ((Staff) user).getAgency();
+                    line += user.getUsername() + "," + user.getPassword() + ",staff," + user.getName() + "," + user.getUserStatus() + "," + user.getLoginAttempt() + "," + ((Staff) user).getAgency();
                 if(user instanceof Nisit)
-                    line = user.toString();
+                    line += user.toString();
                 buffer.append(line);
                 buffer.newLine();
             }

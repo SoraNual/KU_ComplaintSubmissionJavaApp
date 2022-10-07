@@ -24,7 +24,7 @@ public class User {
         this.name = name;
         this.username = username;
         this.password = password;
-        this.loginTime = LocalDateTime.now(); //default time = recently time
+        this.loginTime = null; //default time = recently time
         this.userStatus = "active";
         this.loginAttempt = 0;
         setProfileImage();
@@ -43,7 +43,8 @@ public class User {
     }
 
     public String getLoginTime() {
-         return loginTime.format(format);
+        if (loginTime == null) return "ยังไม่มีการใช้งาน";
+        return loginTime.format(format);
     }
 
     public Color getBorderColor() {
@@ -56,8 +57,10 @@ public class User {
 
     public void setLoginTime(String s) {
         //change string to LocalDateTime
-        this.loginTime = LocalDateTime.parse(s,format);
+        if(s.equals("ยังไม่มีการใช้งาน")) this.loginTime = null;
+        else this.loginTime = LocalDateTime.parse(s,format);
     }
+
     private void setProfileImage() {
             String fileName = username + ".jpg";
             String directoryName = "data" + File.separator + "img";
