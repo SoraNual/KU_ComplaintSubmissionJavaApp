@@ -1,45 +1,72 @@
 package ku.cs.form.controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import ku.cs.form.models.Report;
-import ku.cs.form.models.ReportList;
-import ku.cs.form.models.User;
+import javafx.scene.control.*;
+import ku.cs.form.models.*;
 import ku.cs.form.services.ReportCategoryDataSource;
 import ku.cs.form.services.ReportFileDataSource;
-import ku.cs.form.services.UserDataSource;
-import javafx.scene.image.Image;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class ReportController {
     private User user;
     private Report report;
     @FXML private TextField topicTextField;
     @FXML private TextArea detailTextArea;
-    @FXML private ChoiceBox<String> categoryChoiceBox;
+    @FXML private ChoiceBox<ReportCategory> categoryChoiceBox;
     private ReportCategoryDataSource reportCategoryDataSource;
-    private ArrayList<String> reportCategory;
+    private ReportCategoryList reportCategories;
     private ReportList reportList;
     private ReportFileDataSource reportFileDataSource;
     @FXML private Label warningLabel;
+    @FXML private Label additionalDetailLabel;
+    @FXML private Label additionalImageLabel;
+    @FXML private TextArea additionalDetailTextArea;
+    @FXML private Button uploadImgButton;
     @FXML public void initialize() {
         reportCategoryDataSource = new ReportCategoryDataSource("data","reportCategory.csv");
-        reportCategory = reportCategoryDataSource.readData();
+        reportCategories = reportCategoryDataSource.readData();
 
         reportFileDataSource = new ReportFileDataSource("data","reports.csv");
         reportList = reportFileDataSource.readData();
 
         user = (User) com.github.saacsos.FXRouter.getData();
-        categoryChoiceBox.getItems().addAll(reportCategory);
+        categoryChoiceBox.getItems().addAll(reportCategories.getAllCategories());
+        warningLabel.setText("");
+        additionalDetailLabel.setText("");
+        additionalImageLabel.setText("");
+        additionalDetailTextArea.setVisible(false);
+        uploadImgButton.setVisible(false);
+
+        handleCategoryChoiceBox();
+    }
+    private void handleCategoryChoiceBox(){
+        categoryChoiceBox.getSelectionModel().selectedItemProperty().addListener(
+                new ChangeListener<ReportCategory>() {
+                    @Override
+                    public void changed(ObservableValue<? extends ReportCategory>
+                                                observable,
+                                        ReportCategory oldValue, ReportCategory newValue) {
+                        showSelectedCategory(newValue);
+                    }
+                });
     }
 
+    private void showSelectedCategory(ReportCategory reportCategory){
+
+        if(reportCategory.getImageNeeded() == true){
+            additionalImageLabel.setText(reportCategory.getAdditionalImageTitle());
+            uploadImgButton.setVisible(true);
+        }else{
+            additionalImageLabel.setText("");
+            uploadImgButton.setVisible(false);
+        }
+        additionalDetailLabel.setText(reportCategory.getAdditionalDetailTitle());
+        additionalDetailTextArea.setVisible(true);
+    }
     @FXML
     public void handleBackButton(ActionEvent actionEvent) {
         try {
@@ -51,7 +78,7 @@ public class ReportController {
 
     @FXML
     public void handleSubmitButton(ActionEvent actionEvent) {
-        report = new Report(topicTextField.getText(), user.getUsername(), categoryChoiceBox.getValue(), detailTextArea.getText());
+        report = new Report(topicTextField.getText(), user.getUsername(), categoryChoiceBox.getValue().getName(), detailTextArea.getText());
         System.out.println(report);
         if (report.getTopic().trim().isBlank() || report.getDetail().trim().isBlank() || report.getCategory() == null) {
             warningLabel.setText("โปรดกรอกให้ครบทุกช่อง");

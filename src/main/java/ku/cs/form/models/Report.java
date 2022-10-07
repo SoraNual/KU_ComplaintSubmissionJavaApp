@@ -22,6 +22,7 @@ public class Report {
     private String detail;
     private String status; // 3 status : pending, in progress, finish
     private int votePoint;
+    private ArrayList<User> votedUsers;
 
     public Report(String topic, String complainantUsername, String category, String detail, String status, int votePoint) {
         this.topic = topic;
