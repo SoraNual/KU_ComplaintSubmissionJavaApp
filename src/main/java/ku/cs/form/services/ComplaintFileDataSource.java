@@ -92,7 +92,7 @@ public class ComplaintFileDataSource implements DataSource<ComplaintList> {
         try {
             writer = new FileWriter(file, StandardCharsets.UTF_8);
             buffer = new BufferedWriter(writer);
-            // Submit time, Topic, username, basic details, category, additional details, status, vote points
+            // Submit time, Topic, username, basic details, category, additional details, status, vote points, solution
             for(Complaint complaint : complaintList.getAllReports()){
                 String line = complaint.getSubmitTime() + "," +
                         complaint.getTopic() + "," +

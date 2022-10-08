@@ -1,12 +1,12 @@
 package ku.cs.form.models;
 
-public class UserComplaint {
+public class UserReport {
     private String username;
     private String complaint_category;
     private String complaint_detail;
     private String request_unbanned_detail;
 
-    public UserComplaint(String username, String complaint_category, String complaint_detail, String request_permission_detail) {
+    public UserReport(String username, String complaint_category, String complaint_detail, String request_permission_detail) {
         this.username = username;
         this.complaint_category = complaint_category;
         this.complaint_detail = complaint_detail;

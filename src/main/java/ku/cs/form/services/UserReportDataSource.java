@@ -1,12 +1,12 @@
 package ku.cs.form.services;
 
-import ku.cs.form.models.UserComplaint;
+import ku.cs.form.models.UserReport;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
-public class UserReportDataSource implements DataSource<HashMap<String, UserComplaint>>{
+public class UserReportDataSource implements DataSource<HashMap<String, UserReport>>{
 
     private String directoryName;
     private String fileName;
@@ -17,8 +17,8 @@ public class UserReportDataSource implements DataSource<HashMap<String, UserComp
     }
 
     @Override
-    public HashMap<String, UserComplaint> readData() {
-        HashMap<String, UserComplaint> userComplaintHashMap = new HashMap<>();
+    public HashMap<String, UserReport> readData() {
+        HashMap<String, UserReport> userComplaintHashMap = new HashMap<>();
 
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
@@ -30,14 +30,14 @@ public class UserReportDataSource implements DataSource<HashMap<String, UserComp
             buffer = new BufferedReader(reader);
             String line = "";
             while ((line = buffer.readLine()) != null) {
-                UserComplaint userComplaint = null;
+                UserReport userReport = null;
                 String[] data = line.split(",");
                 if(data.length == 4){
-                    userComplaint = new UserComplaint(data[0].trim(),data[1].trim(),data[2].trim(),data[3].trim());
+                    userReport = new UserReport(data[0].trim(),data[1].trim(),data[2].trim(),data[3].trim());
                 } else {
-                    userComplaint = new UserComplaint(data[0].trim(),data[1].trim(),data[2].trim(),null);
+                    userReport = new UserReport(data[0].trim(),data[1].trim(),data[2].trim(),null);
                 }
-                userComplaintHashMap.put(data[0].trim(),userComplaint);
+                userComplaintHashMap.put(data[0].trim(), userReport);
             }
 
         } catch (FileNotFoundException e) {
@@ -57,7 +57,7 @@ public class UserReportDataSource implements DataSource<HashMap<String, UserComp
     }
 
     @Override
-    public void writeData(HashMap<String, UserComplaint> userComplaintHashMap) {
+    public void writeData(HashMap<String, UserReport> userComplaintHashMap) {
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
 
@@ -69,10 +69,10 @@ public class UserReportDataSource implements DataSource<HashMap<String, UserComp
             buffer = new BufferedWriter(writer);
 
             for (String key : userComplaintHashMap.keySet()){
-                UserComplaint userComplaint = userComplaintHashMap.get(key);
-                String data = key + "," + userComplaint.getComplaint_category() + "," + userComplaint.getComplaint_detail();
-                if(userComplaint.getRequest_permission_detail() != null)
-                    data += userComplaint.getRequest_permission_detail();
+                UserReport userReport = userComplaintHashMap.get(key);
+                String data = key + "," + userReport.getComplaint_category() + "," + userReport.getComplaint_detail();
+                if(userReport.getRequest_permission_detail() != null)
+                    data += userReport.getRequest_permission_detail();
                 buffer.write(data);
                 buffer.newLine();
             }
