@@ -48,15 +48,19 @@ public class ReportFileDataSource implements DataSource<ReportList> {
             String line  = "";
             while ( (line = buffer.readLine()) != null ) {
                 String[] data = line.split(",");
+                // Submit time, Topic, username, basic details, category, additional details, status,vote points
+                // public Report(String topic, String complainantUsername,
+                // String basicDetail, String category, String additionalDetail,String status, int votePoint)
                 Report report = new Report(
-                        data[0].trim(),
                         data[1].trim(),
                         data[2].trim(),
                         data[3].trim(),
                         data[4].trim(),
-                        Integer.parseInt(data[5].trim())
+                        data[5].trim(),
+                        data[6].trim(),
+                        Integer.parseInt(data[7].trim())
                 );
-                report.setSubmitTime(data[6].trim());
+                report.setSubmitTime(data[0].trim());
                 reportList.addReport(report);
             }
         } catch (FileNotFoundException e) {
@@ -87,14 +91,16 @@ public class ReportFileDataSource implements DataSource<ReportList> {
         try {
             writer = new FileWriter(file, StandardCharsets.UTF_8);
             buffer = new BufferedWriter(writer);
+            // Submit time, Topic, username, basic details, category, additional details, status, vote points
             for(Report report : reportList.getAllReports()){
-                String line = report.getTopic() + "," +
+                String line = report.getSubmitTime() + "," +
+                        report.getTopic() + "," +
                         report.getComplainantUsername() + "," +
+                        report.getBasicDetail()+ "," +
                         report.getCategory() + "," +
-                        report.getDetail()+ "," +
+                        report.getAdditionalDetail() + "," +
                         report.getStatus() + "," +
-                        report.getVotePoint() + "," +
-                        report.getSubmitTime();
+                        report.getVotePoint();
                 buffer.append(line);
                 buffer.newLine();
             }

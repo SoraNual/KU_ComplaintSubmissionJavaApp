@@ -15,7 +15,7 @@ public class ReportController {
     private User user;
     private Report report;
     @FXML private TextField topicTextField;
-    @FXML private TextArea detailTextArea;
+    @FXML private TextArea basicDetailsTextArea;
     @FXML private ChoiceBox<ReportCategory> categoryChoiceBox;
     private ReportCategoryDataSource reportCategoryDataSource;
     private ReportCategoryList reportCategories;
@@ -78,11 +78,16 @@ public class ReportController {
 
     @FXML
     public void handleSubmitButton(ActionEvent actionEvent) {
-        report = new Report(topicTextField.getText(), user.getUsername(), categoryChoiceBox.getValue().getName(), detailTextArea.getText());
-        System.out.println(report);
-        if (report.getTopic().trim().isBlank() || report.getDetail().trim().isBlank() || report.getCategory() == null) {
+
+        String topic = topicTextField.getText().trim(),
+                basicDetails = basicDetailsTextArea.getText().trim(),
+                category = categoryChoiceBox.getValue().getName(),
+                additionalDetail = additionalDetailTextArea.getText().trim();
+        if (topic.isBlank() || basicDetails.isBlank() || category == null || additionalDetail.isBlank()) {
             warningLabel.setText("โปรดกรอกให้ครบทุกช่อง");
         } else {
+            report = new Report(topic, user.getUsername(), basicDetails, category, additionalDetail);
+            System.out.println(report);
             reportList.addReport(report);
             reportFileDataSource.writeData(reportList);
             try {

@@ -27,7 +27,7 @@ public class NewReportDetailController {
         Report report = (Report) FXRouter.getData();
 
         topicTextArea.setText(report.getTopic());
-        detailTextArea.setText(report.getDetail());
+        detailTextArea.setText(report.getBasicDetail());
         agencyTextArea.setText("");
         responsibleTextArea.setText("");
     }

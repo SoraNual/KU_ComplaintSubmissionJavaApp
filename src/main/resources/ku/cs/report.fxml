@@ -50,7 +50,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextArea fx:id="detailTextArea" layoutX="188.0" layoutY="255.0" prefHeight="302.0" prefWidth="410.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13; -fx-background-radius: 13;" stylesheets="@styles/rounded-text-area.css">
+      <TextArea fx:id="basicDetailsTextArea" layoutX="188.0" layoutY="255.0" prefHeight="302.0" prefWidth="410.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13; -fx-background-radius: 13;" stylesheets="@styles/rounded-text-area.css">
          <font>
             <Font size="18.0" />
          </font></TextArea>
