@@ -48,9 +48,9 @@ public class ReportFileDataSource implements DataSource<ComplaintList> {
             String line  = "";
             while ( (line = buffer.readLine()) != null ) {
                 String[] data = line.split(",");
-                // Submit time, Topic, username, basic details, category, additional details, status,vote points
+                // Submit time, Topic, username, basic details, category, additional details, status,vote points, solution
                 // public Report(String topic, String complainantUsername,
-                // String basicDetail, String category, String additionalDetail,String status, int votePoint)
+                // String basicDetail, String category, String additionalDetail,String status, int votePoint, String solution)
                 Complaint complaint = new Complaint(
                         data[1].trim(),
                         data[2].trim(),
@@ -58,7 +58,8 @@ public class ReportFileDataSource implements DataSource<ComplaintList> {
                         data[4].trim(),
                         data[5].trim(),
                         data[6].trim(),
-                        Integer.parseInt(data[7].trim())
+                        Integer.parseInt(data[7].trim()),
+                        data[8].trim()
                 );
                 complaint.setSubmitTime(data[0].trim());
                 complaintList.addReport(complaint);
@@ -81,7 +82,7 @@ public class ReportFileDataSource implements DataSource<ComplaintList> {
 
     @Override
     public void writeData(ComplaintList complaintList) {
-        String filePath = "data" + File.separator + "reports.csv";
+        String filePath = "data" + File.separator + "complaints.csv";
         File file = new File(filePath);
         checkFileIsExisted();
 
@@ -100,7 +101,8 @@ public class ReportFileDataSource implements DataSource<ComplaintList> {
                         complaint.getCategory() + "," +
                         complaint.getAdditionalDetail() + "," +
                         complaint.getStatus() + "," +
-                        complaint.getVotePoint();
+                        complaint.getVotePoint() + "," +
+                        complaint.getSolution();
                 buffer.append(line);
                 buffer.newLine();
             }

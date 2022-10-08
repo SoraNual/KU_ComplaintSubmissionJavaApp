@@ -37,7 +37,7 @@ public class NisitPageController {
         File imageFile = new File(user.getProfileImageFilePath());
         Image userImage = new Image(imageFile.toURI().toString());
         nisitImage.setImage(userImage);
-        dataSource = new ReportFileDataSource("data", "reports.csv");
+        dataSource = new ReportFileDataSource("data", "complaints.csv");
         complaintList = dataSource.readData();
         reportsListView.getItems().addAll(complaintList.getAllReports());
         rightRec.setFill(user.getRectangleColor());

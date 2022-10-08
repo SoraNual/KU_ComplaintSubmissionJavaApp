@@ -24,7 +24,7 @@ public class StaffPageController {
         String url = getClass().getResource("/ku/cs/images/zen.jpg").toExternalForm();
         staffImage.setImage(new Image(url));
 
-        dataSource = new ReportFileDataSource("data", "reports.csv");
+        dataSource = new ReportFileDataSource("data", "complaints.csv");
         complaintList = dataSource.readData();
         showReportsListView();
     }

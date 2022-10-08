@@ -28,7 +28,7 @@ public class NewStaffPageController {
     @FXML
     public void initialize() {
         Staff staff = (Staff) FXRouter.getData();
-        ReportFileDataSource reportFileDataSource = new ReportFileDataSource("data", "reports.csv");
+        ReportFileDataSource reportFileDataSource = new ReportFileDataSource("data", "complaints.csv");
         complaintList = reportFileDataSource.readData();
 
         // setText

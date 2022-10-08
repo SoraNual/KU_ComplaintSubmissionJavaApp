@@ -27,10 +27,10 @@ public class ReportController {
     @FXML private TextArea additionalDetailTextArea;
     @FXML private Button uploadImgButton;
     @FXML public void initialize() {
-        reportCategoryDataSource = new ReportCategoryDataSource("data","reportCategory.csv");
+        reportCategoryDataSource = new ReportCategoryDataSource("data","complaintCategories.csv");
         reportCategories = reportCategoryDataSource.readData();
 
-        reportFileDataSource = new ReportFileDataSource("data","reports.csv");
+        reportFileDataSource = new ReportFileDataSource("data","complaints.csv");
         complaintList = reportFileDataSource.readData();
 
         user = (User) com.github.saacsos.FXRouter.getData();

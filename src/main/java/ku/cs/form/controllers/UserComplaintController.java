@@ -29,7 +29,7 @@ public class UserComplaintController {
     @FXML
     public void initialize() {
         userDataSource = new UserDataSource("data","users.csv");
-        userComplaintDataSource = new UserComplaintDataSource("data","user_complaint.csv");
+        userComplaintDataSource = new UserComplaintDataSource("data","user_reports.csv");
         usersList = userDataSource.readData();
         userComplaintHashMap = userComplaintDataSource.readData();
         userHashMap = new HashMap<>();
