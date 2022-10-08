@@ -6,11 +6,11 @@ import ku.cs.form.models.ComplaintCategoryList;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
-public class ReportCategoryDataSource implements DataSource{
+public class ComplaintCategoryDataSource implements DataSource{
     private String directoryName;
     private String fileName;
 
-    public ReportCategoryDataSource(String directoryName, String fileName) {
+    public ComplaintCategoryDataSource(String directoryName, String fileName) {
         this.directoryName = directoryName;
         this.fileName = fileName;
     }

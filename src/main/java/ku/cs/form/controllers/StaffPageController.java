@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import ku.cs.form.models.Complaint;
 import ku.cs.form.models.ComplaintList;
-import ku.cs.form.services.ReportFileDataSource;
+import ku.cs.form.services.ComplaintFileDataSource;
 
 import java.io.IOException;
 
@@ -16,7 +16,7 @@ public class StaffPageController {
     @FXML private ImageView staffImage;
     @FXML private Label agencyLabel;
     @FXML private ListView<Complaint> reportsListView;
-    private ReportFileDataSource dataSource;
+    private ComplaintFileDataSource dataSource;
     private ComplaintList complaintList;
 
     @FXML
@@ -24,7 +24,7 @@ public class StaffPageController {
         String url = getClass().getResource("/ku/cs/images/zen.jpg").toExternalForm();
         staffImage.setImage(new Image(url));
 
-        dataSource = new ReportFileDataSource("data", "complaints.csv");
+        dataSource = new ComplaintFileDataSource("data", "complaints.csv");
         complaintList = dataSource.readData();
         showReportsListView();
     }

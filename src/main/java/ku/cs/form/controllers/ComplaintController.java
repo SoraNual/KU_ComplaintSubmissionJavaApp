@@ -6,26 +6,22 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import ku.cs.form.models.*;
-import ku.cs.form.services.ReportCategoryDataSource;
-import ku.cs.form.services.ReportFileDataSource;
+import ku.cs.form.services.ComplaintCategoryDataSource;
+import ku.cs.form.services.ComplaintFileDataSource;
 import ku.cs.form.services.SetTheme;
-import ku.cs.form.services.UserDataSource;
-import javafx.scene.image.Image;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
-public class ReportController {
+public class ComplaintController {
     private User user;
     private Complaint complaint;
     @FXML private TextField topicTextField;
     @FXML private TextArea basicDetailsTextArea;
     @FXML private ChoiceBox<ComplaintCategory> categoryChoiceBox;
-    private ReportCategoryDataSource reportCategoryDataSource;
+    private ComplaintCategoryDataSource complaintCategoryDataSource;
     private ComplaintCategoryList reportCategories;
     private ComplaintList complaintList;
-    private ReportFileDataSource reportFileDataSource;
+    private ComplaintFileDataSource complaintFileDataSource;
     @FXML private Label warningLabel;
     @FXML private Label additionalDetailLabel;
     @FXML private Label additionalImageLabel;
@@ -33,11 +29,11 @@ public class ReportController {
     @FXML private Button uploadImgButton;
 
     @FXML public void initialize() {
-        reportCategoryDataSource = new ReportCategoryDataSource("data","complaintCategories.csv");
-        reportCategories = reportCategoryDataSource.readData();
+        complaintCategoryDataSource = new ComplaintCategoryDataSource("data","complaintCategories.csv");
+        reportCategories = complaintCategoryDataSource.readData();
 
-        reportFileDataSource = new ReportFileDataSource("data","complaints.csv");
-        complaintList = reportFileDataSource.readData();
+        complaintFileDataSource = new ComplaintFileDataSource("data","complaints.csv");
+        complaintList = complaintFileDataSource.readData();
 
         user = (User) com.github.saacsos.FXRouter.getData();
 
@@ -104,7 +100,7 @@ public class ReportController {
             complaint = new Complaint(topic, user.getUsername(), basicDetails, category, additionalDetail);
             System.out.println(complaint);
             complaintList.addReport(complaint);
-            reportFileDataSource.writeData(complaintList);
+            complaintFileDataSource.writeData(complaintList);
             try {
 
                 com.github.saacsos.FXRouter.goTo("nisitPage");

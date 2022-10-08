@@ -1,20 +1,17 @@
 package ku.cs.form.services;
 
-import javafx.fxml.FXML;
-import ku.cs.form.models.User;
 import ku.cs.form.models.UserComplaint;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.HashMap;
 
-public class UserComplaintDataSource implements DataSource<HashMap<String, UserComplaint>>{
+public class UserReportDataSource implements DataSource<HashMap<String, UserComplaint>>{
 
     private String directoryName;
     private String fileName;
 
-    public UserComplaintDataSource(String directoryName, String fileName) {
+    public UserReportDataSource(String directoryName, String fileName) {
         this.directoryName = directoryName;
         this.fileName = fileName;
     }

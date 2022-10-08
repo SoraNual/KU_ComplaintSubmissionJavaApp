@@ -1,26 +1,20 @@
 package ku.cs.form.controllers;
 
-import javafx.animation.Animation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import ku.cs.form.models.Complaint;
 import ku.cs.form.models.ComplaintList;
-import javafx.util.Callback;
 import ku.cs.form.models.User;
-import ku.cs.form.services.ReportFileDataSource;
+import ku.cs.form.services.ComplaintFileDataSource;
 import ku.cs.form.services.SetTheme;
 
 import java.io.File;
@@ -32,7 +26,7 @@ public class NisitPageController {
 
     private User user;
     @FXML private ListView<Complaint> reportsListView;
-    private ReportFileDataSource dataSource;
+    private ComplaintFileDataSource dataSource;
     private ComplaintList complaintList;
 
     private Stage stage;
@@ -54,7 +48,7 @@ public class NisitPageController {
         File imageFile = new File(user.getProfileImageFilePath());
         Image userImage = new Image(imageFile.toURI().toString());
         nisitImage.setImage(userImage);
-        dataSource = new ReportFileDataSource("data", "complaints.csv");
+        dataSource = new ComplaintFileDataSource("data", "complaints.csv");
         complaintList = dataSource.readData();
         reportsListView.getItems().addAll(complaintList.getAllReports());
         theme();

@@ -7,12 +7,10 @@ import ku.cs.form.models.Staff;
 import ku.cs.form.models.User;
 import ku.cs.form.models.UserComplaint;
 import ku.cs.form.models.UserList;
-import ku.cs.form.services.LoginTimeFileDataSource;
-import ku.cs.form.services.UserComplaintDataSource;
+import ku.cs.form.services.UserReportDataSource;
 import ku.cs.form.services.UserDataSource;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class UserComplaintController {
@@ -21,7 +19,7 @@ public class UserComplaintController {
     @FXML private ListView<String> inappropriateListView;
     @FXML private ListView<String> requestUnbannedListView;
     private HashMap<String, User> userHashMap;
-    private UserComplaintDataSource userComplaintDataSource;
+    private UserReportDataSource userReportDataSource;
     private HashMap<String, UserComplaint> userComplaintHashMap;
     private UserDataSource userDataSource;
     private UserList usersList;
@@ -29,9 +27,9 @@ public class UserComplaintController {
     @FXML
     public void initialize() {
         userDataSource = new UserDataSource("data","users.csv");
-        userComplaintDataSource = new UserComplaintDataSource("data","user_reports.csv");
+        userReportDataSource = new UserReportDataSource("data","user_reports.csv");
         usersList = userDataSource.readData();
-        userComplaintHashMap = userComplaintDataSource.readData();
+        userComplaintHashMap = userReportDataSource.readData();
         userHashMap = new HashMap<>();
         setUserHashMap();
         showBannedUsersListView();
@@ -114,7 +112,7 @@ public class UserComplaintController {
         userComplaintHashMap.remove(banned_username);
         showRequestUnbannedListView();
         userDataSource.writeData(usersList);
-        userComplaintDataSource.writeData(userComplaintHashMap);
+        userReportDataSource.writeData(userComplaintHashMap);
     }
 
     @FXML

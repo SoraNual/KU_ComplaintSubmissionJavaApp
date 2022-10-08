@@ -10,7 +10,7 @@ import ku.cs.form.models.Complaint;
 
 import java.io.IOException;
 
-public class NewReportDetailController {
+public class NewComplaintDetailStaffController {
     @FXML
     private TextArea topicTextArea;
     @FXML

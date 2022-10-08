@@ -10,7 +10,7 @@ import ku.cs.form.models.Complaint;
 import ku.cs.form.models.ComplaintList;
 import ku.cs.form.models.Staff;
 import com.github.saacsos.FXRouter;
-import ku.cs.form.services.ReportFileDataSource;
+import ku.cs.form.services.ComplaintFileDataSource;
 
 import java.io.IOException;
 
@@ -28,8 +28,8 @@ public class NewStaffPageController {
     @FXML
     public void initialize() {
         Staff staff = (Staff) FXRouter.getData();
-        ReportFileDataSource reportFileDataSource = new ReportFileDataSource("data", "complaints.csv");
-        complaintList = reportFileDataSource.readData();
+        ComplaintFileDataSource complaintFileDataSource = new ComplaintFileDataSource("data", "complaints.csv");
+        complaintList = complaintFileDataSource.readData();
 
         // setText
         nameLabel.setText(staff.getName());

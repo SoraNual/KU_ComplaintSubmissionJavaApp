@@ -5,7 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.ReportDetailNisitController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.ComplaintDetailNisitController">
    <children>
       <Label fx:id="topicLabel" layoutX="92.0" layoutY="47.0" text="topicLabel" />
       <Label layoutX="92.0" layoutY="72.0" text="categoryLabel" />
