@@ -1,12 +1,12 @@
 package ku.cs.form.services;
 
-import ku.cs.form.models.Report;
-import ku.cs.form.models.ReportList;
+import ku.cs.form.models.Complaint;
+import ku.cs.form.models.ComplaintList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
-public class ReportFileDataSource implements DataSource<ReportList> {
+public class ReportFileDataSource implements DataSource<ComplaintList> {
     private String directoryName;
     private String fileName;
 
@@ -32,8 +32,8 @@ public class ReportFileDataSource implements DataSource<ReportList> {
     }
 
     @Override
-    public ReportList readData() {
-        ReportList reportList = new ReportList();
+    public ComplaintList readData() {
+        ComplaintList complaintList = new ComplaintList();
 
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
@@ -48,16 +48,21 @@ public class ReportFileDataSource implements DataSource<ReportList> {
             String line  = "";
             while ( (line = buffer.readLine()) != null ) {
                 String[] data = line.split(",");
-                Report report = new Report(
-                        data[0].trim(),
+                // Submit time, Topic, username, basic details, category, additional details, status,vote points, solution
+                // public Report(String topic, String complainantUsername,
+                // String basicDetail, String category, String additionalDetail,String status, int votePoint, String solution)
+                Complaint complaint = new Complaint(
                         data[1].trim(),
                         data[2].trim(),
                         data[3].trim(),
                         data[4].trim(),
-                        Integer.parseInt(data[5].trim())
+                        data[5].trim(),
+                        data[6].trim(),
+                        Integer.parseInt(data[7].trim()),
+                        data[8].trim()
                 );
-                report.setSubmitTime(data[6].trim());
-                reportList.addReport(report);
+                complaint.setSubmitTime(data[0].trim());
+                complaintList.addReport(complaint);
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -72,12 +77,12 @@ public class ReportFileDataSource implements DataSource<ReportList> {
             }
         }
 
-        return reportList;
+        return complaintList;
     }
 
     @Override
-    public void writeData(ReportList reportList) {
-        String filePath = "data" + File.separator + "reports.csv";
+    public void writeData(ComplaintList complaintList) {
+        String filePath = "data" + File.separator + "complaints.csv";
         File file = new File(filePath);
         checkFileIsExisted();
 
@@ -87,14 +92,17 @@ public class ReportFileDataSource implements DataSource<ReportList> {
         try {
             writer = new FileWriter(file, StandardCharsets.UTF_8);
             buffer = new BufferedWriter(writer);
-            for(Report report : reportList.getAllReports()){
-                String line = report.getTopic() + "," +
-                        report.getComplainantUsername() + "," +
-                        report.getCategory() + "," +
-                        report.getDetail()+ "," +
-                        report.getStatus() + "," +
-                        report.getVotePoint() + "," +
-                        report.getSubmitTime();
+            // Submit time, Topic, username, basic details, category, additional details, status, vote points
+            for(Complaint complaint : complaintList.getAllReports()){
+                String line = complaint.getSubmitTime() + "," +
+                        complaint.getTopic() + "," +
+                        complaint.getComplainantUsername() + "," +
+                        complaint.getBasicDetail()+ "," +
+                        complaint.getCategory() + "," +
+                        complaint.getAdditionalDetail() + "," +
+                        complaint.getStatus() + "," +
+                        complaint.getVotePoint() + "," +
+                        complaint.getSolution();
                 buffer.append(line);
                 buffer.newLine();
             }

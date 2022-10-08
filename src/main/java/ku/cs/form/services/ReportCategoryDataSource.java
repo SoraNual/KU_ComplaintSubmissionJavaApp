@@ -1,8 +1,10 @@
 package ku.cs.form.services;
 
+import ku.cs.form.models.ComplaintCategory;
+import ku.cs.form.models.ComplaintCategoryList;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 
 public class ReportCategoryDataSource implements DataSource{
     private String directoryName;
@@ -14,9 +16,8 @@ public class ReportCategoryDataSource implements DataSource{
     }
 
     @Override
-    public ArrayList<String> readData() {
-
-        ArrayList<String> reportCategory = new ArrayList<String>();
+    public ComplaintCategoryList readData() {
+        ComplaintCategoryList reportCategories = new ComplaintCategoryList();
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
         FileReader reader = null;
@@ -26,8 +27,14 @@ public class ReportCategoryDataSource implements DataSource{
             reader = new FileReader(file, StandardCharsets.UTF_8);
             buffer = new BufferedReader(reader);
             String line = "";
+
+
             while ((line = buffer.readLine()) != null) {
-                reportCategory.add(line);
+                String[] data = line.split(",");
+                System.out.println(data);
+                ComplaintCategory complaintCategory = new ComplaintCategory(data[0], data[1], data[3], Boolean.valueOf(data[2]));
+
+                reportCategories.addCategory(complaintCategory);
             }
 
         } catch (FileNotFoundException e) {
@@ -42,7 +49,8 @@ public class ReportCategoryDataSource implements DataSource{
                 throw new RuntimeException(e);
             }
         }
-        return reportCategory;
+        System.out.println(reportCategories);
+        return reportCategories;
     }
 
     @Override

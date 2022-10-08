@@ -3,43 +3,40 @@ package ku.cs.form.models;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.List;
 
-public class Report {
+public class Complaint {
     private String topic;
     private String complainantUsername; //ผู้ร้องเรียน
     private LocalDateTime submitTime;
     private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    private String basicDetail;
     private String category;
-    private String detail;
+    private String additionalDetail;
     private String status; // 3 status : pending, in progress, finish
     private int votePoint;
+    private ArrayList<User> votedUsers;
+    private String solution;
 
-    public Report(String topic, String complainantUsername, String category, String detail, String status, int votePoint) {
+    public Complaint(String topic, String complainantUsername, String basicDetail, String category, String additionalDetail, String status, int votePoint, String solution) {
         this.topic = topic;
         this.complainantUsername = complainantUsername;
         this.submitTime = LocalDateTime.now();
         this.category = category;
-        this.detail = detail;
+        this.additionalDetail = additionalDetail;
+        this.basicDetail = basicDetail;
         this.status = status;
         this.votePoint = votePoint;
+        this.solution = solution;
     }
 
-    public Report(String topic, String complainantUsername, String category, String detail) {
-        this(topic, complainantUsername, category, detail, "pending", 0);
+    public Complaint(String topic, String complainantUsername, String basicDetail, String category, String additionalDetail) {
+        this(topic, complainantUsername, basicDetail, category, additionalDetail, "pending", 0, null);
     }
 
     public String getTopic() { return topic; }
     public String getCategory() { return category; }
-    public String getDetail() { return detail; }
+    public String getBasicDetail() { return basicDetail; }
     public String getStatus() { return status; }
     public int getVotePoint() { return votePoint; }
 
@@ -49,6 +46,17 @@ public class Report {
 
     public String getSubmitTime() {
         return submitTime.format(format);
+    }
+    public String getAdditionalDetail() {
+        return additionalDetail;
+    }
+
+    public String getSolution() {
+        return solution;
+    }
+
+    public void setSolution(String solution) {
+        this.solution = solution;
     }
 
     public void setSubmitTime(LocalDateTime submitTime) {
@@ -65,8 +73,10 @@ public class Report {
     @Override
     public String toString() {
         return "หัวข้อ: " + getTopic() + "\n" +
-                "รายละเอียด: " + getDetail() + "\n" +
+                "รายละเอียด: " + getBasicDetail() + "\n" +
                 "สถานะ: " + getStatus() + "\n" +
                 "คะแนนโหวต: " + getVotePoint();
     }
+
+
 }

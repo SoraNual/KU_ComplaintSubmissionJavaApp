@@ -16,9 +16,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import ku.cs.form.models.Complaint;
+import ku.cs.form.models.ComplaintList;
 import javafx.util.Callback;
-import ku.cs.form.models.Report;
-import ku.cs.form.models.ReportList;
 import ku.cs.form.models.User;
 import ku.cs.form.services.ReportFileDataSource;
 import ku.cs.form.services.SetTheme;
@@ -31,11 +31,12 @@ import java.nio.file.StandardCopyOption;
 public class NisitPageController {
 
     private User user;
+    @FXML private ListView<Complaint> reportsListView;
     private ReportFileDataSource dataSource;
-    private ReportList reportList;
+    private ComplaintList complaintList;
+
     private Stage stage;
     @FXML private Rectangle rightRec;
-    @FXML private ListView<Report> reportsListView;
     @FXML private AnchorPane pane;
     @FXML private Label roleLabel;
     @FXML private Label allReportLabel;
@@ -48,14 +49,15 @@ public class NisitPageController {
 
     @FXML public void initialize() {
         user = (User) com.github.saacsos.FXRouter.getData();
+
         nameLabel.setText(user.getName());
         File imageFile = new File(user.getProfileImageFilePath());
         Image userImage = new Image(imageFile.toURI().toString());
         nisitImage.setImage(userImage);
-        dataSource = new ReportFileDataSource("data", "reports.csv");
-        reportList = dataSource.readData();
+        dataSource = new ReportFileDataSource("data", "complaints.csv");
+        complaintList = dataSource.readData();
+        reportsListView.getItems().addAll(complaintList.getAllReports());
         theme();
-        reportsListView.getItems().addAll(reportList.getAllReports());;
     }
 
     public void theme() {

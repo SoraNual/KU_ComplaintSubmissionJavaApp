@@ -20,6 +20,6 @@ public class Staff extends User {
     @Override
     public String toString() {
         //loginTime.format(format) => change LocalDateTime to string
-        return getUsername()+","+getPassword()+","+this.getClass().getSimpleName()+","+getName()+","+getUserStatus()+","+getLoginAttempt()+","+getAgency()+","+ rectangleColor +","+textColor+","+backgroundColor+","+buttonColor;
+        return getLoginTime()+ "," + getUsername() + ","+ getPassword() +","+ this.getClass().getSimpleName().toLowerCase() +","+getName()+","+getUserStatus()+","+getLoginAttempt()+","+getAgency()+","+ rectangleColor +","+textColor+","+backgroundColor+","+buttonColor;
     }
 }

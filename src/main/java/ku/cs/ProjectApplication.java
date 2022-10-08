@@ -13,6 +13,7 @@ public class ProjectApplication extends Application {
         stage.setResizable(false);
         FXRouter.bind(this, stage, "Project", 1280, 720);
         configRoute();
+        FXRouter.setAnimationType("fade",500);
         FXRouter.goTo("home");
     }
     private static void configRoute() {
