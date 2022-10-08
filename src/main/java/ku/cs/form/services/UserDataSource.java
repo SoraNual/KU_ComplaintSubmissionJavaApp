@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class UserDataSource implements DataSource<UserList>{
@@ -73,28 +74,30 @@ public class UserDataSource implements DataSource<UserList>{
             while ((line = buffer.readLine()) != null) {
 
                 String[] data = line.split(",");
-                String class_name = data[2].trim(); // check Class
+                String class_name = data[3].trim(); // check Class
+                if(class_name.equals("staff")){
 
-                if(class_name.toLowerCase().equals("staff")){
-
-                    Staff staff = new Staff(data[3].trim(), data[0].trim(), data[1].trim(),data[6].trim(),data[7].trim() ,data[8].trim() ,data[9].trim() ,data[10].trim()); // add agency
-                    staff.setLoginAttempt(Integer.parseInt(data[5].trim()));
-                    staff.setUserStatus(data[4].trim());
+                    Staff staff = new Staff(data[4].trim(), data[1].trim(), data[2].trim(),data[7].trim()); // add agency
+                    staff.setLoginAttempt(Integer.parseInt(data[6].trim()));
+                    staff.setUserStatus(data[5].trim());
+                    staff.setLoginTime(data[0].trim());
                     userList.addUser(staff);
                 }
 
-                else if(class_name.toLowerCase().equals("admin")){
-                    Admin admin = new Admin(data[3].trim(), data[0].trim(), data[1].trim(),data[7].trim() ,data[8].trim() ,data[9].trim() ,data[10].trim());
-                    admin.setLoginAttempt(Integer.parseInt(data[5].trim()));
-                    admin.setUserStatus(data[4].trim());
+                else if(class_name.equals("admin")){
+                    Admin admin = new Admin(data[4].trim(), data[1].trim(), data[2].trim());
+                    admin.setLoginAttempt(Integer.parseInt(data[6].trim()));
+                    admin.setUserStatus(data[5].trim());
+                    admin.setLoginTime(data[0].trim());
                     userList.addUser(admin);
                 }
 
-                else if(class_name.toLowerCase().equals("nisit")){
-                    Nisit nisit = new Nisit(data[3].trim(), data[0].trim(), data[1].trim()
-                            ,data[7].trim() ,data[8].trim() ,data[9].trim() ,data[10].trim());
-                    nisit.setLoginAttempt(Integer.parseInt(data[5].trim()));
-                    nisit.setUserStatus(data[4].trim());
+                else if(class_name.equals("nisit")){
+                    Nisit nisit = new Nisit(data[4].trim(), data[1].trim(), data[2].trim()
+                            ,data[8].trim() ,data[9].trim() ,data[10].trim() ,data[11].trim());
+                    nisit.setLoginAttempt(Integer.parseInt(data[6].trim()));
+                    nisit.setUserStatus(data[5].trim());
+                    nisit.setLoginTime(data[0].trim());
                     userList.addUser(nisit);
                 }
             }

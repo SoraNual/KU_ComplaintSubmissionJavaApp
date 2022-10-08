@@ -6,7 +6,6 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
 public class User {
     private final String name;
     private String username;
@@ -25,7 +24,7 @@ public class User {
         this.name = name;
         this.username = username;
         this.password = password;
-        this.loginTime = LocalDateTime.now(); //default time = recently time
+        this.loginTime = null; //default time = recently time
         this.userStatus = "active";
         this.loginAttempt = 0;
         this.rectangleColor = rectangleColor;
@@ -54,13 +53,15 @@ public class User {
     }
 
     public String getLoginTime() {
+        if (loginTime == null) return "ยังไม่มีการใช้งาน";
         return loginTime.format(format);
     }
 
 
     public void setLoginTime(String s) {
         //change string to LocalDateTime
-        this.loginTime = LocalDateTime.parse(s, format);
+        if(s.equals("ยังไม่มีการใช้งาน")) this.loginTime = null;
+        else this.loginTime = LocalDateTime.parse(s,format);
     }
 
     private void setProfileImage() {
@@ -95,7 +96,7 @@ public class User {
     @Override
     public String toString() {
         //loginTime.format(format) => change LocalDateTime to string
-        return getUsername() + "," + getPassword() + "," + this.getClass().getSimpleName() + "," + getName() + "," + getUserStatus() + "," + getLoginAttempt() + "," + "," + rectangleColor + "," + textColor + "," + backgroundColor + "," + buttonColor;
+        return getLoginTime() + "," + getUsername() + "," + getPassword() + "," + this.getClass().getSimpleName().toLowerCase() + "," + getName() + "," + getUserStatus() + "," + getLoginAttempt() + "," + "," + rectangleColor + "," + textColor + "," + backgroundColor + "," + buttonColor;
     }
 
     public String toStringLoginTime() {
@@ -107,6 +108,7 @@ public class User {
     }
 
 
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -114,6 +116,7 @@ public class User {
     public void setUserStatus(String userStatus) {
         this.userStatus = userStatus;
     }
+
 
 
     public void setLoginTime(LocalDateTime loginTime) {
