@@ -1,5 +1,6 @@
 package ku.cs.form.controllers;
 
+import javafx.animation.Animation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -51,7 +52,6 @@ public class NisitPageController {
         File imageFile = new File(user.getProfileImageFilePath());
         Image userImage = new Image(imageFile.toURI().toString());
         nisitImage.setImage(userImage);
-        nisitImage.autosize();
         dataSource = new ReportFileDataSource("data", "reports.csv");
         reportList = dataSource.readData();
         theme();
@@ -78,9 +78,10 @@ public class NisitPageController {
         fileChooser.setInitialFileName(user.getUsername()+".jpg");
         File uploadImg = fileChooser.showOpenDialog(stage);
         File newUserImg = new File("data"+File.separator+"img",user.getUsername()+".jpg");
+
         if(!(uploadImg==null)) {
             try {
-                Files.move(uploadImg.toPath(), newUserImg.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(uploadImg.toPath(), newUserImg.toPath(), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
