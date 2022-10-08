@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 
-public class Report {
+public class Complaint {
     private String topic;
     private String complainantUsername; //ผู้ร้องเรียน
     private LocalDateTime submitTime;
@@ -17,7 +17,7 @@ public class Report {
     private int votePoint;
     private ArrayList<User> votedUsers;
 
-    public Report(String topic, String complainantUsername, String basicDetail, String category, String additionalDetail,String status, int votePoint) {
+    public Complaint(String topic, String complainantUsername, String basicDetail, String category, String additionalDetail, String status, int votePoint) {
         this.topic = topic;
         this.complainantUsername = complainantUsername;
         this.submitTime = LocalDateTime.now();
@@ -28,7 +28,7 @@ public class Report {
         this.votePoint = votePoint;
     }
 
-    public Report(String topic, String complainantUsername, String basicDetail, String category, String additionalDetail) {
+    public Complaint(String topic, String complainantUsername, String basicDetail, String category, String additionalDetail) {
         this(topic, complainantUsername, basicDetail, category, additionalDetail, "pending", 0);
     }
 

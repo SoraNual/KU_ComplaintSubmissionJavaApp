@@ -13,13 +13,13 @@ import java.io.IOException;
 
 public class ReportController {
     private User user;
-    private Report report;
+    private Complaint complaint;
     @FXML private TextField topicTextField;
     @FXML private TextArea basicDetailsTextArea;
-    @FXML private ChoiceBox<ReportCategory> categoryChoiceBox;
+    @FXML private ChoiceBox<ComplaintCategory> categoryChoiceBox;
     private ReportCategoryDataSource reportCategoryDataSource;
-    private ReportCategoryList reportCategories;
-    private ReportList reportList;
+    private ComplaintCategoryList reportCategories;
+    private ComplaintList complaintList;
     private ReportFileDataSource reportFileDataSource;
     @FXML private Label warningLabel;
     @FXML private Label additionalDetailLabel;
@@ -31,7 +31,7 @@ public class ReportController {
         reportCategories = reportCategoryDataSource.readData();
 
         reportFileDataSource = new ReportFileDataSource("data","reports.csv");
-        reportList = reportFileDataSource.readData();
+        complaintList = reportFileDataSource.readData();
 
         user = (User) com.github.saacsos.FXRouter.getData();
         categoryChoiceBox.getItems().addAll(reportCategories.getAllCategories());
@@ -45,26 +45,26 @@ public class ReportController {
     }
     private void handleCategoryChoiceBox(){
         categoryChoiceBox.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<ReportCategory>() {
+                new ChangeListener<ComplaintCategory>() {
                     @Override
-                    public void changed(ObservableValue<? extends ReportCategory>
+                    public void changed(ObservableValue<? extends ComplaintCategory>
                                                 observable,
-                                        ReportCategory oldValue, ReportCategory newValue) {
+                                        ComplaintCategory oldValue, ComplaintCategory newValue) {
                         showSelectedCategory(newValue);
                     }
                 });
     }
 
-    private void showSelectedCategory(ReportCategory reportCategory){
+    private void showSelectedCategory(ComplaintCategory complaintCategory){
 
-        if(reportCategory.getImageNeeded() == true){
-            additionalImageLabel.setText(reportCategory.getAdditionalImageTitle());
+        if(complaintCategory.getImageNeeded() == true){
+            additionalImageLabel.setText(complaintCategory.getAdditionalImageTitle());
             uploadImgButton.setVisible(true);
         }else{
             additionalImageLabel.setText("");
             uploadImgButton.setVisible(false);
         }
-        additionalDetailLabel.setText(reportCategory.getAdditionalDetailTitle());
+        additionalDetailLabel.setText(complaintCategory.getAdditionalDetailTitle());
         additionalDetailTextArea.setVisible(true);
     }
     @FXML
@@ -86,10 +86,10 @@ public class ReportController {
         if (topic.isBlank() || basicDetails.isBlank() || category == null || additionalDetail.isBlank()) {
             warningLabel.setText("โปรดกรอกให้ครบทุกช่อง");
         } else {
-            report = new Report(topic, user.getUsername(), basicDetails, category, additionalDetail);
-            System.out.println(report);
-            reportList.addReport(report);
-            reportFileDataSource.writeData(reportList);
+            complaint = new Complaint(topic, user.getUsername(), basicDetails, category, additionalDetail);
+            System.out.println(complaint);
+            complaintList.addReport(complaint);
+            reportFileDataSource.writeData(complaintList);
             try {
 
                 com.github.saacsos.FXRouter.goTo("nisitPage");

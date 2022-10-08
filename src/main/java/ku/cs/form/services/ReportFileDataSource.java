@@ -1,12 +1,12 @@
 package ku.cs.form.services;
 
-import ku.cs.form.models.Report;
-import ku.cs.form.models.ReportList;
+import ku.cs.form.models.Complaint;
+import ku.cs.form.models.ComplaintList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
-public class ReportFileDataSource implements DataSource<ReportList> {
+public class ReportFileDataSource implements DataSource<ComplaintList> {
     private String directoryName;
     private String fileName;
 
@@ -32,8 +32,8 @@ public class ReportFileDataSource implements DataSource<ReportList> {
     }
 
     @Override
-    public ReportList readData() {
-        ReportList reportList = new ReportList();
+    public ComplaintList readData() {
+        ComplaintList complaintList = new ComplaintList();
 
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
@@ -51,7 +51,7 @@ public class ReportFileDataSource implements DataSource<ReportList> {
                 // Submit time, Topic, username, basic details, category, additional details, status,vote points
                 // public Report(String topic, String complainantUsername,
                 // String basicDetail, String category, String additionalDetail,String status, int votePoint)
-                Report report = new Report(
+                Complaint complaint = new Complaint(
                         data[1].trim(),
                         data[2].trim(),
                         data[3].trim(),
@@ -60,8 +60,8 @@ public class ReportFileDataSource implements DataSource<ReportList> {
                         data[6].trim(),
                         Integer.parseInt(data[7].trim())
                 );
-                report.setSubmitTime(data[0].trim());
-                reportList.addReport(report);
+                complaint.setSubmitTime(data[0].trim());
+                complaintList.addReport(complaint);
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -76,11 +76,11 @@ public class ReportFileDataSource implements DataSource<ReportList> {
             }
         }
 
-        return reportList;
+        return complaintList;
     }
 
     @Override
-    public void writeData(ReportList reportList) {
+    public void writeData(ComplaintList complaintList) {
         String filePath = "data" + File.separator + "reports.csv";
         File file = new File(filePath);
         checkFileIsExisted();
@@ -92,15 +92,15 @@ public class ReportFileDataSource implements DataSource<ReportList> {
             writer = new FileWriter(file, StandardCharsets.UTF_8);
             buffer = new BufferedWriter(writer);
             // Submit time, Topic, username, basic details, category, additional details, status, vote points
-            for(Report report : reportList.getAllReports()){
-                String line = report.getSubmitTime() + "," +
-                        report.getTopic() + "," +
-                        report.getComplainantUsername() + "," +
-                        report.getBasicDetail()+ "," +
-                        report.getCategory() + "," +
-                        report.getAdditionalDetail() + "," +
-                        report.getStatus() + "," +
-                        report.getVotePoint();
+            for(Complaint complaint : complaintList.getAllReports()){
+                String line = complaint.getSubmitTime() + "," +
+                        complaint.getTopic() + "," +
+                        complaint.getComplainantUsername() + "," +
+                        complaint.getBasicDetail()+ "," +
+                        complaint.getCategory() + "," +
+                        complaint.getAdditionalDetail() + "," +
+                        complaint.getStatus() + "," +
+                        complaint.getVotePoint();
                 buffer.append(line);
                 buffer.newLine();
             }

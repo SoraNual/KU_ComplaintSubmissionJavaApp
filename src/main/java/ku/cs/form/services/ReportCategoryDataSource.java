@@ -1,11 +1,10 @@
 package ku.cs.form.services;
 
-import ku.cs.form.models.ReportCategory;
-import ku.cs.form.models.ReportCategoryList;
+import ku.cs.form.models.ComplaintCategory;
+import ku.cs.form.models.ComplaintCategoryList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 
 public class ReportCategoryDataSource implements DataSource{
     private String directoryName;
@@ -17,9 +16,9 @@ public class ReportCategoryDataSource implements DataSource{
     }
 
     @Override
-    public ReportCategoryList readData() {
+    public ComplaintCategoryList readData() {
         System.out.println("HELLO");
-        ReportCategoryList reportCategories = new ReportCategoryList();
+        ComplaintCategoryList reportCategories = new ComplaintCategoryList();
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
         FileReader reader = null;
@@ -36,9 +35,9 @@ public class ReportCategoryDataSource implements DataSource{
             while ((line = buffer.readLine()) != null) {
                 String[] data = line.split(",");
                 System.out.println(data);
-                ReportCategory reportCategory = new ReportCategory(data[0], data[1], data[3], Boolean.valueOf(data[2]));
+                ComplaintCategory complaintCategory = new ComplaintCategory(data[0], data[1], data[3], Boolean.valueOf(data[2]));
 
-                reportCategories.addCategory(reportCategory);
+                reportCategories.addCategory(complaintCategory);
             }
 
         } catch (FileNotFoundException e) {

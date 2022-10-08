@@ -2,16 +2,16 @@ package ku.cs.form.models;
 
 import java.util.ArrayList;
 
-public class ReportCategoryList {
-    private ArrayList<ReportCategory> reportCategories;
+public class ComplaintCategoryList {
+    private ArrayList<ComplaintCategory> reportCategories;
 
-    public ReportCategoryList() {
+    public ComplaintCategoryList() {
         this.reportCategories = new ArrayList<>();
     }
-    public void addCategory(ReportCategory reportCategory) {
-        reportCategories.add(reportCategory);
+    public void addCategory(ComplaintCategory complaintCategory) {
+        reportCategories.add(complaintCategory);
     }
-    public ArrayList<ReportCategory> getAllCategories() {
+    public ArrayList<ComplaintCategory> getAllCategories() {
         return reportCategories;
     }
 

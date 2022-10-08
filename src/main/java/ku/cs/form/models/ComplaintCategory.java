@@ -1,12 +1,12 @@
 package ku.cs.form.models;
 
-public class ReportCategory {
+public class ComplaintCategory {
     String name;
     String additionalDetailTitle;
     String additionalImageTitle;
     Boolean imageNeeded;
 
-    public ReportCategory(String name, String additionalDetailTitle, String additionalImageTitle, Boolean imageNeeded) {
+    public ComplaintCategory(String name, String additionalDetailTitle, String additionalImageTitle, Boolean imageNeeded) {
         this.name = name;
         this.additionalDetailTitle = additionalDetailTitle;
         this.additionalImageTitle = additionalImageTitle;

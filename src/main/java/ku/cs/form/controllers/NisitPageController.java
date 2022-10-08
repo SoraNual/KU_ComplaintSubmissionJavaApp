@@ -2,7 +2,6 @@ package ku.cs.form.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
@@ -10,8 +9,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import ku.cs.form.models.Report;
-import ku.cs.form.models.ReportList;
+import ku.cs.form.models.Complaint;
+import ku.cs.form.models.ComplaintList;
 import ku.cs.form.models.User;
 import ku.cs.form.services.ReportFileDataSource;
 
@@ -25,9 +24,9 @@ public class NisitPageController {
     @FXML private Label nameLabel;
     @FXML private ImageView nisitImage;
     private User user;
-    @FXML private ListView<Report> reportsListView;
+    @FXML private ListView<Complaint> reportsListView;
     private ReportFileDataSource dataSource;
-    private ReportList reportList;
+    private ComplaintList complaintList;
     private Stage stage;
     @FXML private Rectangle rightRec;
 
@@ -39,8 +38,8 @@ public class NisitPageController {
         Image userImage = new Image(imageFile.toURI().toString());
         nisitImage.setImage(userImage);
         dataSource = new ReportFileDataSource("data", "reports.csv");
-        reportList = dataSource.readData();
-        reportsListView.getItems().addAll(reportList.getAllReports());
+        complaintList = dataSource.readData();
+        reportsListView.getItems().addAll(complaintList.getAllReports());
         rightRec.setFill(user.getRectangleColor());
     }
 
