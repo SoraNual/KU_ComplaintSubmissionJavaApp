@@ -48,15 +48,14 @@ public class UserDataSource implements DataSource<UserList>{
     }
     public void changeData(User editedUser) {
         UserList userList = readData();
+        int index = 0;
         for(User user : userList.getAllUsers()){
             if(user.getUsername().equals(editedUser.getUsername())){
-                user.setPassword(editedUser.getPassword());
-                user.setRectangleColor(editedUser.getRectangleColor());
-                user.setBackgroundColor(editedUser.getBackgroundColor());
-                user.setTextColor(editedUser.getTextColor());
-                user.setButtonColor(editedUser.getButtonColor());
+                userList.getAllUsers().set(index,editedUser);
                 writeData(userList);
+                break;
             }
+            index++;
         }
     }
     @Override

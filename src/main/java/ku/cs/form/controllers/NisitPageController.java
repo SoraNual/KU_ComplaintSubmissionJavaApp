@@ -1,12 +1,14 @@
 package ku.cs.form.controllers;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
@@ -21,11 +23,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 
 public class NisitPageController {
 
     private User user;
-    @FXML private ListView<Complaint> reportsListView;
+    @FXML private ListView<Complaint> complaintsListView;
     private ComplaintFileDataSource dataSource;
     private ComplaintList complaintList;
 
@@ -50,13 +53,15 @@ public class NisitPageController {
         nisitImage.setImage(userImage);
         dataSource = new ComplaintFileDataSource("data", "complaints.csv");
         complaintList = dataSource.readData();
-        reportsListView.getItems().addAll(complaintList.getAllReports());
+        complaintsListView.getItems().addAll(complaintList.getAllReports());
+
         theme();
+        handleSelectedItem();
     }
 
     public void theme() {
         SetTheme setTheme = new SetTheme(user);
-        setTheme.setObject(reportsListView);
+        setTheme.setObject(complaintsListView);
         setTheme.setObject(rightRec);
         setTheme.setObject(reportButton);
         setTheme.setObject(uploadImageButton);
@@ -66,6 +71,30 @@ public class NisitPageController {
         setTheme.setObject(roleLabel);
         setTheme.setObject(allReportLabel);
         setTheme.setObject(pane);
+    }
+
+    @FXML
+    public void handleSelectedItem() {
+        complaintsListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getClickCount() % 2 == 0) {
+                    Complaint complaint = complaintsListView.getSelectionModel().getSelectedItem();
+                    if (complaint != null) {
+                        try {
+                            ArrayList<Object> objects = new ArrayList<>();
+                            objects.add(user);
+                            objects.add(complaint);
+                            com.github.saacsos.FXRouter.goTo("complaintsDetailsForNisit", objects);
+                        } catch (IOException e) {
+                            System.out.println("ไม่สามารถไปที่หน้า ReportDetail ได้");
+                        }
+                    } else {
+                        System.out.println("user click on empty list cell");
+                    }
+                }
+            }
+        });
     }
 
     public void handleUploadImageButton(ActionEvent actionEvent){

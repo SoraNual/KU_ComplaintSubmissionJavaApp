@@ -7,3 +7,11 @@
 .text-area .scroll-pane .content{
     -fx-background-color: transparent;
 }
+
+.text-area {
+    text-area-background: pink ;
+}
+
+.text-area .content {
+    -fx-background-color: text-area-background ;
+}

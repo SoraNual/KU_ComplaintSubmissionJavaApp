@@ -24,7 +24,7 @@
         </Label>
       <VBox layoutX="300.0" layoutY="73.0">
          <children>
-              <ListView fx:id="reportsListView" prefHeight="531.0" prefWidth="863.0" style="-fx-background-color: f3f3f3; -fx-background-radius: 13;" />
+              <ListView fx:id="complaintsListView" prefHeight="531.0" prefWidth="863.0" style="-fx-background-color: f3f3f3; -fx-background-radius: 13;" stylesheets="@styles/complaint-listview-styles.css" />
          </children>
       </VBox>
         <Label fx:id="allReportLabel" layoutX="303.0" layoutY="40.0" prefHeight="19.0" prefWidth="144.0" text="เรื่องร้องเรียนทั้งหมด">
@@ -38,7 +38,7 @@
                 <Font name="System Bold" size="20.0" />
             </font>
         </Label>
-        <Button fx:id="reportButton" layoutX="520.0" layoutY="631.0" mnemonicParsing="false" onAction="#handleReportButton" prefHeight="36.0" prefWidth="184.0" style="-fx-background-color: #2EC4B6; -fx-background-color: #2EC4B6; -fx-border-radius: 7; -fx-background-radius: 7;" text="เรื่องร้องเรียน" textFill="WHITE">
+        <Button fx:id="reportButton" layoutX="520.0" layoutY="631.0" mnemonicParsing="false" onAction="#handleReportButton" prefHeight="36.0" prefWidth="184.0" style="-fx-background-color: #2EC4B6; -fx-background-color: #2EC4B6; -fx-border-radius: 7; -fx-background-radius: 7;" text="ร้องเรียน" textFill="WHITE">
             <font>
                 <Font size="16.0" />
             </font>

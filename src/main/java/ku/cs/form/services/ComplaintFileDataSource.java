@@ -54,14 +54,13 @@ public class ComplaintFileDataSource implements DataSource<ComplaintList> {
                 Complaint complaint = new Complaint(
                         data[1].trim(),
                         data[2].trim(),
-                        data[3].trim(),
                         data[4].trim(),
-                        data[5].trim(),
                         data[6].trim(),
-                        Integer.parseInt(data[7].trim()),
-                        data[8].trim()
-                );
+                        Integer.parseInt(data[7].trim()));
+                complaint.setBasicDetail(data[3].trim());
+                complaint.setAdditionalDetail(data[5].trim());
                 complaint.setSubmitTime(data[0].trim());
+                complaint.setSolution(data[8].trim());
                 complaintList.addReport(complaint);
             }
         } catch (FileNotFoundException e) {

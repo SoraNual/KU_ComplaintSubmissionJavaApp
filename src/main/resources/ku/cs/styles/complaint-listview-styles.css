@@ -1,0 +1,7 @@
+.list-cell{
+    -fx-font-size:15.0;
+}
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: linear-gradient(black, gray);
+    -fx-text-fill: white;
+}
