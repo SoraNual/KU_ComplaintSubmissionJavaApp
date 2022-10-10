@@ -3,6 +3,7 @@ package ku.cs.form.controllers;
 import com.github.saacsos.FXRouter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -44,29 +45,6 @@ public class NewStaffChangePasswordPageController {
 
     @FXML
     public void handleChangePasswordButton(ActionEvent actionEvent) {
-        System.out.println("Change Password Clicked");
-
-        String name = username.getText();
-        String oldPass = oldPassword.getText();
-        String newPass = newPassword.getText();
-        String confirmPass = confirmPassword.getText();
-
-        UserData userData = new UserData("data", "users.csv");
-        user = userData.usernamePasswordCheck(name, oldPass);
-
-        // TODO
-    }
-
-    public boolean usernameCheck(String username) {
-        // TODO
-    }
-
-    public boolean confirmPasswordCheck(String password, String confirmPassword) {
-        return password.equals(confirmPassword);
-    }
-
-    @FXML
-    public static void showAlert() {
         // TODO
     }
 }

@@ -51,7 +51,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Button fx:id="changePasswordButton" mnemonicParsing="false" onAction="#handleChangePasswordButton" prefHeight="102.0" prefWidth="345.0" text="Change Password" textFill="WHITE">
+                  <Button fx:id="sideButton" mnemonicParsing="false" onAction="#handleChangePasswordButton" prefHeight="102.0" prefWidth="345.0" text="Change Password" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>

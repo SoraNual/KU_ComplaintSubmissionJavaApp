@@ -59,6 +59,15 @@
     -fx-background-color: #ad182a;
 }
 
+#sideButton {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+}
+
+#sideButton:hover #sideButton:pressed {
+    -fx-background-color: rgba(1, 22, 39, 0.58);
+}
+
 .text-area {
     -fx-background-color: #ffffff;
     -fx-background-radius: 13;

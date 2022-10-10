@@ -39,18 +39,16 @@ public class NewStaffPageController {
         nameLabel.setText(staff.getName());
         agencyLabel.setText(staff.getAgency());
 
-        for (Report report : reportList.getAllReports()) {
-            itemHolder.getItems().add(report);
-        }
+        showReportListView();
         handleSelectedItem();
 
     }
 
     @FXML
     public void showReportListView() {
-//        for (Report report : reportList.getAllReports()) {
-//            itemHolder.getItems().add(report);
-//        }
+        for (Report report : reportList.getAllReports()) {
+            itemHolder.getItems().add(report);
+        }
     }
 
     @FXML
@@ -59,15 +57,13 @@ public class NewStaffPageController {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (mouseEvent.getClickCount() % 2 == 0) {
-                    Report report = itemHolder.getSelectionModel().getSelectedItem();
-                    if (report != null) {
+                    if (!itemHolder.getItems().isEmpty()) {
+                        Report report = itemHolder.getSelectionModel().getSelectedItem();
                         try {
                             FXRouter.goTo("newReportDetail", report);
                         } catch (IOException e) {
                             System.out.println("ไม่สามารถไปที่หน้า ReportDetail ได้");
                         }
-                    } else {
-                        System.out.println("user click on empty list cell");
                     }
                 }
             }
