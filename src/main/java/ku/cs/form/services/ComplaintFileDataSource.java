@@ -59,7 +59,7 @@ public class ComplaintFileDataSource implements DataSource<ComplaintList> {
                         data[5].trim(),
                         data[6].trim(),
                         Integer.parseInt(data[7].trim()),
-                        data[8].trim()
+                        data[8].trim().replace("NEWLINE", "\n")
                 );
                 complaint.setSubmitTime(data[0].trim());
                 complaintList.addReport(complaint);
@@ -78,6 +78,21 @@ public class ComplaintFileDataSource implements DataSource<ComplaintList> {
         }
 
         return complaintList;
+    }
+
+    public void updateData(Complaint newComplaint, String solution, String status) {
+        ComplaintList complaintList = readData();
+        for (Complaint complaint : complaintList.getAllReports()) {
+            if (complaint.getComplainantUsername().equals(newComplaint.getComplainantUsername()) &&
+                        complaint.getTopic().equals(newComplaint.getTopic()))
+            {
+                complaint.setSolution(solution);
+                complaint.setStatus(status);
+
+                writeData(complaintList);
+                break;
+            }
+        }
     }
 
     @Override
@@ -102,7 +117,7 @@ public class ComplaintFileDataSource implements DataSource<ComplaintList> {
                         complaint.getAdditionalDetail() + "," +
                         complaint.getStatus() + "," +
                         complaint.getVotePoint() + "," +
-                        complaint.getSolution();
+                        complaint.getSolution().replace("\n", "NEWLINE");
                 buffer.append(line);
                 buffer.newLine();
             }

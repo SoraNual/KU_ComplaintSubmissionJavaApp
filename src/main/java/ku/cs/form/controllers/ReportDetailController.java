@@ -1,8 +1,12 @@
 package ku.cs.form.controllers;
 
+import com.github.saacsos.FXRouter;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
+import java.io.IOException;
 
 public class ReportDetailController {
     @FXML private TextArea topicTextArea;
@@ -13,10 +17,7 @@ public class ReportDetailController {
 
     @FXML
     public void initialize() {
-        topicTextArea.setText("-");
-        detailTextArea.setText("-");
-        agencyTextArea.setText("-");
-        nameTextArea.setText("Loren Ipsum");
+        // TODO
     }
     @FXML
     public void handleInProgressButton() {
@@ -37,7 +38,11 @@ public class ReportDetailController {
 
     @FXML
     public void handleBackButton() {
-        // TODO
+        try {
+            FXRouter.goTo("");
+        } catch (IOException e) {
+            System.out.println("");
+        }
     }
 
 

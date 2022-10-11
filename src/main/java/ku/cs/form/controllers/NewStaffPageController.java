@@ -96,7 +96,7 @@ public class NewStaffPageController {
     @FXML
     public void handleChangePasswordButton(ActionEvent actionEvent) {
         try {
-            FXRouter.goTo("newStaffChangePassword");
+            FXRouter.goTo("newStaffChangePassword", staff);
         } catch (IOException e) {
             System.out.println("ไม่สามารถไปหน้า Change Password ได้");
         }

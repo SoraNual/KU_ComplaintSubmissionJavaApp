@@ -9,6 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import ku.cs.form.models.Staff;
 import ku.cs.form.models.User;
 import ku.cs.form.models.UserList;
 import ku.cs.form.services.UserDataSource;
@@ -26,13 +27,15 @@ public class NewStaffChangePasswordPageController {
     private PasswordField newPasswordPasswordField;
     @FXML
     private PasswordField confirmPasswordPasswordField;
-    private User user;
-    private UserList userList;
+    private Staff staff;
     private UserDataSource userDataSource;
 
     @FXML
     public void initialize() {
         userDataSource = new UserDataSource("data", "users.csv");
+
+        staff = (Staff) FXRouter.getData();
+
     }
 
     @FXML

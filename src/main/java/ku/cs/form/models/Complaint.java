@@ -68,14 +68,15 @@ public class Complaint {
         this.submitTime = LocalDateTime.parse(s,format);
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public void addVotePoint() { votePoint++; }
 
     @Override
     public String toString() {
-        return "หัวข้อ: " + getTopic() + "\n" +
-                "รายละเอียด: " + getBasicDetail() + "\n" +
-                "สถานะ: " + getStatus() + "\n" +
-                "คะแนนโหวต: " + getVotePoint();
+        return "<[ " + getVotePoint() + " ]> " + getTopic();
     }
 
 

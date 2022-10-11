@@ -6,11 +6,6 @@
     -fx-background-color: transparent;
 }
 
-.button {
-    -fx-background-color: transparent;
-    -fx-text-fill: #ffffff;
-}
-
 #inProgressButton {
     -fx-background-color: #ff9f1c;
     -fx-text-fill: #ffffff;
