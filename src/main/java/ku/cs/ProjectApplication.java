@@ -38,6 +38,7 @@ public class ProjectApplication extends Application {
         FXRouter.when("newReportDetail", packageStr+"new-complaint-detail-staff.fxml");
         FXRouter.when("changePasswordNisit",packageStr+"nisit-change-password.fxml");
         FXRouter.when("complaintsDetailsForNisit",packageStr + "complaint-detail-nisit.fxml");
+        FXRouter.when("addCategory",packageStr + "add-complaint-category.fxml");
 
     }
 
