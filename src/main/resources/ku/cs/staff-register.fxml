@@ -6,7 +6,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -16,11 +15,6 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.StaffRegisterController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#011627" height="751.0" layoutX="-16.0" layoutY="-28.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="314.0" />
-      <ImageView fitHeight="651.0" fitWidth="651.0" layoutX="622.0" layoutY="27.0" opacity="0.05">
-         <image>
-            <Image url="@images/administrator.png" />
-         </image>
-      </ImageView>
       <Label layoutX="406.0" layoutY="116.0" prefHeight="88.0" prefWidth="327.0" text="Staff Registration" textFill="#011627">
          <font>
             <Font name="System Bold" size="36.0" />
@@ -53,7 +47,7 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <ImageView fx:id="regis_pic" fitHeight="372.0" fitWidth="286.0" layoutX="830.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="regis_pic" fitHeight="235.0" fitWidth="180.0" layoutX="1014.0" layoutY="416.0" pickOnBounds="true" preserveRatio="true" />
       <PasswordField fx:id="passwordField" layoutX="408.0" layoutY="382.0" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13px; -fx-background-radius: 13px;" />
       <PasswordField fx:id="confirmPasswordField" layoutX="408.0" layoutY="452.0" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-border-radius: 13px; -fx-background-radius: 13px;" />
       <ChoiceBox fx:id="agencyChoiceBox" layoutX="408.0" layoutY="520.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="33.0" prefWidth="319.0" style="-fx-background-color: #FDFFFC; -fx-background-radius: 13px; -fx-border-radius: 13px; -fx-border-color: #011627;" stylesheets="@styles/staff-register-styles.css" />
@@ -76,5 +70,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Button layoutX="853.0" layoutY="582.0" mnemonicParsing="false" onAction="#handleUploadPicBtn" text="Upload Profile Pic" />
+      <ImageView fx:id="profile_pic" fitHeight="305.0" fitWidth="238.0" layoutX="789.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

@@ -6,11 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
-import ku.cs.form.models.Report;
+import ku.cs.form.models.Complaint;
 
 import java.io.IOException;
 
-public class NewReportDetailController {
+public class NewComplaintDetailStaffController {
     @FXML
     private TextArea topicTextArea;
     @FXML
@@ -24,10 +24,10 @@ public class NewReportDetailController {
 
     @FXML
     public void initialize() {
-        Report report = (Report) FXRouter.getData();
+        Complaint complaint = (Complaint) FXRouter.getData();
 
-        topicTextArea.setText(report.getTopic());
-        detailTextArea.setText(report.getDetail());
+        topicTextArea.setText(complaint.getTopic());
+        detailTextArea.setText(complaint.getBasicDetail());
         agencyTextArea.setText("");
         responsibleTextArea.setText("");
     }

@@ -18,6 +18,7 @@ public class NisitRegisterController {
     @FXML private TextField usernameTextField;
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
+
     @FXML
     private ImageView regis_pic;
     @FXML public void initialize() {
@@ -46,7 +47,7 @@ public class NisitRegisterController {
         String error = reg.registrationCheck(name,username,password,confirmPassword);
 
         if(error.isBlank()){
-            Nisit newNisit = new Nisit(name, username, password);
+            Nisit newNisit = new Nisit(name, username, password,"#666666FF","#FFFFFFFF","#333333FF","#1A1A1AFF");
             reg.addNisit(newNisit);
             showPopUp("Registration successful!","Hello Welcome!",null);
             try {

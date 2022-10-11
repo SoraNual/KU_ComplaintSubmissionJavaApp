@@ -1,14 +1,12 @@
 package ku.cs.form.services;
 
-import ku.cs.form.models.Admin;
-import ku.cs.form.models.Nisit;
-import ku.cs.form.models.Staff;
-import ku.cs.form.models.UserList;
+import ku.cs.form.models.*;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class AgencyDataSource implements DataSource {
+public class AgencyDataSource implements DataSource<AgencyList> {
 
     private String directoryName;
     private String fileName;
@@ -19,20 +17,20 @@ public class AgencyDataSource implements DataSource {
     }
 
     @Override
-    public ArrayList<String> readData() {
+    public AgencyList readData() {
 
-        ArrayList<String> agencies = new ArrayList<String>();
+        AgencyList agencies = new AgencyList();
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
         FileReader reader = null;
         BufferedReader buffer = null;
 
         try {
-            reader = new FileReader(file);
+            reader = new FileReader(file, StandardCharsets.UTF_8);
             buffer = new BufferedReader(reader);
             String line = "";
             while ((line = buffer.readLine()) != null) {
-                agencies.add(line);
+                agencies.addAgency(line);
             }
 
         } catch (FileNotFoundException e) {
@@ -51,7 +49,35 @@ public class AgencyDataSource implements DataSource {
     }
 
     @Override
-    public void writeData(Object o) {
+    public void writeData(AgencyList agencies) {
+        String filePath = directoryName + File.separator + fileName;
+        File file = new File(filePath);
+
+        FileWriter writer = null;
+        BufferedWriter buffer = null;
+
+        try {
+            writer = new FileWriter(file, StandardCharsets.UTF_8);
+            buffer = new BufferedWriter(writer);
+
+            for (String agency : agencies.getAgencies()){
+                buffer.write(agency);
+                buffer.newLine();
+            }
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                buffer.close();
+                writer.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
 
     }
 }

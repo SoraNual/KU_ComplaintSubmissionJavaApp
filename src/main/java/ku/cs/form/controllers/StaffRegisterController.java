@@ -7,15 +7,19 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import ku.cs.form.models.AgencyList;
 import ku.cs.form.models.Staff;
 import ku.cs.form.services.AgencyDataSource;
 import ku.cs.form.services.StaffRegistration;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import ku.cs.form.services.UploadPicture;
+
 import java.io.*;
 import java.util.ArrayList;
 
-public class StaffRegisterController {
+public class StaffRegisterController extends UploadPicture {
     @FXML private TextField nameTextField;
     @FXML private TextField usernameTextField;
     @FXML private PasswordField passwordField;
@@ -23,15 +27,19 @@ public class StaffRegisterController {
     @FXML private ChoiceBox<String> agencyChoiceBox;
     @FXML
     private ImageView regis_pic;
+
+    @FXML
+    private ImageView profile_pic;
+
     private AgencyDataSource agenciesDataSource;
-    private ArrayList<String> agenciesChoices;
+    private AgencyList agencyList;
 
     @FXML public void initialize() {
         String url = getClass().getResource("/ku/cs/images/register_pic.png").toExternalForm();
         regis_pic.setImage(new Image(url));
         agenciesDataSource = new AgencyDataSource("data","agency.csv");
-        agenciesChoices = agenciesDataSource.readData();
-        for (String agenciesChoice : agenciesChoices) agencyChoiceBox.getItems().add(agenciesChoice);
+        agencyList = agenciesDataSource.readData();
+        for (String agenciesChoice : agencyList.getAgencies()) agencyChoiceBox.getItems().add(agenciesChoice);
     }
 
     @FXML
@@ -56,9 +64,13 @@ public class StaffRegisterController {
         String error = reg.registrationCheck(name,username,password,confirmPassword);
 
         if(error.isBlank()){
-            Staff newStaff = new Staff(name, username, password,agency);
+            Staff newStaff = new Staff(name, username, password,agency,"0x669966ff","0x000000ff","0xffffffff","0x008000ff");
             reg.addStaff(newStaff);
+            if(profile_pic.getImage() != null)
+                addPic(username,profile_pic);
+
             showPopUp("Registration successful!","Hello Welcome!",null);
+
             try {
                 com.github.saacsos.FXRouter.goTo("admin");
             } catch (IOException e) {
@@ -79,5 +91,17 @@ public class StaffRegisterController {
         alert.setContentText(infoMessage);
         alert.showAndWait();
     }
+
+    @FXML
+    private void handleUploadPicBtn(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Profile Picture");
+        File file = fileChooser.showOpenDialog(null);
+        if(file != null){
+            profile_pic.setImage(new Image(file.getAbsolutePath()));
+        }
+    }
+
+
 
 }

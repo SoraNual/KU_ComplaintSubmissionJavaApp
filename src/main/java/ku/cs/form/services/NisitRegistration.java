@@ -1,6 +1,7 @@
 package ku.cs.form.services;
 
 import ku.cs.form.models.Nisit;
+import ku.cs.form.models.User;
 import ku.cs.form.models.UserList;
 
 import java.io.*;
@@ -10,10 +11,14 @@ public class NisitRegistration implements Registration {
     private String directoryName;
 
     private String fileName;
+    private UserList userList;
+    private UserDataSource userDataSource;
 
     public NisitRegistration(String directoryName, String fileName) {
         this.directoryName = directoryName;
         this.fileName = fileName;
+        userDataSource = new UserDataSource("data", "users.csv");
+        userList = userDataSource.readData();
         checkFileIsExisted();
     }
 
@@ -49,38 +54,14 @@ public class NisitRegistration implements Registration {
     }
     @Override
     public boolean usernameValidationCheck(String newUserName) {
-        UserList userList = new UserList();
-
-        String filePath = directoryName + File.separator + fileName;
-        File file = new File(filePath);
-
-        FileReader reader = null;
-        BufferedReader buffer = null;
-
-        try {
-            reader = new FileReader(file);
-            buffer = new BufferedReader(reader);
-
-            String line = "";
-            while((line = buffer.readLine()) != null){ //วนลูปแยกคอมมาทีละบรรทัดจนกว่าจะไม่เจอบรรทัด
-                String[] data = line.split(",");
-                if(data[0].equals(newUserName)) return false;
-            }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                buffer.close();
-                reader.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+        for(User user : userList.getAllUsers()){
+            if(newUserName.equals(user.getUsername())){
+                return false;
             }
         }
-
         return true;
     }
+
     @Override
     public boolean confirmationPasswordCheck(String password, String confirmationPassword){
         if(password.equals(confirmationPassword)) return false;
@@ -88,32 +69,7 @@ public class NisitRegistration implements Registration {
     }
 
     public void addNisit(Nisit nisit) {
-        String filePath = directoryName + File.separator + fileName;
-        File file = new File(filePath);
-        FileWriter writer = null;
-        BufferedWriter buffer = null;
-
-        try {
-            writer = new FileWriter(file,true);
-            buffer = new BufferedWriter(writer);
-
-            String line = nisit.getUsername() + ","
-                        + nisit.getPassword() + ",nisit,"
-                        + nisit.getName() + ","
-                        + nisit.getUserStatus() + ","
-                        + nisit.getLoginAttempt();
-            buffer.append(line);
-            buffer.newLine();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                buffer.close();
-                writer.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        userList.addUser(nisit);
+        userDataSource.writeData(userList);
     }
 }

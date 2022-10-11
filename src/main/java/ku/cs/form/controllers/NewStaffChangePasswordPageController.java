@@ -9,9 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import ku.cs.form.models.User;
-import ku.cs.form.models.UserList;
-import ku.cs.form.services.NisitRegistration;
-import ku.cs.form.services.UserData;
+import ku.cs.form.services.UserDataSource;
 
 import java.io.IOException;
 
@@ -45,6 +43,29 @@ public class NewStaffChangePasswordPageController {
 
     @FXML
     public void handleChangePasswordButton(ActionEvent actionEvent) {
+        System.out.println("Change Password Clicked");
+
+        String name = username.getText();
+        String oldPass = oldPassword.getText();
+        String newPass = newPassword.getText();
+        String confirmPass = confirmPassword.getText();
+
+        UserDataSource userDataSource = new UserDataSource("data", "users.csv");
+        user = userDataSource.usernamePasswordCheck(name, oldPass);
+
+        // TODO
+    }
+
+    public boolean usernameCheck(String username) {
+        return false; //placeholder
+    }
+
+    public boolean confirmPasswordCheck(String password, String confirmPassword) {
+        return password.equals(confirmPassword);
+    }
+
+    @FXML
+    public static void showAlert() {
         // TODO
     }
 }
