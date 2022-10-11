@@ -43,17 +43,7 @@ public class NewStaffChangePasswordPageController {
 
     @FXML
     public void handleChangePasswordButton(ActionEvent actionEvent) {
-        System.out.println("Change Password Clicked");
 
-        String name = username.getText();
-        String oldPass = oldPassword.getText();
-        String newPass = newPassword.getText();
-        String confirmPass = confirmPassword.getText();
-
-        UserDataSource userDataSource = new UserDataSource("data", "users.csv");
-        user = userDataSource.usernamePasswordCheck(name, oldPass);
-
-        // TODO
     }
 
     public boolean usernameCheck(String username) {
