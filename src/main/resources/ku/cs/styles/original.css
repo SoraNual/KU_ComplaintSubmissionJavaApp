@@ -1,0 +1,7 @@
+Button {
+    -fx-background-color: -button-color;
+}
+
+AnchorPane {
+    -fx-background-color: -background-color;
+}

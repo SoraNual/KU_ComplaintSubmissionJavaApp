@@ -2,28 +2,34 @@ package ku.cs.form.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 
+import java.awt.*;
 import java.io.IOException;
 import com.github.saacsos.FXRouter;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import ku.cs.form.models.Admin;
+import ku.cs.form.models.User;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import ku.cs.form.services.SetTheme;
 
 
 public class AdminController {
 
     @FXML private Label adminGreetingLabel;
+    @FXML private ImageView adminProfileImageView;
     @FXML private AnchorPane adminAnchorPane;
-    private Admin admin;
+    private User admin;
 
     @FXML
     public void initialize() {
-        admin = new Admin("admin","AdminInwza007","123456","0x669966ff","0x000000ff","0xffffffff","0x008000ff");
-        System.out.println(admin.toString());
-        showAdminGreetingLabel();
+        admin = (User) FXRouter.getData();
+        SetTheme setTheme = new SetTheme(admin.getUsername());
+        setTheme.setting();
+        adminAnchorPane.getStylesheets().add("file:src/main/resources/ku/cs/styles/styles.css");
+        showAdminProfile();
+
     }
     public void handleLoginTimeMenu(ActionEvent actionEvent){
         try {
@@ -41,8 +47,9 @@ public class AdminController {
 
     }
 
-    public void showAdminGreetingLabel() {
-        adminGreetingLabel.setText("Welcome "+admin.getUsername()+"!");
+    public void showAdminProfile() {
+        adminGreetingLabel.setText(admin.getUsername());
+        adminProfileImageView.setImage(new Image("file:" + admin.getProfileImageFilePath()));
     }
 
     @FXML
@@ -67,6 +74,14 @@ public class AdminController {
     private void handleUserComplaintBtn(ActionEvent actionEvent) {
         try {
             FXRouter.goTo("userComplaint");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML private void handleThemeBtn(ActionEvent actionEvent) {
+        try {
+            FXRouter.goTo("editProfile",admin);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

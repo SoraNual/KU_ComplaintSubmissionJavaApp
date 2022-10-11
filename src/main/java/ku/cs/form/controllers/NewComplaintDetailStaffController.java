@@ -25,7 +25,6 @@ public class NewComplaintDetailStaffController {
     @FXML
     public void initialize() {
         Complaint complaint = (Complaint) FXRouter.getData();
-
         topicTextArea.setText(complaint.getTopic());
         detailTextArea.setText(complaint.getBasicDetail());
         agencyTextArea.setText("");
@@ -83,4 +82,6 @@ public class NewComplaintDetailStaffController {
         alert.setContentText(errMsg);
         alert.showAndWait();
     }
+
+
 }

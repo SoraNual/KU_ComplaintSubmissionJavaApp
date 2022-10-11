@@ -18,74 +18,23 @@ public class EditProfileController {
     @FXML private Color rectangleColor;
     @FXML private Color textColor;
     @FXML private Color backgroundColor;
-    @FXML private Color borderColor;
     @FXML private Color buttonColor;
     @FXML private ColorPicker rectangleColorPicker;
     @FXML private ColorPicker textColorPicker;
     @FXML private ColorPicker backgroundColorPicker;
     @FXML private ColorPicker buttonColorPicker;
-    @FXML private Rectangle rightRec;
-    @FXML private Rectangle leftRec;
     @FXML private Rectangle sampleRec;
     @FXML private Rectangle sampleBackground;
     @FXML private Rectangle sampleListView;
     @FXML private Rectangle sampleButton;
-    @FXML private Button confirmButton;
-    @FXML private Button backButton;
-    @FXML private Pane pane;
     @FXML private Label sampleLabel;
-    @FXML private Label changeRectangleColorLabel;
-    @FXML private Label changeTextColorLabel;
-    @FXML private Label changeButtonColorLabel;
-    @FXML private Label changeBackgroundColorLabel;
     private UserDataSource userDataSource;
     private UserList userList;
     @FXML public void initialize() {
         user = (User) com.github.saacsos.FXRouter.getData();
-        rectangleColor = Color.web(user.getRectangleColor().toLowerCase().replace("#","0x"));
-        backgroundColor = Color.web(user.getBackgroundColor().toLowerCase().replace("#","0x"));
-        textColor = Color.web(user.getTextColor().toLowerCase().replace("#","0x"));
-        buttonColor = Color.web(user.getButtonColor().toLowerCase().replace("#","0x"));
-
-        setUpTheme();
-
         userDataSource = new UserDataSource("data","users.csv");
         userList = userDataSource.readData();
     }
-
-    public void setUpTheme(){
-        SetTheme theme = new SetTheme(user);
-
-        theme.setObject(rightRec);
-        theme.setObject(leftRec);
-        theme.setObject(sampleRec);
-
-        theme.setObject(changeBackgroundColorLabel);
-        theme.setObject(changeRectangleColorLabel);
-        theme.setObject(changeTextColorLabel);
-        theme.setObject(changeButtonColorLabel);
-        theme.setObject(sampleLabel);
-        theme.setObject(changeButtonColorLabel);
-
-        theme.setObject(pane);
-
-        theme.setObject(confirmButton);
-        theme.setObject(backButton);
-
-        theme.setObject(textColorPicker);
-        theme.setObject(rectangleColorPicker);
-        theme.setObject(backgroundColorPicker);
-        theme.setObject(buttonColorPicker);
-
-        sampleBackground.setFill(backgroundColor);
-        sampleButton.setFill(buttonColor);
-        sampleListView.setFill(rectangleColor);
-
-
-        sampleRec.setStroke(rectangleColor);
-    }
-
-
 
     public void handleBackButton(ActionEvent actionEvent) {
         try{
@@ -96,10 +45,20 @@ public class EditProfileController {
     }
 
     public void handleConfirmButton(ActionEvent actionEvent){
-        user.setRectangleColor(("#"+rectangleColor).replace("0x","").toUpperCase());
-        user.setBackgroundColor(("#"+backgroundColor).replace("0x","").toUpperCase());
-        user.setTextColor(("#"+textColor).replace("0x","").toUpperCase());
-        user.setButtonColor(("#"+buttonColor).replace("0x","").toUpperCase());
+        String rectangleColor_toHEX =  ("#" + rectangleColor).replace("0x","").toUpperCase();
+        String backgroundColor_toHEX = ("#"+backgroundColor).replace("0x","").toUpperCase();
+        String textColor_toHEX = ("#"+textColor).replace("0x","").toUpperCase();
+        String buttonColor_toHEX = ("#"+buttonColor).replace("0x","").toUpperCase();
+
+        SetTheme setTheme = new SetTheme(user.getUsername());
+
+        System.out.println(rectangleColor_toHEX);
+        System.out.println(backgroundColor_toHEX);
+        System.out.println(textColor_toHEX);
+        System.out.println(buttonColor_toHEX);
+
+        setTheme.setNewTheme(textColor_toHEX,backgroundColor_toHEX,rectangleColor_toHEX,buttonColor_toHEX);
+
         userDataSource.changeData(user);
         if(user instanceof Admin) {
             try {

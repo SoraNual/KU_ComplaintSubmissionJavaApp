@@ -1,0 +1,14 @@
+.root {
+   -text-color: #011627;
+   -background-color: #FFFFFF;
+   -rec-color: #011627;
+   -button-color: #011627;
+   -text-size: 10;
+}
+Button {
+    -fx-background-color: -button-color;
+}
+
+AnchorPane {
+    -fx-background-color: -background-color;
+}

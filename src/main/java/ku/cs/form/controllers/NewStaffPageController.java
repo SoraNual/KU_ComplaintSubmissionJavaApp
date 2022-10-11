@@ -20,7 +20,6 @@ public class NewStaffPageController {
 
     @FXML
     private Label nameLabel;
-
     @FXML
     private ListView<Complaint> itemHolder;
     private ComplaintList complaintList;

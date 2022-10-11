@@ -1,154 +1,219 @@
 package ku.cs.form.services;
 
-import javafx.event.ActionEvent;
-import javafx.scene.Cursor;
-import javafx.scene.control.*;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.util.Callback;
-import ku.cs.form.models.User;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class SetTheme {
-    private User user;
 
-    public SetTheme(User user) {
-        this.user = user;
+    private String username;
+
+    public SetTheme(String username) {
+        this.username = username;
     }
 
-    public void setObject(Rectangle rectangle){
-        rectangle.setStyle("-fx-fill: "+user.getRectangleColor()+";"
-                            +"-fx-stroke: none;");
-    }
-    public void setObject(Pane pane){
-        pane.setStyle("-fx-background-color: "+user.getBackgroundColor()+";");
-    }
-    public void setObject(Button button){
-        button.setStyle("-fx-background-color: "+user.getButtonColor()+";"
-                        +"-fx-border-color: none;"
-                        +"-fx-background-radius : 13;"
-                        +"-fx-border-radius : 13;"
-                        +"-fx-text-fill :"+user.getTextColor());
-        button.hoverProperty().addListener((observable, oldValue, newValue) ->{
-            if(newValue){
-                button.setStyle("-fx-background-color: "+hoverColor(user.getButtonColor())+";"
-                                +"-fx-border-color: none;"
-                                +"-fx-background-radius : 13;"
-                                +"-fx-border-radius : 13;"
-                                +"-fx-text-fill :"+user.getTextColor()
-                                );
-                button.setCursor(Cursor.HAND);
-            } else{
-                button.setStyle("-fx-background-color: "+user.getButtonColor()+";"
-                        +"-fx-border-color: none;"
-                        +"-fx-background-radius : 13;"
-                        +"-fx-border-radius : 13;"
-                        +"-fx-text-fill :"+user.getTextColor());
+    public void setting() {
+        //find setting in setting.csv
+        String filePath = "data" + File.separator + "setting.csv";
+        File file = new File(filePath);
+        FileReader reader = null;
+        BufferedReader buffer = null;
+        FileWriter writer = null;
+        BufferedWriter bufferedWriter = null;
+
+        String textColor = "";
+        String backgroundColor = "";
+        String recColor = "";
+        String buttonColor = "";
+        int textSize = 0;
+
+        try {
+            reader = new FileReader(file, StandardCharsets.UTF_8);
+            buffer = new BufferedReader(reader);
+            writer = new FileWriter(file,true);
+            bufferedWriter = new BufferedWriter(writer);
+
+            String line = "";
+            boolean isSetting = false;
+            while ((line = buffer.readLine()) != null) {
+                String[] data = line.split(",");
+                if(data[0].trim().equals(username)) {
+                    String[] themeProp = findThemeList(data[1].trim());
+                    textColor = themeProp[0];
+                    backgroundColor = themeProp[1];
+                    recColor = themeProp[2];
+                    buttonColor = themeProp[3];
+                    textSize = Integer.parseInt(data[2].trim());
+                    isSetting = true;
+                }
             }
-        });
-    }
-    public void setObject(ColorPicker colorPicker){
-        colorPicker.setStyle("-fx-background-color: "+user.getButtonColor()+";"
-                +"-fx-border-color: none;"
-                +"-fx-background-radius : 13;"
-                +"-fx-border-radius : 13;"
-        );
-        colorPicker.hoverProperty().addListener((observable, oldValue, newValue) ->{
-            if(newValue){
-                colorPicker.setStyle("-fx-background-color: "+hoverColor(user.getButtonColor())+";"
-                        +"-fx-border-color: none;"
-                        +"-fx-background-radius : 13;"
-                        +"-fx-border-radius : 13;"
-                );
-                colorPicker.setCursor(Cursor.HAND);
-            } else{
-                colorPicker.setStyle("-fx-background-color: "+user.getButtonColor()+";"
-                        +"-fx-border-color: none;"
-                        +"-fx-background-radius : 13;"
-                        +"-fx-border-radius : 13;"
-                );
+
+            if(!isSetting){
+                line = username+",default,"+"18";
+                bufferedWriter.newLine();
+                bufferedWriter.write(line);
             }
-        });
-    }
-
-    public void setObject(Label label){
-        label.setStyle("-fx-text-fill :"+user.getTextColor()+";");
-    }
 
 
-    public void setObject(TextField textField){
-        textField.setStyle("-fx-background-color: "+user.getButtonColor()+";"
-                            +"-fx-border-color: none;"
-                            +"-fx-background-radius : 13;"
-                            +"-fx-border-radius : 13;");
-    }
-    public void setObject(TextArea textArea){
-        textArea.setStyle("-fx-background-color: "+user.getButtonColor()+";"
-                +"-fx-border-color: none;"
-                +"-fx-background-radius : 13;"
-                +"-fx-border-radius : 13;");
-    }
-    public void setObject(ListView listView){
-        listView.setStyle("-fx-background-color: "+user.getRectangleColor()+";"
-                +"-fx-border-color: none;"
-                +"-fx-selection-bar:"+hoverColor(user.getRectangleColor())+";"
-                +"-fx-background-radius: 13;"
-                +"-fx-border-radius: 13;"
-                +"-fx-control-inner-background: " + user.getRectangleColor() + ";"
-        );
-    }
-    public void setObject(ComboBox comboBox){
-        comboBox.setStyle("-fx-background-color: "+user.getButtonColor()+";"
-                +"-fx-border-color: none;"
-                +"-fx-background-radius : 13;"
-                +"-fx-border-radius : 13;"
-                +"-fx-text-fill: "+user.getTextColor()+";"
-        );
-    }
-    public void setObject(ChoiceBox choiceBox){
-        choiceBox.setStyle("-fx-background-color: "+user.getButtonColor()+";"
-                +"-fx-border-color: none;"
-                +"-fx-background-radius: 13;"
-                +"-fx-border-radius: 13;"
-        );
-    }
-    public void setInvisibleBackgroundButton(Button button){
-        button.setStyle("-fx-background-color: none;"
-                +"-fx-border-color: none;"
-                +"-fx-background-radius : 13;"
-                +"-fx-border-radius : 13;"
-                +"-fx-text-fill :"+user.getTextColor()+";");
-        button.hoverProperty().addListener((observable, oldValue, newValue) ->{
-            if(newValue){
-                button.setStyle("-fx-background-color: none;"
-                        +"-fx-border-color: none;"
-                        +"-fx-background-radius : 13;"
-                        +"-fx-border-radius : 13;"
-                        +"-fx-underline: true;"
-                        +"-fx-text-fill :"+user.getTextColor()
-                );
-                button.setCursor(Cursor.HAND);
-            } else{
-                button.setStyle("-fx-background-color: none;"
-                        +"-fx-border-color: none;"
-                        +"-fx-background-radius : 13;"
-                        +"-fx-border-radius : 13;"
-                        +"-fx-text-fill :"+user.getTextColor());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                buffer.close();
+                reader.close();
+                bufferedWriter.close();
+                writer.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-        });
+        }
+        //setting in css file
+        setStylesCss(textColor,backgroundColor,recColor,buttonColor,textSize);
     }
-    public void setObject(PasswordField passwordField){
-        passwordField.setStyle("-fx-background-color: "+user.getButtonColor()+";"
-                +"-fx-border-color: none;"
-                +"-fx-background-radius : 13;"
-                +"-fx-border-radius : 13;");
+
+
+    private void setStylesCss(String textColor,
+                              String backgroundColor,
+                              String recColor,
+                              String buttonColor,
+                              int textSize) {
+        String url = "src/main/resources/ku/cs/styles/styles.css";
+        File file = new File(url);
+        File original_css = new File("src/main/resources/ku/cs/styles/original.css");
+
+        FileWriter writer = null;
+        BufferedWriter buffer = null;
+        FileReader reader = null;
+        BufferedReader bufferedReader = null;
+
+        try {
+            writer = new FileWriter(file, StandardCharsets.UTF_8);
+            buffer = new BufferedWriter(writer);
+
+            String rootProperty = ".root {\n" +
+                    "   -text-color: " + textColor + ";\n" +
+                    "   -background-color: " + backgroundColor + ";\n" +
+                    "   -rec-color: " + recColor + ";\n" +
+                    "   -button-color: " + buttonColor + ";\n" +
+                    "   -text-size: " + "" + textSize + ";\n" + "}";
+
+            buffer.write(rootProperty);
+            buffer.newLine();
+
+            reader = new FileReader(original_css);
+            bufferedReader = new BufferedReader(reader);
+
+            String line = "";
+            while((line = bufferedReader.readLine()) != null){
+                buffer.write(line);
+                buffer.newLine();
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                buffer.close();
+                writer.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
     }
-    private String hoverColor(String color){
-        color = ("#"+((Color.web(color)).brighter())).replace("0x","").toUpperCase();
-        return color;
+
+    private String[] findThemeList(String theme) {
+
+        //find theme in theme-list.csv
+        String[] themeProp = new String[4];
+        String filePath = "data" + File.separator + "theme-list.csv";
+        File file = new File(filePath);
+        FileReader reader = null;
+        BufferedReader buffer = null;
+
+        try {
+            reader = new FileReader(file, StandardCharsets.UTF_8);
+            buffer = new BufferedReader(reader);
+            String line = "";
+            while ((line = buffer.readLine()) != null) {
+                String[] data = line.split(",");
+                if(data[0].trim().equals(theme)) {
+                    themeProp[0] = data[1].trim();
+                    themeProp[1] = data[2].trim();
+                    themeProp[2] = data[3].trim();
+                    themeProp[3] = data[4].trim();
+                    return themeProp;
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                buffer.close();
+                reader.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return null;
     }
+
+    public void setNewTheme(String textColor,String backgroundColor,String recColor,String buttonColor) {
+
+        ArrayList<String> themeList = new ArrayList<>();
+        String filePath = "data" + File.separator + "theme-list.csv";
+        File file = new File(filePath);
+        FileReader reader = null;
+        BufferedReader buffer = null;
+        FileWriter writer = null;
+        BufferedWriter bufferedWriter = null;
+
+        try {
+            reader = new FileReader(file, StandardCharsets.UTF_8);
+            buffer = new BufferedReader(reader);
+
+            String line = "";
+            boolean isEdit = false;
+            while ((line = buffer.readLine()) != null) {
+                String[] data = line.split(",");
+                if(data[0].trim().equals(username)){
+                    line = username + "," + textColor + "," + backgroundColor + "," + recColor + "," + buttonColor;
+                    themeList.add(line);
+                    isEdit = true;
+                }
+                else themeList.add(line);
+            }
+
+            if(!isEdit) {
+                line = username + "," + textColor + "," + backgroundColor + "," + recColor + "," + buttonColor;
+                themeList.add(line);
+            }
+
+            writer = new FileWriter(file);
+            bufferedWriter = new BufferedWriter(writer);
+
+            for(String s : themeList){
+                bufferedWriter.write(s);
+                bufferedWriter.newLine();
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                buffer.close();
+                reader.close();
+                bufferedWriter.close();
+                writer.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+
 
 }

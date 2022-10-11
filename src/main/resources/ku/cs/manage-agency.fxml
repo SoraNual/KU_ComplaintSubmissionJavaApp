@@ -24,7 +24,7 @@
       </Label>
       <ScrollPane layoutX="347.0" layoutY="56.0" prefHeight="602.0" prefWidth="530.0">
         <content>
-            <VBox maxWidth="-Infinity" prefHeight="640.0" prefWidth="468.0" spacing="10.0">
+            <VBox maxWidth="-Infinity" prefHeight="533.0" prefWidth="468.0" spacing="10.0">
                <children>
                   <Label prefHeight="42.0" prefWidth="468.0" text="สร้างหน่วยงานใหม่">
                      <font>
@@ -49,7 +49,7 @@
                   </Label>
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="499.0">
                      <children>
-                        <Label maxWidth="-Infinity" prefHeight="38.0" prefWidth="153.0" text="ชื่อหน่วยงานเดิม">
+                        <Label maxWidth="-Infinity" prefHeight="38.0" prefWidth="163.0" text="ชื่อหน่วยงานเดิม">
                            <font>
                               <Font name="FreesiaUPC Bold" size="24.0" />
                            </font>
@@ -59,7 +59,7 @@
                   </HBox>
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="490.0">
                      <children>
-                        <Label prefHeight="38.0" prefWidth="154.0" text="ชื่อหน่วยงานใหม่">
+                        <Label prefHeight="38.0" prefWidth="162.0" text="ชื่อหน่วยงานใหม่">
                            <font>
                               <Font name="FreesiaUPC Bold" size="24.0" />
                            </font>
@@ -77,8 +77,27 @@
                         <Font name="FreesiaUPC Bold" size="36.0" />
                      </font>
                   </Label>
-                  <ListView maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="186.0" prefWidth="478.0" />
-                  <Button mnemonicParsing="false" onAction="#handleChangeAgencyNameBtn" text="กำหนด">
+                  <HBox prefHeight="31.0" prefWidth="468.0">
+                     <children>
+                        <Label prefHeight="28.0" prefWidth="168.0" text="เจ้าหน้าที่">
+                           <font>
+                              <Font name="FreesiaUPC Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="staffChoiceBox" prefHeight="26.0" prefWidth="240.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="31.0" prefWidth="468.0">
+                     <children>
+                        <Label prefHeight="28.0" prefWidth="168.0" text="หน่วยงานที่จะสังกัด">
+                           <font>
+                              <Font name="FreesiaUPC Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="setStaffAgencyChoiceBox" prefHeight="26.0" prefWidth="239.0" />
+                     </children>
+                  </HBox>
+                  <Button mnemonicParsing="false" onAction="#handleSetAgencyToStaffBtn" text="กำหนด">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -98,10 +117,21 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ListView fx:id="agencyListView" layoutX="904.0" layoutY="106.0" prefHeight="424.0" prefWidth="310.0" />
+      <ListView fx:id="agencyListView" layoutX="904.0" layoutY="106.0" prefHeight="249.0" prefWidth="310.0" />
       <Label layoutX="904.0" layoutY="51.0" prefHeight="62.0" prefWidth="214.0" text="รายชื่อหน่วยงาน">
          <font>
             <Font name="FreesiaUPC Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="903.0" layoutY="366.0" prefHeight="44.0" prefWidth="314.0" text="รายชื่อเจ้าหน้าที่ในหน่วยงาน">
+         <font>
+            <Font name="FreesiaUPC Bold" size="28.0" />
+         </font>
+      </Label>
+      <ListView fx:id="staffListView" layoutX="905.0" layoutY="442.0" prefHeight="218.0" prefWidth="310.0" />
+      <Label fx:id="agencyLabel" layoutX="905.0" layoutY="402.0" prefHeight="34.0" prefWidth="310.0">
+         <font>
+            <Font name="FreesiaUPC" size="24.0" />
          </font>
       </Label>
    </children>
