@@ -62,5 +62,15 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <Button fx:id="reportComplaintButton" layoutX="310.0" layoutY="659.0" mnemonicParsing="false" onAction="#handleReportComplaintButton" prefHeight="30.0" prefWidth="126.0" text="รายงานเรื่องร้องเรียน">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="reportUserButton" layoutX="139.0" layoutY="659.0" mnemonicParsing="false" onAction="#handleReportUserButton" prefHeight="27.0" prefWidth="126.0" text="รายงานผู้ใช้">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -34,12 +34,11 @@ public class ComplaintController {
     @FXML private Label warningLabel;
     @FXML private Label additionalDetailLabel;
     @FXML private Label additionalImageLabel;
+    @FXML private Label uploadedImgNameLabel;
     @FXML private TextArea additionalDetailTextArea;
     @FXML private Button uploadImgButton;
     @FXML private Button backButton;
     @FXML private Button submitButton;
-    @FXML private ImageView additionalImageView;
-    private LocalDateTime submitTime;
 
     @FXML public void initialize() {
         complaintCategoryDataSource = new ComplaintCategoryDataSource("data","complaintCategories.csv");
@@ -56,6 +55,7 @@ public class ComplaintController {
         additionalImageLabel.setText("");
         additionalDetailTextArea.setVisible(false);
         uploadImgButton.setVisible(false);
+        uploadedImgNameLabel.setText("");
 
         handleCategoryChoiceBox();
         theme();
@@ -123,7 +123,7 @@ public class ComplaintController {
                 backButton.setDisable(true);
             }
 
-            if(!categoryChoiceBox.getValue().getImageNeeded() || (categoryChoiceBox.getValue().getImageNeeded() && additionalImageView.getImage() != null)){
+            if(!categoryChoiceBox.getValue().getImageNeeded() || (categoryChoiceBox.getValue().getImageNeeded()) && !uploadedImgNameLabel.getText().isBlank()){
                 try {
                     complaintList.addReport(complaint);
                     complaintFileDataSource.writeData(complaintList);
@@ -143,17 +143,16 @@ public class ComplaintController {
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image","*jpg","*jpeg","*png"));
         fileChooser.setInitialFileName(fileName);
         File uploadImg = fileChooser.showOpenDialog(stage);
+        System.out.println(uploadImg.getName());
+        uploadedImgNameLabel.setText(uploadImg.getName());
         File newAdditionalImg = new File("data" + File.separator+"img" + File.separator + "complaint", fileName);
 
-        if(!(uploadImg==null)) {
+        if(uploadImg!=null) {
             try {
                 Files.copy(uploadImg.toPath(), newAdditionalImg.toPath(), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
-        File imageFile = new File("/img/complaint/" + fileName);
-        Image additionalImg = new Image(imageFile.toURI().toString());
-        additionalImageView.setImage(additionalImg);
     }
 }

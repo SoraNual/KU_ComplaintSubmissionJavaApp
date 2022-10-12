@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -30,12 +29,12 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="678.0" layoutY="162.0" prefHeight="35.0" prefWidth="112.0" text="หมวดหมู่" textFill="#011627">
+      <Label layoutX="678.0" layoutY="163.0" prefHeight="35.0" prefWidth="112.0" text="หมวดหมู่" textFill="#011627">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="categoryChoiceBox" layoutX="780.0" layoutY="153.0" prefHeight="46.0" prefWidth="308.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-background-radius: 13; -fx-border-radius: 13;" stylesheets="@styles/complaint-styles.css" />
+      <ChoiceBox fx:id="categoryChoiceBox" layoutX="780.0" layoutY="159.0" prefHeight="46.0" prefWidth="308.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627; -fx-background-radius: 13; -fx-border-radius: 13;" stylesheets="@styles/complaint-styles.css" />
       <Button fx:id="submitButton" layoutX="926.0" layoutY="567.0" mnemonicParsing="false" onAction="#handleSubmitButton" prefHeight="53.0" prefWidth="154.0" style="-fx-background-color: #011627; -fx-border-color: #011627; -fx-border-radius: 13; -fx-background-radius: 13;" text="ส่ง" textFill="WHITE">
          <font>
             <Font size="20.0" />
@@ -51,7 +50,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextArea fx:id="basicDetailsTextArea" layoutX="188.0" layoutY="255.0" prefHeight="302.0" prefWidth="410.0" style="-fx-border-color: #011627; -fx-background-radius: 13;">
+      <TextArea fx:id="basicDetailsTextArea" layoutX="188.0" layoutY="255.0" prefHeight="110.0" prefWidth="410.0" style="-fx-border-color: #011627; -fx-background-radius: 13;">
          <font>
             <Font size="18.0" />
          </font></TextArea>
@@ -65,12 +64,12 @@
             <Font size="18.0" />
          </font>
       </TextArea>
-      <Label fx:id="additionalImageLabel" layoutX="675.0" layoutY="376.0" prefHeight="35.0" prefWidth="411.0" text="additionalImageLabel">
+      <Label fx:id="additionalImageLabel" alignment="CENTER" layoutX="365.0" layoutY="397.0" prefHeight="35.0" prefWidth="550.0" text="additionalImageLabel">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="uploadImgButton" layoutX="676.0" layoutY="415.0" mnemonicParsing="false" onAction="#handleAddImageButton" text="Upload image" />
-      <ImageView fx:id="additionalImageView" fitHeight="133.0" fitWidth="191.0" layoutX="790.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="uploadImgButton" layoutX="595.0" layoutY="456.0" mnemonicParsing="false" onAction="#handleAddImageButton" text="Upload image" />
+      <Label fx:id="uploadedImgNameLabel" alignment="CENTER" layoutX="502.0" layoutY="493.0" prefHeight="18.0" prefWidth="275.0" text="uploadedImgNameLabel" />
    </children>
 </AnchorPane>

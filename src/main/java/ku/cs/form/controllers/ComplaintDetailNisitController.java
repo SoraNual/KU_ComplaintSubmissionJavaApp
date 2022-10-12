@@ -14,6 +14,7 @@ import ku.cs.form.models.User;
 import ku.cs.form.services.ComplaintCategoryDataSource;
 import ku.cs.form.services.SetTheme;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -31,6 +32,8 @@ public class ComplaintDetailNisitController {
     @FXML private Label statusLabel;
     @FXML private Label statusLabelShadow;
     @FXML private Button backButton;
+    @FXML private Button reportUserButton;
+    @FXML private Button reportComplaintButton;
     @FXML private TextArea basicDetailTextArea;
     @FXML private TextArea additionalDetailTextArea;
     @FXML private TextArea solutionTextArea;
@@ -61,13 +64,13 @@ public class ComplaintDetailNisitController {
 
         if(category.getImageNeeded()){
             additionalImageTopicLabel.setText(category.getAdditionalImageTitle());
-            System.out.println("HELLO");
-            System.out.println(selectedComplaint.getSubmitTime().replace(":","-"));
-            System.out.println(user.getUsername());
-            System.out.println(selectedComplaint.getTopic());
-            String url = "/img/complaint/" + selectedComplaint.getSubmitTime().replace(":","-") + "_" + user.getUsername() + "_" + selectedComplaint.getTopic() +".jpg";
-            additionalImg.setImage(new Image(getClass().getResource(url).toExternalForm()));
-            System.out.println("HELLOOO");
+            String filename = selectedComplaint.getSubmitTime().replace(":","-") + "_"
+                    + user.getUsername() + "_" + selectedComplaint.getTopic() +".jpg";
+            String url = "data" + File.separator + "img" + File.separator + "complaint" + File.separator
+                    + filename;
+            File imgFile = new File(url);
+            Image img = new Image(imgFile.toURI().toString());
+            additionalImg.setImage(img);
         }else{
             additionalImageTopicLabel.setText("");
         }
@@ -94,4 +97,10 @@ public class ComplaintDetailNisitController {
             System.err.println("ให้ตรวจสอบการกำหนด route");
         }
     }
+
+    @FXML public void handleReportUserButton(){
+
+    }
+
+    @FXML public void handleReportComplaintButton(){}
 }
