@@ -26,6 +26,7 @@ public class NisitPageController {
 
     private User user;
     @FXML private ListView<Complaint> reportsListView;
+    @FXML private AnchorPane nisitAnchorPane;
     private ComplaintFileDataSource dataSource;
     private ComplaintList complaintList;
 

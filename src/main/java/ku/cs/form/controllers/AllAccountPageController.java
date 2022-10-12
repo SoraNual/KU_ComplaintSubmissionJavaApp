@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import ku.cs.form.models.Staff;
 import ku.cs.form.models.User;
@@ -20,11 +21,13 @@ public class AllAccountPageController {
     @FXML private ListView<HBox> userListView;
     @FXML private UserDataSource userDataSource;
     @FXML private UserList userList;
+    @FXML private AnchorPane anchorPane;
 
     @FXML
     public void initialize() {
         userDataSource = new UserDataSource("data","users.csv");
         userList = userDataSource.readData();
+        anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
         sortUserListByLoginTime();
         showListView();
     }

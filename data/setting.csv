@@ -1,4 +1,9 @@
-admin,default,10
-a,dark,12
-aaa,default,18
-aaaaa,dark,18
+-Setting-
+aaa,default,0
+a,a,0
+aaaaa,dark,0
+admin,admin,125
+-Theme-List-
+default,#011627FF,#FFFFFFFF,#011627FF,#FFFFFFFF,#F2F2F2FF,#E6E6E6FF,#E6E6E6FF
+dark,#000C15FF,#FFFFFFFF,#FFFFFFFF,#011627FF,#1B3A54FF,#1B3A54FF,#1B3A54FF
+admin,#4D4D4DFF,#E6E6E6FF,#1A1A1AFF,#F5F5F5FF,#E6E6E6FF,#999999FF,#808080FF

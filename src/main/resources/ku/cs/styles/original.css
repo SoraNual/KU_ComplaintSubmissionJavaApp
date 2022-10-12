@@ -1,7 +1,67 @@
-Button {
-    -fx-background-color: -button-color;
+.label.text {
+    -fx-fill: -text-color;
+}
+
+.user-menu-bar-text.text {
+    -fx-fill : -menu-bar-text-color;
+
+}
+.user-menu-bar {
+    -fx-fill: -menu-bar-color;
 }
 
 AnchorPane {
     -fx-background-color: -background-color;
+}
+
+.button {
+    -fx-background-color: -button-color;
+    -fx-border-color: none;
+    -fx-background-radius : 13;
+    -fx-border-radius : 13;
+    -fx-text-fill: -menu-bar-text-color;
+}
+
+.user-menu-bar-text.button {
+    -fx-background-color: none;
+    -fx-text-fill: -menu-bar-text-color;
+}
+
+.color-picker {
+    -fx-color-label-visible: false;
+}
+
+.color-picker-rect {
+    -fx-background-radius: 10px;
+}
+
+TextField {
+    -fx-background-color: -button-color;
+    -fx-border-color: none;
+    -fx-background-radius : 13;
+    -fx-border-radius : 13;
+}
+
+.list-view {
+    -fx-background-color: -listview-color;
+    -fx-selection-bar: -listview-color;
+    -fx-background-radius: 13;
+    -fx-border-radius: 13;
+    -fx-control-inner-background: -listview-color;
+}
+
+ComboBox,
+ChoiceBox {
+    -fx-background-color: -button-color;
+    -fx-border-color: none;
+    -fx-background-radius : 13;
+    -fx-border-radius : 13;
+    -fx-text-fill: -menu-bar-text-color;
+}
+
+PasswordField {
+    -fx-background-color: -button-color;
+    -fx-border-color: none;
+    -fx-background-radius : 13;
+    -fx-border-radius : 13;
 }

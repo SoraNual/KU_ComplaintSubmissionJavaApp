@@ -1,14 +1,83 @@
 .root {
-   -text-color: #011627;
-   -background-color: #FFFFFF;
-   -rec-color: #011627;
-   -button-color: #011627;
-   -text-size: 10;
+   -menu-bar-color: #4D4D4DFF;
+   -menu-bar-text-color: #E6E6E6FF;
+   -text-color: #1A1A1AFF;
+   -background-color: #F5F5F5FF;
+   -input-color: #E6E6E6FF;
+   -listview-color: #999999FF;
+   -button-color: #808080FF;
 }
-Button {
-    -fx-background-color: -button-color;
+
+.h1 { -fx-font-size: 50.0px;}
+.h2 { -fx-font-size: 40.0px;}
+.listview.label { -fx-font-size: 25.0px;}
+.user-menu-bar-text.button { -fx-font-size: 27.5px;}
+.user-menu-bar-text.button { -fx-font-size: 27.5px;}
+
+.label.text {
+    -fx-fill: -text-color;
+}
+
+.user-menu-bar-text.text {
+    -fx-fill : -menu-bar-text-color;
+
+}
+.user-menu-bar {
+    -fx-fill: -menu-bar-color;
 }
 
 AnchorPane {
     -fx-background-color: -background-color;
+}
+
+.button {
+    -fx-background-color: -button-color;
+    -fx-border-color: none;
+    -fx-background-radius : 13;
+    -fx-border-radius : 13;
+    -fx-text-fill: -menu-bar-text-color;
+}
+
+.user-menu-bar-text.button {
+    -fx-background-color: none;
+    -fx-text-fill: -menu-bar-text-color;
+}
+
+.color-picker {
+    -fx-color-label-visible: false;
+}
+
+.color-picker-rect {
+    -fx-background-radius: 10px;
+}
+
+TextField {
+    -fx-background-color: -button-color;
+    -fx-border-color: none;
+    -fx-background-radius : 13;
+    -fx-border-radius : 13;
+}
+
+.list-view {
+    -fx-background-color: -listview-color;
+    -fx-selection-bar: -listview-color;
+    -fx-background-radius: 13;
+    -fx-border-radius: 13;
+    -fx-control-inner-background: -listview-color;
+}
+
+ComboBox,
+ChoiceBox {
+    -fx-background-color: -button-color;
+    -fx-border-color: none;
+    -fx-background-radius : 13;
+    -fx-border-radius : 13;
+    -fx-text-fill: -menu-bar-text-color;
+}
+
+PasswordField {
+    -fx-background-color: -button-color;
+    -fx-border-color: none;
+    -fx-background-radius : 13;
+    -fx-border-radius : 13;
 }
