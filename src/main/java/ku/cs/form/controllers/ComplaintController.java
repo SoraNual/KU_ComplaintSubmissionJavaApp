@@ -5,14 +5,23 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import ku.cs.form.models.*;
 import ku.cs.form.services.ComplaintCategoryDataSource;
 import ku.cs.form.services.ComplaintFileDataSource;
 import ku.cs.form.services.SetTheme;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
 
 public class ComplaintController {
+    private Stage stage;
     private User user;
     private Complaint complaint;
     @FXML private TextField topicTextField;
@@ -29,6 +38,8 @@ public class ComplaintController {
     @FXML private Button uploadImgButton;
     @FXML private Button backButton;
     @FXML private Button submitButton;
+    @FXML private ImageView additionalImageView;
+    private LocalDateTime submitTime;
 
     @FXML public void initialize() {
         complaintCategoryDataSource = new ComplaintCategoryDataSource("data","complaintCategories.csv");
@@ -73,14 +84,6 @@ public class ComplaintController {
     }
 
     private void showSelectedCategory(ComplaintCategory complaintCategory){
-
-        if(complaintCategory.getImageNeeded() == true){
-            additionalImageLabel.setText(complaintCategory.getAdditionalImageTitle());
-            uploadImgButton.setVisible(true);
-        }else{
-            additionalImageLabel.setText("");
-            uploadImgButton.setVisible(false);
-        }
         additionalDetailLabel.setText(complaintCategory.getAdditionalDetailTitle());
         additionalDetailTextArea.setVisible(true);
     }
@@ -103,18 +106,54 @@ public class ComplaintController {
         if (topic.isBlank() || basicDetails.isBlank() || category == null || additionalDetail.isBlank()) {
             warningLabel.setText("โปรดกรอกให้ครบทุกช่อง");
         } else {
-            complaint = new Complaint(topic, user.getUsername(), category);
-            complaint.setBasicDetail(basicDetails);
-            complaint.setAdditionalDetail(additionalDetail);
-            System.out.println(complaint);
-            complaintList.addReport(complaint);
-            complaintFileDataSource.writeData(complaintList);
-            try {
+            if(!topicTextField.isDisabled()){
+                complaint = new Complaint(topic, user.getUsername(), category);
+                complaint.setBasicDetail(basicDetails);
+                complaint.setAdditionalDetail(additionalDetail);
+                System.out.println(complaint);
+            }
+            if(categoryChoiceBox.getValue().getImageNeeded()){
+                additionalImageLabel.setText(categoryChoiceBox.getValue().getAdditionalImageTitle());
+                uploadImgButton.setVisible(true);
+                warningLabel.setText("กรุณาอัปโหลดรูปเพื่อยืนยันหลักฐาน (บังคับ)\nหลังอัปโหลดแล้วโปรดกดปุ่ม'ส่ง'อีกครั้ง");
+                additionalDetailTextArea.setDisable(true);
+                topicTextField.setDisable(true);
+                basicDetailsTextArea.setDisable(true);
+                categoryChoiceBox.setDisable(true);
+                backButton.setDisable(true);
+            }
 
-                com.github.saacsos.FXRouter.goTo("nisitPage");
-            } catch (IOException e) {
-                System.err.println("ให้ตรวจสอบการกำหนด route");
+            if(!categoryChoiceBox.getValue().getImageNeeded() || (categoryChoiceBox.getValue().getImageNeeded() && additionalImageView.getImage() != null)){
+                try {
+                    complaintList.addReport(complaint);
+                    complaintFileDataSource.writeData(complaintList);
+                    com.github.saacsos.FXRouter.goTo("nisitPage",user);
+                } catch (IOException e) {
+                    System.err.println("ให้ตรวจสอบการกำหนด route");
+                }
             }
         }
+    }
+
+    @FXML public void handleAddImageButton(){
+        String time = complaint.getSubmitTime().replace(":","-");
+        String fileName = time + "_" + user.getUsername() + "_" + complaint.getTopic() +".jpg";
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image","*jpg","*jpeg","*png"));
+        fileChooser.setInitialFileName(fileName);
+        File uploadImg = fileChooser.showOpenDialog(stage);
+        File newAdditionalImg = new File("data" + File.separator+"img" + File.separator + "complaint", fileName);
+
+        if(!(uploadImg==null)) {
+            try {
+                Files.copy(uploadImg.toPath(), newAdditionalImg.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        File imageFile = new File("/img/complaint/" + fileName);
+        Image additionalImg = new Image(imageFile.toURI().toString());
+        additionalImageView.setImage(additionalImg);
     }
 }

@@ -64,7 +64,7 @@ public class User {
         else this.loginTime = LocalDateTime.parse(s,format);
     }
 
-    private void setProfileImage() {
+    public void setProfileImage() {
         String fileName = username + ".jpg";
         String directoryName = "data" + File.separator + "img";
         String filePath = directoryName + File.separator + fileName;

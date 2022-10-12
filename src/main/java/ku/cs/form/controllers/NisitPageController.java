@@ -88,6 +88,7 @@ public class NisitPageController {
                             com.github.saacsos.FXRouter.goTo("complaintsDetailsForNisit", objects);
                         } catch (IOException e) {
                             System.out.println("ไม่สามารถไปที่หน้า ReportDetail ได้");
+                            e.printStackTrace();
                         }
                     } else {
                         System.out.println("user click on empty list cell");
@@ -111,6 +112,7 @@ public class NisitPageController {
                 throw new RuntimeException(e);
             }
         }
+        user.setProfileImage();
         File imageFile = new File(user.getProfileImageFilePath());
         Image userImage = new Image(imageFile.toURI().toString());
         nisitImage.setImage(userImage);

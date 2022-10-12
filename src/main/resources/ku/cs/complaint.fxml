@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -45,7 +46,7 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Label fx:id="warningLabel" alignment="CENTER" layoutX="501.0" layoutY="576.0" prefHeight="18.0" prefWidth="279.0" text="warningLabel" textFill="RED">
+      <Label fx:id="warningLabel" alignment="CENTER" layoutX="501.0" layoutY="576.0" prefHeight="46.0" prefWidth="275.0" text="warningLabel" textFill="RED" wrapText="true">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -59,16 +60,17 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TextArea fx:id="additionalDetailTextArea" layoutX="678.0" layoutY="256.0" prefHeight="189.0" prefWidth="410.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627;">
+      <TextArea fx:id="additionalDetailTextArea" layoutX="678.0" layoutY="256.0" prefHeight="109.0" prefWidth="410.0" style="-fx-background-color: #FDFFFC; -fx-border-color: #011627;">
          <font>
             <Font size="18.0" />
          </font>
       </TextArea>
-      <Label fx:id="additionalImageLabel" layoutX="675.0" layoutY="468.0" prefHeight="35.0" prefWidth="411.0" text="additionalImageLabel">
+      <Label fx:id="additionalImageLabel" layoutX="675.0" layoutY="376.0" prefHeight="35.0" prefWidth="411.0" text="additionalImageLabel">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="uploadImgButton" layoutX="676.0" layoutY="507.0" mnemonicParsing="false" text="Upload image" />
+      <Button fx:id="uploadImgButton" layoutX="676.0" layoutY="415.0" mnemonicParsing="false" onAction="#handleAddImageButton" text="Upload image" />
+      <ImageView fx:id="additionalImageView" fitHeight="133.0" fitWidth="191.0" layoutX="790.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

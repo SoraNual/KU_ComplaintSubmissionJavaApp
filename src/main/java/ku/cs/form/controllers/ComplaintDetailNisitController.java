@@ -61,8 +61,13 @@ public class ComplaintDetailNisitController {
 
         if(category.getImageNeeded()){
             additionalImageTopicLabel.setText(category.getAdditionalImageTitle());
-            String url = "/img/complaint/" + selectedComplaint.getTopic() + ".jpg";
+            System.out.println("HELLO");
+            System.out.println(selectedComplaint.getSubmitTime().replace(":","-"));
+            System.out.println(user.getUsername());
+            System.out.println(selectedComplaint.getTopic());
+            String url = "/img/complaint/" + selectedComplaint.getSubmitTime().replace(":","-") + "_" + user.getUsername() + "_" + selectedComplaint.getTopic() +".jpg";
             additionalImg.setImage(new Image(getClass().getResource(url).toExternalForm()));
+            System.out.println("HELLOOO");
         }else{
             additionalImageTopicLabel.setText("");
         }
