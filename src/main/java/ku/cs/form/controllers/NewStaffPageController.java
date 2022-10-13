@@ -61,7 +61,7 @@ public class NewStaffPageController {
         agencyLabel.setText(staff.getAgency());
 
         showImage();
-        setTheme();
+//        setTheme();
         showComplaintListView();
         handleSelectedItem();
     }
@@ -121,21 +121,21 @@ public class NewStaffPageController {
         staffImage.setImage(staffImg);
     }
 
-    @FXML
-    public void setTheme() {
-        SetTheme setTheme = new SetTheme(staff);
-        setTheme.setObject(itemHolder);
-        setTheme.setObject(leftRec);
-        setTheme.setObject(uploadImageButton);
-        setTheme.setObject(searchButton);
-        setTheme.setObject(searchTextField);
-        setTheme.setInvisibleBackgroundButton(sideButton);
-        setTheme.setObject(nameLabel);
-        setTheme.setObject(responsibilityLabel);
-        setTheme.setObject(agency);
-        setTheme.setObject(agencyLabel);
-        setTheme.setObject(pane);
-    }
+//    @FXML
+//    public void setTheme() {
+//        SetTheme setTheme = new SetTheme(staff);
+//        setTheme.setObject(itemHolder);
+//        setTheme.setObject(leftRec);
+//        setTheme.setObject(uploadImageButton);
+//        setTheme.setObject(searchButton);
+//        setTheme.setObject(searchTextField);
+//        setTheme.setInvisibleBackgroundButton(sideButton);
+//        setTheme.setObject(nameLabel);
+//        setTheme.setObject(responsibilityLabel);
+//        setTheme.setObject(agency);
+//        setTheme.setObject(agencyLabel);
+//        setTheme.setObject(pane);
+//    }
 
     @FXML
     public void handleChangePasswordButton(ActionEvent actionEvent) {
