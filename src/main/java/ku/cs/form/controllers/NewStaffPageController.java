@@ -59,6 +59,9 @@ public class NewStaffPageController {
         // setText
         nameLabel.setText(staff.getName());
         agencyLabel.setText(staff.getAgency());
+        File imageFile = new File(staff.getProfileImageFilePath());
+        Image userImage = new Image(imageFile.toURI().toString());
+        staffImage.setImage(userImage);
 
         showImage();
 //        setTheme();
@@ -107,11 +110,24 @@ public class NewStaffPageController {
         });
     }
 
-    @FXML
-    public void handleUploadImageButton(ActionEvent actionEvent) {
-        // TODO
+    public void handleUploadImageButton(ActionEvent actionEvent){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image","*jpg","*jpeg","*png"));
+        fileChooser.setInitialFileName(staff.getUsername()+".jpg");
+        File uploadImg = fileChooser.showOpenDialog(stage);
+        File newUserImg = new File("data"+File.separator+"img",staff.getUsername()+".jpg");
 
-        showImage();
+        if(!(uploadImg==null)) {
+            try {
+                Files.copy(uploadImg.toPath(), newUserImg.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        staff.setProfileImage();
+        File imageFile = new File(staff.getProfileImageFilePath());
+        Image userImage = new Image(imageFile.toURI().toString());
+        staffImage.setImage(userImage);;
     }
 
     @FXML
