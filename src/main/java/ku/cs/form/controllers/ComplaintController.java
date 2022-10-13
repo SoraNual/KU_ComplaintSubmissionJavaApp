@@ -39,7 +39,10 @@ public class ComplaintController {
     @FXML private Button uploadImgButton;
     @FXML private Button backButton;
     @FXML private Button submitButton;
-
+    private File uploadImg;
+    private String time;
+    private String fileName;
+    private String dir;
     @FXML public void initialize() {
         complaintCategoryDataSource = new ComplaintCategoryDataSource("data","complaintCategories.csv");
         complaintCategories = complaintCategoryDataSource.readData();
@@ -59,6 +62,7 @@ public class ComplaintController {
 
         handleCategoryChoiceBox();
         theme();
+
     }
     public void theme(){
         SetTheme setTheme = new SetTheme(user);
@@ -125,6 +129,15 @@ public class ComplaintController {
 
             if(!categoryChoiceBox.getValue().getImageNeeded() || (categoryChoiceBox.getValue().getImageNeeded()) && !uploadedImgNameLabel.getText().isBlank()){
                 try {
+                    if(!uploadedImgNameLabel.getText().isBlank()) {
+                        // ไฟล์จะไม่ถูกสร้างในโฟลเดอร์จนกว่าผู้ใช้จะกดส่ง
+                        File newAdditionalImg = new File(dir, fileName);
+                        try {
+                            Files.copy(uploadImg.toPath(), newAdditionalImg.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
                     complaintList.addReport(complaint);
                     complaintFileDataSource.writeData(complaintList);
                     com.github.saacsos.FXRouter.goTo("nisitPage",user);
@@ -136,23 +149,16 @@ public class ComplaintController {
     }
 
     @FXML public void handleAddImageButton(){
-        String time = complaint.getSubmitTime().replace(":","-");
-        String fileName = time + "_" + user.getUsername() + "_" + complaint.getTopic() +".jpg";
+        time = complaint.getSubmitTime().replace(":","-");
+        fileName = time + "_" + user.getUsername() + "_" + complaint.getTopic() +".jpg";
+        dir = "data" + File.separator+"img" + File.separator + "complaint";
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image","*jpg","*jpeg","*png"));
         fileChooser.setInitialFileName(fileName);
-        File uploadImg = fileChooser.showOpenDialog(stage);
+        uploadImg = fileChooser.showOpenDialog(stage);
         System.out.println(uploadImg.getName());
+        System.out.println(uploadImg.getPath());
         uploadedImgNameLabel.setText(uploadImg.getName());
-        File newAdditionalImg = new File("data" + File.separator+"img" + File.separator + "complaint", fileName);
-
-        if(uploadImg!=null) {
-            try {
-                Files.copy(uploadImg.toPath(), newAdditionalImg.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 }
