@@ -23,6 +23,11 @@ public class SetTheme {
         rectangle.setStyle("-fx-fill: "+user.getRectangleColor()+";"
                             +"-fx-stroke: none;");
     }
+
+    public void setObject(VBox rectangle) { // similar to Rectangle but VBox
+        rectangle.setStyle("-fx-background-color: "+user.getRectangleColor()+";");
+    }
+
     public void setObject(Pane pane){
         pane.setStyle("-fx-background-color: "+user.getBackgroundColor()+";");
     }
@@ -115,6 +120,7 @@ public class SetTheme {
                 +"-fx-border-radius: 13;"
         );
     }
+
     public void setInvisibleBackgroundButton(Button button){
         button.setStyle("-fx-background-color: none;"
                 +"-fx-border-color: none;"
