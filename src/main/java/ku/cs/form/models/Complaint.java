@@ -48,6 +48,9 @@ public class Complaint {
     public String getSubmitTime() {
         return submitTime.format(format);
     }
+    public LocalDateTime getLiteralSubmitTime(){
+        return submitTime;
+    }
     public String getAdditionalDetail() {
         return additionalDetail;
     }
@@ -103,9 +106,15 @@ public class Complaint {
 
     public void addVotePoint() { votePoint++; }
 
+//    @Override
+//    public String toString() {
+//        return "<[ " + getVotePoint() + " ]> " + getTopic();
+//    }
+
     @Override
     public String toString() {
-        return "<[ " + getVotePoint() + " ]> " + getTopic();
+        //FOR TESTING
+        return topic + " " + complainantUsername + " " + submitTime + " VotePoint:" + votePoint;
     }
 
     private void addPositiveVote(User voter){

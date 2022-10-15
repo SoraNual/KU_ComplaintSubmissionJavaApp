@@ -5,8 +5,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import ku.cs.form.models.*;
@@ -18,7 +16,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.time.LocalDateTime;
 
 public class ComplaintController {
     private Stage stage;
@@ -138,7 +135,7 @@ public class ComplaintController {
                             throw new RuntimeException(e);
                         }
                     }
-                    complaintList.addReport(complaint);
+                    complaintList.addComplaint(complaint);
                     complaintFileDataSource.writeData(complaintList);
                     com.github.saacsos.FXRouter.goTo("nisitPage",user);
                 } catch (IOException e) {

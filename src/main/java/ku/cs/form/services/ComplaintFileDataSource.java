@@ -61,7 +61,7 @@ public class ComplaintFileDataSource implements DataSource<ComplaintList> {
                 complaint.setAdditionalDetail(data[5].trim());
                 complaint.setSubmitTime(data[0].trim());
                 complaint.setSolution(data[8].trim());
-                complaintList.addReport(complaint);
+                complaintList.addComplaint(complaint);
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -92,7 +92,7 @@ public class ComplaintFileDataSource implements DataSource<ComplaintList> {
             writer = new FileWriter(file, StandardCharsets.UTF_8);
             buffer = new BufferedWriter(writer);
             // Submit time, Topic, username, basic details, category, additional details, status, vote points, solution
-            for(Complaint complaint : complaintList.getAllReports()){
+            for(Complaint complaint : complaintList.getAllComplaints()){
                 String line = complaint.getSubmitTime() + "," +
                         complaint.getTopic() + "," +
                         complaint.getComplainantUsername() + "," +

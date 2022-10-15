@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -17,19 +22,14 @@
                 <Font name="System Bold" size="32.0" />
             </font>
         </Label>
-        <Label layoutX="340.0" layoutY="90.0" prefHeight="36.0" prefWidth="338.0" text="เรื่องร้องเรียนที่รับผิดชอบ">
-            <font>
-                <Font name="System Bold" size="32.0" />
-            </font>
-        </Label>
-      <VBox layoutX="300.0" layoutY="73.0">
+      <VBox layoutX="533.0" layoutY="171.0" prefHeight="434.0" prefWidth="631.0">
          <children>
               <ListView fx:id="complaintsListView" prefHeight="531.0" prefWidth="863.0" style="-fx-background-color: f3f3f3; -fx-background-radius: 13;" stylesheets="@styles/complaint-listview-styles.css" />
          </children>
       </VBox>
-        <Label fx:id="allReportLabel" layoutX="303.0" layoutY="40.0" prefHeight="19.0" prefWidth="144.0" text="เรื่องร้องเรียนทั้งหมด">
+        <Label fx:id="allReportLabel" layoutX="615.0" layoutY="58.0" prefHeight="54.0" prefWidth="322.0" text="เรื่องร้องเรียนทั้งหมด">
             <font>
-                <Font name="System Bold" size="16.0" />
+                <Font name="System Bold" size="36.0" />
             </font>
         </Label>
         <ImageView fx:id="nisitImage" fitHeight="150.0" fitWidth="150.0" layoutX="57.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true" />
@@ -38,7 +38,7 @@
                 <Font name="System Bold" size="20.0" />
             </font>
         </Label>
-        <Button fx:id="reportButton" layoutX="520.0" layoutY="631.0" mnemonicParsing="false" onAction="#handleReportButton" prefHeight="36.0" prefWidth="184.0" style="-fx-background-color: #2EC4B6; -fx-background-color: #2EC4B6; -fx-border-radius: 7; -fx-background-radius: 7;" text="ร้องเรียน" textFill="WHITE">
+        <Button fx:id="reportButton" layoutX="684.0" layoutY="635.0" mnemonicParsing="false" onAction="#handleComplainButton" prefHeight="36.0" prefWidth="184.0" style="-fx-background-color: #2EC4B6; -fx-background-color: #2EC4B6; -fx-border-radius: 7; -fx-background-radius: 7;" text="ร้องเรียน" textFill="WHITE">
             <font>
                 <Font size="16.0" />
             </font>
@@ -58,5 +58,43 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
+      <Label layoutX="533.0" layoutY="132.0" text="เรียงลำดับโดย" />
+      <ComboBox fx:id="sortComboBox" layoutX="606.0" layoutY="127.0" prefHeight="26.0" prefWidth="170.0" />
+      <ComboBox fx:id="categoryFilterComboBox" layoutX="320.0" layoutY="277.0" prefWidth="150.0" promptText="categoryFilter" />
+      <CheckBox fx:id="byMeFilterCheckBox" layoutX="325.0" layoutY="218.0" mnemonicParsing="false" text="แจ้งโดยฉ้น" />
+      <VBox layoutX="323.0" layoutY="348.0" prefHeight="58.0" prefWidth="170.0">
+         <children>
+            <CheckBox mnemonicParsing="false" text="รอการตรวจสอบจากเจ้าหน้าที่" />
+            <CheckBox mnemonicParsing="false" text="กำลังดำเนินการ" />
+            <CheckBox mnemonicParsing="false" text="ดำเนินการเสร็จสิ้น" />
+         </children>
+      </VBox>
+      <Label layoutX="379.0" layoutY="323.0" text="สถานะ">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="363.0" layoutY="424.0" text="คะแนนโหวต">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <RadioButton layoutX="321.0" layoutY="514.0" mnemonicParsing="false" text="ระหว่าง" />
+      <RadioButton layoutX="321.0" layoutY="482.0" mnemonicParsing="false" text="มากกว่า" />
+      <Line endX="100.0" layoutX="399.0" layoutY="314.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="399.0" layoutY="415.0" startX="-100.0" />
+      <Label layoutX="368.0" layoutY="252.0" text="หมวดหมู่">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Line endX="100.0" layoutX="399.0" layoutY="248.0" startX="-100.0" />
+      <RadioButton layoutX="321.0" layoutY="449.0" mnemonicParsing="false" text="น้อยกว่า" />
+      <Button layoutX="342.0" layoutY="554.0" mnemonicParsing="false" text="ล้างสิ่งที่เลือกทั้งหมด" />
+      <TextField layoutX="384.0" layoutY="445.0" prefHeight="1.0" prefWidth="40.0" />
+      <TextField layoutX="384.0" layoutY="479.0" prefHeight="1.0" prefWidth="40.0" />
+      <TextField layoutX="384.0" layoutY="512.0" prefHeight="1.0" prefWidth="40.0" />
+      <TextField layoutX="452.0" layoutY="512.0" prefHeight="1.0" prefWidth="40.0" />
+      <Label layoutX="431.0" layoutY="516.0" text="ถึง" />
     </children>
 </AnchorPane>

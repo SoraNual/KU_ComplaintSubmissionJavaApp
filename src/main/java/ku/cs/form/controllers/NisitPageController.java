@@ -1,11 +1,11 @@
 package ku.cs.form.controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -24,13 +24,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class NisitPageController {
 
     private User user;
     @FXML private ListView<Complaint> complaintsListView;
     private ComplaintFileDataSource dataSource;
-    private ComplaintList complaintList;
+    private ComplaintList defaultComplaintList;
 
     private Stage stage;
     @FXML private Rectangle rightRec;
@@ -43,6 +44,10 @@ public class NisitPageController {
     @FXML private Button changePasswordButton;
     @FXML private Button reportButton;
     @FXML private Button uploadImageButton;
+    @FXML private ComboBox<String> categoryFilterComboBox;
+    @FXML private ComboBox<String> sortComboBox;
+    @FXML private CheckBox byMeFilterCheckBox;
+    private ComplaintList filteredComplaintList;
 
     @FXML public void initialize() {
         user = (User) com.github.saacsos.FXRouter.getData();
@@ -52,11 +57,24 @@ public class NisitPageController {
         Image userImage = new Image(imageFile.toURI().toString());
         nisitImage.setImage(userImage);
         dataSource = new ComplaintFileDataSource("data", "complaints.csv");
-        complaintList = dataSource.readData();
-        complaintsListView.getItems().addAll(complaintList.getAllReports());
+        defaultComplaintList = dataSource.readData();
+
+        sortComboBox.getItems().add("คะแนนโหวตน้อยที่สุด ไป มากที่สุด");
+        sortComboBox.getItems().add("คะแนนโหวตมากที่สุด ไป น้อยที่สุด");
+        sortComboBox.getItems().add("ล่าสุด ไป เก่าสุด");
+        sortComboBox.getItems().add("เก่าสุด ไป ล่าสุด");
+
 
         theme();
-        handleSelectedItem();
+
+        handleSelectedComplaint();
+        handleSelectedSortComboBox();
+        handleByMeFilterCheckBox();
+        handleSelectedCategoryFilterComboBox();
+        sortComboBox.getSelectionModel().select("ล่าสุด ไป เก่าสุด");
+
+        showComplaintListView(defaultComplaintList);
+
     }
 
     public void theme() {
@@ -72,9 +90,68 @@ public class NisitPageController {
         setTheme.setObject(allReportLabel);
         setTheme.setObject(pane);
     }
+    private void showComplaintListView(ComplaintList complaintList){
+        complaintsListView.getItems().clear();
+        complaintsListView.getItems().addAll(complaintList.getAllComplaints());
+        complaintsListView.refresh();
+    }
+    private void handleByMeFilterCheckBox(){
+        byMeFilterCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){// selected
+                    filteredComplaintList = defaultComplaintList;
+                    filteredComplaintList = filteredComplaintList.filterBy(new Filterer<Complaint>() {
+                        @Override
+                        public boolean filter(Complaint o) {
+                            return o.getComplainantUsername().equals(user.getUsername());
+                        }
+                    });
+                    showComplaintListView(filteredComplaintList);
+                }else{// unselected
+                    showComplaintListView(defaultComplaintList);
+                }
+            }
+        });
+    }
 
+    private void handleSelectedSortComboBox(){
+        sortComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String current) {
+                defaultComplaintList.getAllComplaints().sort(new Comparator<Complaint>() {
+                    @Override
+                    public int compare(Complaint o1, Complaint o2) {
+                        if(current.contains("มากที่สุด ไป น้อยที่สุด"))
+                            return -Integer.compare(o1.getVotePoint(),o2.getVotePoint());
+                        else if(current.contains("น้อยที่สุด ไป มากที่สุด"))
+                            return Integer.compare(o1.getVotePoint(),o2.getVotePoint());
+                        else if(current.equals("ล่าสุด ไป เก่าสุด"))
+                            return -o1.getLiteralSubmitTime().compareTo(o2.getLiteralSubmitTime());
+                        return o1.getLiteralSubmitTime().compareTo(o2.getLiteralSubmitTime());
+                    }
+                });
+                showComplaintListView(defaultComplaintList);
+
+            }
+        });
+    }
+
+    private void handleSelectedCategoryFilterComboBox(){
+        categoryFilterComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String current) {
+                filteredComplaintList = filteredComplaintList.filterBy(new Filterer<Complaint>() {
+                    @Override
+                    public boolean filter(Complaint o) {
+                        return false;
+                    }
+                });
+            }
+        });
+    }
     @FXML
-    public void handleSelectedItem() {
+    public void handleSelectedComplaint() {
         complaintsListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -126,7 +203,7 @@ public class NisitPageController {
         }
     }
 
-    public void handleReportButton(ActionEvent actionEvent) {
+    public void handleComplainButton(ActionEvent actionEvent) {
         try {
             com.github.saacsos.FXRouter.goTo("report",user);
         } catch (IOException e) {

@@ -35,7 +35,7 @@ public class NewStaffPageController {
         nameLabel.setText(staff.getName());
         agencyLabel.setText(staff.getAgency());
 
-        for (Complaint complaint : complaintList.getAllReports()) {
+        for (Complaint complaint : complaintList.getAllComplaints()) {
             itemHolder.getItems().add(complaint);
         }
         handleSelectedItem();

@@ -31,7 +31,7 @@ public class StaffPageController {
 
     @FXML
     public void showReportsListView() {
-        reportsListView.getItems().addAll(complaintList.getAllReports());
+        reportsListView.getItems().addAll(complaintList.getAllComplaints());
         reportsListView.refresh();
     }
 

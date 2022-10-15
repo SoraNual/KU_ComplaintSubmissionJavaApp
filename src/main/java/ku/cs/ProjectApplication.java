@@ -14,7 +14,7 @@ public class ProjectApplication extends Application {
         FXRouter.bind(this, stage, "Project", 1280, 720);
         configRoute();
         FXRouter.setAnimationType("fade",500);
-        FXRouter.goTo("addCategory");
+        FXRouter.goTo("home");
     }
     private static void configRoute() {
         String packageStr = "ku/cs/";
