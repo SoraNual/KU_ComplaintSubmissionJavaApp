@@ -60,35 +60,35 @@
       </Button>
       <Label layoutX="533.0" layoutY="132.0" text="เรียงลำดับโดย" />
       <ComboBox fx:id="sortComboBox" layoutX="606.0" layoutY="127.0" prefHeight="26.0" prefWidth="170.0" />
-      <ComboBox fx:id="categoryFilterComboBox" layoutX="320.0" layoutY="277.0" prefWidth="150.0" promptText="categoryFilter" />
-      <CheckBox fx:id="byMeFilterCheckBox" layoutX="325.0" layoutY="218.0" mnemonicParsing="false" text="แจ้งโดยฉ้น" />
-      <VBox layoutX="323.0" layoutY="348.0" prefHeight="58.0" prefWidth="170.0">
+      <ComboBox fx:id="categoryFilterComboBox" layoutX="320.0" layoutY="260.0" prefWidth="150.0" promptText="categoryFilter" />
+      <CheckBox fx:id="byMeFilterCheckBox" layoutX="323.0" layoutY="185.0" mnemonicParsing="false" text="แจ้งโดยฉ้น" />
+      <VBox layoutX="323.0" layoutY="338.0" prefHeight="58.0" prefWidth="170.0">
          <children>
             <CheckBox mnemonicParsing="false" text="รอการตรวจสอบจากเจ้าหน้าที่" />
             <CheckBox mnemonicParsing="false" text="กำลังดำเนินการ" />
             <CheckBox mnemonicParsing="false" text="ดำเนินการเสร็จสิ้น" />
          </children>
       </VBox>
-      <Label layoutX="379.0" layoutY="323.0" text="สถานะ">
+      <Label layoutX="375.0" layoutY="313.0" text="สถานะ">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="363.0" layoutY="424.0" text="คะแนนโหวต">
+      <Label layoutX="363.0" layoutY="416.0" text="คะแนนโหวต">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <RadioButton layoutX="321.0" layoutY="514.0" mnemonicParsing="false" text="ระหว่าง" />
       <RadioButton layoutX="321.0" layoutY="482.0" mnemonicParsing="false" text="มากกว่า" />
-      <Line endX="100.0" layoutX="399.0" layoutY="314.0" startX="-100.0" />
-      <Line endX="100.0" layoutX="399.0" layoutY="415.0" startX="-100.0" />
-      <Label layoutX="368.0" layoutY="252.0" text="หมวดหมู่">
+      <Line endX="100.0" layoutX="399.0" layoutY="304.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="399.0" layoutY="405.0" startX="-100.0" />
+      <Label layoutX="368.0" layoutY="231.0" text="หมวดหมู่">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Line endX="100.0" layoutX="399.0" layoutY="248.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="399.0" layoutY="221.0" startX="-100.0" />
       <RadioButton layoutX="321.0" layoutY="449.0" mnemonicParsing="false" text="น้อยกว่า" />
       <Button layoutX="342.0" layoutY="554.0" mnemonicParsing="false" text="ล้างสิ่งที่เลือกทั้งหมด" />
       <TextField layoutX="384.0" layoutY="445.0" prefHeight="1.0" prefWidth="40.0" />
