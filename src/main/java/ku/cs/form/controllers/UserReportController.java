@@ -3,10 +3,12 @@ package ku.cs.form.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
 import ku.cs.form.models.Staff;
 import ku.cs.form.models.User;
 import ku.cs.form.models.UserReport;
 import ku.cs.form.models.UserList;
+import ku.cs.form.services.SetTheme;
 import ku.cs.form.services.UserReportDataSource;
 import ku.cs.form.services.UserDataSource;
 
@@ -18,6 +20,7 @@ public class UserReportController {
     @FXML private ListView<String> bannedUsersListView;
     @FXML private ListView<String> inappropriateListView;
     @FXML private ListView<String> requestUnbannedListView;
+    @FXML private AnchorPane userReportAnchorPane;
     private HashMap<String, User> userHashMap;
     private UserReportDataSource userReportDataSource;
     private HashMap<String, UserReport> userComplaintHashMap;
@@ -26,6 +29,10 @@ public class UserReportController {
 
     @FXML
     public void initialize() {
+        User user = (User) com.github.saacsos.FXRouter.getData();
+        userReportAnchorPane.getStylesheets().add("file:src/main/resources/ku/cs/styles/styles.css");
+        SetTheme setTheme = new SetTheme(user.getUsername());
+        setTheme.setting();
         userDataSource = new UserDataSource("data","users.csv");
         userReportDataSource = new UserReportDataSource("data","user_reports.csv");
         usersList = userDataSource.readData();

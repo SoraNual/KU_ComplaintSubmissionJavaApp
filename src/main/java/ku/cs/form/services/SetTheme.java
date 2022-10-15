@@ -1,11 +1,9 @@
 package ku.cs.form.services;
 
 
-import javafx.scene.layout.AnchorPane;
-
+import javafx.scene.paint.Color;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -45,7 +43,7 @@ public class SetTheme {
 
                 if (isSettingSection) {
                     String[] data = line.split(",");
-                    String[] settingArray = {data[1].trim(), data[2].trim()};
+                    String[] settingArray = {data[1].trim(), data[2].trim(),data[3].trim()};
                     settingHashMap.put(data[0].trim(), settingArray);
                 }
             }
@@ -114,7 +112,7 @@ public class SetTheme {
 
         //for new user setting (not found in -setting-
         if (setting == null) {
-            String[] default_setting = {"default", "18"};
+            String[] default_setting = {"default", "18","Kanit"};
             settingHashMap.put(username, default_setting);
             setting = settingHashMap.get(username);
         }
@@ -130,6 +128,7 @@ public class SetTheme {
         String buttonColor = theme[6];
 
         int textSize = Integer.parseInt(setting[1]);
+        String fontFamily = setting[2];
         //setting in css file
         setStylesCss(menuBarColor,
                 menuBarTextColor,
@@ -138,7 +137,8 @@ public class SetTheme {
                 inputColor,
                 listviewColor,
                 buttonColor,
-         textSize);
+                textSize,
+                fontFamily);
     }
 
     private void setStylesCss(String menuBarColor,
@@ -148,7 +148,7 @@ public class SetTheme {
                               String inputColor,
                               String listviewColor,
                               String buttonColor,
-                              int textSize) {
+                              int textSize, String fontFamily) {
         String url = "src/main/resources/ku/cs/styles/styles.css";
         File file = new File(url);
         File original_css = new File("src/main/resources/ku/cs/styles/original.css");
@@ -162,6 +162,10 @@ public class SetTheme {
             writer = new FileWriter(file, StandardCharsets.UTF_8);
             buffer = new BufferedWriter(writer);
 
+            String fontFace = " @font-face { \n" +
+                        "   font-family: '" + fontFamily + "';\n" +
+                        "   src: url('fonts/" + fontFamily + ".ttf');}\n";
+
             String rootProperty = ".root {\n" +
                     "   -menu-bar-color: " + menuBarColor + ";\n" +
                     "   -menu-bar-text-color: " + menuBarTextColor + ";\n" +
@@ -169,15 +173,21 @@ public class SetTheme {
                     "   -background-color: " + backgroundColor + ";\n" +
                     "   -input-color: " + inputColor + ";\n" +
                     "   -listview-color: " + listviewColor + ";\n" +
-                    "   -button-color: " + buttonColor + ";\n}\n";
+                    "   -button-color: " + buttonColor + ";\n" +
+                    "   -hover-menu-bar-color: " + hoverColor(menuBarColor) + ";\n" +
+                    "   -hover-button-color: " + hoverColor(buttonColor) + ";\n" +
+                    "   -button-text-color: " + darkerColor(buttonColor) + ";\n }" +
+                    "   * { -fx-font-family: " + "'" + fontFamily + "';}\n";
+
             double percent = textSize/100.0;
-            String fontSize = ".h1 { -fx-font-size: " + (40*percent) + "px;}\n" +
-                    ".h2 { -fx-font-size: " + (32*percent) + "px;}\n" +
-                    ".listview.label { -fx-font-size: " + (20*percent) + "px;}\n" +
-                    ".user-menu-bar-text.button { -fx-font-size: " + (22*percent) + "px;}\n" +
-                    ".user-menu-bar-text.button { -fx-font-size: " + (22*percent) + "px;}\n";
+            String fontSize = ".root { -fx-font-size: " + (int) (16*percent) + "px;}\n"
+            + ".h1 { -fx-font-size: " + (int) (28*percent) + "px;}\n"
+            + ".h2 { -fx-font-size: " + (int) (20*percent) + "px;}\n"
+            ;
 
 
+            buffer.write(fontFace);
+            buffer.newLine();
             buffer.write(rootProperty);
             buffer.newLine();
             buffer.write(fontSize);
@@ -221,7 +231,7 @@ public class SetTheme {
 
             for (String k : settingHashMap.keySet()) {
                 String[] setting = settingHashMap.get(k);
-                String line = k + "," + setting[0] + "," + setting[1];
+                String line = k + "," + setting[0] + "," + setting[1] +"," + setting[2];
                 buffer.write(line);
                 buffer.newLine();
             }
@@ -279,6 +289,25 @@ public class SetTheme {
         writeThemeListFile();
         setting();
     }
+
+    public void changeFont(String font) {
+        String[] setting = settingHashMap.get(username);
+        setting[2] = font;
+        settingHashMap.replace(username, setting);
+        writeThemeListFile();
+        setting();
+    }
+
+    private String hoverColor(String color) {
+        color = ("#"+((Color.web(color)).brighter())).replace("0x","").toUpperCase();
+        return color;
+    }
+
+    private String darkerColor(String color){
+        color = ("#"+((Color.web(color)).darker().darker())).replace("0x","").toUpperCase();
+        return color;
+    }
+
 
 }
 

@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-import java.awt.*;
 import java.io.IOException;
 import com.github.saacsos.FXRouter;
 import javafx.scene.layout.AnchorPane;
@@ -25,9 +24,9 @@ public class AdminController {
     @FXML
     public void initialize() {
         admin = (User) FXRouter.getData();
+        adminAnchorPane.getStylesheets().add("file:src/main/resources/ku/cs/styles/styles.css");
         SetTheme setTheme = new SetTheme(admin.getUsername());
         setTheme.setting();
-        adminAnchorPane.getStylesheets().add("file:src/main/resources/ku/cs/styles/styles.css");
         showAdminProfile();
 
     }
@@ -38,11 +37,11 @@ public class AdminController {
             System.err.println("ให้ตรวจสอบการกำหนด route");
         }
     }
-    public void handleStaffRegisterMenu(ActionEvent actionEvent){
+    public void handleStaffRegisterMenu(ActionEvent actionEvent) throws IOException {
         try {
-            FXRouter.goTo("staffRegister");
+            FXRouter.goTo("staffRegister",admin);
         } catch (IOException e) {
-            System.err.println("ให้ตรวจสอบการกำหนด route");
+            throw new IOException(e);
         }
 
     }
@@ -73,7 +72,7 @@ public class AdminController {
     @FXML
     private void handleUserComplaintBtn(ActionEvent actionEvent) {
         try {
-            FXRouter.goTo("userComplaint");
+            FXRouter.goTo("userComplaint",admin);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

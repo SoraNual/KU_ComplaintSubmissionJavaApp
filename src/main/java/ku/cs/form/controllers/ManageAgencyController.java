@@ -4,38 +4,42 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import ku.cs.form.models.*;
 import ku.cs.form.services.AgencyDataSource;
+import ku.cs.form.services.SetTheme;
 import ku.cs.form.services.UserDataSource;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class ManageAgencyController {
+
+    @FXML private AnchorPane manageAgencyAnchorPane;
     @FXML private Label agencyLabel;
     @FXML private TextField newAgencyTextField;
     @FXML private TextField changeAgencyTextField;
     @FXML private ListView<String> agencyListView;
     @FXML private ListView<String> staffListView;
-    @FXML private ChoiceBox<String> agenciesChoiceBox;
-    @FXML private ChoiceBox<String> setStaffAgencyChoiceBox;
-    @FXML private ChoiceBox<String> staffChoiceBox;
+    @FXML private ComboBox<String> agenciesComboBox;
+    @FXML private ComboBox<String> setStaffAgencyComboBox;
+    @FXML private ComboBox<String> staffComboBox;
     private UserList usersList;
     private UserDataSource userDataSource;
     private AgencyList agencies;
     private AgencyDataSource agencyDataSource;
 
     @FXML public void initialize() {
+        SetTheme setTheme = new SetTheme("admin");
+        setTheme.setting();
+        manageAgencyAnchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
         userDataSource = new UserDataSource("data","users.csv");
         usersList = userDataSource.readData();
         agencyDataSource = new AgencyDataSource("data","agency.csv");
         agencies = agencyDataSource.readData();
-        agenciesChoiceBox.getItems().addAll(agencies.getAgencies());
-        setStaffAgencyChoiceBox.getItems().addAll(agencies.getAgencies());
+        agenciesComboBox.getItems().addAll(agencies.getAgencies());
+        setStaffAgencyComboBox.getItems().addAll(agencies.getAgencies());
         addStaffListChoiceBox();
         showAgencyListView();
         handleSelectedAgencyListView();
@@ -54,8 +58,8 @@ public class ManageAgencyController {
             agencies.addAgency(newAgency);
             System.out.println(agencies.getAgencies());
             agencyDataSource.writeData(agencies);
-            agenciesChoiceBox.getItems().clear();
-            agenciesChoiceBox.getItems().addAll(agencies.getAgencies());
+            agenciesComboBox.getItems().clear();
+            agenciesComboBox.getItems().addAll(agencies.getAgencies());
             newAgencyTextField.setText("");
             showAgencyListView();
         }
@@ -65,7 +69,7 @@ public class ManageAgencyController {
 
     @FXML
     private void handleChangeAgencyNameBtn(ActionEvent actionEvent) {
-        String oldAgency = agenciesChoiceBox.getValue();
+        String oldAgency = agenciesComboBox.getValue();
         String newAgency = changeAgencyTextField.getText();
         if(!(newAgency.equals(""))){
             agencies.changeAgency(oldAgency,newAgency);
@@ -78,8 +82,8 @@ public class ManageAgencyController {
             userDataSource.writeData(usersList);
             changeAgencyTextField.setText("");
             agencyDataSource.writeData(agencies);
-            agenciesChoiceBox.getItems().clear();
-            agenciesChoiceBox.getItems().addAll(agencies.getAgencies());
+            agenciesComboBox.getItems().clear();
+            agenciesComboBox.getItems().addAll(agencies.getAgencies());
             showAgencyListView();
         }
     }
@@ -118,19 +122,19 @@ public class ManageAgencyController {
     private void addStaffListChoiceBox() {
         for(User user : usersList.getAllUsers()){
             if(user instanceof Staff)
-                staffChoiceBox.getItems().add(user.getUsername());
+                staffComboBox.getItems().add(user.getUsername());
         }
     }
 
     @FXML private void handleSetAgencyToStaffBtn(ActionEvent actionEvent){
-        String staff = staffChoiceBox.getValue();
-        String agency = setStaffAgencyChoiceBox.getValue();
+        String staff = staffComboBox.getValue();
+        String agency = setStaffAgencyComboBox.getValue();
         if(!(staff.equals("") && agency.equals(""))){
             for(User user : usersList.getAllUsers()){
                 if(user.getUsername().equals(staff)) ((Staff) user).setAgency(agency);
                 userDataSource.writeData(usersList);
-                staffChoiceBox.setValue("");
-                setStaffAgencyChoiceBox.setValue("");
+                staffComboBox.setValue("");
+                setStaffAgencyComboBox.setValue("");
             }
         }
     }

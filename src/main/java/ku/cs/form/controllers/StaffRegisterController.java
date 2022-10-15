@@ -2,17 +2,17 @@ package ku.cs.form.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import ku.cs.form.models.AgencyList;
 import ku.cs.form.models.Staff;
+import ku.cs.form.models.User;
 import ku.cs.form.services.AgencyDataSource;
+import ku.cs.form.services.SetTheme;
 import ku.cs.form.services.StaffRegistration;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import ku.cs.form.services.UploadPicture;
 
@@ -24,9 +24,10 @@ public class StaffRegisterController extends UploadPicture {
     @FXML private TextField usernameTextField;
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
-    @FXML private ChoiceBox<String> agencyChoiceBox;
+    @FXML private ComboBox<String> agencyComboBox;
     @FXML
     private ImageView regis_pic;
+    @FXML private AnchorPane staffRegisteranchorPane;
 
     @FXML
     private ImageView profile_pic;
@@ -35,11 +36,16 @@ public class StaffRegisterController extends UploadPicture {
     private AgencyList agencyList;
 
     @FXML public void initialize() {
+        User admin = (User) com.github.saacsos.FXRouter.getData();
+        staffRegisteranchorPane.getStylesheets().add("file:src/main/resources/ku/cs/styles/styles.css");
+        SetTheme setTheme = new SetTheme(admin.getUsername());
+        setTheme.setting();
+
         String url = getClass().getResource("/ku/cs/images/register_pic.png").toExternalForm();
         regis_pic.setImage(new Image(url));
         agenciesDataSource = new AgencyDataSource("data","agency.csv");
         agencyList = agenciesDataSource.readData();
-        for (String agenciesChoice : agencyList.getAgencies()) agencyChoiceBox.getItems().add(agenciesChoice);
+        agencyComboBox.getItems().addAll(agencyList.getAgencies());
     }
 
     @FXML
@@ -58,7 +64,7 @@ public class StaffRegisterController extends UploadPicture {
         String username = usernameTextField.getText();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
-        String agency = agencyChoiceBox.getValue();
+        String agency = agencyComboBox.getValue();
 
         StaffRegistration reg = new StaffRegistration("data","users.csv");
         String error = reg.registrationCheck(name,username,password,confirmPassword);

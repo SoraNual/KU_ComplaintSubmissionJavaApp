@@ -17,8 +17,9 @@ public class EditProfileController {
     private User user;
     @FXML private ComboBox<String> themeComboBox;
     @FXML private  ComboBox<String> fontSizeComboBox;
-    @FXML private AnchorPane editProfileAnchorPane;
+    @FXML private ComboBox<String> fontComboBox;
     @FXML private VBox customThemeSetting;
+    @FXML private AnchorPane anchorPane;
 
     private UserDataSource userDataSource;
     private UserList userList;
@@ -43,11 +44,13 @@ public class EditProfileController {
 
     @FXML public void initialize() {
         user = (User) com.github.saacsos.FXRouter.getData();
-        System.out.println(user);
         userDataSource = new UserDataSource("data","users.csv");
         themeComboBox.getItems().addAll("dark","default",user.getUsername() , "custom...");
         fontSizeComboBox.getItems().addAll("Small","Medium","Large");
+        fontComboBox.getItems().addAll("Kanit","Sarabun","Mitr");
         setTheme = new SetTheme(user.getUsername());
+        setTheme.setting();
+        anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
         userList = userDataSource.readData();
     }
 
@@ -122,18 +125,25 @@ public class EditProfileController {
         else {
             customThemeSetting.setVisible(false);
             setTheme.changeTheme(theme);
-            editProfileAnchorPane.getStylesheets().clear();
-            editProfileAnchorPane.getStylesheets().add("file:src/main/resources/ku/cs/styles/styles.css");
+            anchorPane.getStylesheets().clear();
+            anchorPane.getStylesheets().add("file:src/main/resources/ku/cs/styles/styles.css");
         }
     }
 
     @FXML private void handleFontSizeComboBox(ActionEvent actionEvent){
         String size = fontSizeComboBox.getValue();
         int fontSize = 0;
-        if(size.equals("Small")) fontSize = 75;
+        if(size.equals("Small")) fontSize = 90;
         if(size.equals("Medium")) fontSize = 100;
         if(size.equals("Large")) fontSize = 125;
         setTheme.changeTextSize(""+fontSize);
+        anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
+    }
+
+    @FXML private void handleFontComboBox(ActionEvent actionEvent){
+        String font = fontComboBox.getValue();
+        setTheme.changeFont(font);
+        anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
     }
 
     @FXML private void handleBackgroundColorPicker(ActionEvent actionEvent) { samplePanel.setFill(backgroundColorPicker.getValue());}
