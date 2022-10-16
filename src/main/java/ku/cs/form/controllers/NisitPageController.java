@@ -13,9 +13,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import ku.cs.form.models.Complaint;
-import ku.cs.form.models.ComplaintList;
-import ku.cs.form.models.User;
+import ku.cs.form.models.*;
+import ku.cs.form.services.ComplaintCategoryDataSource;
 import ku.cs.form.services.ComplaintFileDataSource;
 import ku.cs.form.services.SetTheme;
 
@@ -30,7 +29,7 @@ public class NisitPageController {
 
     private User user;
     @FXML private ListView<Complaint> complaintsListView;
-    private ComplaintFileDataSource dataSource;
+    private ComplaintFileDataSource complaintDataSource;
     private ComplaintList defaultComplaintList;
 
     private Stage stage;
@@ -44,10 +43,22 @@ public class NisitPageController {
     @FXML private Button changePasswordButton;
     @FXML private Button reportButton;
     @FXML private Button uploadImageButton;
-    @FXML private ComboBox<String> categoryFilterComboBox;
+    @FXML private ComboBox<ComplaintCategory> categoryFilterComboBox;
     @FXML private ComboBox<String> sortComboBox;
     @FXML private CheckBox byMeFilterCheckBox;
+    @FXML private CheckBox pendingStatusCheckBox;
+    @FXML private CheckBox processingStatusCheckBox;
+    @FXML private CheckBox concludedStatusCheckBox;
+    @FXML private CheckBox lessThanVotePointsCheckBox;
+    @FXML private CheckBox moreThanVotePointsCheckBox;
+    @FXML private CheckBox fromToVotePointsCheckBox;
+    @FXML private TextField lessThanVotePointsTextField;
+    @FXML private TextField moreThanVotePointsTextField;
+    @FXML private TextField fromVotePointsTextField;
+    @FXML private TextField toVotePointsTextField;
     private ComplaintList filteredComplaintList;
+    private ComplaintCategoryDataSource categoryDataSource;
+    private ComplaintCategoryList categoryList;
 
     @FXML public void initialize() {
         user = (User) com.github.saacsos.FXRouter.getData();
@@ -56,21 +67,27 @@ public class NisitPageController {
         File imageFile = new File(user.getProfileImageFilePath());
         Image userImage = new Image(imageFile.toURI().toString());
         nisitImage.setImage(userImage);
-        dataSource = new ComplaintFileDataSource("data", "complaints.csv");
-        defaultComplaintList = dataSource.readData();
+        complaintDataSource = new ComplaintFileDataSource("data", "complaints.csv");
+        defaultComplaintList = complaintDataSource.readData();
+        categoryDataSource = new ComplaintCategoryDataSource("data","complaintCategories.csv");
+        categoryList = categoryDataSource.readData();
+        filteredComplaintList = defaultComplaintList;
 
         sortComboBox.getItems().add("คะแนนโหวตน้อยที่สุด ไป มากที่สุด");
         sortComboBox.getItems().add("คะแนนโหวตมากที่สุด ไป น้อยที่สุด");
         sortComboBox.getItems().add("ล่าสุด ไป เก่าสุด");
         sortComboBox.getItems().add("เก่าสุด ไป ล่าสุด");
 
+        ComplaintCategory all = new ComplaintCategory("ทั้งหมด",null,null,null);
+        categoryFilterComboBox.getItems().add(all);
+        categoryFilterComboBox.getItems().addAll(categoryList.getAllCategories());
+        categoryFilterComboBox.getSelectionModel().select(all);
 
         theme();
 
         handleSelectedComplaint();
         handleSelectedSortComboBox();
-        handleByMeFilterCheckBox();
-        handleSelectedCategoryFilterComboBox();
+
         sortComboBox.getSelectionModel().select("ล่าสุด ไป เก่าสุด");
 
         showComplaintListView(defaultComplaintList);
@@ -95,58 +112,14 @@ public class NisitPageController {
         complaintsListView.getItems().addAll(complaintList.getAllComplaints());
         complaintsListView.refresh();
     }
-    private void handleByMeFilterCheckBox(){
-        byMeFilterCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(newValue){// selected
-                    filteredComplaintList = defaultComplaintList;
-                    filteredComplaintList = filteredComplaintList.filterBy(new Filterer<Complaint>() {
-                        @Override
-                        public boolean filter(Complaint o) {
-                            return o.getComplainantUsername().equals(user.getUsername());
-                        }
-                    });
-                    showComplaintListView(filteredComplaintList);
-                }else{// unselected
-                    showComplaintListView(defaultComplaintList);
-                }
-            }
-        });
-    }
 
     private void handleSelectedSortComboBox(){
+
         sortComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String current) {
-                defaultComplaintList.getAllComplaints().sort(new Comparator<Complaint>() {
-                    @Override
-                    public int compare(Complaint o1, Complaint o2) {
-                        if(current.contains("มากที่สุด ไป น้อยที่สุด"))
-                            return -Integer.compare(o1.getVotePoint(),o2.getVotePoint());
-                        else if(current.contains("น้อยที่สุด ไป มากที่สุด"))
-                            return Integer.compare(o1.getVotePoint(),o2.getVotePoint());
-                        else if(current.equals("ล่าสุด ไป เก่าสุด"))
-                            return -o1.getLiteralSubmitTime().compareTo(o2.getLiteralSubmitTime());
-                        return o1.getLiteralSubmitTime().compareTo(o2.getLiteralSubmitTime());
-                    }
-                });
-                showComplaintListView(defaultComplaintList);
-
-            }
-        });
-    }
-
-    private void handleSelectedCategoryFilterComboBox(){
-        categoryFilterComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String current) {
-                filteredComplaintList = filteredComplaintList.filterBy(new Filterer<Complaint>() {
-                    @Override
-                    public boolean filter(Complaint o) {
-                        return false;
-                    }
-                });
+                filteredComplaintList = sort(filteredComplaintList);
+                showComplaintListView(filteredComplaintList);
             }
         });
     }
@@ -164,7 +137,7 @@ public class NisitPageController {
                             objects.add(complaint);
                             com.github.saacsos.FXRouter.goTo("complaintsDetailsForNisit", objects);
                         } catch (IOException e) {
-                            System.out.println("ไม่สามารถไปที่หน้า ReportDetail ได้");
+                            System.out.println("ไม่สามารถไปที่หน้า ComplaintDetail ได้");
                             e.printStackTrace();
                         }
                     } else {
@@ -173,6 +146,81 @@ public class NisitPageController {
                 }
             }
         });
+    }
+    private ComplaintList filterSubmitByMe(ComplaintList currentList){
+        currentList = currentList.filterBy(new Filterer<Complaint>() {
+            @Override
+            public boolean filter(Complaint o) {
+                if(byMeFilterCheckBox.isSelected()) return o.getComplainantUsername().equals(user.getUsername());
+                return true;
+            }
+        });
+        return currentList;
+    }
+    private ComplaintList filterByCategory(ComplaintList currentList){
+        currentList = currentList.filterBy(new Filterer<Complaint>() {
+            @Override
+            public boolean filter(Complaint o) {
+                if(categoryFilterComboBox.getValue() != null && !categoryFilterComboBox.getValue().getName().equals("ทั้งหมด"))
+                    return categoryFilterComboBox.getValue().getName().equals(o.getCategory());
+                return true;
+            }
+        });
+        return currentList;
+    }
+    private ComplaintList filteredByStatus(ComplaintList currentList){
+        currentList = currentList.filterBy(new Filterer<Complaint>() {
+            @Override
+            public boolean filter(Complaint o) {
+                boolean result = true;
+
+                if(pendingStatusCheckBox.isSelected()) {
+                    result = o.getStatus().equals("รอการตรวจสอบจากเจ้าหน้าที่");
+                    if(result) return true;
+                }
+
+                if(processingStatusCheckBox.isSelected()) {
+                    result = o.getStatus().equals("กำลังดำเนินการ");
+                    if(result) return true;
+                }
+
+                if(concludedStatusCheckBox.isSelected()) {
+                    result = o.getStatus().equals("ดำเนินการเสร็จสิ้น") ;
+                    if(result) return true;
+                }
+                return result;
+            }
+        });
+        return currentList;
+    }
+    private ComplaintList filterByVotePoints(ComplaintList currentList){
+        currentList = currentList.filterBy(new Filterer<Complaint>() {
+            @Override
+            public boolean filter(Complaint o) {
+                boolean result = true;
+                int moreThan, lessThan, from, to;
+
+                if(moreThanVotePointsCheckBox.isSelected() && !moreThanVotePointsTextField.getText().isBlank()) {
+                    moreThan = Integer.parseInt(moreThanVotePointsTextField.getText());
+                    result = o.getVotePoint() > moreThan;
+                }
+
+                if(lessThanVotePointsCheckBox.isSelected() && !lessThanVotePointsTextField.getText().isBlank()) {
+                    lessThan = Integer.parseInt(lessThanVotePointsTextField.getText().trim());
+                    result = o.getVotePoint() < lessThan;
+                }
+
+                if(fromToVotePointsCheckBox.isSelected()
+                        && !fromVotePointsTextField.getText().isBlank() && !toVotePointsTextField.getText().isBlank()) {
+                    from = Integer.parseInt(fromVotePointsTextField.getText().trim());
+                    to = Integer.parseInt(toVotePointsTextField.getText().trim());
+                    result = (o.getVotePoint() >= from && o.getVotePoint() <= to);
+                }
+
+                return result;
+            }
+        });
+        return currentList;
     }
 
     public void handleUploadImageButton(ActionEvent actionEvent){
@@ -218,6 +266,31 @@ public class NisitPageController {
             System.out.println("cant go there");
             e.printStackTrace();
         }
+    }
+
+    private ComplaintList sort(ComplaintList currentList){
+        currentList.getAllComplaints().sort(new Comparator<Complaint>() {
+            @Override
+            public int compare(Complaint o1, Complaint o2) {
+                if(sortComboBox.getValue().contains("มากที่สุด ไป น้อยที่สุด"))
+                    return -Integer.compare(o1.getVotePoint(),o2.getVotePoint());
+                else if(sortComboBox.getValue().contains("น้อยที่สุด ไป มากที่สุด"))
+                    return Integer.compare(o1.getVotePoint(),o2.getVotePoint());
+                else if(sortComboBox.getValue().equals("ล่าสุด ไป เก่าสุด"))
+                    return -o1.getLiteralSubmitTime().compareTo(o2.getLiteralSubmitTime());
+                return o1.getLiteralSubmitTime().compareTo(o2.getLiteralSubmitTime());
+            }
+        });
+        return currentList;
+    }
+
+    public void filter(){
+        filteredComplaintList = filterByCategory(defaultComplaintList);
+        filteredComplaintList = filterSubmitByMe(filteredComplaintList);
+        filteredComplaintList = filterByVotePoints(filteredComplaintList);
+        filteredComplaintList = filteredByStatus(filteredComplaintList);
+        filteredComplaintList = sort(filteredComplaintList);
+        showComplaintListView(filteredComplaintList);
     }
 
 }

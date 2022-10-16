@@ -5,8 +5,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -58,18 +58,18 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Label layoutX="533.0" layoutY="132.0" text="เรียงลำดับโดย" />
-      <ComboBox fx:id="sortComboBox" layoutX="606.0" layoutY="127.0" prefHeight="26.0" prefWidth="170.0" />
-      <ComboBox fx:id="categoryFilterComboBox" layoutX="320.0" layoutY="260.0" prefWidth="150.0" promptText="categoryFilter" />
+      <Label layoutX="880.0" layoutY="131.0" text="เรียงตาม:" />
+      <ComboBox fx:id="sortComboBox" layoutX="929.0" layoutY="127.0" prefHeight="26.0" prefWidth="234.0" />
+      <ComboBox fx:id="categoryFilterComboBox" layoutX="314.0" layoutY="259.0" prefHeight="26.0" prefWidth="170.0" />
       <CheckBox fx:id="byMeFilterCheckBox" layoutX="323.0" layoutY="185.0" mnemonicParsing="false" text="แจ้งโดยฉ้น" />
-      <VBox layoutX="323.0" layoutY="338.0" prefHeight="58.0" prefWidth="170.0">
+      <VBox layoutX="321.0" layoutY="338.0" prefHeight="58.0" prefWidth="170.0">
          <children>
-            <CheckBox mnemonicParsing="false" text="รอการตรวจสอบจากเจ้าหน้าที่" />
-            <CheckBox mnemonicParsing="false" text="กำลังดำเนินการ" />
-            <CheckBox mnemonicParsing="false" text="ดำเนินการเสร็จสิ้น" />
+            <CheckBox fx:id="pendingStatusCheckBox" mnemonicParsing="false" text="รอการตรวจสอบจากเจ้าหน้าที่" />
+            <CheckBox fx:id="processingStatusCheckBox" mnemonicParsing="false" text="กำลังดำเนินการ" />
+            <CheckBox fx:id="concludedStatusCheckBox" mnemonicParsing="false" text="ดำเนินการเสร็จสิ้น" />
          </children>
       </VBox>
-      <Label layoutX="375.0" layoutY="313.0" text="สถานะ">
+      <Label layoutX="379.0" layoutY="313.0" text="สถานะ">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -79,22 +79,27 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <RadioButton layoutX="321.0" layoutY="514.0" mnemonicParsing="false" text="ระหว่าง" />
-      <RadioButton layoutX="321.0" layoutY="482.0" mnemonicParsing="false" text="มากกว่า" />
       <Line endX="100.0" layoutX="399.0" layoutY="304.0" startX="-100.0" />
       <Line endX="100.0" layoutX="399.0" layoutY="405.0" startX="-100.0" />
-      <Label layoutX="368.0" layoutY="231.0" text="หมวดหมู่">
+      <Label layoutX="372.0" layoutY="229.0" text="หมวดหมู่">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <Line endX="100.0" layoutX="399.0" layoutY="221.0" startX="-100.0" />
-      <RadioButton layoutX="321.0" layoutY="449.0" mnemonicParsing="false" text="น้อยกว่า" />
-      <Button layoutX="342.0" layoutY="554.0" mnemonicParsing="false" text="ล้างสิ่งที่เลือกทั้งหมด" />
-      <TextField layoutX="384.0" layoutY="445.0" prefHeight="1.0" prefWidth="40.0" />
-      <TextField layoutX="384.0" layoutY="479.0" prefHeight="1.0" prefWidth="40.0" />
-      <TextField layoutX="384.0" layoutY="512.0" prefHeight="1.0" prefWidth="40.0" />
-      <TextField layoutX="452.0" layoutY="512.0" prefHeight="1.0" prefWidth="40.0" />
-      <Label layoutX="431.0" layoutY="516.0" text="ถึง" />
+      <Button layoutX="378.0" layoutY="557.0" mnemonicParsing="false" onAction="#filter" text="Filter" />
+      <TextField fx:id="lessThanVotePointsTextField" layoutX="384.0" layoutY="444.0" prefHeight="1.0" prefWidth="40.0" />
+      <TextField fx:id="moreThanVotePointsTextField" layoutX="384.0" layoutY="478.0" prefHeight="1.0" prefWidth="40.0" />
+      <TextField fx:id="fromVotePointsTextField" layoutX="384.0" layoutY="513.0" prefHeight="1.0" prefWidth="40.0" />
+      <TextField fx:id="toVotePointsTextField" layoutX="452.0" layoutY="513.0" prefHeight="1.0" prefWidth="40.0" />
+      <Label layoutX="431.0" layoutY="517.0" text="ถึง" />
+      <CheckBox fx:id="lessThanVotePointsCheckBox" layoutX="320.0" layoutY="448.0" mnemonicParsing="false" text="น้อยกว่า" />
+      <CheckBox fx:id="moreThanVotePointsCheckBox" layoutX="320.0" layoutY="482.0" mnemonicParsing="false" text="มากกว่า" />
+      <CheckBox fx:id="fromToVotePointsCheckBox" layoutX="320.0" layoutY="516.0" mnemonicParsing="false" text="ตั้งแต่" />
+      <ImageView fitHeight="37.0" fitWidth="40.0" layoutX="842.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/sort.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
