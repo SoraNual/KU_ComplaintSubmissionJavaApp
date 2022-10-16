@@ -3,21 +3,21 @@
    src: url('fonts/Kanit.ttf');}
 
 .root {
-   -menu-bar-color: #000C15FF;
+   -menu-bar-color: #011627FF;
    -menu-bar-text-color: #FFFFFFFF;
-   -text-color: #FFFFFFFF;
-   -background-color: #011627FF;
-   -input-color: #1B3A54FF;
-   -listview-color: #1B3A54FF;
-   -button-color: #1B3A54FF;
-   -hover-menu-bar-color: #00111EFF;
-   -hover-button-color: #275378FF;
-   -button-text-color: #0D1C29FF;
+   -text-color: #011627FF;
+   -background-color: #F7F7F7FF;
+   -input-color: #E6E6E6FF;
+   -listview-color: #F2F2F2FF;
+   -button-color: #E6E6E6FF;
+   -hover-menu-bar-color: #011F38FF;
+   -hover-button-color: #FFFFFFFF;
+   -button-text-color: #717171FF;
  }   * { -fx-font-family: 'Kanit';}
 
-.root { -fx-font-size: 16px;}
-.h1 { -fx-font-size: 28px;}
-.h2 { -fx-font-size: 20px;}
+.root { -fx-font-size: 20px;}
+.h1 { -fx-font-size: 35px;}
+.h2 { -fx-font-size: 25px;}
 
 .root {
     -fx-background-color: -background-color;
@@ -72,6 +72,8 @@
     -fx-background-color: -input-color;
     -fx-text-fill: -text-color;
     -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: none;
 }
 
 .combo-box .list-cell {
@@ -124,7 +126,7 @@
 }
 
 .scroll-pane .scroll-bar:vertical .thumb {
-    -fx-background-color: -menu-bar-color;
+    -fx-background-color: -button-color;
 
 }
 

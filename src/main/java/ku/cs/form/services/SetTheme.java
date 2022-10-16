@@ -308,6 +308,10 @@ public class SetTheme {
         return color;
     }
 
+    public boolean hasCustomTheme() {
+        return themeHashMap.containsKey(username);
+    }
+
 
 }
 

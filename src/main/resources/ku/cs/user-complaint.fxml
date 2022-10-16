@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,25 +15,13 @@
 
 <AnchorPane fx:id="userReportAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.UserReportController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#011627" height="749.0" layoutX="-16.0" layoutY="-28.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="314.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#011627" height="749.0" layoutX="-16.0" layoutY="-28.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="user-menu-bar" width="314.0" />
       <Label layoutX="90.0" layoutY="62.0" text="Admin" textFill="WHITE">
          <font>
             <Font name="FreesiaUPC Bold" size="64.0" />
          </font>
       </Label>
-      <Label layoutX="405.0" layoutY="57.0" prefHeight="103.0" prefWidth="172.0" styleClass="h2" text="ผู้ใช้งานที่ถูกรายงานความไม่เหมาะสม" textAlignment="CENTER" textFill="#011627" wrapText="true">
-         <font>
-            <Font name="FreesiaUPC Bold" size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="915.0" layoutY="109.0" prefHeight="31.0" prefWidth="172.0" styleClass="h2" text="ผู้ใช้งานที่ขอคืนสิทธิ์" textFill="#011627">
-         <font>
-            <Font name="FreesiaUPC Bold" size="24.0" />
-         </font>
-      </Label>
-      <Button layoutX="405.0" layoutY="591.0" mnemonicParsing="false" onAction="#handleBannedBtn" prefHeight="26.0" prefWidth="172.0" text="ระงับการใช้งาน" />
-      <Button layoutX="901.0" layoutY="593.0" mnemonicParsing="false" onAction="#handleUnbannedBtn" prefHeight="38.0" prefWidth="200.0" text="คืนสิทธิ์การใช้งาน" />
-      <Button layoutX="113.0" layoutY="650.0" mnemonicParsing="false" onAction="#handleBackButton" styleClass="user-menu-bar-button" text="Back" textFill="WHITE">
+      <Button layoutX="116.0" layoutY="650.0" mnemonicParsing="false" onAction="#handleBackButton" styleClass="user-menu-bar-button" text="Back" textFill="WHITE">
          <font>
             <Font name="FreesiaUPC" size="24.0" />
          </font>
@@ -39,25 +29,66 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <GridPane hgap="10.0" layoutX="367.0" layoutY="157.0" prefHeight="418.0" prefWidth="760.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <ListView fx:id="inappropriateListView" prefHeight="300.0" prefWidth="198.0" />
-            <ListView fx:id="bannedUsersListView" prefHeight="338.0" prefWidth="369.0" GridPane.columnIndex="1" />
-            <ListView fx:id="requestUnbannedListView" prefHeight="174.0" prefWidth="337.0" GridPane.columnIndex="2" />
-         </children>
-      </GridPane>
-      <Label layoutX="672.0" layoutY="109.0" prefHeight="31.0" prefWidth="150.0" styleClass="h2" text="ผู้ใช้งานที่ถูกระงับ" textFill="#011627">
-         <font>
-            <Font name="FreesiaUPC Bold" size="24.0" />
-         </font>
-      </Label>
+      <TabPane layoutX="380.0" layoutY="43.0" prefHeight="640.0" prefWidth="807.0" style="-fx-background-color: none;" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="จัดการผู้ใช้">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="569.0" prefWidth="814.0">
+                     <children>
+                        <AnchorPane layoutX="11.0" prefHeight="598.0" prefWidth="797.0" style="-fx-padding: 10px;">
+                           <children>
+                              <Label layoutX="38.0" prefHeight="103.0" prefWidth="172.0" styleClass="h2" text="ผู้ใช้งานที่ถูกรายงานความไม่เหมาะสม" textAlignment="CENTER" textFill="#011627" wrapText="true">
+                                 <font>
+                                    <Font name="FreesiaUPC Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="548.0" layoutY="52.0" prefHeight="31.0" prefWidth="172.0" styleClass="h2" text="ผู้ใช้งานที่ขอคืนสิทธิ์" textFill="#011627">
+                                 <font>
+                                    <Font name="FreesiaUPC Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="38.0" layoutY="534.0" mnemonicParsing="false" onAction="#handleBannedBtn" prefHeight="26.0" prefWidth="172.0" text="ระงับการใช้งาน" />
+                              <Button layoutX="534.0" layoutY="536.0" mnemonicParsing="false" onAction="#handleUnbannedBtn" prefHeight="38.0" prefWidth="200.0" text="คืนสิทธิ์การใช้งาน" />
+                              <GridPane hgap="10.0" layoutY="100.0" prefHeight="418.0" prefWidth="760.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <ListView fx:id="inappropriateListView" prefHeight="300.0" prefWidth="198.0" />
+                                    <ListView fx:id="bannedUsersListView" prefHeight="338.0" prefWidth="369.0" GridPane.columnIndex="1" />
+                                    <ListView fx:id="requestUnbannedListView" prefHeight="174.0" prefWidth="337.0" GridPane.columnIndex="2" />
+                                 </children>
+                              </GridPane>
+                              <Label layoutX="305.0" layoutY="52.0" prefHeight="31.0" prefWidth="150.0" styleClass="h2" text="ผู้ใช้งานที่ถูกระงับ" textFill="#011627">
+                                 <font>
+                                    <Font name="FreesiaUPC Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="จัดการเรื่องร้องเรียน">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="152.0" layoutY="88.0">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </AnchorPane>

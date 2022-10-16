@@ -22,7 +22,6 @@ public class ProjectApplication extends Application {
         FXRouter.when("home", packageStr+"home.fxml");
         FXRouter.when("staffRegister", packageStr+"staff-register.fxml");
         FXRouter.when("admin", packageStr+"admin.fxml");
-        FXRouter.when("loginTime", packageStr+"all-user-page.fxml");
         FXRouter.when("login", packageStr+"login-page.fxml");
         FXRouter.when("creatorTeam",packageStr+"creator-team.fxml");
         FXRouter.when("register", packageStr+"register.fxml");

@@ -45,14 +45,22 @@ public class EditProfileController {
     @FXML public void initialize() {
         user = (User) com.github.saacsos.FXRouter.getData();
         userDataSource = new UserDataSource("data","users.csv");
-        themeComboBox.getItems().addAll("dark","default",user.getUsername() , "custom...");
         fontSizeComboBox.getItems().addAll("Small","Medium","Large");
         fontComboBox.getItems().addAll("Kanit","Sarabun","Mitr");
         setTheme = new SetTheme(user.getUsername());
         setTheme.setting();
+        addThemeComboBox();
         anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
         userList = userDataSource.readData();
+
     }
+
+    private void addThemeComboBox() {
+        themeComboBox.getItems().addAll("dark","default");
+        if(setTheme.hasCustomTheme())  themeComboBox.getItems().addAll(user.getUsername(),"custom your theme...");
+        else themeComboBox.getItems().add("make your theme...");
+    }
+
 
     public void handleBackButton(ActionEvent actionEvent) {
         if(user instanceof Admin) {
@@ -118,7 +126,7 @@ public class EditProfileController {
 
     @FXML private void handleThemeComboBox(ActionEvent actionEvent){
         String theme = themeComboBox.getValue();
-        if(theme.equals("custom..."))
+        if(theme.equals("custom your theme...") || theme.equals("make your theme..."))
         {
             customThemeSetting.setVisible(true);
         }
@@ -167,9 +175,6 @@ public class EditProfileController {
     private String colorToString(Color color) {
         return ("#"+color).replace("0x","").toUpperCase();
     }
-
-
-
 
 }
 
