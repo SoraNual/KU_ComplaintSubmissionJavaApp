@@ -4,22 +4,17 @@ import java.util.ArrayList;
 
 public class AgencyList {
 
-    private ArrayList<String> agencies;
+    private ArrayList<Agency> agencies;
 
     public AgencyList() {
         this.agencies = new ArrayList<>();
     }
-    public void addAgency(String agency){
+    public void addAgency(Agency agency){
         agencies.add(agency);
     }
 
-    public ArrayList<String> getAgencies() {
+    public ArrayList<Agency> getAgencies() {
         return agencies;
     }
 
-    public void changeAgency(String oldAgencyName,String newAgencyName) {
-        int index = agencies.indexOf(oldAgencyName);
-        agencies.remove(oldAgencyName);
-        agencies.add(index,newAgencyName);
-    }
 }

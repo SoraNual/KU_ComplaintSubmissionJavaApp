@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import ku.cs.form.models.Agency;
 import ku.cs.form.models.AgencyList;
 import ku.cs.form.models.Staff;
 import ku.cs.form.models.User;
@@ -45,7 +46,8 @@ public class StaffRegisterController extends UploadPicture {
         regis_pic.setImage(new Image(url));
         agenciesDataSource = new AgencyDataSource("data","agency.csv");
         agencyList = agenciesDataSource.readData();
-        agencyComboBox.getItems().addAll(agencyList.getAgencies());
+        for(Agency agency : agencyList.getAgencies())
+            agencyComboBox.getItems().add(agency.getName());
     }
 
     @FXML

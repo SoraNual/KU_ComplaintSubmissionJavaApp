@@ -22,9 +22,9 @@
             <Font name="FreesiaUPC Bold" size="64.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="347.0" layoutY="56.0" prefHeight="602.0" prefWidth="530.0">
+      <ScrollPane layoutX="349.0" layoutY="82.0" prefHeight="582.0" prefWidth="530.0">
         <content>
-            <VBox maxWidth="-Infinity" prefHeight="618.0" prefWidth="443.0" spacing="10.0" styleClass="manage-agency-pane">
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="618.0" prefWidth="443.0" spacing="10.0" styleClass="manage-agency-pane">
                <children>
                   <Label prefHeight="42.0" prefWidth="468.0" styleClass="h2" text="สร้างหน่วยงานใหม่">
                      <font>
@@ -37,11 +37,23 @@
                      </font>
                   </Label>
                   <TextField fx:id="newAgencyTextField" maxWidth="-Infinity" prefHeight="26.0" prefWidth="397.0" />
-                  <Button mnemonicParsing="false" onAction="#handleAddAgencyBtn" text="เพิ่มหน่วยงาน">
+                  <Label text="หมวดหมู่ที่หน่วยงานรับผิดชอบ">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="FreesiaUPC Bold" size="24.0" />
                      </font>
-                  </Button>
+                  </Label>
+                  <ComboBox fx:id="categoryComboBox" prefHeight="37.0" prefWidth="395.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" />
+                  <HBox spacing="10.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#handleAddAgencyBtn" prefHeight="38.0" prefWidth="125.0" text="เพิ่มหน่วยงาน">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Label id="errorLabel" fx:id="addAgencyErrorLabel" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="287.0" textFill="RED" wrapText="true" />
+                     </children>
+                  </HBox>
                   <Label prefHeight="34.0" prefWidth="443.0" styleClass="h2" text="แก้ไขชื่อหน่วยงาน">
                      <font>
                         <Font name="FreesiaUPC Bold" size="36.0" />
@@ -54,9 +66,9 @@
                               <Font name="FreesiaUPC Bold" size="24.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="agenciesComboBox" prefHeight="44.0" prefWidth="244.0" />
                      </children>
                   </HBox>
+                  <ComboBox fx:id="agenciesComboBox" prefHeight="44.0" prefWidth="395.0" />
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="490.0">
                      <children>
                         <Label prefHeight="38.0" prefWidth="162.0" text="ชื่อหน่วยงานใหม่">
@@ -64,14 +76,19 @@
                               <Font name="FreesiaUPC Bold" size="24.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="changeAgencyTextField" prefHeight="26.0" prefWidth="246.0" />
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" onAction="#handleChangeAgencyNameBtn" text="แก้ไขหน่วยงาน">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
+                  <TextField fx:id="changeAgencyTextField" maxWidth="-Infinity" prefHeight="37.0" prefWidth="397.0" />
+                  <HBox spacing="10.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#handleChangeAgencyNameBtn" prefWidth="125.0" text="แก้ไขหน่วยงาน">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Label id="errorLabel" fx:id="editAgencyNameErrorLabel" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="287.0" />
+                     </children>
+                  </HBox>
                   <Label prefHeight="41.0" prefWidth="431.0" styleClass="h2" text="กำหนดหน่วยงานให้เจ้าหน้าที่">
                      <font>
                         <Font name="FreesiaUPC Bold" size="36.0" />
@@ -84,9 +101,9 @@
                               <Font name="FreesiaUPC Bold" size="24.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="staffComboBox" prefHeight="44.0" prefWidth="236.0" />
                      </children>
                   </HBox>
+                  <ComboBox fx:id="staffComboBox" onAction="#handleStaffComboBox" prefHeight="44.0" prefWidth="395.0" />
                   <HBox prefHeight="31.0" prefWidth="468.0">
                      <children>
                         <Label prefHeight="28.0" prefWidth="168.0" text="หน่วยงานที่จะสังกัด">
@@ -94,14 +111,46 @@
                               <Font name="FreesiaUPC Bold" size="24.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="setStaffAgencyComboBox" prefHeight="44.0" prefWidth="234.0" />
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" onAction="#handleSetAgencyToStaffBtn" text="กำหนด">
+                  <ComboBox fx:id="setStaffAgencyComboBox" prefHeight="44.0" prefWidth="395.0" />
+                  <HBox prefHeight="66.0" prefWidth="126.0" spacing="10.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#handleSetAgencyToStaffBtn" prefWidth="125.0" text="กำหนด">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Label id="errorLabel" fx:id="setStaffAgencyErrorLabel" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="287.0" textFill="RED" wrapText="true" />
+                     </children>
+                  </HBox>
+                  <Label prefHeight="34.0" prefWidth="443.0" styleClass="h2" text="แก้ไขหมวดหมู่ที่รับผิดชอบ">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="FreesiaUPC Bold" size="36.0" />
                      </font>
-                  </Button>
+                  </Label>
+                  <Label maxWidth="-Infinity" prefHeight="38.0" prefWidth="163.0" text="ชื่อหน่วยงาน">
+                     <font>
+                        <Font name="FreesiaUPC Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="editCategoryAgencyComboBox" onAction="#handleEditCategoryAgencyComboBox" prefHeight="44.0" prefWidth="395.0" />
+                  <Label maxWidth="-Infinity" prefHeight="38.0" prefWidth="163.0" text="หมวดหมู่ที่รับผิดชอบใหม่">
+                     <font>
+                        <Font name="FreesiaUPC Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="editCategoryComboBox" prefHeight="44.0" prefWidth="395.0" />
+                  <HBox spacing="10.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#handleEditCategoryBtn" prefHeight="37.0" prefWidth="125.0" text="แก้ไขหมวดหมู่">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Label id="errorLabel" fx:id="editCategoryErrorLabel" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="287.0" textFill="RED" wrapText="true" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
         </content>

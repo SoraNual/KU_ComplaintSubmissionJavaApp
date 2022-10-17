@@ -183,6 +183,7 @@ public class SetTheme {
             String fontSize = ".root { -fx-font-size: " + (int) (16*percent) + "px;}\n"
             + ".h1 { -fx-font-size: " + (int) (28*percent) + "px;}\n"
             + ".h2 { -fx-font-size: " + (int) (20*percent) + "px;}\n"
+             + "#errorLabel {-fx-font-size: " + (int) (14*percent) + "px;}\n"
             ;
 
 

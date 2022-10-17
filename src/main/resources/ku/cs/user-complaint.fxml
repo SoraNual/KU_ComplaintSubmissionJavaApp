@@ -37,12 +37,12 @@
                      <children>
                         <AnchorPane layoutX="11.0" prefHeight="598.0" prefWidth="797.0" style="-fx-padding: 10px;">
                            <children>
-                              <Label layoutX="38.0" prefHeight="103.0" prefWidth="172.0" styleClass="h2" text="ผู้ใช้งานที่ถูกรายงานความไม่เหมาะสม" textAlignment="CENTER" textFill="#011627" wrapText="true">
+                              <Label layoutX="38.0" prefHeight="103.0" prefWidth="210.0" styleClass="h2" text="ผู้ใช้งานที่ถูกรายงานความไม่เหมาะสม" textAlignment="CENTER" textFill="#011627" wrapText="true">
                                  <font>
                                     <Font name="FreesiaUPC Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="548.0" layoutY="52.0" prefHeight="31.0" prefWidth="172.0" styleClass="h2" text="ผู้ใช้งานที่ขอคืนสิทธิ์" textFill="#011627">
+                              <Label layoutX="548.0" layoutY="52.0" prefHeight="40.0" prefWidth="203.0" styleClass="h2" text="ผู้ใช้งานที่ขอคืนสิทธิ์" textFill="#011627">
                                  <font>
                                     <Font name="FreesiaUPC Bold" size="24.0" />
                                  </font>
@@ -64,7 +64,7 @@
                                     <ListView fx:id="requestUnbannedListView" prefHeight="174.0" prefWidth="337.0" GridPane.columnIndex="2" />
                                  </children>
                               </GridPane>
-                              <Label layoutX="305.0" layoutY="52.0" prefHeight="31.0" prefWidth="150.0" styleClass="h2" text="ผู้ใช้งานที่ถูกระงับ" textFill="#011627">
+                              <Label layoutX="305.0" layoutY="52.0" prefHeight="40.0" prefWidth="182.0" styleClass="h2" text="ผู้ใช้งานที่ถูกระงับ" textFill="#011627">
                                  <font>
                                     <Font name="FreesiaUPC Bold" size="24.0" />
                                  </font>

@@ -15,9 +15,10 @@
    -button-text-color: #717171FF;
  }   * { -fx-font-family: 'Kanit';}
 
-.root { -fx-font-size: 20px;}
-.h1 { -fx-font-size: 35px;}
-.h2 { -fx-font-size: 25px;}
+.root { -fx-font-size: 16px;}
+.h1 { -fx-font-size: 28px;}
+.h2 { -fx-font-size: 20px;}
+#errorLabel {-fx-font-size: 14px;}
 
 .root {
     -fx-background-color: -background-color;
@@ -168,4 +169,8 @@
 }
 .text-area .scroll-pane .content{
     -fx-background-color: transparent;
+}
+
+#errorLabel {
+    -fx-text-fill: red;
 }
