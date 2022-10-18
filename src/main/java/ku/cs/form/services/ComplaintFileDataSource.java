@@ -2,6 +2,8 @@ package ku.cs.form.services;
 
 import ku.cs.form.models.Complaint;
 import ku.cs.form.models.ComplaintList;
+import ku.cs.form.models.User;
+import ku.cs.form.models.UserList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -61,10 +63,14 @@ public class ComplaintFileDataSource implements DataSource<ComplaintList> {
                 complaint.setAdditionalDetail(data[5].trim());
                 complaint.setSubmitTime(data[0].trim());
                 complaint.setSolution(data[8].trim());
+                if(data.length>=10){
+                    complaint.addPositive(data[9].trim().split("#"));
+                }
+                if(data.length>=11){
+                    complaint.addNegative(data[10].trim().split("#"));
+                }
                 complaintList.addComplaint(complaint);
             }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
@@ -116,7 +122,9 @@ public class ComplaintFileDataSource implements DataSource<ComplaintList> {
                         complaint.getAdditionalDetail() + "," +
                         complaint.getStatus() + "," +
                         complaint.getVotePoint() + "," +
-                        complaint.getSolution().replace("\n", "NEWLINE");
+                        complaint.getSolution().replace("\n", "NEWLINE") +","+
+                        complaint.getPositiveVoter()+","+
+                        complaint.getNegativeVoter();
                 buffer.append(line);
                 buffer.newLine();
             }
@@ -131,6 +139,18 @@ public class ComplaintFileDataSource implements DataSource<ComplaintList> {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+    public void changeData(Complaint changedComplaint){
+        ComplaintList complaintList = readData();
+        int index = 0;
+        for(Complaint complaint : complaintList.getAllComplaints()){
+            if((complaint.getTopic()+complaint.getCategory()+complaint.getBasicDetail()+complaint.getComplainantUsername()).equals(changedComplaint.getTopic()+changedComplaint.getCategory()+changedComplaint.getBasicDetail()+changedComplaint.getComplainantUsername())){
+                complaintList.getAllComplaints().set(index,changedComplaint);
+                writeData(complaintList);
+                break;
+            }
+            index++;
         }
     }
 }

@@ -72,5 +72,7 @@
             <Font size="14.0" />
          </font>
       </Button>
+      <Button layoutX="132.0" layoutY="390.0" mnemonicParsing="false" onAction="#handleUpVoteButton" text="เห็นด้วย" />
+      <Button layoutX="202.0" layoutY="390.0" mnemonicParsing="false" onAction="#handleDownVoteButton" text="ไม่เห็นด้วย" />
    </children>
 </AnchorPane>

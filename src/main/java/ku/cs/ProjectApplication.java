@@ -13,6 +13,7 @@ public class ProjectApplication extends Application {
         stage.setResizable(false);
         FXRouter.bind(this, stage, "Project", 1280, 720);
         configRoute();
+        FXRouter.setAnimationType("fade",500);
         FXRouter.goTo("home");
     }
     private static void configRoute() {
@@ -38,7 +39,8 @@ public class ProjectApplication extends Application {
         FXRouter.when("complaintsDetailsForNisit",packageStr + "complaint-detail-nisit.fxml");
         FXRouter.when("addCategory",packageStr + "add-complaint-category.fxml");
         FXRouter.when("banned", packageStr + "banned-page.fxml");
-
+        FXRouter.when("reportUser",packageStr+"report-user.fxml");
+        FXRouter.when("reportComplaint",packageStr+"report-complaint.fxml");
     }
 
     public static void main(String[] args) {

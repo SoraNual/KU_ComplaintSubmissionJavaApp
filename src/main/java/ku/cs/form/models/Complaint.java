@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Complaint {
     private String topic;
@@ -17,7 +19,8 @@ public class Complaint {
     private String additionalDetailWithNewLine;;
     private String status; // 3 status : pending, in progress, finish
     private int votePoint;
-    private ArrayList<User> voters;
+    private ArrayList<String> positiveVoter;
+    private ArrayList<String> negativeVoter;
     private String solution;
     private String solutionWithNewLine;
 
@@ -29,10 +32,20 @@ public class Complaint {
         this.status = status;
         this.votePoint = votePoint;
         this.solution = "กำลังตรวจสอบ";
+        positiveVoter = new ArrayList<>();
+        negativeVoter = new ArrayList<>();
     }
 
     public Complaint(String topic, String complainantUsername, String category) {
         this(topic, complainantUsername, category, "รอการตรวจสอบจากเจ้าหน้าที่", 0);
+    }
+
+
+    public void addNegative(String[] negative){
+        negativeVoter.addAll(List.of(negative));
+    }
+    public void addPositive(String[] positive){
+        positiveVoter.addAll(List.of(positive));
     }
 
     public String getTopic() { return topic; }
@@ -110,29 +123,78 @@ public class Complaint {
 
     public void addVotePoint() { votePoint++; }
 
-    @Override
-    public String toString() {
-        return "<[ " + getVotePoint() + " ]> " + getTopic();
-    }
-
 //    @Override
 //    public String toString() {
-//        //FOR TESTING
-//        return topic + " " + complainantUsername + " " + submitTime + " VotePoint:" + votePoint;
+//        return "<[ " + getVotePoint() + " ]> " + getTopic();
 //    }
 
-    private void addPositiveVote(User voter){
-        if(checkIfVotedAlready(voter)) return;
+    @Override
+    public String toString() {
+        //FOR TESTING
+        return topic + " " + complainantUsername + " " + submitTime + " VotePoint:" + votePoint;
     }
 
-    private void addNegativeVote(User voter){
-        if(checkIfVotedAlready(voter)) return;
+    public void addPositiveVote(User voter){
+        if(checkIfVotedAlready(voter,positiveVoter)) {
+            votePoint--;
+            positiveVoter.remove(voter.getUsername());
+        }
+        else if (checkIfVotedAlready(voter,negativeVoter)) {
+            //ไม่เจอคนโหวตในคนแง่ลบดังนั้นโหวตได้
+            votePoint+=2;
+            positiveVoter.add(voter.getUsername());
+            negativeVoter.remove(voter.getUsername());
+        } else if (!checkIfVotedAlready(voter,positiveVoter)) {
+            votePoint++;
+            positiveVoter.add(voter.getUsername());
+        }
     }
 
-    private boolean checkIfVotedAlready(User voter){
-        for(User voted: voters){
-            if(voted.getUsername().equals(voter.getUsername())) return true;
+    public void addNegativeVote(User voter){
+        if(checkIfVotedAlready(voter,negativeVoter)) {
+            votePoint++;
+            negativeVoter.remove(voter.getUsername());
+        }
+        else if (checkIfVotedAlready(voter,positiveVoter)) {
+            votePoint-=2;
+            negativeVoter.add(voter.getUsername());
+            positiveVoter.remove(voter.getUsername());
+        } else if (!checkIfVotedAlready(voter,negativeVoter)) {
+            votePoint--;
+            negativeVoter.add(voter.getUsername());
+        }
+    }
+
+    private boolean checkIfVotedAlready(User voter,ArrayList<String> voters){
+        for(String voted: voters){
+            if(voted.equals(voter.getUsername())) return true;
         }
         return false;
+    }
+
+    public String getPositiveVoter() {
+        if(!positiveVoter.isEmpty()) {
+            String returnPosVal = positiveVoter.get(0);
+            if(positiveVoter.size()>1) {
+                for (int i = 1; i<positiveVoter.size(); i++) {
+                    returnPosVal = returnPosVal+ "#" + positiveVoter.get(i);
+                }
+            }
+            return returnPosVal;
+        }
+        return "";
+    }
+
+    public String getNegativeVoter() {
+        if (!negativeVoter.isEmpty()) {
+            String returnNegVal = negativeVoter.get(0);
+            if(negativeVoter.size()>1) {
+                for (int i = 1; i<negativeVoter.size(); i++) {
+                    returnNegVal = returnNegVal + "#" + negativeVoter.get(i);
+                }
+            }
+            return returnNegVal;
+        }
+        return "";
     }
 }

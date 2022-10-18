@@ -92,5 +92,14 @@ public class UserReportDataSource implements DataSource<HashMap<String, UserRepo
 
     }
 
+    public void appendUserReport(UserReport userReport) throws IOException {
+        String filePath = directoryName + File.separator + fileName;
+        File file = new File(filePath);
+        FileWriter writer = new FileWriter(file,true);
+        BufferedWriter buffer = new BufferedWriter(writer);
+        buffer.write("ผู้ใช้,"+userReport.writeAble()+"\n");
+        buffer.close();
+        writer.close();
+    }
 
 }
