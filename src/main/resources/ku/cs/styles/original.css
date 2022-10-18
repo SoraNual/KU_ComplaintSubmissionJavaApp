@@ -139,6 +139,11 @@
     -fx-text-fill: -menu-bar-text-color;
 }
 
+.text-area {
+    -fx-background-color: -input-color;
+    -fx-background-radius: 10px;
+}
+
 .text-area .scroll-pane {
     -fx-background-color: transparent;
 }
