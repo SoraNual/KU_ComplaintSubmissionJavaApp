@@ -7,11 +7,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import ku.cs.form.models.Complaint;
-import ku.cs.form.models.ComplaintCategory;
-import ku.cs.form.models.ComplaintCategoryList;
-import ku.cs.form.models.User;
+import ku.cs.form.models.*;
 import ku.cs.form.services.ComplaintCategoryDataSource;
+import ku.cs.form.services.ComplaintFileDataSource;
 import ku.cs.form.services.SetTheme;
 
 import java.io.File;
@@ -99,8 +97,37 @@ public class ComplaintDetailNisitController {
     }
 
     @FXML public void handleReportUserButton(){
+        ArrayList object = new ArrayList<>();
+        object.add(user);
+        object.add(selectedComplaint.getComplainantUsername());
+        try {
+            com.github.saacsos.FXRouter.goTo("reportUser",object);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
 
     }
 
-    @FXML public void handleReportComplaintButton(){}
+    @FXML public void handleReportComplaintButton(){
+        ArrayList object = new ArrayList<>();
+        object.add(user);
+        object.add(selectedComplaint);
+        try {
+            com.github.saacsos.FXRouter.goTo("reportComplaint",object);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+    @FXML public void handleDownVoteButton(){
+        selectedComplaint.addNegativeVote(user);
+        System.out.println(selectedComplaint.getPositiveVoter()+"dick");
+        System.out.println(selectedComplaint.getNegativeVoter());
+        ComplaintFileDataSource complaintFileDataSource = new ComplaintFileDataSource("data","complaints.csv");
+        complaintFileDataSource.changeData(selectedComplaint);
+    }
+    @FXML public void handleUpVoteButton(){
+        selectedComplaint.addPositiveVote(user);
+        ComplaintFileDataSource complaintFileDataSource = new ComplaintFileDataSource("data","complaints.csv");
+        complaintFileDataSource.changeData(selectedComplaint);;
+    }
 }

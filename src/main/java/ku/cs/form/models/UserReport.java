@@ -10,7 +10,7 @@ public class UserReport {
         this.username = username;
         this.complaint_category = complaint_category;
         this.complaint_detail = complaint_detail;
-        this. request_unbanned_detail = request_permission_detail;
+        this.request_unbanned_detail = request_permission_detail;
     }
 
     public String getComplaint_category() {
@@ -33,5 +33,8 @@ public class UserReport {
                 ", complaint_detail='" + complaint_detail + '\'' +
                 ", request_permission_detail='" +  request_unbanned_detail + '\'' +
                 '}';
+    }
+    public String writeAble(){
+        return username+","+complaint_category+","+complaint_detail;
     }
 }
