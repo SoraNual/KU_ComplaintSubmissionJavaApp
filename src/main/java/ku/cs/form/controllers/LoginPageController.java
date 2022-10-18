@@ -65,14 +65,20 @@ public class LoginPageController {
         try {
             if (user instanceof Admin) {
                 FXRouter.goTo("admin",user);
+                setLoginTime(user);
             } else if (user instanceof Staff) {
                 FXRouter.goTo("newStaff",user);
+                setLoginTime(user);
             } else if (user instanceof Nisit) {
-                FXRouter.goTo("nisitPage",user);
+                if(user.getUserStatus().equals("banned")) FXRouter.goTo("banned",user);
+                else {
+                    FXRouter.goTo("nisitPage", user);
+                    setLoginTime(user);
+                }
             } else{
                 incorrectWarningText.setText("Incorrect username or password");
             }
-            setLoginTime(user);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

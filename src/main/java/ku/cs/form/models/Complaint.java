@@ -106,16 +106,16 @@ public class Complaint {
 
     public void addVotePoint() { votePoint++; }
 
-//    @Override
-//    public String toString() {
-//        return "<[ " + getVotePoint() + " ]> " + getTopic();
-//    }
-
     @Override
     public String toString() {
-        //FOR TESTING
-        return topic + " " + complainantUsername + " " + submitTime + " VotePoint:" + votePoint;
+        return "<[ " + getVotePoint() + " ]> " + getTopic();
     }
+
+//    @Override
+//    public String toString() {
+//        //FOR TESTING
+//        return topic + " " + complainantUsername + " " + submitTime + " VotePoint:" + votePoint;
+//    }
 
     private void addPositiveVote(User voter){
         if(checkIfVotedAlready(voter)) return;

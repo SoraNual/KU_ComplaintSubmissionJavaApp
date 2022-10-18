@@ -13,6 +13,10 @@ public class UserReport {
         this. request_unbanned_detail = request_permission_detail;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
     public String getComplaint_category() {
         return complaint_category;
     }
@@ -23,6 +27,10 @@ public class UserReport {
 
     public String getRequest_permission_detail() {
         return  request_unbanned_detail;
+    }
+
+    public void setRequest_unbanned_detail(String request_unbanned_detail) {
+        this.request_unbanned_detail = request_unbanned_detail;
     }
 
     @Override

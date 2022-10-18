@@ -58,8 +58,8 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Label layoutX="880.0" layoutY="131.0" text="เรียงตาม:" />
-      <ComboBox fx:id="sortComboBox" layoutX="929.0" layoutY="127.0" prefHeight="26.0" prefWidth="234.0" />
+      <Label layoutX="924.0" layoutY="131.0" text="เรียงตาม:" />
+      <ComboBox fx:id="sortComboBox" layoutX="969.0" layoutY="127.0" prefHeight="26.0" prefWidth="194.0" />
       <ComboBox fx:id="categoryFilterComboBox" layoutX="314.0" layoutY="259.0" prefHeight="26.0" prefWidth="170.0" />
       <CheckBox fx:id="byMeFilterCheckBox" layoutX="323.0" layoutY="185.0" mnemonicParsing="false" text="แจ้งโดยฉ้น" />
       <VBox layoutX="321.0" layoutY="338.0" prefHeight="58.0" prefWidth="170.0">
@@ -96,7 +96,7 @@
       <CheckBox fx:id="lessThanVotePointsCheckBox" layoutX="320.0" layoutY="448.0" mnemonicParsing="false" text="น้อยกว่า" />
       <CheckBox fx:id="moreThanVotePointsCheckBox" layoutX="320.0" layoutY="482.0" mnemonicParsing="false" text="มากกว่า" />
       <CheckBox fx:id="fromToVotePointsCheckBox" layoutX="320.0" layoutY="516.0" mnemonicParsing="false" text="ตั้งแต่" />
-      <ImageView fitHeight="37.0" fitWidth="40.0" layoutX="842.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="20.0" fitWidth="22.0" layoutX="904.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/sort.png" />
          </image>
