@@ -3,7 +3,9 @@ package ku.cs.form.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -12,95 +14,55 @@ import ku.cs.form.services.SetTheme;
 import ku.cs.form.services.UserDataSource;
 
 public class EditProfileController {
-
-
     private User user;
-    @FXML private Color rectangleColor;
-    @FXML private Color textColor;
-    @FXML private Color backgroundColor;
-    @FXML private Color borderColor;
-    @FXML private Color buttonColor;
-    @FXML private ColorPicker rectangleColorPicker;
-    @FXML private ColorPicker textColorPicker;
-    @FXML private ColorPicker backgroundColorPicker;
-    @FXML private ColorPicker buttonColorPicker;
-    @FXML private Rectangle rightRec;
-    @FXML private Rectangle leftRec;
-    @FXML private Rectangle sampleRec;
-    @FXML private Rectangle sampleBackground;
-    @FXML private Rectangle sampleListView;
-    @FXML private Rectangle sampleButton;
-    @FXML private Button confirmButton;
-    @FXML private Button backButton;
-    @FXML private Pane pane;
-    @FXML private Label sampleLabel;
-    @FXML private Label changeRectangleColorLabel;
-    @FXML private Label changeTextColorLabel;
-    @FXML private Label changeButtonColorLabel;
-    @FXML private Label changeBackgroundColorLabel;
+    @FXML private ComboBox<String> themeComboBox;
+    @FXML private  ComboBox<String> fontSizeComboBox;
+    @FXML private ComboBox<String> fontComboBox;
+    @FXML private VBox customThemeSetting;
+    @FXML private AnchorPane anchorPane;
+
     private UserDataSource userDataSource;
     private UserList userList;
+    private SetTheme setTheme;
+    //ColorPicker
+    @FXML private ColorPicker backgroundColorPicker;
+    @FXML private ColorPicker buttonColorPicker;
+    @FXML private ColorPicker inputColorPicker;
+    @FXML private ColorPicker listviewColorPicker;
+    @FXML private ColorPicker menuBarColorPicker;
+    @FXML private ColorPicker menuBarTextColorPicker;
+    @FXML private ColorPicker textColorPicker;
+    //Sample
+    @FXML private Button sampleButton;
+    @FXML private ComboBox<String> sampleComboBox;
+    @FXML private ListView<String> sampleListView;
+    @FXML private Rectangle sampleMenuBar;
+    @FXML private Label sampleMenuBarText;
+    @FXML private Label sampleText;
+    @FXML private TextField sampleTextField;
+    @FXML private Rectangle samplePanel;
+
     @FXML public void initialize() {
         user = (User) com.github.saacsos.FXRouter.getData();
-        rectangleColor = Color.web(user.getRectangleColor().toLowerCase().replace("#","0x"));
-        backgroundColor = Color.web(user.getBackgroundColor().toLowerCase().replace("#","0x"));
-        textColor = Color.web(user.getTextColor().toLowerCase().replace("#","0x"));
-        buttonColor = Color.web(user.getButtonColor().toLowerCase().replace("#","0x"));
-
-        setUpTheme();
-
         userDataSource = new UserDataSource("data","users.csv");
+        fontSizeComboBox.getItems().addAll("Small","Medium","Large");
+        fontComboBox.getItems().addAll("Kanit","Sarabun","Mitr");
+        setTheme = new SetTheme(user.getUsername());
+        setTheme.setting();
+        addThemeComboBox();
+        anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
         userList = userDataSource.readData();
+
     }
 
-    public void setUpTheme(){
-        SetTheme theme = new SetTheme(user);
-
-        theme.setObject(rightRec);
-        theme.setObject(leftRec);
-        theme.setObject(sampleRec);
-
-        theme.setObject(changeBackgroundColorLabel);
-        theme.setObject(changeRectangleColorLabel);
-        theme.setObject(changeTextColorLabel);
-        theme.setObject(changeButtonColorLabel);
-        theme.setObject(sampleLabel);
-        theme.setObject(changeButtonColorLabel);
-
-        theme.setObject(pane);
-
-        theme.setObject(confirmButton);
-        theme.setObject(backButton);
-
-        theme.setObject(textColorPicker);
-        theme.setObject(rectangleColorPicker);
-        theme.setObject(backgroundColorPicker);
-        theme.setObject(buttonColorPicker);
-
-        sampleBackground.setFill(backgroundColor);
-        sampleButton.setFill(buttonColor);
-        sampleListView.setFill(rectangleColor);
-
-
-        sampleRec.setStroke(rectangleColor);
+    private void addThemeComboBox() {
+        themeComboBox.getItems().addAll("dark","default");
+        if(setTheme.hasCustomTheme())  themeComboBox.getItems().addAll(user.getUsername(),"custom your theme...");
+        else themeComboBox.getItems().add("make your theme...");
     }
-
 
 
     public void handleBackButton(ActionEvent actionEvent) {
-        try{
-            com.github.saacsos.FXRouter.goTo("nisitPage",user);
-        } catch (Exception e){
-            System.out.println("Path มีปัญหาละพ่อหนุ่ม");
-        }
-    }
-
-    public void handleConfirmButton(ActionEvent actionEvent){
-        user.setRectangleColor(("#"+rectangleColor).replace("0x","").toUpperCase());
-        user.setBackgroundColor(("#"+backgroundColor).replace("0x","").toUpperCase());
-        user.setTextColor(("#"+textColor).replace("0x","").toUpperCase());
-        user.setButtonColor(("#"+buttonColor).replace("0x","").toUpperCase());
-        userDataSource.changeData(user);
         if(user instanceof Admin) {
             try {
                 com.github.saacsos.FXRouter.goTo("admin", user);
@@ -122,26 +84,96 @@ public class EditProfileController {
         }
     }
 
-    public void handleRectangleColorPickerButton(ActionEvent actionEvent){
-        rectangleColor = rectangleColorPicker.getValue();
-        sampleRec.setFill(rectangleColor);
-        sampleRec.setStroke(rectangleColor);
-        sampleListView.setFill(rectangleColor);
+    public void handleConfirmButton(ActionEvent actionEvent){
+
+        String menuBarColor = colorToString(menuBarColorPicker.getValue());
+        String menuBarText = colorToString(menuBarTextColorPicker.getValue());
+        String textColor = colorToString(textColorPicker.getValue());
+        String backgroundColor = colorToString(backgroundColorPicker.getValue());
+        String inputColor = colorToString(inputColorPicker.getValue());
+        String listviewColor = colorToString(listviewColorPicker.getValue());
+        String buttonColor = colorToString(buttonColorPicker.getValue());
+
+        String[] newTheme = {menuBarColor,
+                menuBarText,
+                textColor,
+                backgroundColor,
+                inputColor,
+                listviewColor,
+                buttonColor };
+        setTheme.changeCustomThemeColor(newTheme);
+
+        if(user instanceof Admin) {
+            try {
+                com.github.saacsos.FXRouter.goTo("admin", user);
+            } catch (Exception e) {
+                System.out.println("Path มีปัญหาละพ่อหนุ่ม");
+            }
+        } else if (user instanceof Staff) {
+            try {
+                com.github.saacsos.FXRouter.goTo("staffPage", user);
+            } catch (Exception e) {
+                System.out.println("Path มีปัญหาละพ่อหนุ่ม");
+            }
+        } else if (user instanceof Nisit) {
+            try {
+                com.github.saacsos.FXRouter.goTo("nisitPage", user);
+            } catch (Exception e) {
+                System.out.println("Path มีปัญหาละพ่อหนุ่ม");
+            }
+        }
     }
 
-    public void handleBackgroundColorPickerButton(ActionEvent actionEvent){
-        backgroundColor = backgroundColorPicker.getValue();
-        sampleBackground.setFill(backgroundColor);
-    }
-    public void handleTextColorPickerButton(ActionEvent actionEvent){
-        textColor = textColorPicker.getValue();
-        sampleLabel.setTextFill(textColor);
+    @FXML private void handleThemeComboBox(ActionEvent actionEvent){
+        String theme = themeComboBox.getValue();
+        if(theme.equals("custom your theme...") || theme.equals("make your theme..."))
+        {
+            customThemeSetting.setVisible(true);
+        }
+        else {
+            customThemeSetting.setVisible(false);
+            setTheme.changeTheme(theme);
+            anchorPane.getStylesheets().clear();
+            anchorPane.getStylesheets().add("file:src/main/resources/ku/cs/styles/styles.css");
+        }
     }
 
+    @FXML private void handleFontSizeComboBox(ActionEvent actionEvent){
+        String size = fontSizeComboBox.getValue();
+        int fontSize = 0;
+        if(size.equals("Small")) fontSize = 90;
+        if(size.equals("Medium")) fontSize = 100;
+        if(size.equals("Large")) fontSize = 125;
+        setTheme.changeTextSize(""+fontSize);
+        anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
+    }
 
-    public void handleButtonColorPickerButton(ActionEvent actionEvent){
-        buttonColor = buttonColorPicker.getValue();
-        sampleButton.setFill(buttonColor);
+    @FXML private void handleFontComboBox(ActionEvent actionEvent){
+        String font = fontComboBox.getValue();
+        setTheme.changeFont(font);
+        anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
+    }
+
+    @FXML private void handleBackgroundColorPicker(ActionEvent actionEvent) { samplePanel.setFill(backgroundColorPicker.getValue());}
+    @FXML private void handleButtonColorPicker(ActionEvent actionEvent) {
+        Color color = buttonColorPicker.getValue();
+        sampleButton.setStyle("-fx-background-color: " + colorToString(color));
+    }
+    @FXML private void handleInputColorPicker(ActionEvent actionEvent) {
+        Color color = inputColorPicker.getValue();
+        sampleTextField.setStyle("-fx-background-color: " + colorToString(color));
+        sampleComboBox.setStyle("-fx-background-color: " + colorToString(color));
+    }
+    @FXML private void handleListviewColorPicker(ActionEvent actionEvent) {
+        Color color = listviewColorPicker.getValue();
+        sampleListView.setStyle("-fx-control-inner-background: " + colorToString(color));
+    }
+    @FXML private void handleMenuBarColorPicker(ActionEvent actionEvent) { sampleMenuBar.setFill(menuBarColorPicker.getValue()); }
+    @FXML private void handleMenuBarTextColorPicker(ActionEvent actionEvent) { sampleMenuBarText.setTextFill(menuBarTextColorPicker.getValue());}
+    @FXML private void handleTextColorPicker(ActionEvent actionEvent) { sampleText.setTextFill(textColorPicker.getValue());}
+
+    private String colorToString(Color color) {
+        return ("#"+color).replace("0x","").toUpperCase();
     }
 
 }

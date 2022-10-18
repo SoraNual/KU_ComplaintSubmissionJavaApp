@@ -23,7 +23,6 @@ public class ProjectApplication extends Application {
         FXRouter.when("home", packageStr+"home.fxml");
         FXRouter.when("staffRegister", packageStr+"staff-register.fxml");
         FXRouter.when("admin", packageStr+"admin.fxml");
-        FXRouter.when("loginTime", packageStr+"all-user-page.fxml");
         FXRouter.when("login", packageStr+"login-page.fxml");
         FXRouter.when("creatorTeam",packageStr+"creator-team.fxml");
         FXRouter.when("register", packageStr+"register.fxml");
@@ -37,8 +36,11 @@ public class ProjectApplication extends Application {
         FXRouter.when("newStaffChangePassword", packageStr+"new-staff-change-password.fxml");
         FXRouter.when("newReportDetail", packageStr+"new-complaint-detail-staff.fxml");
         FXRouter.when("changePasswordNisit",packageStr+"nisit-change-password.fxml");
-
-
+        FXRouter.when("complaintsDetailsForNisit",packageStr + "complaint-detail-nisit.fxml");
+        FXRouter.when("addCategory",packageStr + "add-complaint-category.fxml");
+        FXRouter.when("banned", packageStr + "banned-page.fxml");
+        FXRouter.when("reportUser",packageStr+"report-user.fxml");
+        FXRouter.when("reportComplaint",packageStr+"report-complaint.fxml");
     }
 
     public static void main(String[] args) {

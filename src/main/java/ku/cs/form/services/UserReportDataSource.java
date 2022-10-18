@@ -72,7 +72,7 @@ public class UserReportDataSource implements DataSource<HashMap<String, UserRepo
                 UserReport userReport = userComplaintHashMap.get(key);
                 String data = key + "," + userReport.getComplaint_category() + "," + userReport.getComplaint_detail();
                 if(userReport.getRequest_permission_detail() != null)
-                    data += userReport.getRequest_permission_detail();
+                    data += "," + userReport.getRequest_permission_detail();
                 buffer.write(data);
                 buffer.newLine();
             }
@@ -92,5 +92,14 @@ public class UserReportDataSource implements DataSource<HashMap<String, UserRepo
 
     }
 
+    public void appendUserReport(UserReport userReport) throws IOException {
+        String filePath = directoryName + File.separator + fileName;
+        File file = new File(filePath);
+        FileWriter writer = new FileWriter(file,true);
+        BufferedWriter buffer = new BufferedWriter(writer);
+        buffer.write("ผู้ใช้,"+userReport.writeAble()+"\n");
+        buffer.close();
+        writer.close();
+    }
 
 }

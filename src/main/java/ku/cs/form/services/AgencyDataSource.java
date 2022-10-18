@@ -30,7 +30,9 @@ public class AgencyDataSource implements DataSource<AgencyList> {
             buffer = new BufferedReader(reader);
             String line = "";
             while ((line = buffer.readLine()) != null) {
-                agencies.addAgency(line);
+                String[] data = line.split(",");
+                Agency agency = new Agency(data[0].trim(), data[1].trim());
+                agencies.addAgency(agency);
             }
 
         } catch (FileNotFoundException e) {
@@ -60,11 +62,11 @@ public class AgencyDataSource implements DataSource<AgencyList> {
             writer = new FileWriter(file, StandardCharsets.UTF_8);
             buffer = new BufferedWriter(writer);
 
-            for (String agency : agencies.getAgencies()){
-                buffer.write(agency);
+            for (Agency agency : agencies.getAgencies()){
+                String line = agency.getName() + "," + agency.getCategory();
+                buffer.write(line);
                 buffer.newLine();
             }
-
 
         } catch (IOException e) {
             throw new RuntimeException(e);

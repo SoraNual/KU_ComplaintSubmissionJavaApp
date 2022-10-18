@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.BannedPageController">
+   <children>
+      <ImageView fitHeight="201.0" fitWidth="262.0" layoutX="513.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/sadCat.png" />
+         </image>
+      </ImageView>
+      <TextArea fx:id="requestTextArea" layoutX="360.0" layoutY="433.0" prefHeight="200.0" prefWidth="530.0" />
+      <Label alignment="CENTER" layoutX="361.0" layoutY="109.0" text="บัญชีของคุณถูกระงับการใช้งาน" textFill="#bf0000">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <Button fx:id="requestButton" layoutX="492.0" layoutY="446.0" mnemonicParsing="false" onAction="#handleRequestButton" text="ยื่นคำขอคืนสิทธิ์การใช้งาน">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="homeButton" layoutX="492.0" layoutY="533.0" mnemonicParsing="false" onAction="#handleHomeButton" prefHeight="51.0" prefWidth="268.0" text="กลับไปหน้าแรก">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="cancelButton" layoutX="234.0" layoutY="592.0" mnemonicParsing="false" onAction="#handleCancelButton" text="ยกเลิก">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="sendButton" layoutX="947.0" layoutY="591.0" mnemonicParsing="false" onAction="#handleSendButton" prefHeight="40.0" prefWidth="67.0" text="ส่ง">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

@@ -13,32 +13,20 @@ public class User {
     private LocalDateTime loginTime;
     private String profileImageFilePath;
     private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"); //for change date format
-    private String userStatus;
-    private int loginAttempt;
+
     protected String rectangleColor;
     protected String textColor;
     protected String backgroundColor;
     protected String buttonColor;
 
-    public User(String name, String username, String password, String rectangleColor, String textColor, String backgroundColor, String buttonColor) {
-        this.name = name;
-        this.username = username;
-        this.password = password;
-        this.loginTime = null; //default time = recently time
-        this.userStatus = "active";
-        this.loginAttempt = 0;
-        this.rectangleColor = rectangleColor;
-        this.textColor = textColor;
-        this.backgroundColor = backgroundColor;
-        this.buttonColor = buttonColor;
-        setProfileImage();
-    }
-
     public User(String name, String username, String password) {
         this.name = name;
         this.username = username;
         this.password = password;
+        this.loginTime = null; //default time = recently time
+        setProfileImage();
     }
+
 
     public String getUsername() {
         return username;
@@ -77,26 +65,16 @@ public class User {
         profileImageFilePath = filePath;
     }
 
-    public void bannedLoginAttempt() {
-        loginAttempt++;
-    }
+
 
     public String getProfileImageFilePath() {
         return profileImageFilePath;
     }
 
-    public String getUserStatus() {
-        return userStatus;
-    }
-
-    public int getLoginAttempt() {
-        return loginAttempt;
-    }
-
     @Override
     public String toString() {
         //loginTime.format(format) => change LocalDateTime to string
-        return getLoginTime() + "," + getUsername() + "," + getPassword() + "," + this.getClass().getSimpleName().toLowerCase() + "," + getName() + "," + getUserStatus() + "," + getLoginAttempt() + "," + "," + rectangleColor + "," + textColor + "," + backgroundColor + "," + buttonColor;
+        return getLoginTime() + "," + getUsername() + "," + getPassword() + "," + this.getClass().getSimpleName().toLowerCase() + "," + getName() + "," + "active,0";
     }
 
     public String toStringLoginTime() {
@@ -107,15 +85,10 @@ public class User {
         return format;
     }
 
-
-
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setUserStatus(String userStatus) {
-        this.userStatus = userStatus;
-    }
 
 
 
@@ -127,39 +100,6 @@ public class User {
         this.profileImageFilePath = profileImageFilePath;
     }
 
-    public void setLoginAttempt(int loginAttempt) {
-        this.loginAttempt = loginAttempt;
-    }
 
-    public String getRectangleColor() {
-        return rectangleColor;
-    }
 
-    public String getTextColor() {
-        return textColor;
-    }
-
-    public String getBackgroundColor() {
-        return backgroundColor;
-    }
-
-    public String getButtonColor() {
-        return buttonColor;
-    }
-
-    public void setRectangleColor(String rectangleColor) {
-        this.rectangleColor = rectangleColor;
-    }
-
-    public void setTextColor(String textColor) {
-        this.textColor = textColor;
-    }
-
-    public void setBackgroundColor(String backgroundColor) {
-        this.backgroundColor = backgroundColor;
-    }
-
-    public void setButtonColor(String buttonColor) {
-        this.buttonColor = buttonColor;
-    }
 }

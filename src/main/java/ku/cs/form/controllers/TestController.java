@@ -56,42 +56,42 @@ public class TestController implements Initializable {
 //        voteLabel.setText("" + complaint.getVotePoint());
         complaints.add(complaint);
 
-        complaint = new Complaint("a", "b", "c", "d", "e");
+        complaint = new Complaint("a", "b", "c");
 //        topicLabel.setText(complaint.getTopic());
 //        voteLabel.setText("" + complaint.getVotePoint());
         complaints.add(complaint);
 
-        complaint = new Complaint("a", "basdasd", "c", "d", "e");
+        complaint = new Complaint("a", "b", "c");
 //        topicLabel.setText("test" + complaint.getTopic());
 //        voteLabel.setText("" + complaint.getVotePoint());
         complaints.add(complaint);
 
-        complaint = new Complaint("a", "b", "cadsadsa", "d", "e");
+        complaint = new Complaint("a", "b", "c");
 //        topicLabel.setText("test" + complaint.getTopic());
 //        voteLabel.setText("" + complaint.getVotePoint());
         complaints.add(complaint);
 
-        complaint = new Complaint("aasdasdasd", "b", "c", "d", "e");
+        complaint = new Complaint("a", "b", "c");
 //        topicLabel.setText("test" + complaint.getTopic());
 //        voteLabel.setText("" + complaint.getVotePoint());
         complaints.add(complaint);
 
-        complaint = new Complaint("a", "b", "c", "dasdasda", "e");
+        complaint = new Complaint("a", "b", "c");
 //        topicLabel.setText("test" + complaint.getTopic());
 //        voteLabel.setText("" + complaint.getVotePoint());
         complaints.add(complaint);
 
-        complaint = new Complaint("a", "b", "c", "d", "easdasdsa");
+        complaint = new Complaint("a", "b", "c");
 //        topicLabel.setText("test" + complaint.getTopic());
 //        voteLabel.setText("" + complaint.getVotePoint());
         complaints.add(complaint);
 
-        complaint = new Complaint("asdsadsaa", "b", "c", "d", "e");
+        complaint = new Complaint("a", "b", "c");
 //        topicLabel.setText("test" + complaint.getTopic());
 //        voteLabel.setText("" + complaint.getVotePoint());
         complaints.add(complaint);
 
-        complaint = new Complaint("a", "b", "csadasdas", "d", "e");
+        complaint = new Complaint("a", "b", "c");
 //        topicLabel.setText("test" + complaint.getTopic());
 //        voteLabel.setText("" + complaint.getVotePoint());
         complaints.add(complaint);

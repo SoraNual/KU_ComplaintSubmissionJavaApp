@@ -3,10 +3,9 @@ package ku.cs.form.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import ku.cs.form.models.Staff;
-import ku.cs.form.models.User;
-import ku.cs.form.models.UserReport;
-import ku.cs.form.models.UserList;
+import javafx.scene.layout.AnchorPane;
+import ku.cs.form.models.*;
+import ku.cs.form.services.SetTheme;
 import ku.cs.form.services.UserReportDataSource;
 import ku.cs.form.services.UserDataSource;
 
@@ -18,6 +17,7 @@ public class UserReportController {
     @FXML private ListView<String> bannedUsersListView;
     @FXML private ListView<String> inappropriateListView;
     @FXML private ListView<String> requestUnbannedListView;
+    @FXML private AnchorPane userReportAnchorPane;
     private HashMap<String, User> userHashMap;
     private UserReportDataSource userReportDataSource;
     private HashMap<String, UserReport> userComplaintHashMap;
@@ -26,6 +26,10 @@ public class UserReportController {
 
     @FXML
     public void initialize() {
+        User user = (User) com.github.saacsos.FXRouter.getData();
+        userReportAnchorPane.getStylesheets().add("file:src/main/resources/ku/cs/styles/styles.css");
+        SetTheme setTheme = new SetTheme(user.getUsername());
+        setTheme.setting();
         userDataSource = new UserDataSource("data","users.csv");
         userReportDataSource = new UserReportDataSource("data","user_reports.csv");
         usersList = userDataSource.readData();
@@ -40,7 +44,7 @@ public class UserReportController {
     private void showInappropriateListView() {
         inappropriateListView.getItems().clear();
         for(User user : usersList.getAllUsers()) {
-            if (userComplaintHashMap.containsKey(user.getUsername()) && user.getUserStatus().equals("active")) {
+            if (userComplaintHashMap.containsKey(user.getUsername()) && ((Nisit) user).getUserStatus().equals("active")) {
                 UserReport userReport = userComplaintHashMap.get(user.getUsername());
                 String banned_user_data = "Username: " + user.getUsername() + "\n"
                         + "Name: " + user.getName() + "\n"
@@ -63,7 +67,7 @@ public class UserReportController {
     private void showRequestUnbannedListView() {
         requestUnbannedListView.getItems().clear();
         for(User user : usersList.getAllUsers()) {
-            if (userComplaintHashMap.containsKey(user.getUsername()) && user.getUserStatus().equals("banned")) {
+            if (user instanceof Nisit && userComplaintHashMap.containsKey(user.getUsername()) && ((Nisit) user).getUserStatus().equals("banned")) {
                 UserReport userReport = userComplaintHashMap.get(user.getUsername());
                 if(userReport.getRequest_permission_detail() != null){
                     String request_user_data = "Username: " + user.getUsername()
@@ -86,10 +90,10 @@ public class UserReportController {
     private void showBannedUsersListView() {
         bannedUsersListView.getItems().clear();
         for(User user : usersList.getAllUsers()){
-            if(user.getUserStatus().equals("banned") && user.getUserStatus().equals("banned")){
+            if(user instanceof Nisit && ((Nisit) user).getUserStatus().equals("banned") && ((Nisit) user).getUserStatus().equals("banned")){
                 String banned_user_data = "Username: " + user.getUsername() + "\n"
                         + "Name: " + user.getName() + "\n"
-                        + "LoginAttempt: " + user.getLoginAttempt() + "\n"
+                        + "LoginAttempt: " + ((Nisit) user).getLoginAttempt() + "\n"
                         + "Type: " + user.getClass().getSimpleName();
                 if(user.getClass().getSimpleName().equals("Staff"))
                     banned_user_data += "\nAgency: " + ((Staff) user).getAgency();
@@ -106,7 +110,7 @@ public class UserReportController {
         String banned_username = selected_data_array[0].split(" ")[1];
         User target = userHashMap.get(banned_username);
         usersList.getAllUsers().remove(target);
-        target.setUserStatus("active");
+        ((Nisit) target).setUserStatus("active");
         usersList.addUser(target);
         showBannedUsersListView();
         userComplaintHashMap.remove(banned_username);
@@ -121,7 +125,7 @@ public class UserReportController {
         String banned_username = selected_data_array[0].split(" ")[1];
         User target = userHashMap.get(banned_username);
         usersList.getAllUsers().remove(target);
-        target.setUserStatus("banned");
+        ((Nisit) target).setUserStatus("banned");
         usersList.addUser(target);
         showInappropriateListView();
         userDataSource.writeData(usersList);

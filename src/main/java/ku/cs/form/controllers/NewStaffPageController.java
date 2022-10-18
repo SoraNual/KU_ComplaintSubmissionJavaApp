@@ -19,10 +19,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import ku.cs.form.models.Complaint;
-import ku.cs.form.models.ComplaintList;
-import ku.cs.form.models.Staff;
+import ku.cs.form.models.*;
 import com.github.saacsos.FXRouter;
+import ku.cs.form.services.AgencyDataSource;
 import ku.cs.form.services.ComplaintFileDataSource;
 import ku.cs.form.services.Filterer;
 import ku.cs.form.services.SetTheme;
@@ -34,6 +33,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class NewStaffPageController {
     @FXML private VBox leftRec;
@@ -49,14 +49,18 @@ public class NewStaffPageController {
     @FXML private Label nameLabel;
     @FXML private Label responsibilityLabel;
     @FXML private ImageView staffImage;
-
-//    @FXML private ListView<Complaint> itemHolder;
+    @FXML private AnchorPane anchorPane;
     private Staff staff;
     private ComplaintList complaintList;
+    private SetTheme setTheme;
 
     @FXML
     public void initialize() {
         staff = (Staff) FXRouter.getData();
+        setTheme = new SetTheme(staff.getUsername());
+        setTheme.setting();
+        anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
+
         ComplaintFileDataSource complaintFileDataSource = new ComplaintFileDataSource("data", "complaints.csv");
         complaintList = complaintFileDataSource.readData();
 
@@ -68,23 +72,26 @@ public class NewStaffPageController {
         staffImage.setImage(userImage);
 
         showImage();
-//        setTheme();
         showComplaintListView();
-        handleSelectedItem();
+        handleSelectedCustomItem();
+    }
+
+    public ComplaintList filterByCategory(ComplaintList complains) {
+        Agency agency = getStaffCategory();
+        complains = complains.filterBy(new Filterer<Complaint>() {
+            @Override
+            public boolean filter(Complaint o) {
+                return o.getCategory().equals(agency.getCategory());
+            }
+        });
+        return complains;
     }
 
     @FXML
     public void showComplaintListView() {
-//        // filtered by Agency
-//        ComplaintList filteredComplaints = complaintList.filterBy(new Filterer<Complaint>() {
-//            @Override
-//            public boolean filter(Complaint o) {
-//                // TODO
-//                return true;
-//            }
-//        });
+        ComplaintList filteredComplain = filterByCategory(complaintList);
 //
-        List<Complaint> complaints = complaintList.getAllReports();
+        List<Complaint> complaints = filteredComplain.getAllComplaints();
         for (int i = 0; i < complaints.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/ku/cs/complaint-item.fxml"));
@@ -101,25 +108,22 @@ public class NewStaffPageController {
         }
     }
 
+    public Agency getStaffCategory() {
+        AgencyDataSource agencyDataSource = new AgencyDataSource("data", "agency.csv");
+        AgencyList agencyList = agencyDataSource.readData();
+
+        Agency result = null;
+        for (Agency agency : agencyList.getAgencies()) {
+            if (agency.getName().equals(staff.getAgency())) {
+                result = agency;
+            }
+        }
+        return result;
+    }
+
     @FXML
-    public void handleSelectedItem() {
-//        itemHolder.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent mouseEvent) {
-//                if (mouseEvent.getClickCount() % 2 == 0) {
-//                    Complaint complaint = itemHolder.getSelectionModel().getSelectedItem();
-//                    if (complaint != null) {
-//                        try {
-//                            FXRouter.goTo("newReportDetail", complaint);
-//                        } catch (IOException e) {
-//                            System.out.println("ไม่สามารถไปที่หน้า ReportDetail ได้");
-//                        }
-//                    } else {
-//                        System.out.println("user click on empty list cell");
-//                    }
-//                }
-//            }
-//        });
+    public void handleSelectedCustomItem() {
+        // TODO
     }
 
     public void handleUploadImageButton(ActionEvent actionEvent){
@@ -148,22 +152,6 @@ public class NewStaffPageController {
         Image staffImg = new Image(imageFile.toURI().toString());
         staffImage.setImage(staffImg);
     }
-
-//    @FXML
-//    public void setTheme() {
-//        SetTheme setTheme = new SetTheme(staff);
-//        setTheme.setObject(itemHolder);
-//        setTheme.setObject(leftRec);
-//        setTheme.setObject(uploadImageButton);
-//        setTheme.setObject(searchButton);
-//        setTheme.setObject(searchTextField);
-//        setTheme.setInvisibleBackgroundButton(sideButton);
-//        setTheme.setObject(nameLabel);
-//        setTheme.setObject(responsibilityLabel);
-//        setTheme.setObject(agency);
-//        setTheme.setObject(agencyLabel);
-//        setTheme.setObject(pane);
-//    }
 
     @FXML
     public void handleChangePasswordButton(ActionEvent actionEvent) {

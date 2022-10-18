@@ -9,14 +9,18 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import ku.cs.form.models.Staff;
 import ku.cs.form.models.User;
 import ku.cs.form.models.UserList;
+import ku.cs.form.services.SetTheme;
 import ku.cs.form.services.UserDataSource;
 
 import java.io.IOException;
 
 public class NewStaffChangePasswordPageController {
+    @FXML
+    private AnchorPane anchorPane;
     @FXML
     private ImageView staffRegisPic;
     @FXML
@@ -27,6 +31,7 @@ public class NewStaffChangePasswordPageController {
     private PasswordField newPasswordPasswordField;
     @FXML
     private PasswordField confirmPasswordPasswordField;
+    private SetTheme setTheme;
     private Staff staff;
     private UserDataSource userDataSource;
 
@@ -35,6 +40,9 @@ public class NewStaffChangePasswordPageController {
         userDataSource = new UserDataSource("data", "users.csv");
 
         staff = (Staff) FXRouter.getData();
+        setTheme = new SetTheme(staff.getUsername());
+        setTheme.setting();
+        anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
 
     }
 
