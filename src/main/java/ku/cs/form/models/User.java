@@ -13,8 +13,7 @@ public class User {
     private LocalDateTime loginTime;
     private String profileImageFilePath;
     private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"); //for change date format
-    private String userStatus;
-    private int loginAttempt;
+
     protected String rectangleColor;
     protected String textColor;
     protected String backgroundColor;
@@ -25,8 +24,6 @@ public class User {
         this.username = username;
         this.password = password;
         this.loginTime = null; //default time = recently time
-        this.userStatus = "active";
-        this.loginAttempt = 0;
         setProfileImage();
     }
 
@@ -68,26 +65,16 @@ public class User {
         profileImageFilePath = filePath;
     }
 
-    public void bannedLoginAttempt() {
-        loginAttempt++;
-    }
+
 
     public String getProfileImageFilePath() {
         return profileImageFilePath;
     }
 
-    public String getUserStatus() {
-        return userStatus;
-    }
-
-    public int getLoginAttempt() {
-        return loginAttempt;
-    }
-
     @Override
     public String toString() {
         //loginTime.format(format) => change LocalDateTime to string
-        return getLoginTime() + "," + getUsername() + "," + getPassword() + "," + this.getClass().getSimpleName().toLowerCase() + "," + getName() + "," + getUserStatus() + "," + getLoginAttempt();
+        return getLoginTime() + "," + getUsername() + "," + getPassword() + "," + this.getClass().getSimpleName().toLowerCase() + "," + getName() + "," + "active,0";
     }
 
     public String toStringLoginTime() {
@@ -102,9 +89,7 @@ public class User {
         this.password = password;
     }
 
-    public void setUserStatus(String userStatus) {
-        this.userStatus = userStatus;
-    }
+
 
 
     public void setLoginTime(LocalDateTime loginTime) {
@@ -115,8 +100,6 @@ public class User {
         this.profileImageFilePath = profileImageFilePath;
     }
 
-    public void setLoginAttempt(int loginAttempt) {
-        this.loginAttempt = loginAttempt;
-    }
+
 
 }

@@ -73,16 +73,12 @@ public class UserDataSource implements DataSource<UserList>{
                 String class_name = data[3].trim(); // check Class
                 if(class_name.equals("staff")){
                     Staff staff = new Staff(data[4].trim(), data[1].trim(), data[2].trim(), data[7].trim()); // add agency
-                    staff.setLoginAttempt(Integer.parseInt(data[6].trim()));
-                    staff.setUserStatus(data[5].trim());
                     staff.setLoginTime(data[0].trim());
                     userList.addUser(staff);
                 }
 
                 else if(class_name.equals("admin")){
                     Admin admin = new Admin(data[4].trim(), data[1].trim(), data[2].trim());
-                    admin.setLoginAttempt(Integer.parseInt(data[6].trim()));
-                    admin.setUserStatus(data[5].trim());
                     admin.setLoginTime(data[0].trim());
                     userList.addUser(admin);
                 }

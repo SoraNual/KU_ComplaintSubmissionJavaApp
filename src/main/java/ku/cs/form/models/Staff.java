@@ -19,6 +19,6 @@ public class Staff extends User {
     @Override
     public String toString() {
         //loginTime.format(format) => change LocalDateTime to string
-        return getLoginTime()+ "," + getUsername() + ","+ getPassword() +","+ this.getClass().getSimpleName().toLowerCase() +","+getName()+","+getUserStatus()+","+getLoginAttempt()+","+getAgency();
+        return getLoginTime()+ "," + getUsername() + ","+ getPassword() +","+ this.getClass().getSimpleName().toLowerCase() +","+getName()+","+ "active,0," + getAgency();
     }
 }
