@@ -3,13 +3,12 @@ package ku.cs.form.models;
 public class Staff extends User {
 
     private String agency;
-    public Staff(String name, String username, String password,String agency,String rectangleColorWeb,String textColorWeb,String backgroundColorWeb,String buttonColorWeb) {
-        super(name, username, password,rectangleColorWeb,textColorWeb,backgroundColorWeb,buttonColorWeb);
+    public Staff(String name, String username, String password, String agency) {
+        super(name, username, password);
         this.agency = agency;
     }
 
-    public Staff(String name, String username, String password, String agency) {
-        super(name, username, password);
+    public void setAgency(String agency) {
         this.agency = agency;
     }
 
@@ -20,6 +19,6 @@ public class Staff extends User {
     @Override
     public String toString() {
         //loginTime.format(format) => change LocalDateTime to string
-        return getLoginTime()+ "," + getUsername() + ","+ getPassword() +","+ this.getClass().getSimpleName().toLowerCase() +","+getName()+","+getUserStatus()+","+getLoginAttempt()+","+getAgency()+","+ rectangleColor +","+textColor+","+backgroundColor+","+buttonColor;
+        return getLoginTime()+ "," + getUsername() + ","+ getPassword() +","+ this.getClass().getSimpleName().toLowerCase() +","+getName()+","+getUserStatus()+","+getLoginAttempt()+","+getAgency();
     }
 }

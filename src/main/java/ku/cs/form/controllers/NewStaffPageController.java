@@ -67,6 +67,7 @@ public class NewStaffPageController {
 //        setTheme();
         showComplaintListView();
         handleSelectedItem();
+
     }
 
     @FXML

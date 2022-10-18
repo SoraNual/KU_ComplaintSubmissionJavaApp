@@ -40,31 +40,6 @@ public class NisitChangePasswordController {
         user = (User) com.github.saacsos.FXRouter.getData();
         userDataSource = new UserDataSource("data","users.csv");
         userList = userDataSource.readData();
-
-        setUpTheme();
-    }
-
-    public void setUpTheme(){
-        SetTheme setTheme = new SetTheme(user);
-        setTheme.setObject(pane);
-
-        setTheme.setObject(passwordLabel);
-        setTheme.setObject(usernameLabel);
-        setTheme.setObject(newPasswordLabel);
-        setTheme.setObject(confirmNewPasswordLabel);
-        setTheme.setObject(incorrectWarningLabel);
-
-        setTheme.setObject(backButton);
-        setTheme.setObject(confirmButton);
-
-        setTheme.setObject(usernameTextField);
-
-        setTheme.setObject(newPasswordPasswordField);
-        setTheme.setObject(confirmNewPasswordPasswordField);
-        setTheme.setObject(PasswordPasswordField);
-
-        setTheme.setObject(leftRec);
-        setTheme.setObject(rightRec);
     }
 
     public void handleConfirmButton(ActionEvent actionEvent){

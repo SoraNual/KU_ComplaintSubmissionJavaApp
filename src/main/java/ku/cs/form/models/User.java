@@ -20,25 +20,16 @@ public class User {
     protected String backgroundColor;
     protected String buttonColor;
 
-    public User(String name, String username, String password, String rectangleColor, String textColor, String backgroundColor, String buttonColor) {
+    public User(String name, String username, String password) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.loginTime = null; //default time = recently time
         this.userStatus = "active";
         this.loginAttempt = 0;
-        this.rectangleColor = rectangleColor;
-        this.textColor = textColor;
-        this.backgroundColor = backgroundColor;
-        this.buttonColor = buttonColor;
         setProfileImage();
     }
 
-    public User(String name, String username, String password) {
-        this.name = name;
-        this.username = username;
-        this.password = password;
-    }
 
     public String getUsername() {
         return username;
@@ -96,7 +87,7 @@ public class User {
     @Override
     public String toString() {
         //loginTime.format(format) => change LocalDateTime to string
-        return getLoginTime() + "," + getUsername() + "," + getPassword() + "," + this.getClass().getSimpleName().toLowerCase() + "," + getName() + "," + getUserStatus() + "," + getLoginAttempt() + "," + "," + rectangleColor + "," + textColor + "," + backgroundColor + "," + buttonColor;
+        return getLoginTime() + "," + getUsername() + "," + getPassword() + "," + this.getClass().getSimpleName().toLowerCase() + "," + getName() + "," + getUserStatus() + "," + getLoginAttempt();
     }
 
     public String toStringLoginTime() {
@@ -107,8 +98,6 @@ public class User {
         return format;
     }
 
-
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -116,7 +105,6 @@ public class User {
     public void setUserStatus(String userStatus) {
         this.userStatus = userStatus;
     }
-
 
 
     public void setLoginTime(LocalDateTime loginTime) {
@@ -131,35 +119,4 @@ public class User {
         this.loginAttempt = loginAttempt;
     }
 
-    public String getRectangleColor() {
-        return rectangleColor;
-    }
-
-    public String getTextColor() {
-        return textColor;
-    }
-
-    public String getBackgroundColor() {
-        return backgroundColor;
-    }
-
-    public String getButtonColor() {
-        return buttonColor;
-    }
-
-    public void setRectangleColor(String rectangleColor) {
-        this.rectangleColor = rectangleColor;
-    }
-
-    public void setTextColor(String textColor) {
-        this.textColor = textColor;
-    }
-
-    public void setBackgroundColor(String backgroundColor) {
-        this.backgroundColor = backgroundColor;
-    }
-
-    public void setButtonColor(String buttonColor) {
-        this.buttonColor = buttonColor;
-    }
 }

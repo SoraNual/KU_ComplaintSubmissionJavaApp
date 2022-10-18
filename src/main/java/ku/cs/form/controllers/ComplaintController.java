@@ -8,7 +8,6 @@ import javafx.scene.control.*;
 import ku.cs.form.models.*;
 import ku.cs.form.services.ComplaintCategoryDataSource;
 import ku.cs.form.services.ComplaintFileDataSource;
-import ku.cs.form.services.SetTheme;
 
 import java.io.IOException;
 
@@ -45,15 +44,8 @@ public class ComplaintController {
         uploadImgButton.setVisible(false);
 
         handleCategoryChoiceBox();
-        theme();
     }
-    public void theme(){
-        SetTheme setTheme = new SetTheme(user);
-        setTheme.setObject(warningLabel);
-        setTheme.setObject(topicTextField);
-        setTheme.setObject(basicDetailsTextArea);
-        setTheme.setObject(categoryChoiceBox);
-    }
+
     private void handleCategoryChoiceBox(){
         categoryChoiceBox.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<ComplaintCategory>() {

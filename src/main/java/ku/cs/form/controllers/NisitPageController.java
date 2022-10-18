@@ -26,6 +26,7 @@ public class NisitPageController {
 
     private User user;
     @FXML private ListView<Complaint> reportsListView;
+    @FXML private AnchorPane nisitAnchorPane;
     private ComplaintFileDataSource dataSource;
     private ComplaintList complaintList;
 
@@ -43,7 +44,8 @@ public class NisitPageController {
 
     @FXML public void initialize() {
         user = (User) com.github.saacsos.FXRouter.getData();
-
+        SetTheme setTheme = new SetTheme(user.getUsername());
+        setTheme.setting();
         nameLabel.setText(user.getName());
         File imageFile = new File(user.getProfileImageFilePath());
         Image userImage = new Image(imageFile.toURI().toString());
@@ -51,21 +53,6 @@ public class NisitPageController {
         dataSource = new ComplaintFileDataSource("data", "complaints.csv");
         complaintList = dataSource.readData();
         reportsListView.getItems().addAll(complaintList.getAllReports());
-        theme();
-    }
-
-    public void theme() {
-        SetTheme setTheme = new SetTheme(user);
-        setTheme.setObject(reportsListView);
-        setTheme.setObject(rightRec);
-        setTheme.setObject(reportButton);
-        setTheme.setObject(uploadImageButton);
-        setTheme.setInvisibleBackgroundButton(editProfileButton);
-        setTheme.setInvisibleBackgroundButton(changePasswordButton);
-        setTheme.setObject(nameLabel);
-        setTheme.setObject(roleLabel);
-        setTheme.setObject(allReportLabel);
-        setTheme.setObject(pane);
     }
 
     public void handleUploadImageButton(ActionEvent actionEvent){
