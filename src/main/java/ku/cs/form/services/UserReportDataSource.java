@@ -72,7 +72,7 @@ public class UserReportDataSource implements DataSource<HashMap<String, UserRepo
                 UserReport userReport = userComplaintHashMap.get(key);
                 String data = key + "," + userReport.getComplaint_category() + "," + userReport.getComplaint_detail();
                 if(userReport.getRequest_permission_detail() != null)
-                    data += userReport.getRequest_permission_detail();
+                    data += "," + userReport.getRequest_permission_detail();
                 buffer.write(data);
                 buffer.newLine();
             }

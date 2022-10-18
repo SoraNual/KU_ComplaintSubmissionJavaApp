@@ -49,7 +49,7 @@ public class reportComplaintController {
             System.out.println("hey");
             FileWriter writer = new FileWriter(file,true);
             BufferedWriter buffer = new BufferedWriter(writer);
-            buffer.write("เนื้อหา"+complaint.getTopic()+complaint.getSubmitTime()+categoryComboBox.getValue()+detailTextArea.getText().replace("\n","")+"\n");
+            buffer.write("เนื้อหา"+ "," +complaint.getTopic()+ "," +complaint.getSubmitTime()+ "," +categoryComboBox.getValue()+detailTextArea.getText().replace("\n","")+"\n");
             buffer.close();
             writer.close();
 
