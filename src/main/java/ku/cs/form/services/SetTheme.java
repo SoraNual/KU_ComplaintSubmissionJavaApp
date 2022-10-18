@@ -112,7 +112,7 @@ public class SetTheme {
 
         //for new user setting (not found in -setting-
         if (setting == null) {
-            String[] default_setting = {"default", "18","Kanit"};
+            String[] default_setting = {"default", "100","Kanit"};
             settingHashMap.put(username, default_setting);
             setting = settingHashMap.get(username);
         }

@@ -85,7 +85,7 @@ public class NewStaffPageController {
 //            itemHolder.getItems().add(complaint);
 //        }
 
-        for (Complaint complaint : complaintList.getAllReports()) {
+        for (Complaint complaint : complaintList.getAllComplaints()) {
             itemHolder.getItems().add(complaint);
         }
     }

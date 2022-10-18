@@ -6,7 +6,7 @@ import ku.cs.form.models.ComplaintCategoryList;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
-public class ComplaintCategoryDataSource implements DataSource{
+public class ComplaintCategoryDataSource implements DataSource<ComplaintCategoryList>{
     private String directoryName;
     private String fileName;
 
@@ -32,7 +32,7 @@ public class ComplaintCategoryDataSource implements DataSource{
             while ((line = buffer.readLine()) != null) {
                 String[] data = line.split(",");
                 System.out.println(data);
-                ComplaintCategory complaintCategory = new ComplaintCategory(data[0], data[1], data[3], Boolean.valueOf(data[2]));
+                ComplaintCategory complaintCategory = new ComplaintCategory(data[0], data[1], Boolean.valueOf(data[2]), data[3]);
 
                 reportCategories.addCategory(complaintCategory);
             }
@@ -54,7 +54,39 @@ public class ComplaintCategoryDataSource implements DataSource{
     }
 
     @Override
-    public void writeData(Object o) {
+    public void writeData(ComplaintCategoryList complaintCategoryList) {
+        String filePath = directoryName + File.separator + fileName;
+        File file = new File(filePath);
 
+        FileWriter writer = null;
+        BufferedWriter buffer = null;
+
+        try {
+            writer = new FileWriter(file, StandardCharsets.UTF_8);
+            buffer = new BufferedWriter(writer);
+
+            for (ComplaintCategory category : complaintCategoryList.getAllCategories()){
+                String line;
+                line = category.getName() + ","
+                        + category.getAdditionalDetailTitle() + ","
+                        + category.getImageNeeded() + ","
+                        + category.getAdditionalImageTitle();
+                buffer.write(line);
+                buffer.newLine();
+            }
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                buffer.close();
+                writer.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
+
+
 }

@@ -11,27 +11,28 @@ public class Complaint {
     private LocalDateTime submitTime;
     private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     private String basicDetail;
+    private String basicDetailWithNewLine;
     private String category;
     private String additionalDetail;
+    private String additionalDetailWithNewLine;;
     private String status; // 3 status : pending, in progress, finish
     private int votePoint;
-    private ArrayList<User> votedUsers;
+    private ArrayList<User> voters;
     private String solution;
+    private String solutionWithNewLine;
 
-    public Complaint(String topic, String complainantUsername, String basicDetail, String category, String additionalDetail, String status, int votePoint, String solution) {
+    public Complaint(String topic, String complainantUsername, String category, String status, int votePoint) {
         this.topic = topic;
         this.complainantUsername = complainantUsername;
         this.submitTime = LocalDateTime.now();
         this.category = category;
-        this.additionalDetail = additionalDetail;
-        this.basicDetail = basicDetail;
         this.status = status;
         this.votePoint = votePoint;
-        this.solution = solution;
+        this.solution = "กำลังตรวจสอบ";
     }
 
-    public Complaint(String topic, String complainantUsername, String basicDetail, String category, String additionalDetail) {
-        this(topic, complainantUsername, basicDetail, category, additionalDetail, "pending", 0, null);
+    public Complaint(String topic, String complainantUsername, String category) {
+        this(topic, complainantUsername, category, "รอการตรวจสอบจากเจ้าหน้าที่", 0);
     }
 
     public String getTopic() { return topic; }
@@ -47,6 +48,9 @@ public class Complaint {
     public String getSubmitTime() {
         return submitTime.format(format);
     }
+    public LocalDateTime getLiteralSubmitTime(){
+        return submitTime;
+    }
     public String getAdditionalDetail() {
         return additionalDetail;
     }
@@ -55,8 +59,40 @@ public class Complaint {
         return solution;
     }
 
+    public String getBasicDetailWithNewLine() {
+        return basicDetailWithNewLine;
+    }
+
+    public String getAdditionalDetailWithNewLine() {
+        return additionalDetailWithNewLine;
+    }
+
+    public void setBasicDetail(String basicDetail) {
+        this.basicDetail = basicDetail;
+        setBasicDetailWithNewLine(basicDetail.replace("NEWLINE","\n"));
+    }
+
+    public void setAdditionalDetail(String additionalDetail) {
+        this.additionalDetail = additionalDetail;
+        setAdditionalDetailWithNewLine(additionalDetail.replace("NEWLINE","\n"));
+
+    }
+
+    public void setBasicDetailWithNewLine(String basicDetailWithNewLine) {
+        this.basicDetailWithNewLine = basicDetailWithNewLine;
+    }
+
+    public void setAdditionalDetailWithNewLine(String additionalDetailWithNewLine) {
+        this.additionalDetailWithNewLine = additionalDetailWithNewLine;
+    }
+
     public void setSolution(String solution) {
         this.solution = solution;
+        setSolutionWithNewLine(solution.replace("NEWLINE","\n"));
+    }
+
+    public void setSolutionWithNewLine(String solutionWithNewLine) {
+        this.solutionWithNewLine = solutionWithNewLine;
     }
 
     public void setSubmitTime(LocalDateTime submitTime) {
@@ -79,5 +115,24 @@ public class Complaint {
         return "<[ " + getVotePoint() + " ]> " + getTopic();
     }
 
+//    @Override
+//    public String toString() {
+//        //FOR TESTING
+//        return topic + " " + complainantUsername + " " + submitTime + " VotePoint:" + votePoint;
+//    }
 
+    private void addPositiveVote(User voter){
+        if(checkIfVotedAlready(voter)) return;
+    }
+
+    private void addNegativeVote(User voter){
+        if(checkIfVotedAlready(voter)) return;
+    }
+
+    private boolean checkIfVotedAlready(User voter){
+        for(User voted: voters){
+            if(voted.getUsername().equals(voter.getUsername())) return true;
+        }
+        return false;
+    }
 }

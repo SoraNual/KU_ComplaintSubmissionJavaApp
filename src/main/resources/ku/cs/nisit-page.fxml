@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -17,19 +22,14 @@
                 <Font name="System Bold" size="32.0" />
             </font>
         </Label>
-        <Label layoutX="340.0" layoutY="90.0" prefHeight="36.0" prefWidth="338.0" text="เรื่องร้องเรียนที่รับผิดชอบ">
-            <font>
-                <Font name="System Bold" size="32.0" />
-            </font>
-        </Label>
-      <VBox layoutX="300.0" layoutY="73.0">
+      <VBox layoutX="533.0" layoutY="171.0" prefHeight="434.0" prefWidth="631.0">
          <children>
-              <ListView fx:id="reportsListView" prefHeight="531.0" prefWidth="863.0" style="-fx-background-color: f3f3f3; -fx-background-radius: 13;" />
+              <ListView fx:id="complaintsListView" prefHeight="531.0" prefWidth="863.0" style="-fx-background-color: f3f3f3; -fx-background-radius: 13;" stylesheets="@styles/complaint-listview-styles.css" />
          </children>
       </VBox>
-        <Label fx:id="allReportLabel" layoutX="303.0" layoutY="40.0" prefHeight="19.0" prefWidth="144.0" text="เรื่องร้องเรียนทั้งหมด">
+        <Label fx:id="allReportLabel" layoutX="615.0" layoutY="58.0" prefHeight="54.0" prefWidth="322.0" text="เรื่องร้องเรียนทั้งหมด">
             <font>
-                <Font name="System Bold" size="16.0" />
+                <Font name="System Bold" size="36.0" />
             </font>
         </Label>
         <ImageView fx:id="nisitImage" fitHeight="150.0" fitWidth="150.0" layoutX="57.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true" />
@@ -38,7 +38,7 @@
                 <Font name="System Bold" size="20.0" />
             </font>
         </Label>
-        <Button fx:id="reportButton" layoutX="520.0" layoutY="631.0" mnemonicParsing="false" onAction="#handleReportButton" prefHeight="36.0" prefWidth="184.0" style="-fx-background-color: #2EC4B6; -fx-background-color: #2EC4B6; -fx-border-radius: 7; -fx-background-radius: 7;" text="เรื่องร้องเรียน" textFill="WHITE">
+        <Button fx:id="reportButton" layoutX="684.0" layoutY="635.0" mnemonicParsing="false" onAction="#handleComplainButton" prefHeight="36.0" prefWidth="184.0" style="-fx-background-color: #2EC4B6; -fx-background-color: #2EC4B6; -fx-border-radius: 7; -fx-background-radius: 7;" text="ร้องเรียน" textFill="WHITE">
             <font>
                 <Font size="16.0" />
             </font>
@@ -58,5 +58,48 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
+      <Label layoutX="924.0" layoutY="131.0" text="เรียงตาม:" />
+      <ComboBox fx:id="sortComboBox" layoutX="969.0" layoutY="127.0" prefHeight="26.0" prefWidth="194.0" />
+      <ComboBox fx:id="categoryFilterComboBox" layoutX="314.0" layoutY="259.0" prefHeight="26.0" prefWidth="170.0" />
+      <CheckBox fx:id="byMeFilterCheckBox" layoutX="323.0" layoutY="185.0" mnemonicParsing="false" text="แจ้งโดยฉ้น" />
+      <VBox layoutX="321.0" layoutY="338.0" prefHeight="58.0" prefWidth="170.0">
+         <children>
+            <CheckBox fx:id="pendingStatusCheckBox" mnemonicParsing="false" text="รอการตรวจสอบจากเจ้าหน้าที่" />
+            <CheckBox fx:id="processingStatusCheckBox" mnemonicParsing="false" text="กำลังดำเนินการ" />
+            <CheckBox fx:id="concludedStatusCheckBox" mnemonicParsing="false" text="ดำเนินการเสร็จสิ้น" />
+         </children>
+      </VBox>
+      <Label layoutX="379.0" layoutY="313.0" text="สถานะ">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="363.0" layoutY="416.0" text="คะแนนโหวต">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Line endX="100.0" layoutX="399.0" layoutY="304.0" startX="-100.0" />
+      <Line endX="100.0" layoutX="399.0" layoutY="405.0" startX="-100.0" />
+      <Label layoutX="372.0" layoutY="229.0" text="หมวดหมู่">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Line endX="100.0" layoutX="399.0" layoutY="221.0" startX="-100.0" />
+      <Button layoutX="378.0" layoutY="557.0" mnemonicParsing="false" onAction="#filter" text="Filter" />
+      <TextField fx:id="lessThanVotePointsTextField" layoutX="384.0" layoutY="444.0" prefHeight="1.0" prefWidth="40.0" />
+      <TextField fx:id="moreThanVotePointsTextField" layoutX="384.0" layoutY="478.0" prefHeight="1.0" prefWidth="40.0" />
+      <TextField fx:id="fromVotePointsTextField" layoutX="384.0" layoutY="513.0" prefHeight="1.0" prefWidth="40.0" />
+      <TextField fx:id="toVotePointsTextField" layoutX="452.0" layoutY="513.0" prefHeight="1.0" prefWidth="40.0" />
+      <Label layoutX="431.0" layoutY="517.0" text="ถึง" />
+      <CheckBox fx:id="lessThanVotePointsCheckBox" layoutX="320.0" layoutY="448.0" mnemonicParsing="false" text="น้อยกว่า" />
+      <CheckBox fx:id="moreThanVotePointsCheckBox" layoutX="320.0" layoutY="482.0" mnemonicParsing="false" text="มากกว่า" />
+      <CheckBox fx:id="fromToVotePointsCheckBox" layoutX="320.0" layoutY="516.0" mnemonicParsing="false" text="ตั้งแต่" />
+      <ImageView fitHeight="20.0" fitWidth="22.0" layoutX="904.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/sort.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

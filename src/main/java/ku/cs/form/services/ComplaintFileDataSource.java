@@ -54,15 +54,14 @@ public class ComplaintFileDataSource implements DataSource<ComplaintList> {
                 Complaint complaint = new Complaint(
                         data[1].trim(),
                         data[2].trim(),
-                        data[3].trim(),
                         data[4].trim(),
-                        data[5].trim(),
                         data[6].trim(),
-                        Integer.parseInt(data[7].trim()),
-                        data[8].trim().replace("NEWLINE", "\n")
-                );
+                        Integer.parseInt(data[7].trim()));
+                complaint.setBasicDetail(data[3].trim());
+                complaint.setAdditionalDetail(data[5].trim());
                 complaint.setSubmitTime(data[0].trim());
-                complaintList.addReport(complaint);
+                complaint.setSolution(data[8].trim());
+                complaintList.addComplaint(complaint);
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -82,7 +81,7 @@ public class ComplaintFileDataSource implements DataSource<ComplaintList> {
 
     public void updateData(Complaint newComplaint, String solution, String status) {
         ComplaintList complaintList = readData();
-        for (Complaint complaint : complaintList.getAllReports()) {
+        for (Complaint complaint : complaintList.getAllComplaints()) {
             if (complaint.getComplainantUsername().equals(newComplaint.getComplainantUsername()) &&
                         complaint.getTopic().equals(newComplaint.getTopic()))
             {
@@ -108,7 +107,7 @@ public class ComplaintFileDataSource implements DataSource<ComplaintList> {
             writer = new FileWriter(file, StandardCharsets.UTF_8);
             buffer = new BufferedWriter(writer);
             // Submit time, Topic, username, basic details, category, additional details, status, vote points, solution
-            for(Complaint complaint : complaintList.getAllReports()){
+            for(Complaint complaint : complaintList.getAllComplaints()){
                 String line = complaint.getSubmitTime() + "," +
                         complaint.getTopic() + "," +
                         complaint.getComplainantUsername() + "," +
