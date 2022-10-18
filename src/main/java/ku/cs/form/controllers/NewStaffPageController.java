@@ -3,6 +3,8 @@ package ku.cs.form.controllers;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -30,10 +32,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class NewStaffPageController {
     @FXML private VBox leftRec;
+    @FXML private VBox itemHolder;
     @FXML private AnchorPane pane;
     private Stage stage;
     @FXML private Button uploadImageButton;
@@ -46,7 +50,7 @@ public class NewStaffPageController {
     @FXML private Label responsibilityLabel;
     @FXML private ImageView staffImage;
 
-    @FXML private ListView<Complaint> itemHolder;
+//    @FXML private ListView<Complaint> itemHolder;
     private Staff staff;
     private ComplaintList complaintList;
 
@@ -80,34 +84,42 @@ public class NewStaffPageController {
 //            }
 //        });
 //
-//        for (Complaint complaint : filteredComplaints.getAllReports()) {
-//            itemHolder.getItems().add(complaint);
-//        }
+        List<Complaint> complaints = complaintList.getAllReports();
+        for (int i = 0; i < complaints.size(); i++) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/ku/cs/complaint-item.fxml"));
 
-        for (Complaint complaint : complaintList.getAllReports()) {
-            itemHolder.getItems().add(complaint);
+            try {
+                HBox hBox = fxmlLoader.load();
+                ComplaintItemController complaintItemController = fxmlLoader.getController();
+
+                complaintItemController.setData(complaints.get(i));
+                itemHolder.getChildren().add(hBox);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     @FXML
     public void handleSelectedItem() {
-        itemHolder.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if (mouseEvent.getClickCount() % 2 == 0) {
-                    Complaint complaint = itemHolder.getSelectionModel().getSelectedItem();
-                    if (complaint != null) {
-                        try {
-                            FXRouter.goTo("newReportDetail", complaint);
-                        } catch (IOException e) {
-                            System.out.println("ไม่สามารถไปที่หน้า ReportDetail ได้");
-                        }
-                    } else {
-                        System.out.println("user click on empty list cell");
-                    }
-                }
-            }
-        });
+//        itemHolder.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent mouseEvent) {
+//                if (mouseEvent.getClickCount() % 2 == 0) {
+//                    Complaint complaint = itemHolder.getSelectionModel().getSelectedItem();
+//                    if (complaint != null) {
+//                        try {
+//                            FXRouter.goTo("newReportDetail", complaint);
+//                        } catch (IOException e) {
+//                            System.out.println("ไม่สามารถไปที่หน้า ReportDetail ได้");
+//                        }
+//                    } else {
+//                        System.out.println("user click on empty list cell");
+//                    }
+//                }
+//            }
+//        });
     }
 
     public void handleUploadImageButton(ActionEvent actionEvent){

@@ -30,6 +30,11 @@ public class Complaint {
         this.solution = solution;
     }
 
+    // Complaint() is for testing please delete this if i forgor //
+    public Complaint() {
+        this("topic", "complaintUsername", "basicDetail", "category", "additionalDetail", "pending", 0, null);
+    }
+
     public Complaint(String topic, String complainantUsername, String basicDetail, String category, String additionalDetail) {
         this(topic, complainantUsername, basicDetail, category, additionalDetail, "pending", 0, null);
     }
