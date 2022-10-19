@@ -27,7 +27,7 @@
          </font></Label>
       <TextArea fx:id="solutionTextArea" editable="false" layoutX="346.0" layoutY="536.0" prefHeight="72.0" prefWidth="542.0" style="-fx-font-size: 15;" />
       <ImageView fx:id="additionalImg" fitHeight="149.0" fitWidth="163.0" layoutX="825.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="186.0" fitWidth="192.0" layoutX="824.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="186.0" fitWidth="192.0" layoutX="850.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/smudgeTheStaff.png" />
          </image>
@@ -74,5 +74,6 @@
       </Button>
       <Button layoutX="132.0" layoutY="390.0" mnemonicParsing="false" onAction="#handleUpVoteButton" text="เห็นด้วย" />
       <Button layoutX="202.0" layoutY="390.0" mnemonicParsing="false" onAction="#handleDownVoteButton" text="ไม่เห็นด้วย" />
+      <Label fx:id="voteLabel" layoutX="282.0" layoutY="394.0" prefHeight="18.0" prefWidth="290.0" text="voteLabel" />
    </children>
 </AnchorPane>

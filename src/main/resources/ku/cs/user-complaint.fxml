@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="userReportAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.UserReportController">
+<AnchorPane fx:id="userReportAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.ReportUserController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#011627" height="749.0" layoutX="-16.0" layoutY="-28.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="user-menu-bar" width="314.0" />
       <Label layoutX="90.0" layoutY="62.0" text="Admin" textFill="WHITE">

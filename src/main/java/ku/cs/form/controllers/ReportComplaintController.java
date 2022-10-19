@@ -7,8 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import ku.cs.form.models.Complaint;
 import ku.cs.form.models.User;
-import ku.cs.form.models.UserReport;
-import ku.cs.form.services.UserReportDataSource;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,7 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class reportComplaintController {
+public class ReportComplaintController {
     private User user;
     private ArrayList<Object> objects = new ArrayList<>();
     @FXML private TextArea detailTextArea;
@@ -49,7 +47,8 @@ public class reportComplaintController {
             System.out.println("hey");
             FileWriter writer = new FileWriter(file,true);
             BufferedWriter buffer = new BufferedWriter(writer);
-            buffer.write("เนื้อหา"+ "," +complaint.getTopic()+ "," +complaint.getSubmitTime()+ "," +categoryComboBox.getValue()+detailTextArea.getText().replace("\n","")+"\n");
+            buffer.write("เนื้อหา"+ "," +complaint.getTopic()+ "," +complaint.getSubmitTime()+ ","
+                    +categoryComboBox.getValue()+ "," +detailTextArea.getText().replace("\n","")+"\n");
             buffer.close();
             writer.close();
 
