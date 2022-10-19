@@ -59,8 +59,8 @@ public class ComplaintFileDataSource implements DataSource<ComplaintList> {
                         data[4].trim(),
                         data[6].trim(),
                         Integer.parseInt(data[7].trim()));
-                complaint.setBasicDetail(data[3].trim());
-                complaint.setAdditionalDetail(data[5].trim());
+                complaint.setBasicDetail(data[3].trim().replace("NEWLINE", "\n"));
+                complaint.setAdditionalDetail(data[5].trim().replace("NEWLINE", "\n"));
                 complaint.setSubmitTime(data[0].trim());
                 complaint.setSolution(data[8].trim().replace("NEWLINE", "\n"));
                 if(data.length>=10){
@@ -117,9 +117,9 @@ public class ComplaintFileDataSource implements DataSource<ComplaintList> {
                 String line = complaint.getSubmitTime() + "," +
                         complaint.getTopic() + "," +
                         complaint.getComplainantUsername() + "," +
-                        complaint.getBasicDetail()+ "," +
+                        complaint.getBasicDetail().replace("\n", "NEWLINE") + "," +
                         complaint.getCategory() + "," +
-                        complaint.getAdditionalDetail() + "," +
+                        complaint.getAdditionalDetail().replace("\n", "NEWLINE") + "," +
                         complaint.getStatus() + "," +
                         complaint.getVotePoint() + "," +
                         complaint.getSolution().replace("\n", "NEWLINE") +","+

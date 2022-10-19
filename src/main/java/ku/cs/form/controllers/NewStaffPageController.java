@@ -1,6 +1,7 @@
 package ku.cs.form.controllers;
 
 import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,10 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class NewStaffPageController {
     @FXML private VBox leftRec;
@@ -51,8 +49,11 @@ public class NewStaffPageController {
     @FXML private Label responsibilityLabel;
     @FXML private ImageView staffImage;
     @FXML private AnchorPane anchorPane;
+    @FXML private ComboBox<String> filterComboBox;
     private Staff staff;
-    private ComplaintList complaintList;
+    private ComplaintList complaintList; // เก็บแค่ตอนอ่าน ComplaintDatasource ตอนแรก
+    private ComplaintList agencyFilterComplaints; // เก็บ ComplaintList ที่ filter หน่วยงานมาแล้วจะนำไป filter/sort ต่อ
+    private ComplaintList currentComplaintList; // เก็บ ComplaintList ที่ได้มาจากการใช้มา method filter/sort
     private SetTheme setTheme;
 
     @FXML
@@ -65,37 +66,34 @@ public class NewStaffPageController {
         ComplaintFileDataSource complaintFileDataSource = new ComplaintFileDataSource("data", "complaints.csv");
         complaintList = complaintFileDataSource.readData();
 
+        agencyFilterComplaints = filterByCategory(complaintList);
+        currentComplaintList = agencyFilterComplaints;
+
         itemHolder.setSpacing(10);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); // disable ตัว scrollbar แนวนอน
 
-        // setText
+        // set components
         nameLabel.setText(staff.getName());
         agencyLabel.setText(staff.getAgency());
         File imageFile = new File(staff.getProfileImageFilePath());
         Image userImage = new Image(imageFile.toURI().toString());
         staffImage.setImage(userImage);
+        filterComboBox.getItems().addAll("เรียงเวลาจากล่าสุด ไป เก่าสุด", "เรียงเวลาจากเก่าสุด ไป ล่าสุด",
+                                        "เรียงจากคะแนนโหวตมากสุด ไป น้อยสุด", "เรียงจากคะแนนโหวตน้อยสุด ไป มากสุด");
 
         showImage();
-        showComplaintListView();
-        handleSelectedCustomItem();
-    }
-
-    public ComplaintList filterByCategory(ComplaintList complains) {
-        Agency agency = getStaffCategory();
-        complains = complains.filterBy(new Filterer<Complaint>() {
-            @Override
-            public boolean filter(Complaint o) {
-                return o.getCategory().equals(agency.getCategory());
-            }
-        });
-        return complains;
+        showComplaintListView(agencyFilterComplaints);
+        handleSelectedFilterComboBox();
     }
 
     @FXML
-    public void showComplaintListView() {
-        ComplaintList filteredComplain = filterByCategory(complaintList);
-//
-        List<Complaint> complaints = filteredComplain.getAllComplaints();
+    public void showComplaintListView(ComplaintList complaintList) {
+        for (Complaint complaint : complaintList.getAllComplaints()) {
+            System.out.println(complaint.toString());
+        }
+
+        itemHolder.getChildren().clear();
+        List<Complaint> complaints =  complaintList.getAllComplaints();
         for (int i = 0; i < complaints.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/ku/cs/complaint-item.fxml"));
@@ -125,7 +123,7 @@ public class NewStaffPageController {
                         try {
                             FXRouter.goTo("newComplaintDetail", objects);
                         } catch (IOException e) {
-                            System.out.println("handle มีปัญหา");
+                            System.out.println("ไม่สามารถไปหน้า Complaint Detail ได้โปรดตรวจสอบ router อีกครั้ง");
                         }
                     }
                 });
@@ -137,22 +135,22 @@ public class NewStaffPageController {
         }
     }
 
-    public Agency getStaffCategory() {
-        AgencyDataSource agencyDataSource = new AgencyDataSource("data", "agency.csv");
-        AgencyList agencyList = agencyDataSource.readData();
-
-        Agency result = null;
-        for (Agency agency : agencyList.getAgencies()) {
-            if (agency.getName().equals(staff.getAgency())) {
-                result = agency;
-            }
-        }
-        return result;
+    public void handleSearchButton(ActionEvent actionEvent) {
+        currentComplaintList = filterByContain(agencyFilterComplaints);
+        searchTextField.clear();
+        showComplaintListView(currentComplaintList);
     }
 
-    @FXML
-    public void handleSelectedCustomItem() {
+    public void handleSelectedFilterComboBox() {
+        filterComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                System.out.println(oldValue + ":" + newValue);
+                ComplaintList sortedComplaints = sort(currentComplaintList);
 
+                showComplaintListView(sortedComplaints);
+            }
+        });
     }
 
     public void handleUploadImageButton(ActionEvent actionEvent){
@@ -198,5 +196,72 @@ public class NewStaffPageController {
         } catch (IOException e) {
             System.out.println("ไม่สามารถไปหน้า Change Password ได้");
         }
+    }
+
+    @FXML
+    public void handleLogOutButton(ActionEvent actionEvent) {
+        try {
+            FXRouter.goTo("home");
+        } catch (IOException e) {
+            System.out.println("ไม่สามารถไปหน้า Home ได้");
+        }
+    }
+
+    public Agency getStaffCategory() {
+        AgencyDataSource agencyDataSource = new AgencyDataSource("data", "agency.csv");
+        AgencyList agencyList = agencyDataSource.readData();
+
+        Agency result = null;
+        for (Agency agency : agencyList.getAgencies()) {
+            if (agency.getName().equals(staff.getAgency())) {
+                result = agency;
+            }
+        }
+        return result;
+    }
+
+    public ComplaintList filterByCategory(ComplaintList complains) {
+        Agency agency = getStaffCategory();
+        complains = complains.filterBy(new Filterer<Complaint>() {
+            @Override
+            public boolean filter(Complaint o) {
+                return o.getCategory().equals(agency.getCategory());
+            }
+        });
+        return complains;
+    }
+
+    public ComplaintList filterByContain(ComplaintList complaints) {
+        String input = searchTextField.getText();
+        System.out.println(input);
+        if (input != null && !input.trim().isEmpty()) {
+            complaints = complaints.filterBy(new Filterer<Complaint>() {
+                @Override
+                public boolean filter(Complaint o) {
+                    return o.getTopic().contains(input.trim());
+                }
+            });
+        }
+        return complaints;
+    }
+
+    public ComplaintList sort(ComplaintList complaints) {
+        complaints.getAllComplaints().sort(new Comparator<Complaint>() {
+            @Override
+            public int compare(Complaint o1, Complaint o2) {
+                if (filterComboBox.getValue().equals("เรียงจากคะแนนโหวตมากสุด ไป น้อยสุด")) {
+                    return -Integer.compare(o1.getVotePoint(), o2.getVotePoint());
+                }
+                if (filterComboBox.getValue().equals("เรียงจากคะแนนโหวตน้อยสุด ไป มากสุด")) {
+                    return Integer.compare(o1.getVotePoint(), o2.getVotePoint());
+                }
+                if (filterComboBox.getValue().equals("เรียงเวลาจากล่าสุด ไป เก่าสุด")) {
+                    return -o1.getLiteralSubmitTime().compareTo(o2.getLiteralSubmitTime());
+                }
+                else
+                    return o1.getLiteralSubmitTime().compareTo(o2.getLiteralSubmitTime());
+            }
+        });
+        return complaints;
     }
 }
