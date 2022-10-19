@@ -78,8 +78,8 @@ public class NewStaffPageController {
         File imageFile = new File(staff.getProfileImageFilePath());
         Image userImage = new Image(imageFile.toURI().toString());
         staffImage.setImage(userImage);
-        filterComboBox.getItems().addAll("เรียงเวลาจากล่าสุด ไป เก่าสุด", "เรียงเวลาจากเก่าสุด ไป ล่าสุด",
-                                        "เรียงจากคะแนนโหวตมากสุด ไป น้อยสุด", "เรียงจากคะแนนโหวตน้อยสุด ไป มากสุด");
+        filterComboBox.getItems().addAll("เวลาจากล่าสุด ไป เก่าสุด", "เวลาจากเก่าสุด ไป ล่าสุด",
+                                        "คะแนนโหวตมากสุด ไป น้อยสุด", "คะแนนโหวตน้อยสุด ไป มากสุด");
 
         showImage();
         showComplaintListView(agencyFilterComplaints);
@@ -88,10 +88,6 @@ public class NewStaffPageController {
 
     @FXML
     public void showComplaintListView(ComplaintList complaintList) {
-        for (Complaint complaint : complaintList.getAllComplaints()) {
-            System.out.println(complaint.toString());
-        }
-
         itemHolder.getChildren().clear();
         List<Complaint> complaints =  complaintList.getAllComplaints();
         for (int i = 0; i < complaints.size(); i++) {
@@ -249,13 +245,13 @@ public class NewStaffPageController {
         complaints.getAllComplaints().sort(new Comparator<Complaint>() {
             @Override
             public int compare(Complaint o1, Complaint o2) {
-                if (filterComboBox.getValue().equals("เรียงจากคะแนนโหวตมากสุด ไป น้อยสุด")) {
+                if (filterComboBox.getValue().equals("คะแนนโหวตมากสุด ไป น้อยสุด")) {
                     return -Integer.compare(o1.getVotePoint(), o2.getVotePoint());
                 }
-                if (filterComboBox.getValue().equals("เรียงจากคะแนนโหวตน้อยสุด ไป มากสุด")) {
+                if (filterComboBox.getValue().equals("คะแนนโหวตน้อยสุด ไป มากสุด")) {
                     return Integer.compare(o1.getVotePoint(), o2.getVotePoint());
                 }
-                if (filterComboBox.getValue().equals("เรียงเวลาจากล่าสุด ไป เก่าสุด")) {
+                if (filterComboBox.getValue().equals("เวลาจากล่าสุด ไป เก่าสุด")) {
                     return -o1.getLiteralSubmitTime().compareTo(o2.getLiteralSubmitTime());
                 }
                 else

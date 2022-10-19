@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles/main.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.NewStaffPageController">
+<AnchorPane fx:id="anchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.NewStaffPageController">
    <children>
       <BorderPane layoutX="187.0" layoutY="157.0" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -21,21 +21,21 @@
                <children>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="300.0">
                      <children>
-                        <Label text="Staff" textFill="WHITE">
+                        <Label styleClass="user-menu-bar-label" text="Staff" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="30.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <VBox alignment="CENTER" prefHeight="213.0" prefWidth="300.0">
+                  <VBox alignment="CENTER" prefHeight="228.0" prefWidth="300.0">
                      <children>
                         <ImageView fx:id="staffImage" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
                         </ImageView>
-                        <Button fx:id="uploadImageButton" mnemonicParsing="false" onAction="#handleUploadImageButton" style="-fx-background-color: white; -fx-border-color: white; -fx-background-radius: 9999; -fx-border-radius: 9999;" text="+">
+                        <Button fx:id="uploadImageButton" mnemonicParsing="false" onAction="#handleUploadImageButton" styleClass="arrow-button" text="+">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
@@ -45,12 +45,12 @@
                         </Button>
                      </children>
                   </VBox>
-                  <HBox alignment="TOP_CENTER" prefHeight="81.0" prefWidth="300.0">
+                  <HBox alignment="TOP_CENTER" prefHeight="268.0" prefWidth="300.0">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                      <children>
-                        <Label fx:id="nameLabel" text="nameLabel" textFill="WHITE">
+                        <Label fx:id="nameLabel" styleClass="user-menu-bar-label" text="nameLabel" textFill="WHITE">
                            <font>
                               <Font size="25.0" />
                            </font>
@@ -60,19 +60,23 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Button fx:id="sideButton" mnemonicParsing="false" onAction="#handleThemeButton" prefHeight="32.0" prefWidth="300.0" text="Theme" textFill="WHITE">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="sideButton" mnemonicParsing="false" onAction="#handleChangePasswordButton" prefHeight="32.0" prefWidth="300.0" text="Change Password" textFill="WHITE">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </Button>
+                  <VBox alignment="TOP_CENTER" prefHeight="108.0" prefWidth="300.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#handleThemeButton" prefHeight="52.0" prefWidth="300.0" styleClass="user-menu-bar-button" text="Theme" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#handleChangePasswordButton" prefHeight="52.0" prefWidth="374.0" styleClass="user-menu-bar-button" text="Change Password" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
                </children>
             </VBox>
          </left>
@@ -83,7 +87,7 @@
                      <children>
                         <HBox alignment="BOTTOM_LEFT" prefHeight="210.0" prefWidth="584.0">
                            <children>
-                              <Label fx:id="responsibilityLabel" alignment="TOP_LEFT" text="เรื่องร้องเรียนที่รับผิดชอบ">
+                              <Label fx:id="responsibilityLabel" alignment="TOP_LEFT" prefHeight="31.0" prefWidth="356.0" text="เรื่องร้องเรียนที่รับผิดชอบ">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -103,7 +107,7 @@
                            <children>
                               <HBox alignment="BOTTOM_LEFT" prefHeight="123.0" prefWidth="271.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label fx:id="agency" text="หน่วยงาน :">
+                                    <Label fx:id="agency" prefHeight="31.0" prefWidth="120.0" text="หน่วยงาน :">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>
@@ -111,7 +115,7 @@
                                           <Insets bottom="10.0" left="50.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <Label fx:id="agencyLabel" text="agencyLabel">
+                                    <Label fx:id="agencyLabel" prefHeight="31.0" prefWidth="185.0" text="agencyLabel">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>
@@ -121,7 +125,7 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <HBox alignment="TOP_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="123.0" prefWidth="271.0">
+                              <HBox alignment="TOP_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="123.0" prefWidth="140.0">
                                  <children>
                                     <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleLogOutButton" text="Log Out" textAlignment="CENTER">
                                        <HBox.margin>

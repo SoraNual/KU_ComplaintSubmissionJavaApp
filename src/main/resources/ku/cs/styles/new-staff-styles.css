@@ -6,6 +6,16 @@
     -fx-background-color: transparent;
 }
 
+.button {
+    -fx-background-color: -button-color;
+    -fx-text-fill: -text-color;
+    -fx-background-radius: 10px;
+}
+
+.button:hover {
+    -fx-background-color: -hover-button-color;
+}
+
 #inProgressButton {
     -fx-background-color: #ff9f1c;
     -fx-text-fill: #ffffff;
