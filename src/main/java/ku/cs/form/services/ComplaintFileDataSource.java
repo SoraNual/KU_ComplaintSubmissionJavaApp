@@ -62,7 +62,7 @@ public class ComplaintFileDataSource implements DataSource<ComplaintList> {
                 complaint.setBasicDetail(data[3].trim());
                 complaint.setAdditionalDetail(data[5].trim());
                 complaint.setSubmitTime(data[0].trim());
-                complaint.setSolution(data[8].trim());
+                complaint.setSolution(data[8].trim().replace("NEWLINE", "\n"));
                 if(data.length>=10){
                     complaint.addPositive(data[9].trim().split("#"));
                 }
