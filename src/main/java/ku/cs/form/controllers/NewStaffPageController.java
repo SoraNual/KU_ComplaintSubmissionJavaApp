@@ -1,14 +1,14 @@
 package ku.cs.form.controllers;
 
+import javafx.beans.Observable;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -39,6 +39,7 @@ public class NewStaffPageController {
     @FXML private VBox leftRec;
     @FXML private VBox itemHolder;
     @FXML private AnchorPane pane;
+    @FXML private ScrollPane scrollPane;
     private Stage stage;
     @FXML private Button uploadImageButton;
     @FXML private Button sideButton;
@@ -63,6 +64,9 @@ public class NewStaffPageController {
 
         ComplaintFileDataSource complaintFileDataSource = new ComplaintFileDataSource("data", "complaints.csv");
         complaintList = complaintFileDataSource.readData();
+
+        itemHolder.setSpacing(10);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); // disable ตัว scrollbar แนวนอน
 
         // setText
         nameLabel.setText(staff.getName());
@@ -99,8 +103,33 @@ public class NewStaffPageController {
             try {
                 HBox hBox = fxmlLoader.load();
                 ComplaintItemController complaintItemController = fxmlLoader.getController();
-
                 complaintItemController.setData(complaints.get(i));
+
+                hBox.hoverProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+                    if (newValue) {
+                        hBox.setStyle("-fx-background-color: #dddddd");
+                    } else {
+                        hBox.setStyle("-fx-background-color: transparent");
+                    }
+                });
+
+                hBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        System.out.println("mouse clicked: " + complaintItemController.getComplaint());
+
+                        ArrayList<Object> objects = new ArrayList<>();
+                        objects.add(staff);
+                        objects.add(complaintItemController.getComplaint());
+
+                        try {
+                            FXRouter.goTo("newComplaintDetail", objects);
+                        } catch (IOException e) {
+                            System.out.println("handle มีปัญหา");
+                        }
+                    }
+                });
+
                 itemHolder.getChildren().add(hBox);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -123,7 +152,7 @@ public class NewStaffPageController {
 
     @FXML
     public void handleSelectedCustomItem() {
-        // TODO
+
     }
 
     public void handleUploadImageButton(ActionEvent actionEvent){
@@ -157,6 +186,15 @@ public class NewStaffPageController {
     public void handleChangePasswordButton(ActionEvent actionEvent) {
         try {
             FXRouter.goTo("newStaffChangePassword", staff);
+        } catch (IOException e) {
+            System.out.println("ไม่สามารถไปหน้า Change Password ได้");
+        }
+    }
+
+    @FXML
+    public void handleThemeButton(ActionEvent actionEvent) {
+        try {
+            FXRouter.goTo("editProfile", staff);
         } catch (IOException e) {
             System.out.println("ไม่สามารถไปหน้า Change Password ได้");
         }

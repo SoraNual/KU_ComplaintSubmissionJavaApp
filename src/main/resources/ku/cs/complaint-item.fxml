@@ -7,25 +7,13 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="958.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.ComplaintItemController">
+<HBox fx:id="pane" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="958.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.ComplaintItemController">
    <children>
-      <HBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0">
+      <HBox alignment="CENTER" prefHeight="150.0" prefWidth="638.0">
          <children>
             <Label fx:id="topicLabel" alignment="TOP_LEFT" text="topicLabel">
                <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" layoutX="410.0" layoutY="10.0" prefHeight="150.0" prefWidth="600.0">
-         <children>
-            <Label text="do something">
-               <HBox.margin>
-                  <Insets />
+                  <Insets left="10.0" right="10.0" />
                </HBox.margin>
                <font>
                   <Font name="System Bold" size="24.0" />
@@ -35,14 +23,14 @@
       </HBox>
       <VBox prefHeight="200.0" prefWidth="200.0">
          <children>
-            <VBox alignment="TOP_CENTER" prefHeight="75.0" prefWidth="200.0">
+            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="192.0">
                <children>
                   <Label text="คะแนนโหวต :">
                      <font>
                         <Font size="18.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="20.0" />
+                        <Insets top="10.0" />
                      </VBox.margin>
                   </Label>
                   <Label fx:id="voteLabel" text="voteLabel">
@@ -50,7 +38,7 @@
                         <Font size="18.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets />
                      </VBox.margin>
                   </Label>
                </children>
@@ -62,5 +50,13 @@
             </VBox>
          </children>
       </VBox>
+      <Label fx:id="dateTimeLabel" alignment="CENTER" text="dateTimeLabel" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <HBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </HBox.margin>
+      </Label>
    </children>
 </HBox>
