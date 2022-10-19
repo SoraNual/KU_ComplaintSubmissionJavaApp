@@ -4,9 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 
-import com.github.saacsos.FXRouter;
-import ku.cs.form.models.ReportHashMap;
+import ku.cs.form.models.Nisit;
+import ku.cs.form.models.UserList;
+import ku.cs.form.models.UserReportHashMap;
 import ku.cs.form.models.User;
+import ku.cs.form.services.UserDataSource;
 import ku.cs.form.services.UserReportDataSource;
 
 import java.io.IOException;
@@ -19,19 +21,20 @@ public class BannedPageController {
     @FXML private Button sendButton;
     @FXML private TextArea requestTextArea;
     private UserReportDataSource userReportDataSource;
-    private ReportHashMap reportHashMap;
+    private UserReportHashMap userReportHashMap;
+    private UserList userList;
+    private UserDataSource userDataSource;
     private User user;
     @FXML public void initialize(){
         user = (User) com.github.saacsos.FXRouter.getData();
-
-
+        userDataSource = new UserDataSource("data","users.csv");
+        userList = userDataSource.readData();
+        userReportDataSource =  new UserReportDataSource("data","userReport.csv");
+        userReportHashMap = userReportDataSource.readData();
+        setBanned();
         cancelButton.setVisible(false);
         sendButton.setVisible(false);
         requestTextArea.setVisible(false);
-
-        userReportDataSource = new UserReportDataSource("data", "user_reports.csv");
-        reportHashMap = new ReportHashMap();
-        reportHashMap.setReports(userReportDataSource.readData());
     }
 
     public void handleCancelButton(){
@@ -39,7 +42,6 @@ public class BannedPageController {
         requestTextArea.setVisible(false);
         sendButton.setVisible(false);
         cancelButton.setVisible(false);
-
         requestButton.setVisible(true);
         homeButton.setVisible(true);
     }
@@ -50,6 +52,14 @@ public class BannedPageController {
         } catch (IOException e) {
             System.err.println("ให้ตรวจสอบการกำหนด route");
         }
+    }
+
+    public void setBanned() {
+        for(User u : userList.getAllUsers()){
+            if(u.getUsername().equals(user.getUsername()))
+                ((Nisit) u).bannedLoginAttempt();
+        }
+        userDataSource.writeData(userList);
     }
 
     public void handleRequestButton(){
@@ -64,7 +74,8 @@ public class BannedPageController {
     public void handleSendButton(){
         String requestMsg = requestTextArea.getText().trim();
         if(!requestMsg.isBlank()){
-            reportHashMap.setRequest(user.getUsername(), requestMsg);
+            userReportHashMap.setRequest(user.getUsername(), requestMsg);
+            userReportDataSource.writeData(userReportHashMap);
         }
     }
 }

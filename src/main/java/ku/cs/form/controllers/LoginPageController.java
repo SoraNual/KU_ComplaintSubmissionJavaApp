@@ -70,7 +70,9 @@ public class LoginPageController {
                 FXRouter.goTo("newStaff",user);
                 setLoginTime(user);
             } else if (user instanceof Nisit) {
-                if(((Nisit) user).getUserStatus().equals("banned")) FXRouter.goTo("banned",user);
+                if(((Nisit) user).getUserStatus().equals("banned")) {
+                    FXRouter.goTo("banned",user);
+                }
                 else {
                     FXRouter.goTo("nisitPage", user);
                     setLoginTime(user);

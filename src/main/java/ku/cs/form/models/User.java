@@ -73,12 +73,7 @@ public class User {
 
     @Override
     public String toString() {
-        //loginTime.format(format) => change LocalDateTime to string
         return getLoginTime() + "," + getUsername() + "," + getPassword() + "," + this.getClass().getSimpleName().toLowerCase() + "," + getName() + "," + "active,0";
-    }
-
-    public String toStringLoginTime() {
-        return loginTime.format(format);
     }
 
     public DateTimeFormatter getFormat() {

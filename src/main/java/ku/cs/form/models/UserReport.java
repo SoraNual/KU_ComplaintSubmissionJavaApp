@@ -2,47 +2,38 @@ package ku.cs.form.models;
 
 public class UserReport {
     private String username;
-    private String complaint_category;
-    private String complaint_detail;
-    private String request_unbanned_detail;
+    private String complaintCategory;
+    private String complaintDetail;
+    private String requestUnbannedDetail;
 
-    public UserReport(String username, String complaint_category, String complaint_detail, String request_permission_detail) {
+    public UserReport(String username, String complaintCategory, String complaintDetail, String request_permission_detail) {
         this.username = username;
-        this.complaint_category = complaint_category;
-        this.complaint_detail = complaint_detail;
-        this.request_unbanned_detail = request_permission_detail;
+        this.complaintCategory = complaintCategory;
+        this.complaintDetail = complaintDetail;
+        this.requestUnbannedDetail = request_permission_detail;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public String getComplaint_category() {
-        return complaint_category;
+    public String getComplaintCategory() {
+        return complaintCategory;
     }
 
-    public String getComplaint_detail() {
-        return complaint_detail;
+    public String getComplaintDetail() {
+        return complaintDetail;
     }
 
     public String getRequest_permission_detail() {
-        return  request_unbanned_detail;
+        return requestUnbannedDetail;
     }
 
-    public void setRequest_unbanned_detail(String request_unbanned_detail) {
-        this.request_unbanned_detail = request_unbanned_detail;
+    public void setRequestUnbannedDetail(String requestUnbannedDetail) {
+        this.requestUnbannedDetail = requestUnbannedDetail;
     }
 
-    @Override
-    public String toString() {
-        return "UserComplaint{" +
-                "username='" + username + '\'' +
-                ", complaint_category='" + complaint_category + '\'' +
-                ", complaint_detail='" + complaint_detail + '\'' +
-                ", request_permission_detail='" +  request_unbanned_detail + '\'' +
-                '}';
-    }
     public String writeAble(){
-        return username+","+complaint_category+","+complaint_detail;
+        return username+","+ complaintCategory +","+ complaintDetail;
     }
 }

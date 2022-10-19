@@ -15,10 +15,10 @@
    -button-text-color: #0D1C29FF;
  }   * { -fx-font-family: 'Kanit';}
 
-.root { -fx-font-size: 14px;}
-.h1 { -fx-font-size: 25px;}
-.h2 { -fx-font-size: 18px;}
-#errorLabel {-fx-font-size: 12px;}
+.root { -fx-font-size: 16px;}
+.h1 { -fx-font-size: 28px;}
+.h2 { -fx-font-size: 20px;}
+#errorLabel {-fx-font-size: 14px;}
 
 .root {
     -fx-background-color: -background-color;
@@ -164,6 +164,7 @@
 .text-area {
     -fx-background-color: -input-color;
     -fx-background-radius: 10px;
+    -fx-text-fill: -text-color;
 }
 
 .text-area .scroll-pane {
@@ -178,4 +179,12 @@
 
 #errorLabel {
     -fx-text-fill: red;
+}
+
+#deleteBtn {
+    -fx-background-color: red;
+}
+
+#rejectBtn {
+    -fx-background-color: blue;
 }

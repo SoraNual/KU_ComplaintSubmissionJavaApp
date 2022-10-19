@@ -142,6 +142,7 @@
 .text-area {
     -fx-background-color: -input-color;
     -fx-background-radius: 10px;
+    -fx-text-fill: -text-color;
 }
 
 .text-area .scroll-pane {
@@ -156,4 +157,12 @@
 
 #errorLabel {
     -fx-text-fill: red;
+}
+
+#deleteBtn {
+    -fx-background-color: red;
+}
+
+#rejectBtn {
+    -fx-background-color: blue;
 }

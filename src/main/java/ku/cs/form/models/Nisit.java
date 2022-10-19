@@ -28,7 +28,6 @@ public class Nisit extends User{
 
     @Override
     public String toString() {
-        //loginTime.format(format) => change LocalDateTime to string
         return getLoginTime() + "," + getUsername() + "," + getPassword() + "," + this.getClass().getSimpleName().toLowerCase() + "," + getName() + "," + getUserStatus() + "," + getLoginAttempt();
     }
 }

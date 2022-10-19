@@ -8,6 +8,7 @@ import javafx.scene.control.TextArea;
 import ku.cs.form.models.Complaint;
 import ku.cs.form.models.User;
 import ku.cs.form.models.UserReport;
+import ku.cs.form.models.UserReportHashMap;
 import ku.cs.form.services.UserReportDataSource;
 
 import java.io.BufferedWriter;
@@ -15,6 +16,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ComplaintUserController {
     private User user;
@@ -22,11 +24,16 @@ public class ComplaintUserController {
     @FXML private TextArea detailTextArea;
     @FXML private ComboBox<String> categoryComboBox;
     @FXML private Label warningLabel;
+    private UserReportHashMap userReportHashMap;
+    private UserReportDataSource userReportDataSource;
 
     @FXML
     public void initialize(){
         objects = (ArrayList<Object>) com.github.saacsos.FXRouter.getData();
         user = (User) objects.get(0);
+
+        userReportDataSource = new UserReportDataSource("data","userReport.csv");
+        userReportHashMap = userReportDataSource.readData();
 
         categoryComboBox.getItems().add("ข่าวปลอม");
         categoryComboBox.getItems().add("คำหยาบ");
@@ -44,9 +51,12 @@ public class ComplaintUserController {
         } else if (detailTextArea.getText().trim().equals("")){
             warningLabel.setText("กรุณาใส่บางอย่างลงในรายละเอียดด้วย BAKA :<");
         }   else {
-            UserReport userReport = new UserReport((String) objects.get(1), categoryComboBox.getValue(), detailTextArea.getText().replace("\n", ""), null);
-            UserReportDataSource userReportDataSource = new UserReportDataSource("data", "user_reports.csv");
-            userReportDataSource.appendUserReport(userReport);
+            UserReport userReport = new UserReport((String) objects.get(1),
+                    categoryComboBox.getValue(),
+                    detailTextArea.getText().replace("\n", ""),
+                    null);
+            userReportHashMap.addReport(userReport);
+            userReportDataSource.writeData(userReportHashMap);
             try {
                 com.github.saacsos.FXRouter.goTo("nisitPage",user);
             } catch (IOException e){

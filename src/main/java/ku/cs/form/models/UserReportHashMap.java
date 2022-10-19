@@ -1,23 +1,18 @@
 package ku.cs.form.models;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ReportHashMap {
+public class UserReportHashMap {
     private HashMap<String, UserReport> reports;
 
-    public ReportHashMap() {
+    public UserReportHashMap() {
         this.reports = new HashMap<>();
     }
     public void addReport(UserReport report) {
         reports.put(report.getUsername(), report);
     }
     public void setRequest(String username, String requestDetail){
-        reports.get(username).setRequest_unbanned_detail(requestDetail);
-    }
-
-    public void setReports(HashMap<String, UserReport> reports) {
-        this.reports = reports;
+        reports.get(username).setRequestUnbannedDetail(requestDetail);
     }
 
     public void deleteReport(String username){

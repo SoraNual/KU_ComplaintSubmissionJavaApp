@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="userReportAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.UserReportController">
+<AnchorPane fx:id="userReportAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.ReportController">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#011627" height="749.0" layoutX="-16.0" layoutY="-28.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="user-menu-bar" width="314.0" />
         <Label layoutX="90.0" layoutY="62.0" text="Admin" textFill="WHITE">
@@ -43,7 +43,7 @@
                                                 <Font name="FreesiaUPC Bold" size="24.0" />
                                             </font>
                                         </Label>
-                                        <Button layoutX="34.0" layoutY="529.0" mnemonicParsing="false" onAction="#handleBannedBtn" prefHeight="38.0" prefWidth="371.0" text="ระงับการใช้งาน" />
+                                        <Button fx:id="bannedButton" disable="true" layoutX="34.0" layoutY="529.0" mnemonicParsing="false" onAction="#handleBannedBtn" prefHeight="38.0" prefWidth="371.0" text="ระงับการใช้งาน" />
                                           <ListView fx:id="inappropriateListView" layoutX="38.0" layoutY="100.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="370.0">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -52,15 +52,13 @@
                               <VBox layoutX="446.0" layoutY="70.0" prefHeight="498.0" prefWidth="314.0" spacing="5.0">
                                  <children>
                                     <Label text="ชื่อผู้ใช้" />
-                                    <TextField editable="false" />
+                                    <TextField fx:id="inappropriateUserNameTextField" editable="false" />
                                     <Label text="ชื่อ" />
-                                    <TextField editable="false" />
-                                    <Label text="ตำแหน่ง" />
-                                    <TextField editable="false" />
+                                    <TextField fx:id="inappropriateNameTextField" editable="false" />
                                     <Label text="ประเภทความไม่เหมาะสม" />
-                                    <TextField editable="false" />
+                                    <TextField fx:id="inappropriateCategoryTextField" editable="false" />
                                     <Label text="รายละเอียดเพิ่มเติม" />
-                                    <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
+                                    <TextArea fx:id="inappropriateDetailTextArea" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
                                  </children>
                               </VBox>
                                     </children>
@@ -94,7 +92,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                                  <Button layoutX="34.0" layoutY="529.0" mnemonicParsing="false" onAction="#handleUnbannedBtn" prefHeight="38.0" prefWidth="371.0" text="คืนสิทธิ์การใช้งาน" />
+                                  <Button fx:id="unbannedButton" disable="true" layoutX="34.0" layoutY="529.0" mnemonicParsing="false" onAction="#handleUnbannedBtn" prefHeight="38.0" prefWidth="371.0" text="คืนสิทธิ์การใช้งาน" />
                                     <ListView fx:id="requestUnbannedListView" layoutX="38.0" layoutY="100.0" maxWidth="-Infinity" prefHeight="418.0" prefWidth="370.0">
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -108,15 +106,15 @@
                         <VBox layoutX="446.0" layoutY="70.0" prefHeight="498.0" prefWidth="314.0" spacing="5.0">
                            <children>
                               <Label text="ชื่อผู้ใช้" />
-                              <TextField editable="false" />
+                              <TextField fx:id="requestUnbannedUserNameTextField" editable="false" />
                               <Label text="ชื่อ" />
-                              <TextField editable="false" />
-                              <Label text="ตำแหน่ง" />
-                              <TextField editable="false" />
+                              <TextField fx:id="requestUnbannedNameTextField" editable="false" />
                               <Label text="ประเภทความไม่เหมาะสม" />
-                              <TextField editable="false" />
+                              <TextField fx:id="requestUnbannedCategoryTextField" editable="false" />
                               <Label text="รายละเอียดเพิ่มเติม" />
-                              <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" />
+                              <TextArea fx:id="requestUnbannedDetailTextArea" editable="false" prefHeight="98.0" prefWidth="314.0" />
+                              <Label text="คำขอคืนสิทธิ์การใช้งาน" />
+                              <TextArea fx:id="requestUnbannedRequestPermissionTextArea" editable="false" prefHeight="140.0" prefWidth="314.0" />
                            </children>
                         </VBox>
                      </children>
@@ -127,11 +125,32 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <Label layoutX="152.0" layoutY="88.0">
-                                    <font>
-                                        <Font size="21.0" />
-                                    </font>
-                                </Label>
+                        <ListView fx:id="inappropriateComplaintListView" focusTraversable="false" layoutX="38.0" layoutY="100.0" pickOnBounds="false" prefHeight="418.0" prefWidth="370.0" />
+                        <Label layoutX="38.0" layoutY="41.0" prefHeight="58.0" prefWidth="679.0" styleClass="h2" text="เรื่องร้องเรียนที่ไม่เหมาะสม" textFill="#011627">
+                           <font>
+                              <Font name="FreesiaUPC Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Button id="deleteBtn" fx:id="deleteButton" disable="true" layoutX="38.0" layoutY="529.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="38.0" prefWidth="181.0" text="ลบ">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <Button id="rejectBtn" fx:id="rejectButton" disable="true" layoutX="228.0" layoutY="529.0" mnemonicParsing="false" onAction="#handleRejectButton" prefHeight="38.0" prefWidth="181.0" text="ละเว้น">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <VBox layoutX="446.0" layoutY="70.0" prefHeight="498.0" prefWidth="314.0" spacing="5.0">
+                           <children>
+                              <Label text="ชื่อเรื่อง" />
+                              <TextField fx:id="topicTextField" editable="false" />
+                              <Label text="เวลาส่ง" />
+                              <TextField fx:id="submitTimeTextField" editable="false" />
+                              <Label text="ประเภทความไม่เหมาะสม" />
+                              <TextField fx:id="complaintReportCategoryTextField" editable="false" />
+                              <Label text="รายละเอียดเพิ่มเติม" />
+                              <TextArea fx:id="complaintReportDetailTextArea" editable="false" prefHeight="251.0" prefWidth="314.0" />
+                           </children>
+                        </VBox>
                             </children>
                         </AnchorPane>
                     </content>
