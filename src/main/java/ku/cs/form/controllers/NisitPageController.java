@@ -5,12 +5,14 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import ku.cs.form.models.*;
@@ -25,26 +27,23 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 import com.github.saacsos.FXRouter;
+import ku.cs.form.services.SetTheme;
 
 
 public class NisitPageController {
 
-    private User user;
-    @FXML private ListView<Complaint> complaintsListView;
+    private User nisit;
     private ComplaintFileDataSource complaintDataSource;
     private ComplaintList defaultComplaintList;
 
     private Stage stage;
-    @FXML private Rectangle rightRec;
-    @FXML private AnchorPane pane;
     @FXML private Label roleLabel;
     @FXML private Label allReportLabel;
     @FXML private Label nameLabel;
     @FXML private ImageView nisitImage;
-    @FXML private Button editProfileButton;
-    @FXML private Button changePasswordButton;
     @FXML private Button reportButton;
     @FXML private Button uploadImageButton;
     @FXML private ComboBox<ComplaintCategory> categoryFilterComboBox;
@@ -60,15 +59,22 @@ public class NisitPageController {
     @FXML private TextField moreThanVotePointsTextField;
     @FXML private TextField fromVotePointsTextField;
     @FXML private TextField toVotePointsTextField;
+    @FXML private AnchorPane nisitAnchorPane;
+    @FXML private ScrollPane scrollPane;
+    @FXML private VBox itemHolder;
     private ComplaintList filteredComplaintList;
     private ComplaintCategoryDataSource categoryDataSource;
     private ComplaintCategoryList categoryList;
+    private SetTheme setTheme;
 
     @FXML public void initialize() {
-        user = (User) com.github.saacsos.FXRouter.getData();
+        nisit = (Nisit) com.github.saacsos.FXRouter.getData();
+        setTheme = new SetTheme(nisit.getUsername());
+        setTheme.setting();
+        nisitAnchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
 
-        nameLabel.setText(user.getName());
-        File imageFile = new File(user.getProfileImageFilePath());
+        nameLabel.setText(nisit.getName());
+        File imageFile = new File(nisit.getProfileImageFilePath());
         Image userImage = new Image(imageFile.toURI().toString());
         nisitImage.setImage(userImage);
         complaintDataSource = new ComplaintFileDataSource("data", "complaints.csv");
@@ -87,8 +93,10 @@ public class NisitPageController {
         categoryFilterComboBox.getItems().addAll(categoryList.getAllCategories());
         categoryFilterComboBox.getSelectionModel().select(all);
 
+        itemHolder.setSpacing(10);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); // disable ตัว scrollbar แนวนอน
 
-        handleSelectedComplaint();
+//        handleSelectedComplaint();
         handleSelectedSortComboBox();
 
         sortComboBox.getSelectionModel().select("ล่าสุด ไป เก่าสุด");
@@ -98,12 +106,56 @@ public class NisitPageController {
     }
 
 
-    private void showComplaintListView(ComplaintList complaintList){
-        complaintsListView.getItems().clear();
-        complaintsListView.getItems().addAll(complaintList.getAllComplaints());
-        complaintsListView.refresh();
-    }
+//    private void showComplaintListView(ComplaintList complaintList){
+//        complaintsListView.getItems().clear();
+//        complaintsListView.getItems().addAll(complaintList.getAllComplaints());
+//        complaintsListView.refresh();
+//    }
 
+    @FXML
+    public void showComplaintListView(ComplaintList complaintList) {
+        itemHolder.getChildren().clear();
+        List<Complaint> complaints =  complaintList.getAllComplaints();
+        for (int i = 0; i < complaints.size(); i++) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/ku/cs/complaint-item-nisit.fxml"));
+
+            try {
+                HBox hBox = fxmlLoader.load();
+                ComplaintItemNisitController complaintItemNisitController = fxmlLoader.getController();
+                complaintItemNisitController.setData(complaints.get(i));
+
+                hBox.hoverProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+                    if (newValue) {
+                        hBox.setStyle("-fx-background-color: #dddddd");
+                    } else {
+                        hBox.setStyle("-fx-background-color: transparent");
+                    }
+                });
+
+                hBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        System.out.println("mouse clicked: " + complaintItemNisitController.getComplaint());
+
+                        ArrayList<Object> objects = new ArrayList<>();
+                        objects.add(nisit);
+                        objects.add(complaintItemNisitController.getComplaint());
+
+                        try {
+                            FXRouter.goTo("complaintsDetailsForNisit", objects);
+                        } catch (IOException e) {
+                            System.out.println("ไม่สามารถไปหน้า Complaint Detail For Nisit ได้ โปรดตรวจสอบ router อีกครั้ง");
+                        }
+                    }
+                });
+
+                itemHolder.getChildren().add(hBox);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     private void handleSelectedSortComboBox(){
 
         sortComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
@@ -114,35 +166,35 @@ public class NisitPageController {
             }
         });
     }
-    @FXML
-    public void handleSelectedComplaint() {
-        complaintsListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if (mouseEvent.getClickCount() % 2 == 0) {
-                    Complaint complaint = complaintsListView.getSelectionModel().getSelectedItem();
-                    if (complaint != null) {
-                        try {
-                            ArrayList<Object> objects = new ArrayList<>();
-                            objects.add(user);
-                            objects.add(complaint);
-                            FXRouter.goTo("complaintsDetailsForNisit", objects);
-                        } catch (IOException e) {
-                            System.out.println("ไม่สามารถไปที่หน้า ComplaintDetail ได้");
-                            e.printStackTrace();
-                        }
-                    } else {
-                        System.out.println("user click on empty list cell");
-                    }
-                }
-            }
-        });
-    }
+//    @FXML
+//    public void handleSelectedComplaint() {
+//        complaintsListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent mouseEvent) {
+//                if (mouseEvent.getClickCount() % 2 == 0) {
+//                    Complaint complaint = complaintsListView.getSelectionModel().getSelectedItem();
+//                    if (complaint != null) {
+//                        try {
+//                            ArrayList<Object> objects = new ArrayList<>();
+//                            objects.add(user);
+//                            objects.add(complaint);
+//                            FXRouter.goTo("complaintsDetailsForNisit", objects);
+//                        } catch (IOException e) {
+//                            System.out.println("ไม่สามารถไปที่หน้า ComplaintDetail ได้");
+//                            e.printStackTrace();
+//                        }
+//                    } else {
+//                        System.out.println("user click on empty list cell");
+//                    }
+//                }
+//            }
+//        });
+//    }
     private ComplaintList filterSubmitByMe(ComplaintList currentList){
         currentList = currentList.filterBy(new Filterer<Complaint>() {
             @Override
             public boolean filter(Complaint o) {
-                if(byMeFilterCheckBox.isSelected()) return o.getComplainantUsername().equals(user.getUsername());
+                if(byMeFilterCheckBox.isSelected()) return o.getComplainantUsername().equals(nisit.getUsername());
                 return true;
             }
         });
@@ -217,9 +269,9 @@ public class NisitPageController {
     public void handleUploadImageButton(ActionEvent actionEvent){
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image","*jpg","*jpeg","*png"));
-        fileChooser.setInitialFileName(user.getUsername()+".jpg");
+        fileChooser.setInitialFileName(nisit.getUsername()+".jpg");
         File uploadImg = fileChooser.showOpenDialog(stage);
-        File newUserImg = new File("data"+File.separator+"img",user.getUsername()+".jpg");
+        File newUserImg = new File("data"+File.separator+"img",nisit.getUsername()+".jpg");
 
         if(!(uploadImg==null)) {
             try {
@@ -228,15 +280,15 @@ public class NisitPageController {
                 throw new RuntimeException(e);
             }
         }
-        user.setProfileImage();
-        File imageFile = new File(user.getProfileImageFilePath());
+        nisit.setProfileImage();
+        File imageFile = new File(nisit.getProfileImageFilePath());
         Image userImage = new Image(imageFile.toURI().toString());
         nisitImage.setImage(userImage);
     }
 
-    public void handleEditProfileButton(ActionEvent actionEvent) {
+    public void handleThemeSettingButton(ActionEvent actionEvent) {
         try {
-            com.github.saacsos.FXRouter.goTo("editProfile",user);
+            FXRouter.goTo("editProfile",nisit);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -244,7 +296,7 @@ public class NisitPageController {
 
     public void handleComplainButton(ActionEvent actionEvent) {
         try {
-            com.github.saacsos.FXRouter.goTo("report",user);
+            FXRouter.goTo("report",nisit);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -252,9 +304,18 @@ public class NisitPageController {
 
     public void handleChangePasswordButton(ActionEvent actionEvent){
         try {
-            com.github.saacsos.FXRouter.goTo("changePasswordNisit",user);
+            FXRouter.goTo("changePasswordNisit",nisit);
         } catch (Exception e){
             System.out.println("cant go there");
+            e.printStackTrace();
+        }
+    }
+
+    public void handleLogOutButton(){
+        try {
+            FXRouter.goTo("home");
+        } catch (Exception e){
+            System.out.println("cant go there bro");
             e.printStackTrace();
         }
     }

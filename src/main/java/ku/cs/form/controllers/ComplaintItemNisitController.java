@@ -39,7 +39,8 @@ public class ComplaintItemNisitController implements Initializable {
         dateTimeLabel.setText(data[0] + "\n" + data[1]);
 
         if (complaint.getStatus().equals("กำลังดำเนินการ")) statusCircle.setFill(Color.rgb(252, 238, 167, 1));
-        if (complaint.getStatus().equals("ดำเนินการเสร็จสิ้น")) statusCircle.setFill(Color.rgb(156, 198, 188, 1));
+        else if (complaint.getStatus().equals("ดำเนินการเสร็จสิ้น")) statusCircle.setFill(Color.rgb(156, 198, 188, 1));
+        else statusCircle.setFill(Color.RED);
     }
 
     public void setComplaint(Complaint complaint) {

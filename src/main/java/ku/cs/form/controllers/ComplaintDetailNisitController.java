@@ -45,7 +45,7 @@ public class ComplaintDetailNisitController {
     @FXML private ImageView additionalImg;
     @FXML public void initialize(){
         objects = (ArrayList<Object>) com.github.saacsos.FXRouter.getData();
-        user = (User) objects.get(0);
+        user = (Nisit) objects.get(0);
         selectedComplaint = (Complaint) objects.get(1);
         System.out.println(user);
         System.out.println(selectedComplaint);
@@ -71,7 +71,7 @@ public class ComplaintDetailNisitController {
         if(category.getImageNeeded()){
             additionalImageTopicLabel.setText(category.getAdditionalImageTitle());
             String filename = selectedComplaint.getSubmitTime().replace(":","-") + "_"
-                    + user.getUsername() + "_" + selectedComplaint.getTopic() +".jpg";
+                    + selectedComplaint.getComplainantUsername() + "_" + selectedComplaint.getTopic() +".jpg";
             String url = "data" + File.separator + "img" + File.separator + "complaint" + File.separator
                     + filename;
             File imgFile = new File(url);
