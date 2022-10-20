@@ -205,5 +205,10 @@
             <Font size="20.0" />
          </font>
       </Button>
+      <ImageView fitHeight="101.0" fitWidth="77.0" layoutX="566.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/catWait.gif" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

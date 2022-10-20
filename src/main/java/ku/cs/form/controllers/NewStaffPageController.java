@@ -179,7 +179,7 @@ public class NewStaffPageController {
     @FXML
     public void handleChangePasswordButton(ActionEvent actionEvent) {
         try {
-            FXRouter.goTo("newStaffChangePassword", staff);
+            FXRouter.goTo("changePassword", staff);
         } catch (IOException e) {
             System.out.println("ไม่สามารถไปหน้า Change Password ได้");
         }

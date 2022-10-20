@@ -32,7 +32,7 @@ public class ProjectApplication extends Application {
         FXRouter.when("nisitPage", packageStr+"nisit-page.fxml");
         FXRouter.when("editProfile",packageStr+"edit-profile.fxml");
         FXRouter.when("newStaff", packageStr+"new-staff-page.fxml");
-        FXRouter.when("newStaffChangePassword", packageStr+"new-staff-change-password.fxml");
+        FXRouter.when("changePassword", packageStr+"change-password.fxml");
         FXRouter.when("newComplaintDetail", packageStr+"new-complaint-detail-staff.fxml");
         FXRouter.when("changePasswordNisit",packageStr+"nisit-change-password.fxml");
         FXRouter.when("complaintsDetailsForNisit",packageStr + "complaint-detail-nisit.fxml");

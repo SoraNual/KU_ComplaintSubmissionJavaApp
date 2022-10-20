@@ -7,18 +7,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import ku.cs.form.models.Nisit;
 import ku.cs.form.models.Staff;
 import ku.cs.form.models.User;
-import ku.cs.form.models.UserList;
 import ku.cs.form.services.SetTheme;
 import ku.cs.form.services.UserDataSource;
 
 import java.io.IOException;
 
-public class NewStaffChangePasswordPageController {
+public class ChangePasswordPageController {
     @FXML
     private AnchorPane anchorPane;
     @FXML
@@ -32,15 +31,15 @@ public class NewStaffChangePasswordPageController {
     @FXML
     private PasswordField confirmPasswordPasswordField;
     private SetTheme setTheme;
-    private Staff staff;
+    private User user;
     private UserDataSource userDataSource;
 
     @FXML
     public void initialize() {
         userDataSource = new UserDataSource("data", "users.csv");
 
-        staff = (Staff) FXRouter.getData();
-        setTheme = new SetTheme(staff.getUsername());
+        user = (User) FXRouter.getData();
+        setTheme = new SetTheme(user.getUsername());
         setTheme.setting();
         anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
 
@@ -48,11 +47,27 @@ public class NewStaffChangePasswordPageController {
 
     @FXML
     public void handleBackButton(ActionEvent actionEvent) {
-        try {
-            FXRouter.goTo("newStaff");
-        } catch (IOException e) {
-            System.out.println("ไม่สามารถกลับหน้า New Staff Page ได้");
+        if(user instanceof Nisit){
+            try {
+                FXRouter.goTo("nisitPage", user);
+            } catch (IOException e) {
+                System.out.println("ไม่สามารถกลับหน้า nisit Page ได้");
+            }
+        } else if (user instanceof Staff) {
+            try {
+                FXRouter.goTo("newStaff", user);
+            } catch (IOException e) {
+                System.out.println("ไม่สามารถกลับหน้า New Staff Page ได้");
+            }
         }
+        else{
+            try {
+                FXRouter.goTo("admin", user);
+            } catch (IOException e) {
+                System.out.println("ไม่สามารถกลับหน้า admin Page ได้");
+            }
+        }
+
     }
 
     @FXML
@@ -76,10 +91,25 @@ public class NewStaffChangePasswordPageController {
 
                 userDataSource.changeData(updateUser);
                 showAlert("เปลี่ยนรหัสผ่านสำเร็จ","SUCCESSFUL");
-                try {
-                    FXRouter.goTo("home");
-                } catch (IOException e) {
-                    System.out.println("ไม่สามารถกลับหน้า New Staff Page ได้");
+                if(user instanceof Nisit){
+                    try {
+                        FXRouter.goTo("nisitPage", user);
+                    } catch (IOException e) {
+                        System.out.println("ไม่สามารถกลับหน้า nisit Page ได้");
+                    }
+                } else if (user instanceof Staff) {
+                    try {
+                        FXRouter.goTo("newStaff", user);
+                    } catch (IOException e) {
+                        System.out.println("ไม่สามารถกลับหน้า New Staff Page ได้");
+                    }
+                }
+                else{
+                    try {
+                        FXRouter.goTo("admin", user);
+                    } catch (IOException e) {
+                        System.out.println("ไม่สามารถกลับหน้า admin Page ได้");
+                    }
                 }
             } else {
                 showAlert("คอนเฟิร์มรหัสผ่านไม่ตรงกับรหัสผ่านใหม่ โปรดเช็คอีกครั้ง", "UNSUCCESSFUL");

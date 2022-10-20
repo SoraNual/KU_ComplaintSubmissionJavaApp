@@ -5,19 +5,18 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import ku.cs.form.models.Complaint;
-import ku.cs.form.models.ComplaintReport;
-import ku.cs.form.models.ComplaintReportHashMap;
-import ku.cs.form.models.User;
+import javafx.scene.layout.AnchorPane;
+import ku.cs.form.models.*;
 import ku.cs.form.services.ComplaintReportDataSource;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import com.github.saacsos.FXRouter;
+import ku.cs.form.services.SetTheme;
 
 public class ComplaintReportController {
-    private User user;
+    private User nisit;
     private ArrayList<Object> objects = new ArrayList<>();
     @FXML private TextArea detailTextArea;
     @FXML private ComboBox<String> categoryComboBox;
@@ -25,12 +24,18 @@ public class ComplaintReportController {
     private Complaint complaint;
     private ComplaintReportDataSource complaintReportDataSource;
     private ComplaintReportHashMap complaintReportHashMap;
+    @FXML private AnchorPane anchorPane;
+    private SetTheme setTheme;
     @FXML
     public void initialize(){
         objects = (ArrayList<Object>) com.github.saacsos.FXRouter.getData();
         warningLabel.setText("");
-        user = (User) objects.get(0);
+        nisit = (Nisit) objects.get(0);
         complaint = (Complaint) objects.get(1);
+
+        setTheme = new SetTheme(nisit.getUsername());
+        setTheme.setting();
+        anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
 
         complaintReportDataSource = new ComplaintReportDataSource("data","complaintReport.csv");
         complaintReportHashMap = complaintReportDataSource.readData();
@@ -57,7 +62,7 @@ public class ComplaintReportController {
             complaintReportHashMap.addReport(complaintReport);
             complaintReportDataSource.writeData(complaintReportHashMap);
             try {
-                com.github.saacsos.FXRouter.goTo("nisitPage",user);
+                com.github.saacsos.FXRouter.goTo("nisitPage", nisit);
             } catch (IOException e){
                 e.printStackTrace();
             }
@@ -67,7 +72,7 @@ public class ComplaintReportController {
     @FXML
     public void handleBackButton(ActionEvent actionEvent) {
         try {
-            FXRouter.goTo("nisitPage",user);
+            FXRouter.goTo("nisitPage", nisit);
         } catch (IOException e) {
             System.err.println("ให้ตรวจสอบการกำหนด route");
         }

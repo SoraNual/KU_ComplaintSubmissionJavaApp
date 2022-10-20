@@ -138,6 +138,13 @@ public class AdminController {
         }
     }
 
+    @FXML private void handleChangePasswordButton(ActionEvent actionEvent) {
+        try {
+            com.github.saacsos.FXRouter.goTo("",admin);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     @FXML private void handleSettingButton(ActionEvent actionEvent) {
         try {
             com.github.saacsos.FXRouter.goTo("editProfile",admin);

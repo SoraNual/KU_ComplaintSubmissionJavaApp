@@ -6,9 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import ku.cs.form.models.*;
 import ku.cs.form.services.ComplaintCategoryDataSource;
 import ku.cs.form.services.ComplaintFileDataSource;
@@ -19,12 +18,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ComplaintDetailNisitController {
-
-    public HBox pane;
-    public Circle statusCircle;
-    public Label dateTimeLabel;
+    @FXML private AnchorPane anchorPane;
     private Complaint selectedComplaint;
-    private User user;
+    private User nisit;
     private ArrayList<Object> objects = new ArrayList<>();
     private ComplaintCategory category;
     private ComplaintCategoryList categoryList;
@@ -34,7 +30,6 @@ public class ComplaintDetailNisitController {
     @FXML private Label additionalInformationTopicLabel;
     @FXML private Label additionalImageTopicLabel;
     @FXML private Label statusLabel;
-    @FXML private Label statusLabelShadow;
     @FXML private Label voteLabel;
     @FXML private Button backButton;
     @FXML private Button reportUserButton;
@@ -43,12 +38,17 @@ public class ComplaintDetailNisitController {
     @FXML private TextArea additionalDetailTextArea;
     @FXML private TextArea solutionTextArea;
     @FXML private ImageView additionalImg;
+    private SetTheme setTheme;
     @FXML public void initialize(){
         objects = (ArrayList<Object>) com.github.saacsos.FXRouter.getData();
-        user = (Nisit) objects.get(0);
+        nisit = (Nisit) objects.get(0);
         selectedComplaint = (Complaint) objects.get(1);
-        System.out.println(user);
+        System.out.println(nisit);
         System.out.println(selectedComplaint);
+
+        setTheme = new SetTheme(nisit.getUsername());
+        setTheme.setting();
+        anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
 
         complaintCategoryDataSource = new ComplaintCategoryDataSource("data","complaintCategories.csv");
         categoryList = complaintCategoryDataSource.readData();
@@ -82,7 +82,6 @@ public class ComplaintDetailNisitController {
         }
 
         statusLabel.setText(selectedComplaint.getStatus());
-        statusLabelShadow.setText(selectedComplaint.getStatus());
         if(selectedComplaint.getStatus().equals("รอการตรวจสอบจากเจ้าหน้าที่")) statusLabel.setTextFill(Color.RED);
         else if(selectedComplaint.getStatus().equals("กำลังดำเนินการ")) statusLabel.setTextFill(Color.YELLOW);
         else statusLabel.setTextFill(Color.GREEN);
@@ -93,15 +92,15 @@ public class ComplaintDetailNisitController {
 
     @FXML public void handleBackButton(){
         try {
-            com.github.saacsos.FXRouter.goTo("nisitPage", user);
+            com.github.saacsos.FXRouter.goTo("nisitPage", nisit);
         } catch (IOException e) {
             System.err.println("ให้ตรวจสอบการกำหนด route");
         }
     }
 
     @FXML public void handleReportUserButton(){
-        ArrayList object = new ArrayList<>();
-        object.add(user);
+        ArrayList<Object> object = new ArrayList<>();
+        object.add(nisit);
         object.add(selectedComplaint.getComplainantUsername());
         try {
             com.github.saacsos.FXRouter.goTo("reportUser",object);
@@ -112,8 +111,8 @@ public class ComplaintDetailNisitController {
     }
 
     @FXML public void handleReportComplaintButton(){
-        ArrayList object = new ArrayList<>();
-        object.add(user);
+        ArrayList<Object> object = new ArrayList<>();
+        object.add(nisit);
         object.add(selectedComplaint);
         try {
             com.github.saacsos.FXRouter.goTo("reportComplaint",object);
@@ -122,14 +121,14 @@ public class ComplaintDetailNisitController {
         }
     }
     @FXML public void handleDownVoteButton(){
-        voteLabel.setText(selectedComplaint.addNegativeVote(user));
+        voteLabel.setText(selectedComplaint.addNegativeVote(nisit));
         System.out.println(selectedComplaint.getPositiveVoter());
         System.out.println(selectedComplaint.getNegativeVoter());
         ComplaintFileDataSource complaintFileDataSource = new ComplaintFileDataSource("data","complaints.csv");
         complaintFileDataSource.changeData(selectedComplaint);
     }
     @FXML public void handleUpVoteButton(){
-        voteLabel.setText(selectedComplaint.addPositiveVote(user));
+        voteLabel.setText(selectedComplaint.addPositiveVote(nisit));
         ComplaintFileDataSource complaintFileDataSource = new ComplaintFileDataSource("data","complaints.csv");
         complaintFileDataSource.changeData(selectedComplaint);;
     }

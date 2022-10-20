@@ -43,7 +43,7 @@ public class ComplaintItemController implements Initializable {
 
         if (complaint.getStatus().equals("กำลังดำเนินการ")) statusCircle.setFill(Color.rgb(252, 238, 167, 1));
         else if (complaint.getStatus().equals("ดำเนินการเสร็จสิ้น")) statusCircle.setFill(Color.rgb(156, 198, 188, 1));
-        else statusCircle.setFill(Color.rgb(156, 198, 188, 1));
+        else statusCircle.setFill(Color.rgb(255, 88, 88, 1));
     }
 
     public void setComplaint(Complaint complaint) {

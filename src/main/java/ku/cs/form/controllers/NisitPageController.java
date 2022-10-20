@@ -105,15 +105,8 @@ public class NisitPageController {
 
     }
 
-
-//    private void showComplaintListView(ComplaintList complaintList){
-//        complaintsListView.getItems().clear();
-//        complaintsListView.getItems().addAll(complaintList.getAllComplaints());
-//        complaintsListView.refresh();
-//    }
-
     @FXML
-    public void showComplaintListView(ComplaintList complaintList) {
+    private void showComplaintListView(ComplaintList complaintList) {
         itemHolder.getChildren().clear();
         List<Complaint> complaints =  complaintList.getAllComplaints();
         for (int i = 0; i < complaints.size(); i++) {
@@ -166,31 +159,7 @@ public class NisitPageController {
             }
         });
     }
-//    @FXML
-//    public void handleSelectedComplaint() {
-//        complaintsListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent mouseEvent) {
-//                if (mouseEvent.getClickCount() % 2 == 0) {
-//                    Complaint complaint = complaintsListView.getSelectionModel().getSelectedItem();
-//                    if (complaint != null) {
-//                        try {
-//                            ArrayList<Object> objects = new ArrayList<>();
-//                            objects.add(user);
-//                            objects.add(complaint);
-//                            FXRouter.goTo("complaintsDetailsForNisit", objects);
-//                        } catch (IOException e) {
-//                            System.out.println("ไม่สามารถไปที่หน้า ComplaintDetail ได้");
-//                            e.printStackTrace();
-//                        }
-//                    } else {
-//                        System.out.println("user click on empty list cell");
-//                    }
-//                }
-//            }
-//        });
-//    }
-    private ComplaintList filterSubmitByMe(ComplaintList currentList){
+private ComplaintList filterSubmitByMe(ComplaintList currentList){
         currentList = currentList.filterBy(new Filterer<Complaint>() {
             @Override
             public boolean filter(Complaint o) {
@@ -304,7 +273,7 @@ public class NisitPageController {
 
     public void handleChangePasswordButton(ActionEvent actionEvent){
         try {
-            FXRouter.goTo("changePasswordNisit",nisit);
+            FXRouter.goTo("changePassword",nisit);
         } catch (Exception e){
             System.out.println("cant go there");
             e.printStackTrace();

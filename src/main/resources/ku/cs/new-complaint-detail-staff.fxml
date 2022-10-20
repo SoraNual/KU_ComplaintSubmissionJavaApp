@@ -20,7 +20,7 @@
                <children>
                   <VBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="640.0">
                      <children>
-                        <Label text="รายละเอียดเรื่องที่ร้องเรียน">
+                        <Label styleClass="h1" text="รายละเอียดเรื่องที่ร้องเรียน">
                            <font>
                               <Font name="System Bold" size="32.0" />
                            </font>
@@ -149,7 +149,7 @@
                               </Button>
                            </children>
                         </VBox>
-                        <Label prefHeight="25.0" prefWidth="278.0" text="จัดการเรื่องร้องเรียน">
+                        <Label prefHeight="25.0" prefWidth="278.0" styleClass="h2" text="จัดการเรื่องร้องเรียน">
                            <font>
                               <Font name="System Bold" size="32.0" />
                            </font>
@@ -197,7 +197,7 @@
                   </TextArea>
                   <HBox alignment="CENTER" prefHeight="84.0" prefWidth="640.0">
                      <children>
-                        <Button fx:id="inProgressButton" mnemonicParsing="false" onAction="#handleInProgressButton" prefHeight="59.0" prefWidth="295.0" style="-fx-background-color: #ff9f1c; -fx-text-fill: white;" text="กำลังดำเนินการ">
+                        <Button id="warningBtn" fx:id="inProgressButton" mnemonicParsing="false" onAction="#handleInProgressButton" prefHeight="59.0" prefWidth="295.0" text="กำลังดำเนินการ">
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>
@@ -208,7 +208,7 @@
                               <Font size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="finishButton" mnemonicParsing="false" onAction="#handleDoneButton" prefHeight="59.0" prefWidth="295.0" style="-fx-background-color: #076e68; -fx-text-fill: white;" text="ดำเนินการเสร็จสิ้น">
+                        <Button id="successBtn" fx:id="finishButton" mnemonicParsing="false" onAction="#handleDoneButton" prefHeight="59.0" prefWidth="295.0" text="ดำเนินการเสร็จสิ้น">
                            <HBox.margin>
                               <Insets left="20.0" right="20.0" />
                            </HBox.margin>

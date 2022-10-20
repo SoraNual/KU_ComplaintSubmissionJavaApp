@@ -3,22 +3,22 @@
    src: url('fonts/Kanit.ttf');}
 
 .root {
-   -menu-bar-color: #011627FF;
+   -menu-bar-color: #000C15FF;
    -menu-bar-text-color: #FFFFFFFF;
-   -text-color: #011627FF;
-   -background-color: #F7F7F7FF;
-   -input-color: #E6E6E6FF;
-   -listview-color: #F2F2F2FF;
-   -button-color: #E6E6E6FF;
-   -hover-menu-bar-color: #011F38FF;
-   -hover-button-color: #FFFFFFFF;
-   -button-text-color: #717171FF;
+   -text-color: #FFFFFFFF;
+   -background-color: #011627FF;
+   -input-color: #1B3A54FF;
+   -listview-color: #1B3A54FF;
+   -button-color: #1B3A54FF;
+   -hover-menu-bar-color: #00111EFF;
+   -hover-button-color: #275378FF;
+   -button-text-color: #0D1C29FF;
  }   * { -fx-font-family: 'Kanit';}
 
-.root { -fx-font-size: 16px;}
-.h1 { -fx-font-size: 28px;}
-.h2 { -fx-font-size: 20px;}
-#errorLabel {-fx-font-size: 14px;}
+.root { -fx-font-size: 17px;}
+.h1 { -fx-font-size: 30px;}
+.h2 { -fx-font-size: 22px;}
+#errorLabel {-fx-font-size: 15px;}
 
 .root {
     -fx-background-color: -background-color;
@@ -177,6 +177,9 @@
 .text-area .scroll-pane .content{
     -fx-background-color: transparent;
 }
+#errorLabel {
+    -fx-text-fill: red;
+    }
 
 #successBtn {
     -fx-background-color: #28a745;
@@ -192,7 +195,7 @@
     -fx-background-color: #d32535;
 }
 
-#waringBtn {
+#warningBtn  {
     -fx-background-color: #ffc107;
     -fx-text-fill: white;
 }
