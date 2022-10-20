@@ -96,7 +96,7 @@
                               <Insets left="50.0" top="5.0" />
                            </HBox.margin>
                         </Label>
-                        <TextArea fx:id="agencyTextArea" editable="false" prefHeight="50.0" prefWidth="460.0" styleClass="text-area" wrapText="true">
+                        <TextArea fx:id="agencyTextArea" editable="false" prefHeight="50.0" prefWidth="390.0" styleClass="text-area" wrapText="true">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -197,9 +197,9 @@
                   </TextArea>
                   <HBox alignment="CENTER" prefHeight="84.0" prefWidth="640.0">
                      <children>
-                        <Button fx:id="inProgressButton" mnemonicParsing="false" onAction="#handleInProgressButton" prefHeight="59.0" prefWidth="303.0" style="-fx-background-color: #ff9f1c; -fx-text-fill: white;" text="กำลังดำเนินการ">
+                        <Button fx:id="inProgressButton" mnemonicParsing="false" onAction="#handleInProgressButton" prefHeight="59.0" prefWidth="217.0" style="-fx-background-color: #ff9f1c; -fx-text-fill: white;" text="กำลังดำเนินการ">
                            <HBox.margin>
-                              <Insets left="20.0" right="20.0" />
+                              <Insets left="20.0" />
                            </HBox.margin>
                            <padding>
                               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
@@ -218,6 +218,17 @@
                            <font>
                               <Font size="24.0" />
                            </font>
+                        </Button>
+                        <Button fx:id="reportButton" layoutX="349.0" layoutY="21.0" mnemonicParsing="false" onAction="#handleReportButton" prefHeight="59.0" prefWidth="220.0" style="-fx-background-color: red; -fx-text-fill: white;" text="รายงาน" textFill="WHITE">
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="25.0" />
+                           </HBox.margin>
                         </Button>
                      </children>
                   </HBox>

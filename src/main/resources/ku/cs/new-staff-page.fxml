@@ -199,7 +199,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                      <children>
-                        <ScrollPane fx:id="scrollPane" prefHeight="513.0" prefWidth="967.0">
+                        <ScrollPane fx:id="scrollPane" prefHeight="513.0" prefWidth="967.0" style="-fx-background-color: white;">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>

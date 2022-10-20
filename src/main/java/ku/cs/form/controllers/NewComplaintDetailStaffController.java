@@ -61,7 +61,7 @@ public class NewComplaintDetailStaffController {
         additionalDetailTextArea.setText(complaint.getAdditionalDetail());
         agencyTextArea.setText(getStaffAgency().getName());
 
-        if (complaint.getSolution().equals("null")) solutionTextArea.setText("");
+        if (complaint.getSolution().equals("กำลังตรวจสอบ")) solutionTextArea.setText("");
         else solutionTextArea.setText(complaint.getSolution());
 
         showResponsibleListView();
@@ -120,6 +120,18 @@ public class NewComplaintDetailStaffController {
             FXRouter.goTo("newStaff");
         } catch (IOException e) {
             System.out.println("ไม่สามารถกลับหน้า New Staff Page ได้");
+        }
+    }
+
+    @FXML
+    public void handleReportButton(ActionEvent actionEvent) {
+        try {
+            ArrayList<Object> objects = new ArrayList<>();
+            objects.add(staff);
+            objects.add(complaint);
+            FXRouter.goTo("reportComplaint", objects);
+        } catch (IOException e) {
+            System.out.println("ไม่สามารถไปหน้า reportComplaint ได้");
         }
     }
 

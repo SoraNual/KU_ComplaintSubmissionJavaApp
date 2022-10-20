@@ -6,6 +6,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import ku.cs.form.models.Complaint;
+import ku.cs.form.models.Staff;
 import ku.cs.form.models.User;
 import ku.cs.form.models.UserReport;
 import ku.cs.form.services.UserReportDataSource;
@@ -54,7 +55,10 @@ public class reportComplaintController {
             writer.close();
 
             try {
-                com.github.saacsos.FXRouter.goTo("nisitPage",user);
+                if (((Staff) user).getAgency() != null) {
+                    com.github.saacsos.FXRouter.goTo("newStaff", user);
+                }
+                else com.github.saacsos.FXRouter.goTo("nisitPage",user);
             } catch (IOException e){
                 e.printStackTrace();
             }
@@ -64,7 +68,10 @@ public class reportComplaintController {
     @FXML
     public void handleBackButton(ActionEvent actionEvent) {
         try {
-            com.github.saacsos.FXRouter.goTo("nisitPage", user);
+            if (((Staff) user).getAgency() != null) {
+                com.github.saacsos.FXRouter.goTo("newStaff", user);
+            }
+            else com.github.saacsos.FXRouter.goTo("nisitPage",user);
         } catch (IOException e) {
             System.err.println("ให้ตรวจสอบการกำหนด route");
         }

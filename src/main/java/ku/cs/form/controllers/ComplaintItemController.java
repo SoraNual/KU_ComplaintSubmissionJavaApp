@@ -12,9 +12,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import ku.cs.form.models.Complaint;
+import ku.cs.form.models.User;
+import ku.cs.form.models.UserReport;
+import ku.cs.form.services.UserReportDataSource;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class ComplaintItemController implements Initializable {
@@ -22,7 +26,6 @@ public class ComplaintItemController implements Initializable {
     @FXML Label voteLabel;
     @FXML Label dateTimeLabel;
     @FXML Circle statusCircle;
-    private ObjectProperty<EventHandler<MouseEvent>> propertyOnAction = new SimpleObjectProperty<>();
     private Complaint store;
 
     @Override
