@@ -5,26 +5,32 @@ import com.github.saacsos.FXRouter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import ku.cs.form.models.Complaint;
 import ku.cs.form.models.ComplaintList;
+import ku.cs.form.models.Staff;
 import ku.cs.form.services.ComplaintFileDataSource;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class NewComplaintDetailStaffController {
-    @FXML
-    private TextArea topicTextArea;
-    @FXML
-    private TextArea detailTextArea;
-    @FXML
-    private TextArea agencyTextArea;
-    @FXML
-    private TextArea responsibleTextArea;
-    @FXML
-    private TextArea solutionTextArea;
+    @FXML private TextArea topicTextArea;
+    @FXML private TextArea detailTextArea;
+    @FXML private TextArea agencyTextArea;
+    @FXML private ListView<String> responsibleListView;
+    @FXML private TextArea solutionTextArea;
+    @FXML private Label attachImageLabel;
+    @FXML private ImageView attachImage;
     private ComplaintFileDataSource complaintFileDataSource;
     private ComplaintList complaintList;
+    private ArrayList<Object> objects = new ArrayList<>();
+    private Staff staff;
     private Complaint complaint;
 
     @FXML
@@ -32,22 +38,31 @@ public class NewComplaintDetailStaffController {
         complaintFileDataSource = new ComplaintFileDataSource("data", "complaints.csv");
         complaintList = complaintFileDataSource.readData();
 
-        complaint = (Complaint) FXRouter.getData();
+        objects = (ArrayList<Object>) FXRouter.getData();
+        staff = (Staff) objects.get(0);
+        complaint = (Complaint) objects.get(1);
+
+        File imageFile = new File(staff.getProfileImageFilePath());
+        Image userImage = new Image(imageFile.toURI().toString());
+        attachImage.setImage(null);
+        attachImageLabel.setText(null);
 
         topicTextArea.setText(complaint.getTopic());
         detailTextArea.setText(complaint.getBasicDetail());
-        agencyTextArea.setText("// TODO //");
-        responsibleTextArea.setText("// TODO //");
+        agencyTextArea.setText(complaint.getCategory());
+//        attachImageLabel.setText("Set");
 
         if (complaint.getSolution().equals("null")) solutionTextArea.setText("");
         else solutionTextArea.setText(complaint.getSolution());
+
+        showResponsibleListView();
     }
 
     @FXML
     public void handleInProgressButton(ActionEvent actionEvent) {
         String solution = solutionTextArea.getText();
         if (solution == null || solution.trim().isEmpty()) {
-            showAlert("โปรดใส่ solution ก่อน");
+            showAlert("โปรดใส่ solution ก่อนกดเปลี่ยนสถานะ");
             return;
         }
 
@@ -101,5 +116,19 @@ public class NewComplaintDetailStaffController {
         alert.setHeaderText(null);
         alert.setContentText(errMsg);
         alert.showAndWait();
+    }
+
+    @FXML
+    public void showResponsibleListView() {
+        responsibleListView.getItems().clear();
+        responsibleListView.getItems().add("A");
+        responsibleListView.getItems().add("A");
+        responsibleListView.getItems().add("A");
+        responsibleListView.getItems().add("A");
+        responsibleListView.getItems().add("A");
+        responsibleListView.getItems().add("A");
+        responsibleListView.getItems().add("A");
+        responsibleListView.getItems().add("A");
+        responsibleListView.refresh();
     }
 }

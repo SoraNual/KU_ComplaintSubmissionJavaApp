@@ -1,12 +1,15 @@
 package ku.cs.form.controllers;
 
+import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -17,10 +20,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import ku.cs.form.models.Complaint;
-import ku.cs.form.models.ComplaintList;
-import ku.cs.form.models.Staff;
+import ku.cs.form.models.*;
 import com.github.saacsos.FXRouter;
+import ku.cs.form.services.AgencyDataSource;
 import ku.cs.form.services.ComplaintFileDataSource;
 import ku.cs.form.services.Filterer;
 import ku.cs.form.services.SetTheme;
@@ -29,12 +31,13 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.*;
 
 public class NewStaffPageController {
     @FXML private VBox leftRec;
+    @FXML private VBox itemHolder;
     @FXML private AnchorPane pane;
+    @FXML private ScrollPane scrollPane;
     private Stage stage;
     @FXML private Button uploadImageButton;
     @FXML private Button sideButton;
@@ -45,68 +48,103 @@ public class NewStaffPageController {
     @FXML private Label nameLabel;
     @FXML private Label responsibilityLabel;
     @FXML private ImageView staffImage;
-
-    @FXML private ListView<Complaint> itemHolder;
+    @FXML private AnchorPane anchorPane;
+    @FXML private ComboBox<String> filterComboBox;
     private Staff staff;
-    private ComplaintList complaintList;
+    private ComplaintList complaintList; // เก็บแค่ตอนอ่าน ComplaintDatasource ตอนแรก
+    private ComplaintList agencyFilterComplaints; // เก็บ ComplaintList ที่ filter หน่วยงานมาแล้วจะนำไป filter/sort ต่อ
+    private ComplaintList currentComplaintList; // เก็บ ComplaintList ที่ได้มาจากการใช้มา method filter/sort
+    private SetTheme setTheme;
 
     @FXML
     public void initialize() {
         staff = (Staff) FXRouter.getData();
+        setTheme = new SetTheme(staff.getUsername());
+        setTheme.setting();
+        anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
+
         ComplaintFileDataSource complaintFileDataSource = new ComplaintFileDataSource("data", "complaints.csv");
         complaintList = complaintFileDataSource.readData();
 
-        // setText
+        agencyFilterComplaints = filterByCategory(complaintList);
+        currentComplaintList = agencyFilterComplaints;
+
+        itemHolder.setSpacing(10);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); // disable ตัว scrollbar แนวนอน
+
+        // set components
         nameLabel.setText(staff.getName());
         agencyLabel.setText(staff.getAgency());
         File imageFile = new File(staff.getProfileImageFilePath());
         Image userImage = new Image(imageFile.toURI().toString());
         staffImage.setImage(userImage);
+        filterComboBox.getItems().addAll("เวลาจากล่าสุด ไป เก่าสุด", "เวลาจากเก่าสุด ไป ล่าสุด",
+                                        "คะแนนโหวตมากสุด ไป น้อยสุด", "คะแนนโหวตน้อยสุด ไป มากสุด");
 
         showImage();
-//        setTheme();
-        showComplaintListView();
-        handleSelectedItem();
-
+        showComplaintListView(agencyFilterComplaints);
+        handleSelectedFilterComboBox();
     }
 
     @FXML
-    public void showComplaintListView() {
-//        // filtered by Agency
-//        ComplaintList filteredComplaints = complaintList.filterBy(new Filterer<Complaint>() {
-//            @Override
-//            public boolean filter(Complaint o) {
-//                // TODO
-//                return true;
-//            }
-//        });
-//
-//        for (Complaint complaint : filteredComplaints.getAllReports()) {
-//            itemHolder.getItems().add(complaint);
-//        }
+    public void showComplaintListView(ComplaintList complaintList) {
+        itemHolder.getChildren().clear();
+        List<Complaint> complaints =  complaintList.getAllComplaints();
+        for (int i = 0; i < complaints.size(); i++) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/ku/cs/complaint-item.fxml"));
 
-        for (Complaint complaint : complaintList.getAllComplaints()) {
-            itemHolder.getItems().add(complaint);
+            try {
+                HBox hBox = fxmlLoader.load();
+                ComplaintItemController complaintItemController = fxmlLoader.getController();
+                complaintItemController.setData(complaints.get(i));
+
+                hBox.hoverProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+                    if (newValue) {
+                        hBox.setStyle("-fx-background-color: #dddddd");
+                    } else {
+                        hBox.setStyle("-fx-background-color: transparent");
+                    }
+                });
+
+                hBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        System.out.println("mouse clicked: " + complaintItemController.getComplaint());
+
+                        ArrayList<Object> objects = new ArrayList<>();
+                        objects.add(staff);
+                        objects.add(complaintItemController.getComplaint());
+
+                        try {
+                            FXRouter.goTo("newComplaintDetail", objects);
+                        } catch (IOException e) {
+                            System.out.println("ไม่สามารถไปหน้า Complaint Detail ได้โปรดตรวจสอบ router อีกครั้ง");
+                        }
+                    }
+                });
+
+                itemHolder.getChildren().add(hBox);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    @FXML
-    public void handleSelectedItem() {
-        itemHolder.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    public void handleSearchButton(ActionEvent actionEvent) {
+        currentComplaintList = filterByContain(agencyFilterComplaints);
+        searchTextField.clear();
+        showComplaintListView(currentComplaintList);
+    }
+
+    public void handleSelectedFilterComboBox() {
+        filterComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void handle(MouseEvent mouseEvent) {
-                if (mouseEvent.getClickCount() % 2 == 0) {
-                    Complaint complaint = itemHolder.getSelectionModel().getSelectedItem();
-                    if (complaint != null) {
-                        try {
-                            FXRouter.goTo("newReportDetail", complaint);
-                        } catch (IOException e) {
-                            System.out.println("ไม่สามารถไปที่หน้า ReportDetail ได้");
-                        }
-                    } else {
-                        System.out.println("user click on empty list cell");
-                    }
-                }
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                System.out.println(oldValue + ":" + newValue);
+                ComplaintList sortedComplaints = sort(currentComplaintList);
+
+                showComplaintListView(sortedComplaints);
             }
         });
     }
@@ -138,22 +176,6 @@ public class NewStaffPageController {
         staffImage.setImage(staffImg);
     }
 
-//    @FXML
-//    public void setTheme() {
-//        SetTheme setTheme = new SetTheme(staff);
-//        setTheme.setObject(itemHolder);
-//        setTheme.setObject(leftRec);
-//        setTheme.setObject(uploadImageButton);
-//        setTheme.setObject(searchButton);
-//        setTheme.setObject(searchTextField);
-//        setTheme.setInvisibleBackgroundButton(sideButton);
-//        setTheme.setObject(nameLabel);
-//        setTheme.setObject(responsibilityLabel);
-//        setTheme.setObject(agency);
-//        setTheme.setObject(agencyLabel);
-//        setTheme.setObject(pane);
-//    }
-
     @FXML
     public void handleChangePasswordButton(ActionEvent actionEvent) {
         try {
@@ -161,5 +183,81 @@ public class NewStaffPageController {
         } catch (IOException e) {
             System.out.println("ไม่สามารถไปหน้า Change Password ได้");
         }
+    }
+
+    @FXML
+    public void handleThemeButton(ActionEvent actionEvent) {
+        try {
+            FXRouter.goTo("editProfile", staff);
+        } catch (IOException e) {
+            System.out.println("ไม่สามารถไปหน้า Change Password ได้");
+        }
+    }
+
+    @FXML
+    public void handleLogOutButton(ActionEvent actionEvent) {
+        try {
+            FXRouter.goTo("home");
+        } catch (IOException e) {
+            System.out.println("ไม่สามารถไปหน้า Home ได้");
+        }
+    }
+
+    public Agency getStaffCategory() {
+        AgencyDataSource agencyDataSource = new AgencyDataSource("data", "agency.csv");
+        AgencyList agencyList = agencyDataSource.readData();
+
+        Agency result = null;
+        for (Agency agency : agencyList.getAgencies()) {
+            if (agency.getName().equals(staff.getAgency())) {
+                result = agency;
+            }
+        }
+        return result;
+    }
+
+    public ComplaintList filterByCategory(ComplaintList complains) {
+        Agency agency = getStaffCategory();
+        complains = complains.filterBy(new Filterer<Complaint>() {
+            @Override
+            public boolean filter(Complaint o) {
+                return o.getCategory().equals(agency.getCategory());
+            }
+        });
+        return complains;
+    }
+
+    public ComplaintList filterByContain(ComplaintList complaints) {
+        String input = searchTextField.getText();
+        System.out.println(input);
+        if (input != null && !input.trim().isEmpty()) {
+            complaints = complaints.filterBy(new Filterer<Complaint>() {
+                @Override
+                public boolean filter(Complaint o) {
+                    return o.getTopic().contains(input.trim());
+                }
+            });
+        }
+        return complaints;
+    }
+
+    public ComplaintList sort(ComplaintList complaints) {
+        complaints.getAllComplaints().sort(new Comparator<Complaint>() {
+            @Override
+            public int compare(Complaint o1, Complaint o2) {
+                if (filterComboBox.getValue().equals("คะแนนโหวตมากสุด ไป น้อยสุด")) {
+                    return -Integer.compare(o1.getVotePoint(), o2.getVotePoint());
+                }
+                if (filterComboBox.getValue().equals("คะแนนโหวตน้อยสุด ไป มากสุด")) {
+                    return Integer.compare(o1.getVotePoint(), o2.getVotePoint());
+                }
+                if (filterComboBox.getValue().equals("เวลาจากล่าสุด ไป เก่าสุด")) {
+                    return -o1.getLiteralSubmitTime().compareTo(o2.getLiteralSubmitTime());
+                }
+                else
+                    return o1.getLiteralSubmitTime().compareTo(o2.getLiteralSubmitTime());
+            }
+        });
+        return complaints;
     }
 }
