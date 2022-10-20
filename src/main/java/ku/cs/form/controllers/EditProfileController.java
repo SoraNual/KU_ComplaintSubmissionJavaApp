@@ -52,6 +52,7 @@ public class EditProfileController {
         addThemeComboBox();
         anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
         userList = userDataSource.readData();
+        setUserSettingInComboBox();
 
     }
 
@@ -174,6 +175,17 @@ public class EditProfileController {
 
     private String colorToString(Color color) {
         return ("#"+color).replace("0x","").toUpperCase();
+    }
+
+    private void setUserSettingInComboBox() {
+        String[] setting = setTheme.setting();
+        themeComboBox.setValue(setting[0]);
+        String textSize = "";
+        if(setting[1].equals("90")) textSize = "Small";
+        if(setting[1].equals("100")) textSize = "Medium";
+        if(setting[1].equals("125")) textSize = "Large";
+       fontSizeComboBox.setValue(textSize);
+        fontComboBox.setValue(setting[2]);
     }
 
 }

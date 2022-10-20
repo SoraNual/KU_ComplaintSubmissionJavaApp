@@ -1,6 +1,7 @@
 package ku.cs.form.services;
 
 
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -106,7 +107,7 @@ public class SetTheme {
 
     }
 
-    public void setting() {
+    public String[] setting() {
 
         String[] setting = settingHashMap.get(username);
 
@@ -139,6 +140,7 @@ public class SetTheme {
                 buttonColor,
                 textSize,
                 fontFamily);
+        return setting;
     }
 
     private void setStylesCss(String menuBarColor,
@@ -312,6 +314,11 @@ public class SetTheme {
     public boolean hasCustomTheme() {
         return themeHashMap.containsKey(username);
     }
+
+    public void setStyleToAnchorPane(AnchorPane anchorPane){
+        anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
+    }
+
 
 
 }

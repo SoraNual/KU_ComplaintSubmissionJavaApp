@@ -19,7 +19,7 @@ public class ProjectApplication extends Application {
     private static void configRoute() {
         String packageStr = "ku/cs/";
         FXRouter.when("manageAgency",packageStr+"manage-agency.fxml");
-        FXRouter.when("report",packageStr+"report.fxml");
+        FXRouter.when("reports",packageStr+"report.fxml");
         FXRouter.when("home", packageStr+"home.fxml");
         FXRouter.when("staffRegister", packageStr+"staff-register.fxml");
         FXRouter.when("admin", packageStr+"admin.fxml");

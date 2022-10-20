@@ -12,12 +12,18 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import ku.cs.form.models.Staff;
 import ku.cs.form.models.User;
 import ku.cs.form.models.UserList;
+import ku.cs.form.services.SetTheme;
 import ku.cs.form.services.UserDataSource;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -31,13 +37,18 @@ public class AdminController {
 
     @FXML private Label adminGreetingLabel;
     private User admin;
+    private Stage stage;
+
 
     @FXML
     public void initialize() {
         admin = (User) com.github.saacsos.FXRouter.getData();
         userDataSource = new UserDataSource("data","users.csv");
         userList = userDataSource.readData();
-        anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
+
+        SetTheme setTheme = new SetTheme(admin.getUsername());
+        setTheme.setting();
+        setTheme.setStyleToAnchorPane(anchorPane);
 
         sortUserListByLoginTime();
         showListView();
@@ -109,7 +120,7 @@ public class AdminController {
     }
 
     @FXML
-    private void handleManageAgencyBtn(ActionEvent actionEvent) {
+    private void handleManageAgencyButton(ActionEvent actionEvent) {
         try {
             com.github.saacsos.FXRouter.goTo("manageAgency");
         } catch (IOException e) {
@@ -118,20 +129,55 @@ public class AdminController {
     }
 
     @FXML
-    private void handleUserComplaintBtn(ActionEvent actionEvent) {
+    private void handleReportButton(ActionEvent actionEvent) {
         try {
-            com.github.saacsos.FXRouter.goTo("userComplaint",admin);
+            com.github.saacsos.FXRouter.goTo("reports",admin);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    @FXML private void handleThemeBtn(ActionEvent actionEvent) {
+    @FXML private void handleSettingButton(ActionEvent actionEvent) {
         try {
             com.github.saacsos.FXRouter.goTo("editProfile",admin);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @FXML private void handleAddComplaintCategoryButton(ActionEvent actionEvent){
+        try {
+            com.github.saacsos.FXRouter.goTo("addCategory");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML private void handleLogOutButton(ActionEvent actionEvent){
+        try {
+            com.github.saacsos.FXRouter.goTo("home");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML public void handleUploadImageButton(ActionEvent actionEvent){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image","*jpg","*jpeg","*png"));
+        fileChooser.setInitialFileName(admin.getUsername()+".jpg");
+        File uploadImg = fileChooser.showOpenDialog(stage);
+        File newUserImg = new File("data"+File.separator+"img",admin.getUsername()+".jpg");
+
+        if(!(uploadImg==null)) {
+            try {
+                Files.copy(uploadImg.toPath(), newUserImg.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        admin.setProfileImage();
+        File imageFile = new File(admin.getProfileImageFilePath());
+        showAdminProfile();
     }
 
 

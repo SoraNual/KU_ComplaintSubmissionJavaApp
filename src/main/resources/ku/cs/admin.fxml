@@ -20,9 +20,9 @@
          </font>
       </Label>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#011627" height="751.0" layoutX="-16.0" layoutY="-28.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="user-menu-bar" width="314.0" />
-      <VBox layoutX="-4.0" layoutY="335.0" prefHeight="271.0" prefWidth="298.0" styleClass="user-menu-bar">
+      <VBox layoutX="-4.0" layoutY="335.0" prefHeight="344.0" prefWidth="298.0" styleClass="user-menu-bar">
          <children>
-            <Button mnemonicParsing="false" onAction="#handleStaffRegisterMenu" prefHeight="52.0" prefWidth="374.0" styleClass="user-menu-bar-button" text="ลงทะเบียนเจ้าหน้าที่" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#handleSettingButton" prefHeight="52.0" prefWidth="374.0" styleClass="user-menu-bar-button" text="เปลี่ยนรหัสผ่าน" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -30,7 +30,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" onAction="#handleUserComplaintBtn" prefHeight="52.0" prefWidth="374.0" styleClass="user-menu-bar-button" text="รายงานผู้ใช้ระบบ" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#handleStaffRegisterMenu" prefHeight="52.0" prefWidth="374.0" styleClass="user-menu-bar-button" text="ลงทะเบียนเจ้าหน้าที่" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -38,7 +38,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" onAction="#handleManageAgencyBtn" prefHeight="52.0" prefWidth="374.0" styleClass="user-menu-bar-button" text="จัดการหน่วยงาน" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#handleReportButton" prefHeight="52.0" prefWidth="374.0" styleClass="user-menu-bar-button" text="จัดการรายงาน" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -46,7 +46,31 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" onAction="#handleThemeBtn" prefHeight="52.0" prefWidth="374.0" styleClass="user-menu-bar-button" text="Theme" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#handleManageAgencyButton" prefHeight="52.0" prefWidth="374.0" styleClass="user-menu-bar-button" text="จัดการหน่วยงาน" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#handleAddComplaintCategoryButton" prefHeight="52.0" prefWidth="374.0" styleClass="user-menu-bar-button" text="เพิ่มหมวดหมู่" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#handleSettingButton" prefHeight="52.0" prefWidth="374.0" styleClass="user-menu-bar-button" text="การตั้งค่า" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#handleLogOutButton" prefHeight="52.0" prefWidth="374.0" styleClass="user-menu-bar-button" text="Log out" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -75,5 +99,10 @@
          </styleClass>
       </Label>
       <Rectangle fx:id="profilePic" arcHeight="45.0" arcWidth="45.0" fill="WHITE" height="162.0" layoutX="65.0" layoutY="116.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="162.0" />
+      <Button layoutX="202.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleUploadImageButton" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100;" text="+">
+         <font>
+            <Font size="63.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

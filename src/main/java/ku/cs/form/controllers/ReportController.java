@@ -59,9 +59,10 @@ public class ReportController {
     public void initialize() {
         //setting section
         User user = (User) com.github.saacsos.FXRouter.getData();
-        userReportAnchorPane.getStylesheets().add("file:src/main/resources/ku/cs/styles/styles.css");
+
         SetTheme setTheme = new SetTheme(user.getUsername());
         setTheme.setting();
+        setTheme.setStyleToAnchorPane(userReportAnchorPane);
 
         userDataSource = new UserDataSource("data","users.csv");
         usersList = userDataSource.readData();
