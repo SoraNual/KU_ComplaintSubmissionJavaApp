@@ -55,10 +55,7 @@ public class reportComplaintController {
             writer.close();
 
             try {
-                if (((Staff) user).getAgency() != null) {
-                    com.github.saacsos.FXRouter.goTo("newStaff", user);
-                }
-                else com.github.saacsos.FXRouter.goTo("nisitPage",user);
+                com.github.saacsos.FXRouter.goTo("nisitPage",user);
             } catch (IOException e){
                 e.printStackTrace();
             }
@@ -68,10 +65,7 @@ public class reportComplaintController {
     @FXML
     public void handleBackButton(ActionEvent actionEvent) {
         try {
-            if (((Staff) user).getAgency() != null) {
-                com.github.saacsos.FXRouter.goTo("newStaff", user);
-            }
-            else com.github.saacsos.FXRouter.goTo("nisitPage",user);
+            com.github.saacsos.FXRouter.goTo("nisitPage",user);
         } catch (IOException e) {
             System.err.println("ให้ตรวจสอบการกำหนด route");
         }

@@ -162,7 +162,7 @@
                         <Insets />
                      </VBox.margin>
                   </VBox>
-                  <VBox alignment="TOP_CENTER" prefHeight="247.0" prefWidth="640.0">
+                  <VBox alignment="TOP_CENTER" prefHeight="230.0" prefWidth="640.0">
                      <children>
                         <VBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="640.0">
                            <children>
@@ -187,7 +187,7 @@
                         <Insets left="25.0" right="25.0" />
                      </VBox.margin>
                   </Label>
-                  <TextArea fx:id="solutionTextArea" prefHeight="224.0" prefWidth="590.0" wrapText="true">
+                  <TextArea fx:id="solutionTextArea" prefHeight="206.0" prefWidth="590.0" wrapText="true">
                      <VBox.margin>
                         <Insets bottom="20.0" left="25.0" right="25.0" top="10.0" />
                      </VBox.margin>
@@ -197,7 +197,7 @@
                   </TextArea>
                   <HBox alignment="CENTER" prefHeight="84.0" prefWidth="640.0">
                      <children>
-                        <Button fx:id="inProgressButton" mnemonicParsing="false" onAction="#handleInProgressButton" prefHeight="59.0" prefWidth="217.0" style="-fx-background-color: #ff9f1c; -fx-text-fill: white;" text="กำลังดำเนินการ">
+                        <Button fx:id="inProgressButton" mnemonicParsing="false" onAction="#handleInProgressButton" prefHeight="59.0" prefWidth="295.0" style="-fx-background-color: #ff9f1c; -fx-text-fill: white;" text="กำลังดำเนินการ">
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>
@@ -208,7 +208,7 @@
                               <Font size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="finishButton" mnemonicParsing="false" onAction="#handleDoneButton" prefHeight="59.0" prefWidth="220.0" style="-fx-background-color: #076e68; -fx-text-fill: white;" text="ดำเนินการเสร็จสิ้น">
+                        <Button fx:id="finishButton" mnemonicParsing="false" onAction="#handleDoneButton" prefHeight="59.0" prefWidth="295.0" style="-fx-background-color: #076e68; -fx-text-fill: white;" text="ดำเนินการเสร็จสิ้น">
                            <HBox.margin>
                               <Insets left="20.0" right="20.0" />
                            </HBox.margin>
@@ -218,17 +218,6 @@
                            <font>
                               <Font size="24.0" />
                            </font>
-                        </Button>
-                        <Button fx:id="reportButton" layoutX="349.0" layoutY="21.0" mnemonicParsing="false" onAction="#handleReportButton" prefHeight="59.0" prefWidth="220.0" style="-fx-background-color: red; -fx-text-fill: white;" text="รายงาน" textFill="WHITE">
-                           <padding>
-                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                           </padding>
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets right="25.0" />
-                           </HBox.margin>
                         </Button>
                      </children>
                   </HBox>
