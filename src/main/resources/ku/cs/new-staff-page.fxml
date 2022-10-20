@@ -107,7 +107,7 @@
                            <children>
                               <HBox alignment="BOTTOM_LEFT" prefHeight="123.0" prefWidth="271.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label fx:id="agency" prefHeight="31.0" prefWidth="120.0" text="หน่วยงาน :">
+                                    <Label fx:id="agency" prefHeight="31.0" prefWidth="87.0" text="หน่วยงาน :">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>
@@ -115,7 +115,7 @@
                                           <Insets bottom="10.0" left="50.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <Label fx:id="agencyLabel" prefHeight="31.0" prefWidth="185.0" text="agencyLabel">
+                                    <Label fx:id="agencyLabel" prefHeight="31.0" prefWidth="247.0" text="agencyLabel">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>

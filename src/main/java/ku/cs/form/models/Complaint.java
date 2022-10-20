@@ -31,7 +31,7 @@ public class Complaint {
         this.category = category;
         this.status = status;
         this.votePoint = votePoint;
-        this.solution = "กำลังตรวจสอบ";
+        this.solution = null;
         positiveVoter = new ArrayList<>();
         negativeVoter = new ArrayList<>();
     }

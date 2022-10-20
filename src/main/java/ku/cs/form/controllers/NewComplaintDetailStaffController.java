@@ -11,11 +11,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import ku.cs.form.models.Complaint;
-import ku.cs.form.models.ComplaintList;
-import ku.cs.form.models.Staff;
+import ku.cs.form.models.*;
+import ku.cs.form.services.AgencyDataSource;
 import ku.cs.form.services.ComplaintFileDataSource;
 import ku.cs.form.services.SetTheme;
+import ku.cs.form.services.UserDataSource;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +24,7 @@ import java.util.ArrayList;
 public class NewComplaintDetailStaffController {
     @FXML private TextArea topicTextArea;
     @FXML private TextArea detailTextArea;
+    @FXML private TextArea additionalDetailTextArea;
     @FXML private TextArea agencyTextArea;
     @FXML private ListView<String> responsibleListView;
     @FXML private TextArea solutionTextArea;
@@ -57,13 +58,26 @@ public class NewComplaintDetailStaffController {
 
         topicTextArea.setText(complaint.getTopic());
         detailTextArea.setText(complaint.getBasicDetail());
-        agencyTextArea.setText(complaint.getCategory());
-//        attachImageLabel.setText("Set");
+        additionalDetailTextArea.setText(complaint.getAdditionalDetail());
+        agencyTextArea.setText(getStaffAgency().getName());
 
         if (complaint.getSolution().equals("null")) solutionTextArea.setText("");
         else solutionTextArea.setText(complaint.getSolution());
 
         showResponsibleListView();
+    }
+
+    public Agency getStaffAgency() {
+        AgencyDataSource agencyDataSource = new AgencyDataSource("data", "agency.csv");
+        AgencyList agencyList = agencyDataSource.readData();
+
+        Agency result = null;
+        for (Agency agency : agencyList.getAgencies()) {
+            if (agency.getCategory().equals(complaint.getCategory())) {
+                result = agency;
+            }
+        }
+        return result;
     }
 
     @FXML
@@ -129,14 +143,13 @@ public class NewComplaintDetailStaffController {
     @FXML
     public void showResponsibleListView() {
         responsibleListView.getItems().clear();
-        responsibleListView.getItems().add("A");
-        responsibleListView.getItems().add("A");
-        responsibleListView.getItems().add("A");
-        responsibleListView.getItems().add("A");
-        responsibleListView.getItems().add("A");
-        responsibleListView.getItems().add("A");
-        responsibleListView.getItems().add("A");
-        responsibleListView.getItems().add("A");
-        responsibleListView.refresh();
+        UserDataSource userDataSource = new UserDataSource("data", "users.csv");
+        UserList users = userDataSource.readData();
+
+        for (User user : users.getAllUsers()) {
+            if (user instanceof Staff && ((Staff) user).getAgency().equals(getStaffAgency().getName())) {
+                responsibleListView.getItems().add(user.getName());
+            }
+        }
     }
 }
