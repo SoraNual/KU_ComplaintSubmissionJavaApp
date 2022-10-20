@@ -10,10 +10,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import ku.cs.form.models.Complaint;
 import ku.cs.form.models.ComplaintList;
 import ku.cs.form.models.Staff;
 import ku.cs.form.services.ComplaintFileDataSource;
+import ku.cs.form.services.SetTheme;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,11 +29,13 @@ public class NewComplaintDetailStaffController {
     @FXML private TextArea solutionTextArea;
     @FXML private Label attachImageLabel;
     @FXML private ImageView attachImage;
+    @FXML private AnchorPane anchorPane;
     private ComplaintFileDataSource complaintFileDataSource;
     private ComplaintList complaintList;
     private ArrayList<Object> objects = new ArrayList<>();
     private Staff staff;
     private Complaint complaint;
+    private SetTheme setTheme;
 
     @FXML
     public void initialize() {
@@ -42,10 +46,14 @@ public class NewComplaintDetailStaffController {
         staff = (Staff) objects.get(0);
         complaint = (Complaint) objects.get(1);
 
+        setTheme = new SetTheme(staff.getUsername());
+        setTheme.setting();
+        anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
+
+
         File imageFile = new File(staff.getProfileImageFilePath());
         Image userImage = new Image(imageFile.toURI().toString());
         attachImage.setImage(null);
-        attachImageLabel.setText(null);
 
         topicTextArea.setText(complaint.getTopic());
         detailTextArea.setText(complaint.getBasicDetail());

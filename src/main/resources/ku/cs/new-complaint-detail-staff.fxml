@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" styleClass="white-background" stylesheets="@styles/new-staff-styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.NewComplaintDetailStaffController">
+<AnchorPane fx:id="anchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.NewComplaintDetailStaffController">
    <children>
       <BorderPane layoutX="508.0" layoutY="198.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -173,7 +173,7 @@
                   </TextArea>
                   <HBox alignment="CENTER" prefHeight="84.0" prefWidth="640.0">
                      <children>
-                        <Button fx:id="inProgressButton" mnemonicParsing="false" onAction="#handleInProgressButton" prefHeight="59.0" prefWidth="303.0" text="กำลังดำเนินการ">
+                        <Button fx:id="inProgressButton" mnemonicParsing="false" onAction="#handleInProgressButton" prefHeight="59.0" prefWidth="303.0" style="-fx-background-color: #076e68; -fx-text-fill: white;" text="กำลังดำเนินการ">
                            <HBox.margin>
                               <Insets left="20.0" right="20.0" />
                            </HBox.margin>
@@ -184,7 +184,7 @@
                               <Font size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="finishButton" mnemonicParsing="false" onAction="#handleDoneButton" prefHeight="59.0" prefWidth="220.0" text="ดำเนินการเสร็จสิ้น">
+                        <Button fx:id="finishButton" mnemonicParsing="false" onAction="#handleDoneButton" prefHeight="59.0" prefWidth="220.0" style="-fx-background-color: #ff9f1c; -fx-text-fill: white;" text="ดำเนินการเสร็จสิ้น">
                            <HBox.margin>
                               <Insets left="20.0" right="20.0" />
                            </HBox.margin>
