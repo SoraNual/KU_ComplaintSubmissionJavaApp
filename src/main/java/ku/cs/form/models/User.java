@@ -12,6 +12,7 @@ public class User {
     private String password;
     private LocalDateTime loginTime;
     private String profileImageFilePath;
+    private String role;
     private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"); //for change date format
 
     protected String rectangleColor;
@@ -65,7 +66,13 @@ public class User {
         profileImageFilePath = filePath;
     }
 
+    public String getRole() {
+        return role;
+    }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public String getProfileImageFilePath() {
         return profileImageFilePath;
@@ -83,18 +90,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-
-
-
-    public void setLoginTime(LocalDateTime loginTime) {
-        this.loginTime = loginTime;
-    }
-
-    public void setProfileImageFilePath(String profileImageFilePath) {
-        this.profileImageFilePath = profileImageFilePath;
-    }
-
-
 
 }

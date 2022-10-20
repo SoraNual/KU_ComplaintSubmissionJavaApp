@@ -74,12 +74,14 @@ public class UserDataSource implements DataSource<UserList>{
                 if(class_name.equals("staff")){
                     Staff staff = new Staff(data[4].trim(), data[1].trim(), data[2].trim(), data[7].trim()); // add agency
                     staff.setLoginTime(data[0].trim());
+                    staff.setRole(class_name);
                     userList.addUser(staff);
                 }
 
                 else if(class_name.equals("admin")){
-                    Admin admin = new Admin(data[4].trim(), data[1].trim(), data[2].trim());
+                    User admin = new User(data[4].trim(), data[1].trim(), data[2].trim());
                     admin.setLoginTime(data[0].trim());
+                    admin.setRole(class_name);
                     userList.addUser(admin);
                 }
 
@@ -88,13 +90,12 @@ public class UserDataSource implements DataSource<UserList>{
                     nisit.setLoginAttempt(Integer.parseInt(data[6].trim()));
                     nisit.setUserStatus(data[5].trim());
                     nisit.setLoginTime(data[0].trim());
+                    nisit.setRole(class_name);
                     userList.addUser(nisit);
                 }
             }
 
 
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
@@ -122,10 +123,10 @@ public class UserDataSource implements DataSource<UserList>{
 
             for (User user : userList.getAllUsers()){
                 String line = "";
-                if(user instanceof Admin)
+                if(user.getRole().equals("admin"))
                     line = user.toString();
                 if(user instanceof Staff)
-                    line = ((Staff) user).toString();
+                    line = user.toString();
                 if(user instanceof Nisit)
                     line = user.toString();
                 buffer.append(line);

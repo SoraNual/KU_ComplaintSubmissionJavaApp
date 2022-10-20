@@ -1,6 +1,7 @@
 package ku.cs.form.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 
@@ -12,6 +13,8 @@ import ku.cs.form.services.UserDataSource;
 import ku.cs.form.services.UserReportDataSource;
 
 import java.io.IOException;
+
+import com.github.saacsos.FXRouter;
 
 
 public class BannedPageController {
@@ -76,6 +79,24 @@ public class BannedPageController {
         if(!requestMsg.isBlank()){
             userReportHashMap.setRequest(user.getUsername(), requestMsg);
             userReportDataSource.writeData(userReportHashMap);
+            showPopUp("แจ้งคำร้องขอแล้ว \nโปรดรอการตรวจสอบจากแอดมิน", "คำร้องขอของคุณถูกส่งแล้ว",null);
+            try {
+                FXRouter.goTo("home");
+            } catch (IOException e) {
+                System.err.println("ให้ตรวจสอบการกำหนด route");
+            }
         }
+        else showPopUp("โปรดกรอกคำร้องขอในช่องที่กำหนดให้", "ERROR",null);
+    }
+
+    public static void showPopUp(String infoMessage, String titleBar, String headerMessage)
+    {
+        Alert alert;
+        if(titleBar != null && titleBar.equals("ERROR")) alert = new Alert(Alert.AlertType.ERROR);
+        else alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titleBar);
+        alert.setHeaderText(headerMessage);
+        alert.setContentText(infoMessage);
+        alert.showAndWait();
     }
 }

@@ -14,6 +14,8 @@ import ku.cs.form.services.ComplaintReportDataSource;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.github.saacsos.FXRouter;
+
 public class ComplaintReportController {
     private User user;
     private ArrayList<Object> objects = new ArrayList<>();
@@ -65,7 +67,7 @@ public class ComplaintReportController {
     @FXML
     public void handleBackButton(ActionEvent actionEvent) {
         try {
-            com.github.saacsos.FXRouter.goTo("nisitPage",user);
+            FXRouter.goTo("nisitPage",user);
         } catch (IOException e) {
             System.err.println("ให้ตรวจสอบการกำหนด route");
         }

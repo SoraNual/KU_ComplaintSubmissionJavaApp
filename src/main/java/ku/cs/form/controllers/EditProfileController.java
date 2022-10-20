@@ -64,7 +64,7 @@ public class EditProfileController {
 
 
     public void handleBackButton(ActionEvent actionEvent) {
-        if(user instanceof Admin) {
+        if(user.getRole().equals("admin")) {
             try {
                 com.github.saacsos.FXRouter.goTo("admin", user);
             } catch (Exception e) {
@@ -104,7 +104,7 @@ public class EditProfileController {
                 buttonColor };
         setTheme.changeCustomThemeColor(newTheme);
 
-        if(user instanceof Admin) {
+        if(user.getRole().equals("admin")) {
             try {
                 com.github.saacsos.FXRouter.goTo("admin", user);
             } catch (Exception e) {
