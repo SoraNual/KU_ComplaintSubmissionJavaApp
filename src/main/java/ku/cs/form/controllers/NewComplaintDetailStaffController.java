@@ -12,12 +12,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import ku.cs.form.models.*;
-import ku.cs.form.services.AgencyDataSource;
-import ku.cs.form.services.ComplaintFileDataSource;
-import ku.cs.form.services.SetTheme;
-import ku.cs.form.services.UserDataSource;
+import ku.cs.form.services.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -65,6 +63,7 @@ public class NewComplaintDetailStaffController {
         else solutionTextArea.setText(complaint.getSolution());
 
         showResponsibleListView();
+        showAttachImage();
     }
 
     public Agency getStaffAgency() {
@@ -124,18 +123,6 @@ public class NewComplaintDetailStaffController {
     }
 
     @FXML
-    public void handleReportButton(ActionEvent actionEvent) {
-        try {
-            ArrayList<Object> objects = new ArrayList<>();
-            objects.add(staff);
-            objects.add(complaint);
-            FXRouter.goTo("reportComplaint", objects);
-        } catch (IOException e) {
-            System.out.println("ไม่สามารถไปหน้า reportComplaint ได้");
-        }
-    }
-
-    @FXML
     public void handleBackButton(ActionEvent actionEvent) {
         try {
             FXRouter.goTo("newStaff");
@@ -163,5 +150,39 @@ public class NewComplaintDetailStaffController {
                 responsibleListView.getItems().add(user.getName());
             }
         }
+    }
+
+    @FXML
+    public void showAttachImage() {
+        ComplaintCategoryDataSource complaintCategoryDataSource = new ComplaintCategoryDataSource("data", "complaintCategories.csv");
+        ComplaintCategoryList categoryList = complaintCategoryDataSource.readData();
+        ComplaintCategory complaintCategory = null;
+
+        for (ComplaintCategory category : categoryList.getAllCategories()) {
+            if (category.getName().equals(complaint.getCategory())) {
+                complaintCategory = category;
+            }
+        }
+        if(complaintCategory != null && complaintCategory.getImageNeeded()){
+            String filename = complaint.getSubmitTime().replace(":","-") + "_"
+                    + complaint.getComplainantUsername() + "_" + complaint.getTopic() +".jpg";
+            String url = "data" + File.separator + "img" + File.separator + "complaint" + File.separator
+                    + filename;
+            File imgFile = new File(url);
+            Image img = new Image(imgFile.toURI().toString());
+            attachImage.setImage(img);
+        }
+//
+//        if (complaintCategory != null) {
+//            if (complaintCategory.getImageNeeded()) {
+//                File imageFile = new File(staff.getProfileImageFilePath());
+//                Image userImage = new Image(imageFile.toURI().toString());
+//                attachImage.setImage(userImage);
+//            }
+//        } else {
+//            attachImageLabel.setVisible(false);
+//            attachImage.setVisible(false);
+//            attachImage.setImage(null);
+//        }
     }
 }
