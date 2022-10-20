@@ -6,7 +6,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import ku.cs.form.models.*;
 import ku.cs.form.services.ComplaintCategoryDataSource;
 import ku.cs.form.services.ComplaintFileDataSource;
@@ -17,6 +19,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ComplaintDetailNisitController {
+
+    public HBox pane;
+    public Circle statusCircle;
+    public Label dateTimeLabel;
     private Complaint selectedComplaint;
     private User user;
     private ArrayList<Object> objects = new ArrayList<>();
@@ -29,6 +35,7 @@ public class ComplaintDetailNisitController {
     @FXML private Label additionalImageTopicLabel;
     @FXML private Label statusLabel;
     @FXML private Label statusLabelShadow;
+    @FXML private Label voteLabel;
     @FXML private Button backButton;
     @FXML private Button reportUserButton;
     @FXML private Button reportComplaintButton;
@@ -53,6 +60,7 @@ public class ComplaintDetailNisitController {
             }
         }
 
+        voteLabel.setText("");
         topicLabel.setText(selectedComplaint.getTopic());
         categoryLabel.setText("หมวดหมู่: " + selectedComplaint.getCategory());
         basicDetailTextArea.setText(selectedComplaint.getBasicDetailWithNewLine());
@@ -114,14 +122,14 @@ public class ComplaintDetailNisitController {
         }
     }
     @FXML public void handleDownVoteButton(){
-        selectedComplaint.addNegativeVote(user);
-        System.out.println(selectedComplaint.getPositiveVoter()+"dick");
+        voteLabel.setText(selectedComplaint.addNegativeVote(user));
+        System.out.println(selectedComplaint.getPositiveVoter());
         System.out.println(selectedComplaint.getNegativeVoter());
         ComplaintFileDataSource complaintFileDataSource = new ComplaintFileDataSource("data","complaints.csv");
         complaintFileDataSource.changeData(selectedComplaint);
     }
     @FXML public void handleUpVoteButton(){
-        selectedComplaint.addPositiveVote(user);
+        voteLabel.setText(selectedComplaint.addPositiveVote(user));
         ComplaintFileDataSource complaintFileDataSource = new ComplaintFileDataSource("data","complaints.csv");
         complaintFileDataSource.changeData(selectedComplaint);;
     }

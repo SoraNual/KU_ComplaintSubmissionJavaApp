@@ -134,10 +134,11 @@ public class Complaint {
         return topic + " " + complainantUsername + " " + submitTime + " VotePoint:" + votePoint;
     }
 
-    public void addPositiveVote(User voter){
+    public String addPositiveVote(User voter){
         if(checkIfVotedAlready(voter,positiveVoter)) {
             votePoint--;
             positiveVoter.remove(voter.getUsername());
+            return "ยกเลิกการโหวตเรียบร้อยแล้ว";
         }
         else if (checkIfVotedAlready(voter,negativeVoter)) {
             //ไม่เจอคนโหวตในคนแง่ลบดังนั้นโหวตได้
@@ -148,12 +149,14 @@ public class Complaint {
             votePoint++;
             positiveVoter.add(voter.getUsername());
         }
+        return "ทำการโหวตเรียบร้อยแล้ว";
     }
 
-    public void addNegativeVote(User voter){
+    public String addNegativeVote(User voter){
         if(checkIfVotedAlready(voter,negativeVoter)) {
             votePoint++;
             negativeVoter.remove(voter.getUsername());
+            return "ยกเลิกการโหวตเรียบร้อยแล้ว";
         }
         else if (checkIfVotedAlready(voter,positiveVoter)) {
             votePoint-=2;
@@ -163,14 +166,17 @@ public class Complaint {
             votePoint--;
             negativeVoter.add(voter.getUsername());
         }
+        return "ทำการโหวตเรียบร้อยแล้ว";
     }
 
-    private boolean checkIfVotedAlready(User voter,ArrayList<String> voters){
+    public boolean checkIfVotedAlready(User voter,ArrayList<String> voters){
         for(String voted: voters){
             if(voted.equals(voter.getUsername())) return true;
         }
         return false;
     }
+
+
 
     public String getPositiveVoter() {
         if(!positiveVoter.isEmpty()) {

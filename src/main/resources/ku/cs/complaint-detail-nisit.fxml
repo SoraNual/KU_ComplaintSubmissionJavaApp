@@ -62,7 +62,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="reportComplaintButton" layoutX="310.0" layoutY="659.0" mnemonicParsing="false" onAction="#handleReportComplaintButton" prefHeight="30.0" prefWidth="126.0" text="รายงานเรื่องร้องเรียน">
+      <Button fx:id="reportComplaintButton" layoutX="310.0" layoutY="659.0" mnemonicParsing="false" onAction="#handleReportComplaintButton" prefHeight="30.0" prefWidth="126.0" text="รายงานเนื้อหา">
          <font>
             <Font size="14.0" />
          </font>
@@ -72,7 +72,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="132.0" layoutY="390.0" mnemonicParsing="false" onAction="#handleUpVoteButton" text="เห็นด้วย" />
+      <Button fx:id="upVoteButton" layoutX="132.0" layoutY="390.0" mnemonicParsing="false" onAction="#handleUpVoteButton" text="เห็นด้วย" />
       <Button layoutX="202.0" layoutY="390.0" mnemonicParsing="false" onAction="#handleDownVoteButton" text="ไม่เห็นด้วย" />
       <Label fx:id="voteLabel" layoutX="282.0" layoutY="394.0" prefHeight="18.0" prefWidth="290.0" text="voteLabel" />
    </children>

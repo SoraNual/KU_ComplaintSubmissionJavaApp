@@ -26,6 +26,9 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import com.github.saacsos.FXRouter;
+
+
 public class NisitPageController {
 
     private User user;
@@ -123,7 +126,7 @@ public class NisitPageController {
                             ArrayList<Object> objects = new ArrayList<>();
                             objects.add(user);
                             objects.add(complaint);
-                            com.github.saacsos.FXRouter.goTo("complaintsDetailsForNisit", objects);
+                            FXRouter.goTo("complaintsDetailsForNisit", objects);
                         } catch (IOException e) {
                             System.out.println("ไม่สามารถไปที่หน้า ComplaintDetail ได้");
                             e.printStackTrace();
