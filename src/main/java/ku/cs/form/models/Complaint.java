@@ -154,7 +154,7 @@ public class Complaint {
             votePoint++;
             positiveVoter.add(voter.getUsername());
         }
-        return "ทำการโหวตเรียบร้อยแล้ว";
+        return "คุณเห็นด้วยกับเรื่องร้องเรียนนี้";
     }
 
     public String addNegativeVote(User voter){
@@ -171,7 +171,7 @@ public class Complaint {
             votePoint--;
             negativeVoter.add(voter.getUsername());
         }
-        return "ทำการโหวตเรียบร้อยแล้ว";
+        return "คุณไม่เห็นด้วยกับเรื่องร้องเรียนนี้";
     }
 
     public boolean checkIfVotedAlready(User voter,ArrayList<String> voters){

@@ -144,7 +144,7 @@ public class EditProfileController {
         int fontSize = 0;
         if(size.equals("Small")) fontSize = 90;
         if(size.equals("Medium")) fontSize = 100;
-        if(size.equals("Large")) fontSize = 125;
+        if(size.equals("Large")) fontSize = 110;
         setTheme.changeTextSize(""+fontSize);
         anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
     }
@@ -183,7 +183,7 @@ public class EditProfileController {
         String textSize = "";
         if(setting[1].equals("90")) textSize = "Small";
         if(setting[1].equals("100")) textSize = "Medium";
-        if(setting[1].equals("125")) textSize = "Large";
+        if(setting[1].equals("110")) textSize = "Large";
        fontSizeComboBox.setValue(textSize);
         fontComboBox.setValue(setting[2]);
     }

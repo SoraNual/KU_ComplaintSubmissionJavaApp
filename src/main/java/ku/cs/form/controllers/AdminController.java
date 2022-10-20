@@ -118,6 +118,7 @@ public class AdminController {
     public void showAdminProfile() {
         Image profile = new Image("file:" + admin.getProfileImageFilePath());
         profilePic.setFill(new ImagePattern(profile));
+        adminGreetingLabel.setText(admin.getName());
     }
 
     @FXML

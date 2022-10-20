@@ -22,7 +22,7 @@ public class ComplaintController {
     private Complaint complaint;
     @FXML private TextField topicTextField;
     @FXML private TextArea basicDetailsTextArea;
-    @FXML private ChoiceBox<ComplaintCategory> categoryChoiceBox;
+    @FXML private ComboBox<ComplaintCategory> categoryComboBox;
     private ComplaintCategoryDataSource complaintCategoryDataSource;
     private ComplaintCategoryList complaintCategories;
     private ComplaintList complaintList;
@@ -48,7 +48,7 @@ public class ComplaintController {
 
         user = (User) com.github.saacsos.FXRouter.getData();
 
-        categoryChoiceBox.getItems().addAll(complaintCategories.getAllCategories());
+        categoryComboBox.getItems().addAll(complaintCategories.getAllCategories());
         warningLabel.setText("");
         additionalDetailLabel.setText("");
         additionalImageLabel.setText("");
@@ -60,7 +60,7 @@ public class ComplaintController {
     }
 
     private void handleCategoryChoiceBox(){
-        categoryChoiceBox.getSelectionModel().selectedItemProperty().addListener(
+        categoryComboBox.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<ComplaintCategory>() {
                     @Override
                     public void changed(ObservableValue<? extends ComplaintCategory>
@@ -89,7 +89,7 @@ public class ComplaintController {
 
         String topic = topicTextField.getText().trim(),
                 basicDetails = basicDetailsTextArea.getText().trim().replace("\n","NEWLINE"),
-                category = categoryChoiceBox.getValue().getName(),
+                category = categoryComboBox.getValue().getName(),
                 additionalDetail = additionalDetailTextArea.getText().trim().replace("\n", "NEWLINE");
         if (topic.isBlank() || basicDetails.isBlank() || category == null || additionalDetail.isBlank()) {
             warningLabel.setText("โปรดกรอกให้ครบทุกช่อง");
@@ -100,18 +100,18 @@ public class ComplaintController {
                 complaint.setAdditionalDetail(additionalDetail);
                 System.out.println(complaint);
             }
-            if(categoryChoiceBox.getValue().getImageNeeded()){
-                additionalImageLabel.setText(categoryChoiceBox.getValue().getAdditionalImageTitle());
+            if(categoryComboBox.getValue().getImageNeeded()){
+                additionalImageLabel.setText(categoryComboBox.getValue().getAdditionalImageTitle());
                 uploadImgButton.setVisible(true);
                 warningLabel.setText("กรุณาอัปโหลดรูปเพื่อยืนยันหลักฐาน (บังคับ)\nหลังอัปโหลดแล้วโปรดกดปุ่ม'ส่ง'อีกครั้ง");
                 additionalDetailTextArea.setDisable(true);
                 topicTextField.setDisable(true);
                 basicDetailsTextArea.setDisable(true);
-                categoryChoiceBox.setDisable(true);
+                categoryComboBox.setDisable(true);
                 backButton.setDisable(true);
             }
 
-            if(!categoryChoiceBox.getValue().getImageNeeded() || (categoryChoiceBox.getValue().getImageNeeded()) && !uploadedImgNameLabel.getText().isBlank()){
+            if(!categoryComboBox.getValue().getImageNeeded() || (categoryComboBox.getValue().getImageNeeded()) && !uploadedImgNameLabel.getText().isBlank()){
                 try {
                     if(!uploadedImgNameLabel.getText().isBlank()) {
                         // ไฟล์จะไม่ถูกสร้างในโฟลเดอร์จนกว่าผู้ใช้จะกดส่ง

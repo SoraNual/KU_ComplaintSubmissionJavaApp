@@ -107,10 +107,10 @@ public class NewStaffChangePasswordPageController {
         Alert alert;
         if (status == "UNSUCCESSFUL") {
             alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Changed Password Unsuccessful");
+            alert.setTitle("เปลี่ยนรหัสผ่านไม่สำเร็จ");
         } else {
             alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Changed Password Successful");
+            alert.setTitle("เปลี่ยนรหัสผ่านสำเร็จ");
         }
         alert.setHeaderText(null);
         alert.setContentText(message);

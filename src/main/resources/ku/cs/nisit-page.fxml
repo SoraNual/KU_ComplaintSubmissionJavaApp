@@ -8,7 +8,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -18,7 +17,7 @@
 
 <AnchorPane fx:id="nisitAnchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.NisitPageController">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#011627" height="720.0" stroke="BLACK" strokeType="INSIDE" width="264.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#011627" height="720.0" stroke="BLACK" strokeType="INSIDE" styleClass="user-menu-bar" width="264.0" />
         <Label fx:id="roleLabel" alignment="CENTER" layoutX="95.0" layoutY="40.0" prefHeight="45.0" prefWidth="84.0" text="Nisit" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="32.0" />
@@ -39,7 +38,7 @@
                 <Font name="System Bold" size="20.0" />
             </font>
         </Label>
-        <Button fx:id="reportButton" layoutX="684.0" layoutY="645.0" mnemonicParsing="false" onAction="#handleComplainButton" prefHeight="36.0" prefWidth="184.0" style="-fx-background-color: #2EC4B6; -fx-background-color: #2EC4B6; -fx-border-radius: 7; -fx-background-radius: 7;" text="ร้องเรียน" textFill="WHITE">
+        <Button fx:id="reportButton" layoutX="684.0" layoutY="645.0" mnemonicParsing="false" onAction="#handleComplainButton" prefHeight="36.0" prefWidth="184.0" text="ร้องเรียน" textFill="WHITE">
             <font>
                 <Font size="16.0" />
             </font>
@@ -49,7 +48,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Label layoutX="950.0" layoutY="115.0" prefHeight="31.0" prefWidth="82.0" styleClass="h2" text="เรียงตาม:">
+      <Label layoutX="929.0" layoutY="115.0" prefHeight="40.0" prefWidth="103.0" styleClass="h2" text="เรียงตาม:">
          <font>
             <Font size="14.0" />
          </font></Label>
@@ -83,19 +82,14 @@
       <CheckBox fx:id="lessThanVotePointsCheckBox" layoutX="289.0" layoutY="474.0" mnemonicParsing="false" text="น้อยกว่า" />
       <CheckBox fx:id="moreThanVotePointsCheckBox" layoutX="289.0" layoutY="520.0" mnemonicParsing="false" text="มากกว่า" />
       <CheckBox fx:id="fromToVotePointsCheckBox" layoutX="289.0" layoutY="566.0" mnemonicParsing="false" text="ตั้งแต่" />
-      <ImageView fitHeight="26.0" fitWidth="29.0" layoutX="926.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/sort.png" />
-         </image>
-      </ImageView>
-      <ScrollPane fx:id="scrollPane" layoutX="553.0" layoutY="162.0" prefHeight="470.0" prefWidth="694.0">
+      <ScrollPane fx:id="scrollPane" layoutX="553.0" layoutY="162.0" prefHeight="470.0" prefWidth="694.0" style="-fx-background-color: white;">
          <content>
             <VBox fx:id="itemHolder" prefHeight="98.0" prefWidth="958.0" />
          </content>
       </ScrollPane>
       <VBox alignment="TOP_CENTER" layoutY="541.0" prefHeight="158.0" prefWidth="264.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#handleThemeSettingButton" prefHeight="52.0" prefWidth="300.0" styleClass="user-menu-bar-button" text="การตั้งค่าธีม" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#handleThemeSettingButton" prefHeight="52.0" prefWidth="300.0" styleClass="user-menu-bar-button" text="การตั้งค่า" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>

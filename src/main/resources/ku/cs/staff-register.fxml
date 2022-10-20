@@ -31,18 +31,18 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="406.0" layoutY="347.0" prefHeight="35.0" prefWidth="108.0" text="Password" textFill="#011627">
+      <Label layoutX="406.0" layoutY="347.0" prefHeight="35.0" prefWidth="108.0" text="รหัสผ่าน" textFill="#011627">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="406.0" layoutY="417.0" prefHeight="35.0" prefWidth="166.0" text="Confirm Password" textFill="#011627">
+      <Label layoutX="406.0" layoutY="417.0" prefHeight="35.0" prefWidth="166.0" text="ยืนยันรหัสผ่าน" textFill="#011627">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
       <TextField fx:id="usernameTextField" layoutX="409.0" layoutY="305.0" prefHeight="33.0" prefWidth="319.0" />
-      <Button layoutX="408.0" layoutY="576.0" mnemonicParsing="false" onAction="#handleRegisterButton" prefHeight="37.0" prefWidth="313.0" text="Register" textFill="#fdfffc">
+      <Button layoutX="408.0" layoutY="576.0" mnemonicParsing="false" onAction="#handleRegisterButton" prefHeight="37.0" prefWidth="313.0" text="ลงทะเบียน" textFill="#fdfffc">
          <font>
             <Font size="16.0" />
          </font>
@@ -56,11 +56,6 @@
          </font>
       </Label>
       <Pane layoutX="814.0" layoutY="282.0" prefHeight="200.0" prefWidth="200.0" />
-      <Label layoutX="90.0" layoutY="62.0" text="Admin" textFill="WHITE">
-         <font>
-            <Font name="FreesiaUPC Bold" size="64.0" />
-         </font>
-      </Label>
       <Button layoutX="113.0" layoutY="650.0" mnemonicParsing="false" onAction="#handleBackButton" styleClass="user-menu-bar-button" text="Back" textFill="WHITE">
          <font>
             <Font name="FreesiaUPC" size="24.0" />
@@ -69,7 +64,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="853.0" layoutY="582.0" mnemonicParsing="false" onAction="#handleUploadPicBtn" text="Upload Profile Pic" />
+      <Button layoutX="853.0" layoutY="582.0" mnemonicParsing="false" onAction="#handleUploadPicBtn" text="อัปโหลดรูปโปรไฟล์" />
       <ImageView fx:id="profile_pic" fitHeight="305.0" fitWidth="238.0" layoutX="789.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
       <ComboBox fx:id="agencyComboBox" layoutX="406.0" layoutY="526.0" prefHeight="26.0" prefWidth="314.0" />
    </children>

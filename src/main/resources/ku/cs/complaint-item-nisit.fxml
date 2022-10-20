@@ -11,7 +11,7 @@
     <children>
         <HBox alignment="CENTER" prefHeight="470.0" prefWidth="370.0">
             <children>
-                <Label fx:id="topicLabel" alignment="CENTER" prefHeight="120.0" prefWidth="408.0" text="topicLabel" textAlignment="CENTER" wrapText="true">
+                <Label fx:id="topicLabel" alignment="CENTER" prefHeight="120.0" prefWidth="408.0" style="-fx-text-fill: black;" text="topicLabel" textAlignment="CENTER" wrapText="true">
                     <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                     </HBox.margin>
@@ -25,7 +25,7 @@
             <children>
                 <VBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Label text="คะแนนโหวต :" textAlignment="CENTER">
+                        <Label style="-fx-text-fill: black;" text="คะแนนโหวต :" textAlignment="CENTER">
                             <font>
                                 <Font size="13.0" />
                             </font>
@@ -33,7 +33,7 @@
                                 <Insets top="10.0" />
                             </VBox.margin>
                         </Label>
-                        <Label fx:id="voteLabel" text="voteLabel" textAlignment="CENTER">
+                        <Label fx:id="voteLabel" style="-fx-text-fill: black;" text="voteLabel" textAlignment="CENTER">
                             <font>
                                 <Font size="13.0" />
                             </font>
@@ -55,7 +55,7 @@
         </VBox>
         <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="470.0" prefWidth="178.0">
             <children>
-                <Label fx:id="dateTimeLabel" alignment="CENTER" text="dateTimeLabel" textAlignment="CENTER" wrapText="true">
+                <Label fx:id="dateTimeLabel" alignment="CENTER" style="-fx-text-fill: black;" text="dateTimeLabel" textAlignment="CENTER" wrapText="true">
                     <font>
                         <Font size="14.0" />
                     </font>

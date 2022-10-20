@@ -45,7 +45,7 @@ public class NisitChangePasswordController {
     public void handleConfirmButton(ActionEvent actionEvent){
         if(user.getUsername().equals(usernameTextField.getText()) && user.getPassword().equals(PasswordPasswordField.getText())){
             if(newPasswordPasswordField.getText().trim().equals("")){
-                incorrectWarningLabel.setText("NOT BLANK PASSWORD BRO");
+                incorrectWarningLabel.setText("อย่าปล่อยให้ช่องว่างสิครับ");
             } else if (newPasswordPasswordField.getText().equals(confirmNewPasswordPasswordField.getText())) {
                 user.setPassword(newPasswordPasswordField.getText());
                 userDataSource.changeData(user);
@@ -55,11 +55,11 @@ public class NisitChangePasswordController {
                     System.out.println("BUGGGGGGGGGGGGGGGGGGGG!");
                 }
             } else{
-                incorrectWarningLabel.setText("Theres a problem with new password STUPID :<");
+                incorrectWarningLabel.setText("รหัสผ่านใหม่ ไม่ตรงกับ ช่องยืนยันรหัสผ่านใหม่ :<");
             }
         }
         else{
-            incorrectWarningLabel.setText("Something wrong with your password or username :P");
+            incorrectWarningLabel.setText("username หรือรหัสผ่านผิด โปรดตรวจเช็คให้ดี:P");
         }
     }
     public void handleBackButton(ActionEvent actionEvent){

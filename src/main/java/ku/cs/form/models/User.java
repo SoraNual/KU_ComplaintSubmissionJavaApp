@@ -80,7 +80,7 @@ public class User {
 
     @Override
     public String toString() {
-        return getLoginTime() + "," + getUsername() + "," + getPassword() + "," + this.getClass().getSimpleName().toLowerCase() + "," + getName() + "," + "active,0";
+        return getLoginTime() + "," + getUsername() + "," + getPassword() + "," + getRole() + "," + getName() + "," + "active,0";
     }
 
     public DateTimeFormatter getFormat() {

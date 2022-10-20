@@ -56,18 +56,18 @@ public class LoginPageController {
         user = unclarifiedUser.usernamePasswordCheck(username,password);
         try {
             if (user.getRole().equals("admin")) {
+                setLoginTime(user);
                 FXRouter.goTo("admin",user);
-                setLoginTime(user);
             } else if (user instanceof Staff) {
-                FXRouter.goTo("newStaff",user);
                 setLoginTime(user);
+                FXRouter.goTo("newStaff",user);
             } else if (user instanceof Nisit) {
                 if(((Nisit) user).getUserStatus().equals("banned")) {
                     FXRouter.goTo("banned",user);
                 }
                 else {
-                    FXRouter.goTo("nisitPage", user);
                     setLoginTime(user);
+                    FXRouter.goTo("nisitPage", user);
                 }
             } else{
                 incorrectWarningText.setText("Incorrect username or password");
