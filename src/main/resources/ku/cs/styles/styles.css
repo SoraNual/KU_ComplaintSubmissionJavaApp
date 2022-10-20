@@ -146,6 +146,7 @@
 
 .user-menu-bar {
     -fx-fill: -menu-bar-color;
+    -fx-background-color: -menu-bar-color;
 }
 
 .user-menu-bar-button {
@@ -177,14 +178,33 @@
     -fx-background-color: transparent;
 }
 
-#errorLabel {
-    -fx-text-fill: red;
+#successBtn {
+    -fx-background-color: #28a745;
+    -fx-text-fill: white;
 }
 
-#deleteBtn {
-    -fx-background-color: red;
+#dangerBtn {
+    -fx-background-color: #dc3545;
+    -fx-text-fill: white;
 }
 
-#rejectBtn {
-    -fx-background-color: blue;
+#dangerBtn:hover {
+    -fx-background-color: #d32535;
+}
+
+#waringBtn {
+    -fx-background-color: #ffc107;
+    -fx-text-fill: white;
+}
+
+.check-box {
+    -fx-text-fill: -text-color;
+}
+
+.check-box:determinate .box {
+    -fx-background-color: -input-color;
+}
+
+.check-box:determinate .box .mark:selected {
+    -fx-background-color: -text-color;
 }

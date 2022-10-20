@@ -26,8 +26,6 @@ public class StaffRegisterController extends UploadPicture {
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
     @FXML private ComboBox<String> agencyComboBox;
-    @FXML
-    private ImageView regis_pic;
     @FXML private AnchorPane staffRegisteranchorPane;
 
     @FXML
@@ -43,7 +41,6 @@ public class StaffRegisterController extends UploadPicture {
         setTheme.setting();
 
         String url = getClass().getResource("/ku/cs/images/register_pic.png").toExternalForm();
-        regis_pic.setImage(new Image(url));
         agenciesDataSource = new AgencyDataSource("data","agency.csv");
         agencyList = agenciesDataSource.readData();
         for(Agency agency : agencyList.getAgencies())

@@ -18,7 +18,7 @@
    <children>
       <BorderPane layoutX="187.0" layoutY="157.0" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
-            <VBox fx:id="leftRec" prefHeight="720.0" prefWidth="300.0" style="-fx-background-color: #011627;" BorderPane.alignment="TOP_LEFT">
+            <VBox fx:id="leftRec" prefHeight="720.0" prefWidth="300.0" styleClass="user-menu-bar" BorderPane.alignment="TOP_LEFT">
                <children>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="300.0">
                      <children>
@@ -40,7 +40,7 @@
                               <Insets top="15.0" />
                            </VBox.margin>
                         </ImageView>
-                        <Button fx:id="uploadImageButton" mnemonicParsing="false" onAction="#handleUploadImageButton" styleClass="arrow-button" text="+">
+                        <Button fx:id="uploadImageButton" mnemonicParsing="false" onAction="#handleUploadImageButton" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100;" styleClass="arrow-button" text="+">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
@@ -50,7 +50,7 @@
                         </Button>
                      </children>
                   </VBox>
-                  <HBox alignment="TOP_CENTER" prefHeight="240.0" prefWidth="300.0" styleClass="user-menu-bar">
+                  <HBox alignment="TOP_CENTER" prefHeight="157.0" prefWidth="300.0" styleClass="user-menu-bar">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
@@ -65,9 +65,9 @@
                         </Label>
                      </children>
                   </HBox>
-                  <VBox alignment="TOP_CENTER" prefHeight="142.0" prefWidth="300.0">
+                  <VBox alignment="TOP_CENTER" prefHeight="177.0" prefWidth="300.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#handleThemeButton" prefHeight="37.0" prefWidth="406.0" styleClass="user-menu-bar-button" text="Theme" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#handleThemeButton" prefHeight="52.0" prefWidth="300.0" styleClass="user-menu-bar-button" text="Theme" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -75,7 +75,7 @@
                               <Insets />
                            </VBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#handleChangePasswordButton" prefHeight="37.0" prefWidth="651.0" styleClass="user-menu-bar-button" text="Change Password" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#handleChangePasswordButton" prefHeight="52.0" prefWidth="651.0" styleClass="user-menu-bar-button" text="Change Password" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -83,7 +83,7 @@
                               <Insets />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleLogOutButton" prefHeight="46.0" prefWidth="389.0" styleClass="user-menu-bar-button" text="Log Out" textAlignment="CENTER">
+                        <Button id="dangerBtn" fx:id="backButton" mnemonicParsing="false" onAction="#handleLogOutButton" prefHeight="52.0" prefWidth="389.0" styleClass="user-menu-bar-button" text="Log Out" textAlignment="CENTER">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
@@ -121,7 +121,7 @@
                         </HBox>
                         <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="123.0" prefWidth="667.0">
                            <children>
-                              <HBox alignment="BOTTOM_LEFT" prefHeight="123.0" prefWidth="271.0" HBox.hgrow="ALWAYS">
+                              <HBox alignment="BOTTOM_RIGHT" prefHeight="123.0" prefWidth="271.0" HBox.hgrow="ALWAYS">
                                  <children>
                                     <Label fx:id="agency" prefHeight="31.0" prefWidth="87.0" text="หน่วยงาน :">
                                        <font>
@@ -131,7 +131,7 @@
                                           <Insets bottom="10.0" left="50.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <Label fx:id="agencyLabel" prefHeight="31.0" prefWidth="247.0" text="agencyLabel">
+                                    <Label fx:id="agencyLabel" prefHeight="31.0" prefWidth="299.0" text="agencyLabel">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>
@@ -148,7 +148,7 @@
                         </HBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="980.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="938.0">
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="564.0">
                            <children>
@@ -192,7 +192,7 @@
                         </HBox>
                      </children>
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="10.0" left="20.0" />
                      </VBox.margin>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="347.0" prefWidth="980.0" VBox.vgrow="ALWAYS">
@@ -200,7 +200,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                      <children>
-                        <ScrollPane fx:id="scrollPane" prefHeight="513.0" prefWidth="967.0" style="-fx-background-color: white;">
+                        <ScrollPane fx:id="scrollPane" prefHeight="508.0" prefWidth="923.0" style="-fx-background-color: white;">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>

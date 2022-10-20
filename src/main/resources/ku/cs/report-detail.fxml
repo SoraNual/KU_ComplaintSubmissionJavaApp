@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.ComplaintDetailStaffController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.ComplaintDetailStaffController">
    <children>
       <Label layoutX="150.0" layoutY="60.0" text="รายละเอียดเรื่องที่ร้องเรียน">
          <font>
@@ -44,37 +43,37 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button layoutX="609.0" layoutY="587.0" mnemonicParsing="false" onAction="#handleInProgressButton" prefHeight="57.0" prefWidth="223.0" style="-fx-background-color: ff9f1c; -fx-background-radius: 13; -fx-border-radius: 13;" text="อยู่ระหว่างการดำเนินการ" textFill="WHITE">
+      <Button id="waringBtn" layoutX="609.0" layoutY="587.0" mnemonicParsing="false" onAction="#handleInProgressButton" prefHeight="57.0" prefWidth="223.0" text="อยู่ระหว่างการดำเนินการ" textFill="WHITE">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
       </Button>
-      <Button layoutX="852.0" layoutY="587.0" mnemonicParsing="false" onAction="#handleFinishButton" prefHeight="57.0" prefWidth="223.0" style="-fx-background-color: green; -fx-background-radius: 13; -fx-border-radius: 13;" text="เสร็จสิ้นแล้ว" textFill="WHITE">
+      <Button id="successBtn" layoutX="852.0" layoutY="587.0" mnemonicParsing="false" onAction="#handleFinishButton" prefHeight="57.0" prefWidth="223.0" text="เสร็จสิ้นแล้ว" textFill="WHITE">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
       </Button>
-      <TextArea fx:id="detailTextArea" layoutX="152.0" layoutY="220.0" prefHeight="212.0" prefWidth="337.0" style="-fx-background-color: white; -fx-border-color: black;">
+      <TextArea fx:id="detailTextArea" layoutX="152.0" layoutY="220.0" prefHeight="212.0" prefWidth="337.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextArea>
-      <TextArea fx:id="topicTextArea" layoutX="220.0" layoutY="115.0" prefHeight="56.0" prefWidth="269.0" style="-fx-background-color: white; -fx-border-color: black;">
+      <TextArea fx:id="topicTextArea" layoutX="220.0" layoutY="115.0" prefHeight="56.0" prefWidth="269.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextArea>
-      <TextArea fx:id="agencyTextArea" layoutX="258.0" layoutY="457.0" prefHeight="39.0" prefWidth="231.0" style="-fx-background-color: white; -fx-border-color: black;">
+      <TextArea fx:id="agencyTextArea" layoutX="258.0" layoutY="457.0" prefHeight="39.0" prefWidth="231.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextArea>
-      <TextArea fx:id="nameTextArea" layoutX="152.0" layoutY="565.0" prefHeight="97.0" prefWidth="337.0" style="-fx-background-color: white; -fx-border-color: black;">
+      <TextArea fx:id="nameTextArea" layoutX="152.0" layoutY="565.0" prefHeight="97.0" prefWidth="337.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextArea>
-      <TextArea fx:id="solutionTextArea" layoutX="609.0" layoutY="192.0" prefHeight="374.0" prefWidth="466.0" style="-fx-background-color: white; -fx-border-color: black;">
+      <TextArea fx:id="solutionTextArea" layoutX="609.0" layoutY="192.0" prefHeight="374.0" prefWidth="466.0">
          <font>
             <Font size="18.0" />
          </font>

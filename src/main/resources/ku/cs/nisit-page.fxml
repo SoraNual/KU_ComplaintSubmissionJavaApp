@@ -11,7 +11,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -22,12 +21,12 @@
             <font>
                 <Font name="System Bold" size="32.0" />
             </font>
-         <styleClass>
-            <String fx:value="user-menu-bar-label" />
-            <String fx:value="h1" />
-         </styleClass>
+            <styleClass>
+                <String fx:value="user-menu-bar-label" />
+                <String fx:value="h1" />
+            </styleClass>
         </Label>
-        <Label fx:id="allReportLabel" alignment="CENTER" layoutX="615.0" layoutY="48.0" prefHeight="54.0" prefWidth="322.0" styleClass="h1" text="เรื่องร้องเรียนทั้งหมด">
+        <Label fx:id="allReportLabel" alignment="CENTER" layoutX="299.0" layoutY="70.0" prefHeight="54.0" prefWidth="258.0" styleClass="h1" text="เรื่องร้องเรียนทั้งหมด">
             <font>
                 <Font name="System Bold" size="36.0" />
             </font>
@@ -38,79 +37,76 @@
                 <Font name="System Bold" size="20.0" />
             </font>
         </Label>
-        <Button fx:id="reportButton" layoutX="684.0" layoutY="645.0" mnemonicParsing="false" onAction="#handleComplainButton" prefHeight="36.0" prefWidth="184.0" text="ร้องเรียน" textFill="WHITE">
+        <Button fx:id="reportButton" layoutX="776.0" layoutY="640.0" mnemonicParsing="false" onAction="#handleComplainButton" prefHeight="36.0" prefWidth="184.0" text="ร้องเรียน" textFill="WHITE">
             <font>
                 <Font size="16.0" />
             </font>
         </Button>
-      <Button fx:id="uploadImageButton" layoutX="192.0" layoutY="221.0" mnemonicParsing="false" onAction="#handleUploadImageButton" text="+" textFill="#011626">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Button>
-      <Label layoutX="929.0" layoutY="115.0" prefHeight="40.0" prefWidth="103.0" styleClass="h2" text="เรียงตาม:">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-      <ComboBox fx:id="sortComboBox" layoutX="1033.0" layoutY="113.0" prefHeight="26.0" prefWidth="194.0" />
-      <ComboBox fx:id="categoryFilterComboBox" layoutX="324.0" layoutY="231.0" prefHeight="26.0" prefWidth="170.0" />
-      <CheckBox fx:id="byMeFilterCheckBox" layoutX="294.0" layoutY="146.0" mnemonicParsing="false" text="แจ้งโดยฉ้น" />
-      <Label layoutX="375.0" layoutY="288.0" styleClass="h2" text="สถานะ">
-         <font>
-            <Font name="System Bold" size="25.0" />
-         </font>
-      </Label>
-      <Label layoutX="354.0" layoutY="427.0" styleClass="h2" text="คะแนนโหวต">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Line endX="106.60003662109375" layoutX="399.0" layoutY="287.0" startX="-100.0" />
-      <Line endX="109.0" layoutX="399.0" layoutY="426.0" startX="-100.0" />
-      <Label layoutX="369.0" layoutY="191.0" styleClass="h2" text="หมวดหมู่">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Line endX="100.0" layoutX="399.0" layoutY="190.0" startX="-100.0" />
-      <Button layoutX="370.0" layoutY="623.0" mnemonicParsing="false" onAction="#filter" text="Filter" />
-      <TextField fx:id="lessThanVotePointsTextField" layoutX="399.0" layoutY="467.0" prefHeight="1.0" prefWidth="40.0" />
-      <TextField fx:id="moreThanVotePointsTextField" layoutX="399.0" layoutY="515.0" prefHeight="1.0" prefWidth="40.0" />
-      <TextField fx:id="fromVotePointsTextField" layoutX="399.0" layoutY="563.0" prefHeight="1.0" prefWidth="40.0" />
-      <TextField fx:id="toVotePointsTextField" layoutX="484.0" layoutY="564.0" prefHeight="1.0" prefWidth="40.0" />
-      <Label layoutX="452.0" layoutY="567.0" text="ถึง" />
-      <CheckBox fx:id="lessThanVotePointsCheckBox" layoutX="289.0" layoutY="474.0" mnemonicParsing="false" text="น้อยกว่า" />
-      <CheckBox fx:id="moreThanVotePointsCheckBox" layoutX="289.0" layoutY="520.0" mnemonicParsing="false" text="มากกว่า" />
-      <CheckBox fx:id="fromToVotePointsCheckBox" layoutX="289.0" layoutY="566.0" mnemonicParsing="false" text="ตั้งแต่" />
-      <ScrollPane fx:id="scrollPane" layoutX="553.0" layoutY="162.0" prefHeight="470.0" prefWidth="694.0" style="-fx-background-color: white;">
-         <content>
-            <VBox fx:id="itemHolder" prefHeight="98.0" prefWidth="958.0" />
-         </content>
-      </ScrollPane>
-      <VBox alignment="TOP_CENTER" layoutY="541.0" prefHeight="158.0" prefWidth="264.0">
-         <children>
-            <Button mnemonicParsing="false" onAction="#handleThemeSettingButton" prefHeight="52.0" prefWidth="300.0" styleClass="user-menu-bar-button" text="การตั้งค่า" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#handleChangePasswordButton" prefHeight="52.0" prefWidth="374.0" styleClass="user-menu-bar-button" text="เปลี่ยนรหัสผ่าน" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#handleLogOutButton" prefHeight="52.0" prefWidth="300.0" styleClass="user-menu-bar-button" text="ออกจากระบบ" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-         </children>
-      </VBox>
-      <CheckBox fx:id="pendingStatusCheckBox" layoutX="273.0" layoutY="323.0" mnemonicParsing="false" text="รอการตรวจสอบจากเจ้าหน้าที่" />
-      <CheckBox fx:id="processingStatusCheckBox" layoutX="273.0" layoutY="356.0" mnemonicParsing="false" text="กำลังดำเนินการ" />
-      <CheckBox fx:id="concludedStatusCheckBox" layoutX="273.0" layoutY="389.0" mnemonicParsing="false" text="ดำเนินการเสร็จสิ้น" />
+        <Button fx:id="uploadImageButton" layoutX="192.0" layoutY="221.0" mnemonicParsing="false" onAction="#handleUploadImageButton" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 100px;" text="+" textFill="#011626">
+            <font>
+                <Font name="System Bold" size="13.0" />
+            </font>
+        </Button>
+        <Label layoutX="929.0" layoutY="115.0" prefHeight="40.0" prefWidth="103.0" styleClass="h2" text="เรียงตาม:">
+            <font>
+                <Font size="14.0" />
+            </font></Label>
+        <ComboBox fx:id="sortComboBox" layoutX="1033.0" layoutY="113.0" prefHeight="26.0" prefWidth="194.0" />
+        <ComboBox fx:id="categoryFilterComboBox" layoutX="307.0" layoutY="235.0" prefHeight="26.0" prefWidth="170.0" />
+        <CheckBox fx:id="byMeFilterCheckBox" layoutX="307.0" layoutY="147.0" mnemonicParsing="false" text="แจ้งโดยฉ้น" />
+        <Label layoutX="305.0" layoutY="285.0" styleClass="h2" text="สถานะ">
+            <font>
+                <Font name="System Bold" size="25.0" />
+            </font>
+        </Label>
+        <Label layoutX="307.0" layoutY="418.0" styleClass="h2" text="คะแนนโหวต">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="303.0" layoutY="199.0" styleClass="h2" text="หมวดหมู่">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+        <Button layoutX="309.0" layoutY="594.0" mnemonicParsing="false" onAction="#filter" prefHeight="37.0" prefWidth="219.0" text="Filter" />
+        <TextField fx:id="lessThanVotePointsTextField" layoutX="408.0" layoutY="456.0" prefHeight="1.0" prefWidth="40.0" />
+        <TextField fx:id="moreThanVotePointsTextField" layoutX="408.0" layoutY="499.0" prefHeight="1.0" prefWidth="40.0" />
+        <TextField fx:id="fromVotePointsTextField" layoutX="408.0" layoutY="542.0" prefHeight="1.0" prefWidth="40.0" />
+        <TextField fx:id="toVotePointsTextField" layoutX="484.0" layoutY="542.0" prefHeight="1.0" prefWidth="40.0" />
+        <Label layoutX="457.0" layoutY="547.0" text="ถึง" />
+        <CheckBox fx:id="lessThanVotePointsCheckBox" layoutX="309.0" layoutY="464.0" mnemonicParsing="false" text="น้อยกว่า" />
+        <CheckBox fx:id="moreThanVotePointsCheckBox" layoutX="309.0" layoutY="500.0" mnemonicParsing="false" text="มากกว่า" />
+        <CheckBox fx:id="fromToVotePointsCheckBox" layoutX="309.0" layoutY="542.0" mnemonicParsing="false" text="ตั้งแต่" />
+        <ScrollPane fx:id="scrollPane" layoutX="553.0" layoutY="162.0" prefHeight="470.0" prefWidth="694.0" style="-fx-background-color: white;">
+            <content>
+                <VBox fx:id="itemHolder" prefHeight="98.0" prefWidth="958.0" />
+            </content>
+        </ScrollPane>
+        <VBox alignment="TOP_CENTER" layoutY="541.0" prefHeight="158.0" prefWidth="264.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#handleThemeSettingButton" prefHeight="52.0" prefWidth="300.0" styleClass="user-menu-bar-button" text="การตั้งค่า" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#handleChangePasswordButton" prefHeight="52.0" prefWidth="374.0" styleClass="user-menu-bar-button" text="เปลี่ยนรหัสผ่าน" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </Button>
+                <Button id="dangerBtn" mnemonicParsing="false" onAction="#handleLogOutButton" prefHeight="52.0" prefWidth="300.0" styleClass="user-menu-bar-button" text="ออกจากระบบ" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+        <CheckBox fx:id="pendingStatusCheckBox" layoutX="309.0" layoutY="321.0" mnemonicParsing="false" text="รอการตรวจสอบจากเจ้าหน้าที่" />
+        <CheckBox fx:id="processingStatusCheckBox" layoutX="309.0" layoutY="351.0" mnemonicParsing="false" text="กำลังดำเนินการ" />
+        <CheckBox fx:id="concludedStatusCheckBox" layoutX="309.0" layoutY="382.0" mnemonicParsing="false" text="ดำเนินการเสร็จสิ้น" />
     </children>
 </AnchorPane>

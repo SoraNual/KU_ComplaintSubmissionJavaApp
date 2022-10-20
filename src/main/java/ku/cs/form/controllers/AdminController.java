@@ -48,7 +48,6 @@ public class AdminController {
 
         SetTheme setTheme = new SetTheme(admin.getUsername());
         setTheme.setting();
-        setTheme.setStyleToAnchorPane(anchorPane);
 
         showListView();
         showAdminProfile();
@@ -149,7 +148,7 @@ public class AdminController {
 
     @FXML private void handleAddComplaintCategoryButton(ActionEvent actionEvent){
         try {
-            com.github.saacsos.FXRouter.goTo("addCategory");
+            com.github.saacsos.FXRouter.goTo("addCategory",admin);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

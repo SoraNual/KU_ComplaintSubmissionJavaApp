@@ -9,7 +9,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import ku.cs.form.models.ComplaintCategory;
 import ku.cs.form.models.ComplaintCategoryList;
+import ku.cs.form.models.User;
 import ku.cs.form.services.ComplaintCategoryDataSource;
+import ku.cs.form.services.SetTheme;
 
 import java.io.IOException;
 
@@ -25,6 +27,11 @@ public class AddComplaintCategoryPageController {
     private ComplaintCategoryDataSource dataSource;
 
     @FXML private void initialize(){
+        User admin = (User) com.github.saacsos.FXRouter.getData();
+
+        SetTheme setTheme = new SetTheme(admin.getUsername());
+        setTheme.setting();
+
         errorLabel.setText("");
         additionalImageTopicLabel.setVisible(false);
         additionalImageTextField.setVisible(false);
