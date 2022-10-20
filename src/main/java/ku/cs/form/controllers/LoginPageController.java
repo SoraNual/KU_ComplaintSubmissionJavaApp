@@ -51,9 +51,10 @@ public class LoginPageController {
         for(User u : userList.getAllUsers()){
             if(u.getUsername().equals(user.getUsername())){
                 u.setLoginTime(LocalDateTime.now().format(u.getFormat()));
+                userDataSource.writeData(userList);
+                break;
             }
         }
-        userDataSource.writeData(userList);
     }
 
     @FXML public void handleLoginButton(ActionEvent actionEvent) {

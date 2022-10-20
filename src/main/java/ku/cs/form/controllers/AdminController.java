@@ -50,7 +50,6 @@ public class AdminController {
         setTheme.setting();
         setTheme.setStyleToAnchorPane(anchorPane);
 
-        sortUserListByLoginTime();
         showListView();
         showAdminProfile();
     }
@@ -70,6 +69,7 @@ public class AdminController {
 
     private void showListView() {
         userListView.getItems().clear();
+        sortUserListByLoginTime();
         for(User user : userList.getAllUsers()){
             HBox user_box = new HBox();
             user_box.setSpacing(50);
@@ -93,6 +93,7 @@ public class AdminController {
 
             userListView.getItems().add(user_box);
         }
+        userListView.refresh();
     }
 
 
