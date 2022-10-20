@@ -58,34 +58,34 @@
          <children>
             <VBox prefHeight="619.0" prefWidth="288.0" spacing="4.0">
                <children>
-                  <Label fx:id="changeButtonColorLabel1" prefHeight="35.0" prefWidth="179.0" text="Change Theme">
+                  <Label fx:id="changeButtonColorLabel1" prefHeight="35.0" prefWidth="179.0" text="เปลี่ยนธีม">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
                   <ComboBox fx:id="themeComboBox" onAction="#handleThemeComboBox" prefHeight="44.0" prefWidth="220.0" />
-                  <Label fx:id="changeButtonColorLabel11" prefHeight="35.0" prefWidth="179.0" text="Font size">
+                  <Label fx:id="changeButtonColorLabel11" prefHeight="35.0" prefWidth="179.0" text="ขนาดข้อความ">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
                   <ComboBox fx:id="fontSizeComboBox" onAction="#handleFontSizeComboBox" prefHeight="44.0" prefWidth="224.0" />
-                  <Label fx:id="changeButtonColorLabel111" prefHeight="35.0" prefWidth="179.0" text="Font family">
+                  <Label fx:id="changeButtonColorLabel111" prefHeight="35.0" prefWidth="179.0" text="ฟอนต์ของข้อความ">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
                   <ComboBox fx:id="fontComboBox" onAction="#handleFontComboBox" prefHeight="14.0" prefWidth="226.0" />
-                  <VBox fx:id="customThemeSetting" prefHeight="395.0" prefWidth="288.0" spacing="5.0" visible="false">
+                  <VBox fx:id="customThemeSetting" prefHeight="395.0" prefWidth="323.0" spacing="5.0" visible="false">
                      <children>
-                        <Label prefHeight="18.0" prefWidth="174.0" styleClass="h2" text="User Menu bar">
+                        <Label prefHeight="18.0" prefWidth="174.0" styleClass="h2" text="แถบเมนูของผู้ใช้">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
                         <HBox prefHeight="39.0" prefWidth="223.0">
                            <children>
-                              <Label prefHeight="34.0" prefWidth="308.0" text="Menubar color">
+                              <Label prefHeight="34.0" prefWidth="308.0" text="สีแถบเมนู">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -99,7 +99,7 @@
                         </HBox>
                         <HBox prefHeight="39.0" prefWidth="223.0">
                            <children>
-                              <Label prefHeight="34.0" prefWidth="308.0" text="Menubar Text color">
+                              <Label prefHeight="34.0" prefWidth="308.0" text="สีข้อความแถบเมนู">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -111,14 +111,14 @@
                               </ColorPicker>
                            </children>
                         </HBox>
-                        <Label prefHeight="18.0" prefWidth="174.0" styleClass="h2" text="User Panel ">
+                        <Label prefHeight="18.0" prefWidth="174.0" styleClass="h2" text="หน้าต่างผู้ใช้">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
                         <HBox prefHeight="39.0" prefWidth="223.0">
                            <children>
-                              <Label prefHeight="34.0" prefWidth="308.0" text="Text color">
+                              <Label prefHeight="34.0" prefWidth="308.0" text="สีข้อความ">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -132,7 +132,7 @@
                         </HBox>
                         <HBox prefHeight="39.0" prefWidth="223.0">
                            <children>
-                              <Label prefHeight="34.0" prefWidth="308.0" text="Background color">
+                              <Label prefHeight="34.0" prefWidth="308.0" text="สีพื้นหลัง">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -146,7 +146,7 @@
                         </HBox>
                         <HBox prefHeight="39.0" prefWidth="223.0">
                            <children>
-                              <Label prefHeight="34.0" prefWidth="308.0" text="Input color ( e.g. TextField )">
+                              <Label prefHeight="34.0" prefWidth="308.0" text="สีหน้าต่างรับข้อมูลเข้า เช่น TextField">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -160,7 +160,7 @@
                         </HBox>
                         <HBox prefHeight="39.0" prefWidth="223.0">
                            <children>
-                              <Label prefHeight="34.0" prefWidth="308.0" text="Listview color">
+                              <Label prefHeight="34.0" prefWidth="308.0" text="สี ListView">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -174,7 +174,7 @@
                         </HBox>
                         <HBox prefHeight="39.0" prefWidth="223.0">
                            <children>
-                              <Label prefHeight="34.0" prefWidth="308.0" text="Button color">
+                              <Label prefHeight="34.0" prefWidth="308.0" text="สีปุ่มต่าง ๆ">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
