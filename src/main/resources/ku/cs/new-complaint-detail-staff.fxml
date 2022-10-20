@@ -3,14 +3,16 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" styleClass="white-background" stylesheets="@styles/new-staff-styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.NewComplaintDetailStaffController">
+<AnchorPane fx:id="anchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.NewComplaintDetailStaffController">
    <children>
       <BorderPane layoutX="508.0" layoutY="198.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -30,7 +32,7 @@
                   </VBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="640.0">
                      <children>
-                        <Label text="หัวข้อ">
+                        <Label prefHeight="25.0" prefWidth="274.0" text="หัวข้อ">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -38,7 +40,7 @@
                               <Insets left="50.0" />
                            </HBox.margin>
                         </Label>
-                        <TextArea fx:id="topicTextArea" editable="false" prefHeight="50.0" prefWidth="500.0" styleClass="text-area" text="TetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetst" wrapText="true">
+                        <TextArea fx:id="topicTextArea" editable="false" prefHeight="50.0" prefWidth="500.0" styleClass="text-area" wrapText="true">
                            <HBox.margin>
                               <Insets bottom="5.0" left="10.0" right="25.0" top="5.0" />
                            </HBox.margin>
@@ -50,7 +52,7 @@
                   </HBox>
                   <VBox prefHeight="315.0" prefWidth="640.0">
                      <children>
-                        <Label text="รายละเอียด">
+                        <Label prefHeight="25.0" prefWidth="505.0" text="รายละเอียด">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -58,7 +60,7 @@
                               <Insets left="50.0" top="10.0" />
                            </VBox.margin>
                         </Label>
-                        <TextArea fx:id="detailTextArea" editable="false" prefHeight="250.0" prefWidth="550.0" styleClass="text-area" text="TetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetst" wrapText="true">
+                        <TextArea fx:id="detailTextArea" editable="false" prefHeight="100.0" prefWidth="565.0" styleClass="text-area" wrapText="true">
                            <VBox.margin>
                               <Insets left="50.0" right="25.0" top="10.0" />
                            </VBox.margin>
@@ -66,11 +68,27 @@
                               <Font size="20.0" />
                            </font>
                         </TextArea>
+                        <Label layoutX="60.0" layoutY="20.0" prefHeight="25.0" prefWidth="449.0" text="รายละเอียดเพิ่มเติม">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="50.0" top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextArea fx:id="additionalDetailTextArea" editable="false" layoutX="60.0" layoutY="53.0" prefHeight="100.0" prefWidth="565.0" styleClass="text-area" wrapText="true">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="50.0" right="25.0" top="10.0" />
+                           </VBox.margin>
+                        </TextArea>
                      </children>
                   </VBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="640.0">
                      <children>
-                        <Label text="หน่วยงาน">
+                        <Label prefHeight="25.0" prefWidth="235.0" text="หน่วยงาน">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -78,7 +96,7 @@
                               <Insets left="50.0" top="5.0" />
                            </HBox.margin>
                         </Label>
-                        <TextArea fx:id="agencyTextArea" editable="false" prefHeight="50.0" prefWidth="460.0" styleClass="text-area" text="TetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetst" wrapText="true">
+                        <TextArea fx:id="agencyTextArea" editable="false" prefHeight="50.0" prefWidth="390.0" styleClass="text-area" wrapText="true">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -88,9 +106,9 @@
                         </TextArea>
                      </children>
                   </HBox>
-                  <VBox prefHeight="69.0" prefWidth="640.0">
+                  <VBox prefHeight="147.0" prefWidth="640.0">
                      <children>
-                        <Label text="ชื่อผู้รับผิดชอบ">
+                        <Label prefHeight="25.0" prefWidth="562.0" text="ชื่อผู้รับผิดชอบ">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -98,14 +116,11 @@
                               <Insets bottom="10.0" left="50.0" top="10.0" />
                            </VBox.margin>
                         </Label>
-                        <TextArea fx:id="responsibleTextArea" editable="false" prefHeight="50.0" prefWidth="565.0" styleClass="text-area" text="TetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetstTetst" wrapText="true">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
+                        <ListView fx:id="responsibleListView" prefHeight="200.0" prefWidth="200.0">
                            <VBox.margin>
-                              <Insets left="50.0" right="25.0" />
+                              <Insets bottom="10.0" left="50.0" right="25.0" />
                            </VBox.margin>
-                        </TextArea>
+                        </ListView>
                      </children>
                   </VBox>
                </children>
@@ -125,16 +140,16 @@
                                  <VBox.margin>
                                     <Insets right="25.0" top="10.0" />
                                  </VBox.margin>
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
                                  <padding>
                                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                                  </padding>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
                               </Button>
                            </children>
                         </VBox>
-                        <Label text="จัดการเรื่องร้องเรียน">
+                        <Label prefHeight="25.0" prefWidth="278.0" text="จัดการเรื่องร้องเรียน">
                            <font>
                               <Font name="System Bold" size="32.0" />
                            </font>
@@ -147,7 +162,32 @@
                         <Insets />
                      </VBox.margin>
                   </VBox>
-                  <TextArea fx:id="solutionTextArea" prefHeight="446.0" prefWidth="590.0">
+                  <VBox alignment="TOP_CENTER" prefHeight="230.0" prefWidth="640.0">
+                     <children>
+                        <VBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="640.0">
+                           <children>
+                              <Label fx:id="attachImageLabel" prefHeight="25.0" prefWidth="549.0" text="รูปที่แนบมา (ถ้ามี) :">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="25.0" right="25.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <ImageView fx:id="attachImage" fitHeight="173.0" fitWidth="590.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </VBox>
+                  <Label fx:id="attachImageLabel1" prefHeight="25.0" prefWidth="481.0" text="วิธีการแก้ปัญหา">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="25.0" right="25.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextArea fx:id="solutionTextArea" prefHeight="206.0" prefWidth="590.0" wrapText="true">
                      <VBox.margin>
                         <Insets bottom="20.0" left="25.0" right="25.0" top="10.0" />
                      </VBox.margin>
@@ -155,11 +195,11 @@
                         <Font size="20.0" />
                      </font>
                   </TextArea>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" prefHeight="84.0" prefWidth="640.0">
                      <children>
-                        <Button fx:id="inProgressButton" mnemonicParsing="false" onAction="#handleInProgressButton" prefHeight="59.0" prefWidth="303.0" text="กำลังดำเนินการ">
+                        <Button fx:id="inProgressButton" mnemonicParsing="false" onAction="#handleInProgressButton" prefHeight="59.0" prefWidth="295.0" style="-fx-background-color: #ff9f1c; -fx-text-fill: white;" text="กำลังดำเนินการ">
                            <HBox.margin>
-                              <Insets left="20.0" right="20.0" />
+                              <Insets left="20.0" />
                            </HBox.margin>
                            <padding>
                               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
@@ -168,7 +208,7 @@
                               <Font size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="finishButton" mnemonicParsing="false" onAction="#handleDoneButton" prefHeight="59.0" prefWidth="220.0" text="ดำเนินการเสร็จสิ้น">
+                        <Button fx:id="finishButton" mnemonicParsing="false" onAction="#handleDoneButton" prefHeight="59.0" prefWidth="295.0" style="-fx-background-color: #076e68; -fx-text-fill: white;" text="ดำเนินการเสร็จสิ้น">
                            <HBox.margin>
                               <Insets left="20.0" right="20.0" />
                            </HBox.margin>

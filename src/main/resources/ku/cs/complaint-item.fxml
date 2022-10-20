@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="pane" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="958.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.ComplaintItemController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="120.0" prefWidth="600.0">
+         <children>
+            <Label fx:id="topicLabel" alignment="TOP_LEFT" style="-fx-text-fill: #011627;" text="topicLabel" textAlignment="CENTER" textFill="#011627" wrapText="true">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <VBox prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label style="-fx-text-fill: #011627;" text="คะแนนโหวต :" textAlignment="CENTER" textFill="#011627">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="voteLabel" style="-fx-text-fill: #011627;" text="voteLabel" textAlignment="CENTER" textFill="#011627">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="75.0" prefWidth="100.0">
+               <children>
+                  <Circle fx:id="statusCircle" fill="WHITE" radius="12.0" stroke="BLACK" strokeType="INSIDE">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin></Circle>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="120.0" prefWidth="157.0">
+         <children>
+            <Label fx:id="dateTimeLabel" alignment="CENTER" style="-fx-text-fill: #011627;" text="dateTimeLabel" textAlignment="CENTER" textFill="#011627" wrapText="true">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</HBox>

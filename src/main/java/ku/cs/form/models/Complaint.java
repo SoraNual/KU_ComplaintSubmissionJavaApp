@@ -44,8 +44,13 @@ public class Complaint {
     public void addNegative(String[] negative){
         negativeVoter.addAll(List.of(negative));
     }
-    public void addPositive(String[] positive){
+    public void addPositive(String[] positive) {
         positiveVoter.addAll(List.of(positive));
+    }
+
+    // Complaint() is for testing please delete this if i forgor //
+    public Complaint() {
+        this("topic", "complaintUsername", "category");
     }
 
     public String getTopic() { return topic; }

@@ -65,7 +65,7 @@ public class ComplaintReportController {
     @FXML
     public void handleBackButton(ActionEvent actionEvent) {
         try {
-            com.github.saacsos.FXRouter.goTo("nisitPage", user);
+            com.github.saacsos.FXRouter.goTo("nisitPage",user);
         } catch (IOException e) {
             System.err.println("ให้ตรวจสอบการกำหนด route");
         }

@@ -72,7 +72,7 @@ public class EditProfileController {
             }
         } else if (user instanceof Staff) {
             try {
-                com.github.saacsos.FXRouter.goTo("staffPage", user);
+                com.github.saacsos.FXRouter.goTo("newStaff", user);
             } catch (Exception e) {
                 System.out.println("Path มีปัญหาละพ่อหนุ่ม");
             }
@@ -112,7 +112,7 @@ public class EditProfileController {
             }
         } else if (user instanceof Staff) {
             try {
-                com.github.saacsos.FXRouter.goTo("staffPage", user);
+                com.github.saacsos.FXRouter.goTo("newStaff", user);
             } catch (Exception e) {
                 System.out.println("Path มีปัญหาละพ่อหนุ่ม");
             }
