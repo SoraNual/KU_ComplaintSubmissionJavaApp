@@ -14,7 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ReportComplaintController {
+public class ComplaintReportController {
     private User user;
     private ArrayList<Object> objects = new ArrayList<>();
     @FXML private TextArea detailTextArea;

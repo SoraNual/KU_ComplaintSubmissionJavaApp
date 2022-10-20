@@ -12,7 +12,7 @@ import ku.cs.form.services.UserDataSource;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class ReportUserController {
+public class UserReportController {
 
     @FXML private ListView<String> bannedUsersListView;
     @FXML private ListView<String> inappropriateListView;
