@@ -34,7 +34,6 @@ public class ComplaintDetailNisitController {
     @FXML private Label additionalInformationTopicLabel;
     @FXML private Label additionalImageTopicLabel;
     @FXML private Label statusLabel;
-    @FXML private Label statusLabelShadow;
     @FXML private Label voteLabel;
     @FXML private Button backButton;
     @FXML private Button reportUserButton;
@@ -82,7 +81,6 @@ public class ComplaintDetailNisitController {
         }
 
         statusLabel.setText(selectedComplaint.getStatus());
-        statusLabelShadow.setText(selectedComplaint.getStatus());
         if(selectedComplaint.getStatus().equals("รอการตรวจสอบจากเจ้าหน้าที่")) statusLabel.setTextFill(Color.RED);
         else if(selectedComplaint.getStatus().equals("กำลังดำเนินการ")) statusLabel.setTextFill(Color.YELLOW);
         else statusLabel.setTextFill(Color.GREEN);
