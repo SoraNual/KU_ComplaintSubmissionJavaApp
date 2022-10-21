@@ -20,7 +20,7 @@ public class ProjectApplication extends Application {
         FXRouter.when("manageAgency",packageStr+"manage-agency.fxml");
         FXRouter.when("reports",packageStr+"report-management.fxml");
         FXRouter.when("home", packageStr+"home.fxml");
-        FXRouter.when("staffRegister", packageStr+"staff-nisit-register.fxml");
+        FXRouter.when("staffRegister", packageStr+"staff-register.fxml");
         FXRouter.when("admin", packageStr+"admin-page.fxml");
         FXRouter.when("login", packageStr+"login-page.fxml");
         FXRouter.when("creatorTeam",packageStr+"creator-team.fxml");

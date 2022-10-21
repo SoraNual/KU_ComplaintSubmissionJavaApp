@@ -108,6 +108,7 @@ public class AdminPageController {
         try {
             com.github.saacsos.FXRouter.goTo("staffRegister",admin);
         } catch (IOException e) {
+            e.printStackTrace();
             throw new IOException(e);
         }
 
