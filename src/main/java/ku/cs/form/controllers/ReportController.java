@@ -62,7 +62,6 @@ public class ReportController {
 
         SetTheme setTheme = new SetTheme(user.getUsername());
         setTheme.setting();
-        setTheme.setStyleToAnchorPane(userReportAnchorPane);
 
         userDataSource = new UserDataSource("data","users.csv");
         usersList = userDataSource.readData();

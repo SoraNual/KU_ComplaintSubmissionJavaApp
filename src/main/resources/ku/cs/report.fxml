@@ -25,7 +25,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <TabPane layoutX="380.0" layoutY="43.0" prefHeight="640.0" prefWidth="807.0" style="-fx-background-color: none;" tabClosingPolicy="UNAVAILABLE">
+        <TabPane layoutX="380.0" layoutY="43.0" prefHeight="640.0" prefWidth="807.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="ผู้ใช้งานที่ถูกรายงาน">
                     <content>

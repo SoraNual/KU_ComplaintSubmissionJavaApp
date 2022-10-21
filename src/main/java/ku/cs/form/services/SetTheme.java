@@ -315,11 +315,6 @@ public class SetTheme {
         return themeHashMap.containsKey(username);
     }
 
-    public void setStyleToAnchorPane(AnchorPane anchorPane){
-        anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
-    }
-
-
 
 }
 

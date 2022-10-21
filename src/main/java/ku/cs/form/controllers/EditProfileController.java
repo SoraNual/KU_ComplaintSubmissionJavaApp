@@ -167,7 +167,8 @@ public class EditProfileController {
     }
     @FXML private void handleListviewColorPicker(ActionEvent actionEvent) {
         Color color = listviewColorPicker.getValue();
-        sampleListView.setStyle("-fx-control-inner-background: " + colorToString(color));
+        sampleListView.setStyle("-fx-control-inner-background: " + colorToString(color)
+        +";-fx-background-color : " +  colorToString(color) + ";");
     }
     @FXML private void handleMenuBarColorPicker(ActionEvent actionEvent) { sampleMenuBar.setFill(menuBarColorPicker.getValue()); }
     @FXML private void handleMenuBarTextColorPicker(ActionEvent actionEvent) { sampleMenuBarText.setTextFill(menuBarTextColorPicker.getValue());}

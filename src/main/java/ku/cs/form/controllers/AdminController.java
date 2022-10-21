@@ -48,7 +48,7 @@ public class AdminController {
 
         SetTheme setTheme = new SetTheme(admin.getUsername());
         setTheme.setting();
-
+        anchorPane.getStylesheets().setAll("file:src/main/resources/ku/cs/styles/styles.css");
         showListView();
         showAdminProfile();
     }
@@ -140,7 +140,7 @@ public class AdminController {
 
     @FXML private void handleChangePasswordButton(ActionEvent actionEvent) {
         try {
-            com.github.saacsos.FXRouter.goTo("",admin);
+            com.github.saacsos.FXRouter.goTo("changePassword",admin);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -189,3 +189,15 @@
 .check-box:determinate .box .mark:selected {
     -fx-background-color: -text-color;
 }
+
+.tab-pane:top .tab-header-area .tab-header-background {
+    -fx-background-color: none;
+}
+
+.tab-pane:top .tab-header-area .headers-region .tab:top {
+    -fx-background-color: -input-color;
+}
+
+.tab-pane:top .tab-header-area .headers-region .tab:top .tab-container .tab-label {
+    -fx-text-fill: -text-color;
+}

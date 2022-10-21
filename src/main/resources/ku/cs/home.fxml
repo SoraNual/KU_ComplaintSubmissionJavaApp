@@ -10,22 +10,22 @@
    <children>
       <Button layoutX="508.0" layoutY="407.0" mnemonicParsing="false" onAction="#handleLoginButton" prefHeight="52.0" prefWidth="276.0" style="-fx-background-color: #011627; -fx-background-radius: 8;" text="เข้าสู่ระบบ" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="Kanit Regular" size="18.0" />
          </font>
       </Button>
       <Button layoutX="508.0" layoutY="551.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="276.0" style="-fx-background-color: #011627; -fx-background-radius: 8;" text="คำแนะนำการใช้งาน" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="Kanit Regular" size="18.0" />
          </font>
       </Button>
       <Button layoutX="508.0" layoutY="479.0" mnemonicParsing="false" onAction="#handleRegisterButton" prefHeight="52.0" prefWidth="276.0" style="-fx-background-color: FFFFFF; -fx-background-radius: 8; -fx-border-color: #011627; -fx-border-radius: 8;" text="ลงทะเบียนบัญชีนิสิต">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="Kanit Regular" size="18.0" />
          </font>
       </Button>
       <Button layoutX="508.0" layoutY="623.0" mnemonicParsing="false" onAction="#handleCreatorButton" prefHeight="52.0" prefWidth="276.0" style="-fx-background-color: FF9F1C; -fx-background-radius: 8;" text="ทีมผู้จัดทำ" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="Kanit Regular" size="18.0" />
          </font>
       </Button>
       <Label layoutX="539.0" text="KU">
@@ -35,7 +35,7 @@
       </Label>
       <Label layoutX="551.0" layoutY="152.0" text="จะแจ้ง">
          <font>
-            <Font name="System Bold" size="70.0" />
+            <Font name="Kanit Regular" size="70.0" />
          </font>
       </Label>
       <ImageView fx:id="cat" fitHeight="150.0" fitWidth="150.0" layoutX="570.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true" />
