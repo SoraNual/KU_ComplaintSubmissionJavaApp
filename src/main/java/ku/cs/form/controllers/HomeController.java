@@ -39,12 +39,11 @@ public class HomeController {
     }
 
     public void handleInstructionButton(ActionEvent actionEvent) {
-        /*try {
-            //FXRouter.goTo("instruction");
-        } catch (IOException e) {
-            System.err.println("ไปที่หน้า instruction ไม่ได้");
-            System.err.println("ให้ตรวจสอบการกำหนด route");
-        }*/
+        try{
+            FXRouter.goTo("howToUse");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void handleCreatorButton(ActionEvent actionEvent) {

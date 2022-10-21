@@ -13,7 +13,7 @@
             <Font name="Kanit Regular" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="508.0" layoutY="551.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="276.0" style="-fx-background-color: #011627; -fx-background-radius: 8;" text="คำแนะนำการใช้งาน" textFill="WHITE">
+      <Button layoutX="508.0" layoutY="551.0" mnemonicParsing="false" onAction="#handleInstructionButton" prefHeight="52.0" prefWidth="276.0" style="-fx-background-color: #011627; -fx-background-radius: 8;" text="คำแนะนำการใช้งาน" textFill="WHITE">
          <font>
             <Font name="Kanit Regular" size="18.0" />
          </font>
