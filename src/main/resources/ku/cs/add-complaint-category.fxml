@@ -14,7 +14,7 @@
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.form.controllers.AddComplaintCategoryPageController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#011627" height="751.0" layoutX="-16.0" layoutY="-28.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="user-menu-bar" width="314.0" />
-      <Button layoutX="123.0" layoutY="660.0" mnemonicParsing="false" onAction="#handleBackButton" styleClass="user-menu-bar-button" text="Back" textFill="WHITE">
+      <Button layoutX="123.0" layoutY="660.0" mnemonicParsing="false" onAction="#handleBackButton" styleClass="user-menu-bar-button" text="กลับ" textFill="WHITE">
          <font>
             <Font name="FreesiaUPC" size="24.0" />
          </font>
@@ -58,7 +58,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" onAction="#handleAddButton" prefHeight="37.0" prefWidth="313.0" text="Add" textFill="#fdfffc">
+            <Button mnemonicParsing="false" onAction="#handleAddButton" prefHeight="37.0" prefWidth="313.0" text="เพิ่ม" textFill="#fdfffc">
                <font>
                   <Font size="16.0" />
                </font>
