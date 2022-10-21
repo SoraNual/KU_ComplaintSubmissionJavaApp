@@ -17,7 +17,7 @@ import ku.cs.form.services.*;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class ReportController {
+public class ReportManagementController {
 
     @FXML private ListView<HBox> bannedUsersListView;
     @FXML private ListView<String> inappropriateListView;

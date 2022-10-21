@@ -6,7 +6,6 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
@@ -27,7 +26,7 @@ import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class AdminController {
+public class AdminPageController {
 
     @FXML private ListView<HBox> userListView;
     @FXML private UserDataSource userDataSource;

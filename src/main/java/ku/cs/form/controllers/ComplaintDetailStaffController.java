@@ -12,12 +12,11 @@ import ku.cs.form.models.*;
 import ku.cs.form.services.*;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewComplaintDetailStaffController {
+public class ComplaintDetailStaffController {
     @FXML private Button inProgressButton;
     @FXML private Button doneButton;
     @FXML private TextArea topicTextArea;
