@@ -27,7 +27,6 @@ public class ProjectApplication extends Application {
         FXRouter.when("register", packageStr+"nisit-register.fxml");
         FXRouter.when("staffPage", packageStr+"staff-page.fxml");
         FXRouter.when("staffChangePassword", packageStr+"staff-change-password-page.fxml");
-        FXRouter.when("reportDetail", packageStr+"report-detail.fxml");
         FXRouter.when("complain", packageStr+"complain.fxml");
         FXRouter.when("nisitPage", packageStr+"nisit-page.fxml");
         FXRouter.when("editProfile",packageStr+"edit-profile.fxml");
