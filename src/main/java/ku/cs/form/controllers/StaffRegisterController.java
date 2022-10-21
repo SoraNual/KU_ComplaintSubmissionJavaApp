@@ -65,7 +65,7 @@ public class StaffRegisterController extends UploadPicture {
         String confirmPassword = confirmPasswordField.getText();
         String agency = agencyComboBox.getValue();
 
-        StaffRegistration reg = new StaffRegistration("data","users.csv");
+        StaffRegistration reg = new StaffRegistration();
         String error = reg.registrationCheck(name,username,password,confirmPassword);
         if(agency == null) {
             error += "โปรดเลือกหน่วยงาน!\n";
@@ -73,6 +73,7 @@ public class StaffRegisterController extends UploadPicture {
 
         if(error.isBlank()){
             Staff newStaff = new Staff(name, username, password,agency);
+            newStaff.setRole("staff");
             reg.addStaff(newStaff);
             if(profile_pic.getImage() != null)
                 addPic(username,profile_pic);

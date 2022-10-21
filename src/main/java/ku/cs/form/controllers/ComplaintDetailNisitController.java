@@ -101,7 +101,7 @@ public class ComplaintDetailNisitController {
     @FXML public void handleReportUserButton(){
         ArrayList<Object> object = new ArrayList<>();
         object.add(nisit);
-        object.add(selectedComplaint.getComplainantUsername());
+        object.add(selectedComplaint);
         try {
             com.github.saacsos.FXRouter.goTo("reportUser",object);
         } catch (IOException e){

@@ -55,22 +55,23 @@ public class LoginPageController {
         UserDataSource unclarifiedUser = new UserDataSource("data","users.csv");
         user = unclarifiedUser.usernamePasswordCheck(username,password);
         try {
-            if (user.getRole().equals("admin")) {
-                setLoginTime(user);
-                FXRouter.goTo("admin",user);
-            } else if (user instanceof Staff) {
-                setLoginTime(user);
-                FXRouter.goTo("newStaff",user);
-            } else if (user instanceof Nisit) {
-                if(((Nisit) user).getUserStatus().equals("banned")) {
-                    FXRouter.goTo("banned",user);
-                }
-                else {
+            if(user != null){
+                if (user instanceof Nisit) {
+                    if (((Nisit) user).getUserStatus().equals("banned")) {
+                        FXRouter.goTo("banned", user);
+                    } else {
+                        setLoginTime(user);
+                        FXRouter.goTo("nisitPage", user);
+                    }
+                } else if (user.getRole().equals("admin")) {
                     setLoginTime(user);
-                    FXRouter.goTo("nisitPage", user);
+                    FXRouter.goTo("admin",user);
+                } else if (user instanceof Staff) {
+                    setLoginTime(user);
+                    FXRouter.goTo("newStaff",user);
                 }
             } else{
-                incorrectWarningText.setText("Incorrect username or password");
+                incorrectWarningText.setText("รหัสผ่านหรือ Username ผิด");
             }
 
         } catch (IOException e) {

@@ -123,11 +123,12 @@ public class UserDataSource implements DataSource<UserList>{
 
             for (User user : userList.getAllUsers()){
                 String line = "";
-                if(user.getRole().equals("admin"))
-                    line = user.toString();
+
                 if(user instanceof Staff)
                     line = user.toString();
-                if(user instanceof Nisit)
+                else if(user instanceof Nisit)
+                    line = user.toString();
+                else if(user.getRole().equals("admin"))
                     line = user.toString();
                 buffer.append(line);
                 buffer.newLine();

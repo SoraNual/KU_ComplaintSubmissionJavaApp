@@ -193,7 +193,7 @@
                               <Font size="24.0" />
                            </font>
                         </Button>
-                        <Button id="successBtn" fx:id="finishButton" mnemonicParsing="false" onAction="#handleDoneButton" prefHeight="59.0" prefWidth="295.0" text="ดำเนินการเสร็จสิ้น">
+                        <Button id="successBtn" fx:id="doneButton" mnemonicParsing="false" onAction="#handleDoneButton" prefHeight="59.0" prefWidth="295.0" text="ดำเนินการเสร็จสิ้น">
                            <HBox.margin>
                               <Insets left="20.0" right="20.0" />
                            </HBox.margin>

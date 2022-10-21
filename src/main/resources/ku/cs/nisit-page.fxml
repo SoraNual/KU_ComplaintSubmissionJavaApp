@@ -37,7 +37,7 @@
                 <Font name="System Bold" size="20.0" />
             </font>
         </Label>
-        <Button fx:id="reportButton" layoutX="776.0" layoutY="640.0" mnemonicParsing="false" onAction="#handleComplainButton" prefHeight="36.0" prefWidth="184.0" text="ร้องเรียน" textFill="WHITE">
+        <Button fx:id="reportButton" layoutX="705.0" layoutY="641.0" mnemonicParsing="false" onAction="#handleComplainButton" prefHeight="36.0" prefWidth="184.0" text="ร้องเรียน" textFill="WHITE">
             <font>
                 <Font size="16.0" />
             </font>

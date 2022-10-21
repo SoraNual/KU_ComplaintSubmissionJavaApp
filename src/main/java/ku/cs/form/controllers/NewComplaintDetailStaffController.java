@@ -4,10 +4,7 @@ import com.github.saacsos.FXRouter;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -18,8 +15,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class NewComplaintDetailStaffController {
+    @FXML private Button inProgressButton;
+    @FXML private Button doneButton;
     @FXML private TextArea topicTextArea;
     @FXML private TextArea detailTextArea;
     @FXML private TextArea additionalDetailTextArea;
@@ -62,6 +62,12 @@ public class NewComplaintDetailStaffController {
         if (complaint.getSolution().equals("กำลังตรวจสอบ")) solutionTextArea.setText("");
         else solutionTextArea.setText(complaint.getSolution());
 
+        if(complaint.getStatus().equals("ดำเนินการเสร็จสิ้น")){
+            inProgressButton.setDisable(true);
+            doneButton.setDisable(true);
+            solutionTextArea.setEditable(false);
+        }
+
         showResponsibleListView();
         showAttachImage();
     }
@@ -88,8 +94,8 @@ public class NewComplaintDetailStaffController {
         }
 
         complaint.setSolution(solutionTextArea.getText().trim());
+        if(!complaint.getAssignedStaff().contains(staff.getName())) complaint.addAssignedStaff(staff);
         complaintFileDataSource.updateData(complaint, solution.trim(), "กำลังดำเนินการ");
-
         try {
             FXRouter.goTo("newStaff");
         } catch (IOException e) {
@@ -105,8 +111,8 @@ public class NewComplaintDetailStaffController {
 
         String solution = solutionTextArea.getText();
         System.out.println(solution);
-
         complaint.setSolution(solutionTextArea.getText().trim());
+        if(!complaint.getAssignedStaff().contains(staff.getName())) complaint.addAssignedStaff(staff);
         complaintFileDataSource.updateData(complaint, solution.trim(), "ดำเนินการเสร็จสิ้น");
 
         try {
@@ -142,14 +148,13 @@ public class NewComplaintDetailStaffController {
     @FXML
     public void showResponsibleListView() {
         responsibleListView.getItems().clear();
-        UserDataSource userDataSource = new UserDataSource("data", "users.csv");
-        UserList users = userDataSource.readData();
 
-        for (User user : users.getAllUsers()) {
-            if (user instanceof Staff && ((Staff) user).getAgency().equals(getStaffAgency().getName())) {
-                responsibleListView.getItems().add(user.getName());
-            }
+        ArrayList<String> assignedStaffs = new ArrayList<>();
+        assignedStaffs.addAll(List.of(complaint.getAssignedStaff().split("#")));
+        for(String eachStaff: assignedStaffs){
+            if(eachStaff.contains(staff.getAgency())) responsibleListView.getItems().add(eachStaff);
         }
+        responsibleListView.refresh();
     }
 
     @FXML
@@ -172,17 +177,5 @@ public class NewComplaintDetailStaffController {
             Image img = new Image(imgFile.toURI().toString());
             attachImage.setImage(img);
         }
-//
-//        if (complaintCategory != null) {
-//            if (complaintCategory.getImageNeeded()) {
-//                File imageFile = new File(staff.getProfileImageFilePath());
-//                Image userImage = new Image(imageFile.toURI().toString());
-//                attachImage.setImage(userImage);
-//            }
-//        } else {
-//            attachImageLabel.setVisible(false);
-//            attachImage.setVisible(false);
-//            attachImage.setImage(null);
-//        }
     }
 }

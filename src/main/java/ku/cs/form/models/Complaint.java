@@ -23,7 +23,7 @@ public class Complaint {
     private ArrayList<String> negativeVoter;
     private String solution;
     private String solutionWithNewLine;
-
+    private ArrayList<String> assignedStaffs;
     public Complaint(String topic, String complainantUsername, String category, String status, int votePoint) {
         this.topic = topic;
         this.complainantUsername = complainantUsername;
@@ -34,6 +34,7 @@ public class Complaint {
         this.solution = "กำลังตรวจสอบ";
         positiveVoter = new ArrayList<>();
         negativeVoter = new ArrayList<>();
+        assignedStaffs = new ArrayList<>();
     }
 
     public Complaint(String topic, String complainantUsername, String category) {
@@ -205,6 +206,25 @@ public class Complaint {
                 }
             }
             return returnNegVal;
+        }
+        return "";
+    }
+
+    public void addAssignedStaff(Staff staff){
+        assignedStaffs.add(staff.getName() + " [" + staff.getAgency() + "]");
+    }
+    public void setAssignedStaffs(ArrayList<String> assignedStaffs){
+        this.assignedStaffs = assignedStaffs;
+    }
+    public String getAssignedStaff(){
+        if(!assignedStaffs.isEmpty()){
+            String allAssignedStaffs = assignedStaffs.get(0);
+            if (assignedStaffs.size() > 1) {
+                for (int i = 1; i < assignedStaffs.size(); i++) {
+                    allAssignedStaffs = allAssignedStaffs + "#" + assignedStaffs.get(i);
+                }
+            }
+            return allAssignedStaffs;
         }
         return "";
     }

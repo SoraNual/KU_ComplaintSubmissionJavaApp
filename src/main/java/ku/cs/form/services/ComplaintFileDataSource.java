@@ -7,6 +7,8 @@ import ku.cs.form.models.UserList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ComplaintFileDataSource implements DataSource<ComplaintList> {
     private String directoryName;
@@ -69,6 +71,11 @@ public class ComplaintFileDataSource implements DataSource<ComplaintList> {
                 if(data.length>=11){
                     complaint.addNegative(data[10].trim().split("#"));
                 }
+                if(data.length >= 12){
+                    ArrayList<String> assignedStaff = new ArrayList<>();
+                    assignedStaff.addAll(List.of(data[11].trim().split("#")));
+                    complaint.setAssignedStaffs(assignedStaff);
+                }
                 complaintList.addComplaint(complaint);
             }
         } catch (IOException e) {
@@ -91,8 +98,11 @@ public class ComplaintFileDataSource implements DataSource<ComplaintList> {
             if (complaint.getComplainantUsername().equals(newComplaint.getComplainantUsername()) &&
                         complaint.getTopic().equals(newComplaint.getTopic()))
             {
+                ArrayList<String> newAssignedStaffs = new ArrayList<>();
+                newAssignedStaffs.addAll(List.of(newComplaint.getAssignedStaff().split("#")));
                 complaint.setSolution(solution);
                 complaint.setStatus(status);
+                complaint.setAssignedStaffs(newAssignedStaffs);
 
                 writeData(complaintList);
                 break;
@@ -123,8 +133,9 @@ public class ComplaintFileDataSource implements DataSource<ComplaintList> {
                         complaint.getStatus() + "," +
                         complaint.getVotePoint() + "," +
                         complaint.getSolution().replace("\n", "NEWLINE") +","+
-                        complaint.getPositiveVoter()+","+
-                        complaint.getNegativeVoter();
+                        complaint.getPositiveVoter() + "," +
+                        complaint.getNegativeVoter() + "," +
+                        complaint.getAssignedStaff();
                 buffer.append(line);
                 buffer.newLine();
             }

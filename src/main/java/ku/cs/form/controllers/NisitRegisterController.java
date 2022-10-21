@@ -43,11 +43,12 @@ public class NisitRegisterController {
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
-        NisitRegistration reg = new NisitRegistration("data","users.csv");
+        NisitRegistration reg = new NisitRegistration();
         String error = reg.registrationCheck(name,username,password,confirmPassword);
 
         if(error.isBlank()){
             Nisit newNisit = new Nisit(name, username, password);
+            newNisit.setRole("nisit");
             reg.addNisit(newNisit);
             showPopUp("Registration successful!","Hello Welcome!",null);
             try {

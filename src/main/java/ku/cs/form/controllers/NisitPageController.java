@@ -136,7 +136,7 @@ public class NisitPageController {
                         objects.add(complaintItemNisitController.getComplaint());
 
                         try {
-                            FXRouter.goTo("complaintsDetailsForNisit", objects);
+                            FXRouter.goTo("complaintDetailsForNisit", objects);
                         } catch (IOException e) {
                             System.out.println("ไม่สามารถไปหน้า Complaint Detail For Nisit ได้ โปรดตรวจสอบ router อีกครั้ง");
                         }
@@ -265,7 +265,7 @@ private ComplaintList filterSubmitByMe(ComplaintList currentList){
 
     public void handleComplainButton(ActionEvent actionEvent) {
         try {
-            FXRouter.goTo("report",nisit);
+            FXRouter.goTo("complain",nisit);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -126,11 +126,11 @@
                               <Font name="FreesiaUPC Bold" size="24.0" />
                            </font>
                         </Label>
-                        <Button id="deleteBtn" fx:id="deleteButton" disable="true" layoutX="38.0" layoutY="529.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="38.0" prefWidth="181.0" text="ลบ">
+                        <Button id="dangerBtn" fx:id="deleteButton" disable="true" layoutX="38.0" layoutY="529.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="38.0" prefWidth="181.0" text="ลบ">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
-                        <Button id="rejectBtn" fx:id="rejectButton" disable="true" layoutX="228.0" layoutY="529.0" mnemonicParsing="false" onAction="#handleRejectButton" prefHeight="38.0" prefWidth="181.0" text="ละเว้น">
+                        <Button fx:id="rejectButton" disable="true" layoutX="228.0" layoutY="529.0" mnemonicParsing="false" onAction="#handleRejectButton" prefHeight="38.0" prefWidth="181.0" text="ละเว้น">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>

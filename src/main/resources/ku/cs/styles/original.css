@@ -177,7 +177,12 @@
     -fx-background-color: #ffc107;
     -fx-text-fill: white;
 }
-
+#warningBtn:hover  {
+    -fx-background-color: #edb100;
+}
+#dangerBtn:hover {
+    -fx-background-color: #d32535;
+}
 .check-box {
     -fx-text-fill: -text-color;
 }

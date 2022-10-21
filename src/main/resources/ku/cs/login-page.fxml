@@ -45,7 +45,7 @@
                 <Font name="Kanit Regular" size="18.0" />
             </font>
         </PasswordField>
-        <Label fx:id="incorrectWarningText" layoutX="497.0" layoutY="468.0" prefHeight="34.0" prefWidth="445.0" textFill="RED">
+        <Label id="errorLabel" fx:id="incorrectWarningText" layoutX="497.0" layoutY="468.0" prefHeight="34.0" prefWidth="445.0" textFill="RED">
             <font>
                 <Font size="23.0" />
             </font>
