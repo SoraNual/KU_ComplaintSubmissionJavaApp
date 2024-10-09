@@ -1,6 +1,6 @@
 # วิธีการติดต้ังและรันโปรแกรม
 ขั้นตอนการติดตั้งโปรแกรม
-1. ใช้คำสั่ง git clone https://github.com/CS211-651/project211-pythonnumbaone.git
+1. ใช้คำสั่ง git clone https://github.com/SoraNual/KU_ComplaintSubmissionJavaApp.git
 2. จากนั้นกดไปที่ KU จะแจ้ง_windows.jar (ในกรณีที่ใช้ระบบปฏิบัติการ windows)
 
 # การวางโครงสร้างไฟล์
